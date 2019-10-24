@@ -1,0 +1,9 @@
+/*/
+
+!/doc-*/
+
+.*
+
+!/.editorconfig
+!/.gitignore
+!/.prettier*
