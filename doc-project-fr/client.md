@@ -1,5 +1,7 @@
 # Souhaits du client
 
+_Expression des besoins_
+
 Pour chaque fonctionalité, le client exprime différentes idées qu'il a du produit final, associé à différents niveaux de satisfaction. Ces idées sont triées par ordre croissant de satisfaction.
 
 ## Affichage
@@ -8,7 +10,7 @@ Pour chaque fonctionalité, le client exprime différentes idées qu'il a du pro
 
 ### Zoom
 
-Attente:
+Attentes:
 
 - le changement de zoom doit préserver les couleurs affichées. Si de nouvels
   couleurs apparaissent, cela doit être parcequ'une fonctionalité le demande
