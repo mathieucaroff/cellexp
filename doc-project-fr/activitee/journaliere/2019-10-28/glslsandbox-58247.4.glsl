@@ -1,12 +1,6 @@
-// Rule 110 & cellular automaton
+// Rule 110 (& Game of life)
 
-// Piece of advice -
-//
-// For advanced shader editing, use a text editor with syntax highlighting and
-// copy-paste to the browser when satified, rather than to do all edits live in
-// the browser.
-
-// /!\ Each time, you do so, think to check the shader do compiles
+// Find the list of controls below
 
 #ifdef GL_ES
 precision highp float;
@@ -17,6 +11,36 @@ uniform vec2 mouse;
 uniform vec2 resolution;
 uniform sampler2D backbuffer;
 
+float cut = 0.25;
+
+vec2 pixel = 1. / resolution;
+
+// /\ List of controls for the Rule 110
+
+bool mouse_to_the_left = mouse.x < pixel.x;         // Put the grid everywhere
+
+bool mouse_to_the_right = mouse.x >= 1.0 - pixel.x; // Put random everywhere
+
+bool mouse_to_the_bottom = mouse.y < 4. * pixel.y;  // Delete everything
+
+bool mouse_is_above_cut = mouse.y > cut + 3. * pixel.y; // Stop time
+
+// if the mouse is near the baseline of the rule110 automata, the values are
+// randomized locally.
+
+// \/ End of list of controls
+
+// bool mouse_near_the_bottom = !mouse_to_the_bottom && mouse.y < 8. * pixel.y; // Nothing yet
+// bool mouse_to_the_right_half = mouse.x > 0.5; // Nothing yet
+
+// Piece of advice -
+//
+// For advanced shader editing, use a text editor with syntax highlighting and
+// copy-paste to the browser when satified, rather than to do all edits live in
+// the browser.
+
+// /!\ Each time, you do so, think to check the shader **does** compile
+
 vec3 zero = vec3(0.);
 
 vec4 blue = vec4(0., 0., 1.,1.);
@@ -26,17 +50,6 @@ vec4 black = vec4(0., 0., 0., 1.);
 
 vec4 live = cyan;
 vec4 dead = black;
-
-float cut = 0.25;
-
-vec2 pixel = 1. / resolution;
-
-bool mouse_to_the_left = mouse.x < pixel.x; // Put the grid everywhere
-bool mouse_to_the_right = mouse.x >= 1.0 - pixel.x; // Put the grid everywhere
-bool mouse_to_the_bottom = mouse.y < 4. * pixel.y; // Delete everything
-bool mouse_near_the_bottom = !mouse_to_the_bottom && mouse.y < 8. * pixel.y; // Nothing yet
-bool mouse_to_the_right_half = mouse.x > 0.5; // Nothing yet
-bool mouse_is_above_cut = mouse.y > cut + 3. * pixel; // Stop time
 
 bool exterior(vec2 elem, vec2 limit) {
    return elem.x < 1.0 || limit.x - elem.x <= 1.0 || elem.y < 1.0 || limit.y - elem.y <= 1.0;
@@ -93,6 +106,7 @@ void main(void) {
          int kx = int(mod(gl_FragCoord.x, 14.));
 
          if (alive) {
+            // Check the 14 cells
             float a0 = retrieve(position, -7.).b;
             float a1 = retrieve(position, -6.).b;
             float a2 = retrieve(position, -5.).b;
@@ -110,57 +124,55 @@ void main(void) {
 
             float total = a0 + a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + aa + ab + ac + ad;
 
-            // match: whether the grid patter is found
-            bool match = true;
-
-            // if (7.9 < total && total < 8.1) {
-            //    for (float m = 0; m < 14., m++) {
-            //       checkPattern(position, m)
-            //    }
-            // }
-
-            // if (true) {
-            // if (false) {
+            bool matching = false;
             if (total < 7.9 || 8.1 < total) {
-               bool match = false;
                // skip all
-            } else if (a0 * a1 * a2 * a3 * a4 * a8 * ab * ac > .9) {
-               live_color.g = 0.4;
-            } else if (a1 * a2 * a3 * a4 * a5 * a9 * ac * ad > .9) {
-               live_color.g = 0.4;
-            } else if (a2 * a3 * a4 * a5 * a6 * aa * ad * a0 > .9) {
-               live_color.g = 0.4;
-            } else if (a3 * a4 * a5 * a6 * a7 * ab * a0 * a1 > .9) {
-               live_color.g = 0.4;
-            } else if (a4 * a5 * a6 * a7 * a8 * ac * a1 * a2 > .9) {
-               live_color.g = 0.4;
-            } else if (a5 * a6 * a7 * a8 * a9 * ad * a2 * a3 > .9) {
-               live_color.g = 0.4;
-            } else if (a6 * a7 * a8 * a9 * aa * a0 * a3 * a4 > .9) {
-               live_color.g = 0.4;
-            } else if (a7 * a8 * a9 * aa * ab * a1 * a4 * a5 > .9) {
-               live_color.g = 0.4;
-            } else if (a8 * a9 * aa * ab * ac * a2 * a5 * a6 > .9) {
-               live_color.g = 0.4;
-            } else if (a9 * aa * ab * ac * ad * a3 * a6 * a7 > .9) {
-               live_color.g = 0.4;
-            } else if (aa * ab * ac * ad * a0 * a4 * a7 * a8 > .9) {
-               live_color.g = 0.4;
-            } else if (ab * ac * ad * a0 * a1 * a5 * a8 * a9 > .9) {
-               live_color.g = 0.4;
-            } else if (ac * ad * a0 * a1 * a2 * a6 * a9 * aa > .9) {
-               live_color.g = 0.4;
-            } else if (ad * a0 * a1 * a2 * a3 * a7 * aa * ab > .9) {
-               live_color.g = 0.4;
             } else {
-               match = false;
+               if (a4 > .9) {
+                  if (a0 * a1 * a2 * a3 * a4 * a8 * ab * ac > .9) {
+                     matching = true;
+                  } else if (a1 * a2 * a3 * a4 * a5 * a9 * ac * ad > .9) {
+                     matching = true;
+                  } else if (a2 * a3 * a4 * a5 * a6 * aa * ad * a0 > .9) {
+                     matching = true;
+                  } else if (a3 * a4 * a5 * a6 * a7 * ab * a0 * a1 > .9) {
+                     matching = true;
+                  } else if (a4 * a5 * a6 * a7 * a8 * ac * a1 * a2 > .9) {
+                     matching = true;
+                  }
+               }
+
+               if (a9 > .9) {
+                  if (a5 * a6 * a7 * a8 * a9 * ad * a2 * a3 > .9) {
+                     matching = true;
+                  } else if (a6 * a7 * a8 * a9 * aa * a0 * a3 * a4 > .9) {
+                     matching = true;
+                  } else if (a7 * a8 * a9 * aa * ab * a1 * a4 * a5 > .9) {
+                     matching = true;
+                  } else if (a8 * a9 * aa * ab * ac * a2 * a5 * a6 > .9) {
+                     matching = true;
+                  } else if (a9 * aa * ab * ac * ad * a3 * a6 * a7 > .9) {
+                     matching = true;
+                  }
+               }
+
+               if (ad > .9) {
+                  if (aa * ab * ac * ad * a0 * a4 * a7 * a8 > .9) {
+                     matching = true;
+                  } else if (ab * ac * ad * a0 * a1 * a5 * a8 * a9 > .9) {
+                     matching = true;
+                  } else if (ac * ad * a0 * a1 * a2 * a6 * a9 * aa > .9) {
+                     matching = true;
+                  } else if (ad * a0 * a1 * a2 * a3 * a7 * aa * ab > .9) {
+                     matching = true;
+                  }
+               }
+            }
+
+            if (matching) {
+               live_color.g = 0.4;
             }
          }
-
-         // righ side always alive
-         // if (right_side) {
-         //    alive = true;
-         // }
 
          if (mouse_to_the_right || near_mouse) {
             float rnd1 = mod(fract(sin(dot(position + time * 0.001, vec2(14.7898,78.233))) * 43758.5453), 1.0);
@@ -186,15 +198,7 @@ void main(void) {
       return;
    }
 
-
-   // if (exterior(gl_FragCoord.xy, resolution)) {
-   //    float rnd0 = mod(fract(sin(dot(position, vec2(14.7898,78.233))) * 43758.5453), 1.0);
-   //    if (rnd0 > 0.5) {
-   //       gl_FragColor = live;
-   //    } else {
-   //       gl_FragColor = dead;
-   //    }
-   // } else
+   // Game of life //
    if (near_mouse) {
       float rnd1 = mod(fract(sin(dot(position + time * 0.001, vec2(14.7898,78.233))) * 43758.5453), 1.0);
       if (rnd1 > 0.79) {
