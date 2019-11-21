@@ -1,3 +1,18 @@
 # Bibliographie
 
 - R. Wm. Gosper, Exploiting Regularities in Large Cellular Spaces. Physica 10D (1984) 75-80
+
+## Outils Wolfram Alpha
+
+- Rêgle 30: https://www.wolframalpha.com/input/?i=rule+30
+- Rêgle 110: https://www.wolframalpha.com/input/?i=rule+110
+- Une rêgle sur un voisinage de 5 cellules
+  https://www.wolframalpha.com/input/?i=rule+1%2C222%2C193%2C931+k%3D2+r%3D2
+- Explorateur stratégique des rêgles à voisinage de 5 cellules (r=2)
+  https://demonstrations.wolfram.com/AStrategyForExploringK2R2CellularAutomata/
+- Générateur de paneaux aux motifs d'automates cellulaires:
+  https://www.wolframcloud.com/objects/sw-blog/capanels
+
+## Autres outils
+
+- Défileur à 256: http://mbostock.github.io/protovis/ex/cell.html
