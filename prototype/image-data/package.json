@@ -1,5 +1,5 @@
 {
-  "name": "cellular-automaton-explorer-1d--measure--image-data",
+  "name": "cellular-automaton-explorer-1d--prototype--image-data",
   "version": "1.0.0",
   "description": "Unidimensional cellular automaton explorer to highlight their unique properties",
   "main": "index.js",
