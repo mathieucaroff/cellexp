@@ -7,7 +7,18 @@ Une partie du contenu ci-dessous est extrait des pages wikipédia en lien (le 20
 
 ## Automate cellulaire
 
-Un automate cellulaire consiste en une grille régulière de « cellules » contenant chacune un « état » choisi parmi un ensemble fini et qui peut évoluer au cours du temps. L'état d'une cellule au temps t+1 est fonction de l'état au temps t d'un nombre fini de cellules appelé son « voisinage ». À chaque nouvelle unité de temps, les mêmes règles sont appliquées simultanément à toutes les cellules de la grille, produisant une nouvelle « génération » de cellules dépendant entièrement de la génération précédente.
+Un automate cellulaire est un simulateur basé sur une grille de cellule. À chaque pas de temps, un nouvel état est calculé pour chaque cellule, à partir de son état précédent et de l'état des cellules voisines. Chaque pas de temps corresponds à une génération de cellule.
+
+Dans les automates cellulaires standards, la liste complète des états que peu prendre une cellule est prédéfinie et est statique. De même, le voisinage de cellule est clairement identifé par l'ensemble des positions relatives des cellules du voisinage. La rêgle d'évolution est alors défini comme une fonction qui associe à chaque cellule un nouvel état en fonction de la liste des états des cellule du voisinage. Ainsi, avec les notations suivantes:
+
+n: dimension de l'automate cellulaire
+Z^n: espace des position des cellules de l'automate
+S: ensemble des état possibles pour une cellule
+V, partie de Z^n: ensemble définissant la forme des voisinages
+
+la fonction d'évolution est alors un élément de:
+
+S ^ (S ^ V)
 
 ## Exemple
 
