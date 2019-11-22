@@ -1,6 +1,12 @@
 # Glossaire
 
+API: Application Programming Interface
+
 Automate cellulaire: Un automate cellulaire consiste en une grille régulière de « cellules » contenant chacune un « état » choisi parmi un ensemble fini et qui peut évoluer au cours du temps.
+
+BabylonJS: Framework web de rendu graphique 3D en WebGL.
+
+Défileur: Voire /GLOSSARY.md::Flasher
 
 Utilisateur (non-)développeur / profane / averti / experimenté;
 Utilisation simple / avancée / développeur: Se référer à presentation-profile-utilisateur.md
@@ -13,7 +19,3 @@ UIS: UI Simple
 UID: UI Difficile
 
 UISE / UIDE: UIS / UID Entrées - Les entrées des l'UI Simple ou Difficile
-
-API: Application Programming Interface
-
-BabylonJS: Framework web de rendu graphique 3D en WebGL.
