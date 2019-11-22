@@ -1,8 +1,13 @@
+# Folders
 /*/
 
 !/doc-*/
+!/measure/
+!/prototype/
 
-.*
+# Files
+/.*
+*.js
 
 !/.editorconfig
 !/.gitignore
