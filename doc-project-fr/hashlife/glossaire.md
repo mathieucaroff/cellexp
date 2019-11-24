@@ -8,7 +8,7 @@ Block: Unité de calcule de l'algorithme Hashlife. Un block à un type: simple o
 complèxe. Un block simple est décrit par les états des cellules qui le compose.
 Un block complexe est décrit par les nom des blocks qui le compose.
 
-Brut-forcer un block: calculer son résultat en applicant la rêgle d'évolution
+Brut-forcer un block: calculer son résultat en applicant la règle d'évolution
 autant de fois que nécéssaire
 
 Block simple: Block de la plus petite taille, dont le résultat ne peut pas

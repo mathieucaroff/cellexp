@@ -2,7 +2,7 @@
 
 Un automate cellulaire est un simulateur basé sur une grille de cellules. À chaque pas de temps, un nouvel état est calculé pour chaque cellule, à partir de son état précédent et de l'état des cellules voisines.
 
-Les automates cellulaires (AC) existent avec des grilles de différentes dimensions. L'AC le plus célèbre est le jeu de la vie, de John Horton Conway. C'est un AC de dimension 2. En dimension 1, l'AC le plus connu est la rêgle 110. Elle partage avec le jeu de la vie, la caractéristique de Turing-completness, aussi dite universalité: tout calcule discret peut-être simulé dans ces automates cellulaires.
+Les automates cellulaires (AC) existent avec des grilles de différentes dimensions. L'AC le plus célèbre est le jeu de la vie, de John Horton Conway. C'est un AC de dimension 2. En dimension 1, l'AC le plus connu est la règle 110. Elle partage avec le jeu de la vie, la caractéristique de Turing-completness, aussi dite universalité: tout calcule discret peut-être simulé dans ces automates cellulaires.
 
 Aux premiers abords, les automates cellulaires sont intéressants pour leur aspects ludique. Cependant, malgrès leur remarquable simplicité, ils affichent des comportement d'une grande complexité. Ainsi, les automates cellulaires sont étudiés en sciences de l'information. Il constituent d'une part des sujets d'enseignement avec d'intéressantes qualités pédagogiques, et d'autres part d'utils modèles théorique. On peu distinguer deux approches dans l'étude des automates cellulaires:
 
@@ -43,7 +43,7 @@ Cette partie liste les exigences fermes de fonctionalité du projet.
 Cette partie liste les objectifs de fonctionalité plus flexibles du projet.
 
 - Détecter et colorer des motifs horizontaux décrits par l'utilisateur
-- Détecter et colorer les motifs de "grille" décrits par l'utilisateur (notablement pour la rêgle 110 et ses soeurs)
+- Détecter et colorer les motifs de "grille" décrits par l'utilisateur (notablement pour la règle 110 et ses soeurs)
 - Automate cellulaire de taille horizontale supérieur à celle la taille de l'écran
 - Paramétrage du comportement l'automate cellulaire lors du redimentionnement de l'affichage
 - Remplacement du moteur de calcul des générations de cellules pour le calcul des sauts

@@ -51,12 +51,12 @@ Performances
 ### (E) Aspect pédagogiques
 
 - Composant(s) démonstratif
-  - Presentateur(s) de rêgle
-    - Explicateur de l'évolution d'une rêgle
+  - Presentateur(s) de règle
+    - Explicateur de l'évolution d'une règle
     - Listeur des propriétés particulières
       - Évaluateur de linéarité
     - Listeur des symétries
-  - Défileur de rêgles par flash
+  - Défileur de règles par flash
 - Intervention divine
   - Preview de la propagation des différences
 

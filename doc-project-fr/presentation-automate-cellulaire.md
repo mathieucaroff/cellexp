@@ -9,7 +9,7 @@ Une partie du contenu ci-dessous est extrait des pages wikipédia en lien (le 20
 
 Un automate cellulaire est un simulateur basé sur une grille de cellules. À chaque pas de temps, un nouvel état est calculé pour chaque cellule, à partir de son état précédent et de l'état des cellules voisines. Chaque pas de temps corresponds à une génération de cellule.
 
-Dans les automates cellulaires standards, la liste complète des états que peu prendre une cellule est prédéfinie et est statique. De même, le voisinage de cellule est clairement identifé par l'ensemble des positions relatives des cellules du voisinage. La rêgle d'évolution est alors défini comme une fonction qui associe à chaque cellule un nouvel état en fonction de la liste des états des cellule du voisinage. Ainsi, avec les notations suivantes:
+Dans les automates cellulaires standards, la liste complète des états que peu prendre une cellule est prédéfinie et est statique. De même, le voisinage de cellule est clairement identifé par l'ensemble des positions relatives des cellules du voisinage. La règle d'évolution est alors défini comme une fonction qui associe à chaque cellule un nouvel état en fonction de la liste des états des cellule du voisinage. Ainsi, avec les notations suivantes:
 
 d: **dimension** de l'automate cellulaire
 Z^d: espace des position des cellules de l'automate: le **réseau**
@@ -45,11 +45,11 @@ Les automates cellulaire élémentaires figure parmis les automates cellulaire l
 - **2 états** possibles: 0 ou 1 - mort ou vivant - Q = {0, 1}
 - **Voisinages de 3** cellules: V = {-1, 0, 1}
 
-Notons q et v les cardinals de Q et V. La formule donnant le nombre de rêgles d'évolution en fontion du nombre d'état et de la taille des voisinages est:
+Notons q et v les cardinals de Q et V. La formule donnant le nombre de règles d'évolution en fontion du nombre d'état et de la taille des voisinages est:
 
 `q ** (q ** v)`
 
-Dans ces condition, pour un AC élémentaire, les rêgles d'évolution sont au nombre de `2 ** (2 ** 3),` soit `2 ** 8`, d'ou 256 rêgles d'évolution possibles.
+Dans ces condition, pour un AC élémentaire, les règles d'évolution sont au nombre de `2 ** (2 ** 3),` soit `2 ** 8`, d'ou 256 règles d'évolution possibles.
 
 ### La règle 110
 
