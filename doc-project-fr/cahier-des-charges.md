@@ -64,7 +64,7 @@ spécification et de conception est de 120 heures, pour une personne.
 
 Le but de ce projet est la réalisation d'un explorateur automate cellulair unidimensionel. Cet explorateur sera accessible à des utilisateurs novices, mais offrira un plus grand contrôle à des utilisateurs avertis. Il sera utilisable en ligne. Il sera OpenSource. Il sera documenté pour l'utilisateur novice et pour l'utilisateur averti. Le code du projet sera aussi documenté, avec de la JSDoc, et par des documents présentant la structure interne du logiciel.
 
-## Annexe
+## Références
 
 1. Le glossaire en français du projet [glossaire](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/glossaire.md)
 2. La présentation du concepte d'[automate cellulaire](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-automate-cellulaire.md)
