@@ -39,7 +39,7 @@ Une chute de « bombes » non périodique.
 
 ### Les automates cellulaires élémentaires
 
-Les automates cellulaire élémentaires figure parmis les automates cellulaire les plus simples qui puissent être concus. Ils sont au nombre de 256. Ils sont définits par les caractéristiques suivantes:
+Les automates cellulaires élémentaires figure parmis les automates cellulaires les plus simples qui puissent être concus. Ils sont au nombre de 256. Ils sont définits par les caractéristiques suivantes:
 
 - **Dimensionalité d de 1**: Le réseau est simplement E = **Z**
 - **2 états** possibles: 0 ou 1 - mort ou vivant - Q = {0, 1}
@@ -53,7 +53,7 @@ Dans ces condition, pour un AC élémentaire, les règles d'évolution sont au n
 
 ### La règle 110
 
-La règle 110 est un des 256 AC élémentaires, et donc unidimensionelle. Il à été prouvé en 2004, Matthew Cook, que la règle 110 est Turing Complete. À la date du 2019-11-22, c'est le seul automate élémentaire dont la Turing Completeness a été prouvé.
+La règle 110 est un des 256 AC élémentaires, et donc unidimensionnelle. Il à été prouvé en 2004, Matthew Cook, que la règle 110 est Turing Complete. À la date du 2019-11-22, c'est le seul automate élémentaire dont la Turing Completeness a été prouvé.
 
 Ceci fait de la règle 110 un AC d'une extrème simplicité, en particulier losrque le but est de prouver la turing Compelte
 

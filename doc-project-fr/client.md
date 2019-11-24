@@ -2,7 +2,7 @@
 
 _Expression des besoins_
 
-Pour chaque fonctionalité, le client exprime différentes idées qu'il a du produit final, associé à différents niveaux de satisfaction. Ces idées sont triées par ordre croissant de satisfaction.
+Pour chaque fonctionnalité, le client exprime différentes idées qu'il a du produit final, associé à différents niveaux de satisfaction. Ces idées sont triées par ordre croissant de satisfaction.
 
 ## Affichage
 
@@ -13,7 +13,7 @@ Pour chaque fonctionalité, le client exprime différentes idées qu'il a du pro
 Attentes:
 
 - le changement de zoom doit préserver les couleurs affichées. Si de nouvels
-  couleurs apparaissent, cela doit être parcequ'une fonctionalité le demande
+  couleurs apparaissent, cela doit être parcequ'une fonctionnalité le demande
 
 Souhaits:
 

@@ -1,6 +1,6 @@
 # Cahier des charges
 
-Ce projet à pour but la réalisation d'un explorateur automate cellulaire unidimensionel, accessible sur internet.
+Ce projet à pour but la réalisation d'un explorateur automate cellulaire unidimensionnel, accessible sur internet.
 
 _Ce cahier des charges utilise sans les définir les termes du [glossaire[1]](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/glossaire.md)_
 
@@ -8,9 +8,9 @@ _Ce cahier des charges utilise sans les définir les termes du [glossaire[1]](ht
 
 ### Automates cellulaires
 
-Les automates cellulaire sont un sujet d'étude en informatique théorique. Le représentant le plus connus des automates cellulaire est le "jeu de la vie" de John Horton Conway.
+Les automates cellulaires sont un sujet d'étude en informatique théorique. Le représentant le plus connus des automates cellulaires est le "jeu de la vie" de John Horton Conway.
 
-Ce projet s'intéresse aux automates cellulaire monodimentionels. Par exemple, la "Rêgle 110" est un tel automate, avec la particularité qu'il a été prouvé par Matthew Cook que cet automate était Turing Complete, ce qui signifie qu'il est capable de supporter des calculs universels.
+Ce projet s'intéresse aux automates cellulaires monodimensionnels. Par exemple, la "Rêgle 110" est un tel automate, avec la particularité qu'il a été prouvé par Matthew Cook que cet automate était Turing Complete, ce qui signifie qu'il est capable de supporter des calculs universels.
 
 Voire la [présentation des automates cellulaires [2]](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-automate-cellulaire.md) pour plus de details.
 
@@ -18,18 +18,18 @@ Voire la [présentation des automates cellulaires [2]](https://github.com/mathie
 
 Les automates cellulaires étant relativement ludique à découvrir et étudier, ils constituent un choix intéressant de sujet pédagogique pour présenter l'informatique théorique.
 
-Les automates cellulaires monodimentionels plus complexes peuvent être utilisés
+Les automates cellulaires monodimensionnels plus complexes peuvent être utilisés
 pour générer des images dans lesquelels aparaissentt des motifs à la fois
 réguliers et chaotiques.
 
 ### Exploration des propriétés des automates cellulaires
 
-Les outils d'exploration d'automates cellulaires monodimentionels sont peu
-nombreux et généralement peu exansifs en fonctionalités.
+Les outils d'exploration d'automates cellulaires monodimensionnels sont peu
+nombreux et généralement peu exansifs en fonctionnalités.
 
 ## Objectif et Périmètre
 
-L'objectif de ce projet est de développer un outil d'exploration des automates cellulaires unidimentionels. Il s'addresse à trois types d'utilisateurs:
+L'objectif de ce projet est de développer un outil d'exploration des automates cellulaires unidimensionnels. Il s'addresse à trois types d'utilisateurs:
 
 - utilisateur développeur
 - utilisateur averti
@@ -62,7 +62,7 @@ spécification et de conception est de 120 heures, pour une personne.
 
 ## Récapitulatif
 
-Le but de ce projet est la réalisation d'un explorateur automate cellulair unidimensionel. Cet explorateur sera accessible à des utilisateurs novices, mais offrira un plus grand contrôle à des utilisateurs avertis. Il sera utilisable en ligne. Il sera OpenSource. Il sera documenté pour l'utilisateur novice et pour l'utilisateur averti. Le code du projet sera aussi documenté, avec de la JSDoc, et par des documents présentant la structure interne du logiciel.
+Le but de ce projet est la réalisation d'un explorateur automate cellulair unidimensionnel. Cet explorateur sera accessible à des utilisateurs novices, mais offrira un plus grand contrôle à des utilisateurs avertis. Il sera utilisable en ligne. Il sera OpenSource. Il sera documenté pour l'utilisateur novice et pour l'utilisateur averti. Le code du projet sera aussi documenté, avec de la JSDoc, et par des documents présentant la structure interne du logiciel.
 
 ## Références
 

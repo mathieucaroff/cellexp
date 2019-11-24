@@ -28,10 +28,10 @@ Les enjeux de ce projet sont:
 
 Le projet suivra un cycle de vie itératif, inspiré de Scrum.
 
-Chaque fonctionalité sera présentées par écrit, par le client, accéptée ou
+Chaque fonctionnalité sera présentées par écrit, par le client, accéptée ou
 refusée par le développeur, puis spécifiées par le client et le développeur
 conjoins, et finalement concue, puis réalisée par le développeur. Ces
-différentes activités seront mesurées en temps. Pour chaque fonctionalité,
+différentes activités seront mesurées en temps. Pour chaque fonctionnalité,
 la durée de la conception et de la réalisation seront estimées, puis comparées
 à la duree effective lors de la revue de sprint suivante.
 

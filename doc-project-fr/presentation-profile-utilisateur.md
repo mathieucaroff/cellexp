@@ -40,16 +40,16 @@ Il maitrise les fonctionnalités de CAE1D qu'il utilise, et comprends le fonctio
 
 ### Utilisation simple
 
-Utilisation de fonctionalités disponibles en mode simple.
+Utilisation de fonctionnalités disponibles en mode simple.
 
-Le mode simple donne accès à une selection de fonctionalités simple et compréhensible, même avec une compréhension limité du fontionnement des automates cellulaires. Il permet à un utilisateur qui ne pratique pas l'exploration d'automate cellulaires d'avoir une expérience intéressante avec CAE1D.
+Le mode simple donne accès à une selection de fonctionnalités simple et compréhensible, même avec une compréhension limité du fontionnement des automates cellulaires. Il permet à un utilisateur qui ne pratique pas l'exploration d'automate cellulaire d'avoir une expérience intéressante avec CAE1D.
 
 ### Utilisation avancée
 
-Utilisation d'au moins une fonctionalité disponibles en mode avancé.
+Utilisation d'au moins une fonctionnalité disponibles en mode avancé.
 
-Le mode avancé donne accès à toutes les fonctionalités de CAE1D qui peuvent, tant que ces fonctionalités peuvent être configurés de manière suffisamen simple et compréhensibles qu'il ne soit pas nécessaire d'écrire de code.
+Le mode avancé donne accès à toutes les fonctionnalités de CAE1D qui peuvent, tant que ces fonctionnalités peuvent être configurés de manière suffisamen simple et compréhensibles qu'il ne soit pas nécessaire d'écrire de code.
 
 ### Utilisation développeur
 
-Utilisation d'au moins une des fonctionalités en mode "code utilisateur". L'utilisateur développeur fourni son code qui sera executé par la fonctionalité pour déterminer son comprotement.
+Utilisation d'au moins une des fonctionnalités en mode "code utilisateur". L'utilisateur développeur fourni son code qui sera executé par la fonctionnalité pour déterminer son comprotement.

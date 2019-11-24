@@ -32,7 +32,7 @@ Combien
 (Emphase sur les aspects visuels) (V) 99
 (Emphase sur les aspects qui montrent le potentiel de ces systemes) (P) 11
 (Emphase sur les aspects pédagogiques) (E) 8
-(Emphase sur la découvrabilité des fonctionalités) (D) 33
+(Emphase sur la découvrabilité des fonctionnalités) (D) 33
 
 ### Aspect de coeur / sous-entendu
 
@@ -41,7 +41,7 @@ Performances
 - Mode infini / bouclé
 - N'importe quel automate cellulaire
 
-### (P) Aspect montrer le potentiel des automates cellulaire
+### (P) Aspect montrer le potentiel des automates cellulaires
 
 - Dézoom
 - & Coloration des motifs

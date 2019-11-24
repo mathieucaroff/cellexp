@@ -8,10 +8,17 @@ Se référer à la [présentation des automates cellulaires](https://github.com/
 
 ## Outils
 
-### Explorateurs unidimentionels existant
+### Explorateurs existant
 
-[Wolframe alpha]
+#### Explorateurs unidimensionnels
+
+[Wolframe alpha] + web + description de l'automate - aucune fonctionalité de calcul, d'interactivité ou de défilement
+
+#### Explorateurs bidimensionnels
+
+[Golly] + utilise haslife + automates arbitraires + référence de son domaine - 2d uniquement
+[LifeViewer] + web - 2d uniquement
 
 ### Algorithmes
 
-[Hashlife]
+[Hashlife] - Réduit la quantité de calculs CPU en échange de plus de RAM
