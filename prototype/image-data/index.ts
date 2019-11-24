@@ -197,6 +197,7 @@ let createUrlManager = (prop: UrlManagerProp) => {
       // logj({ key: ev.key })
       if (ev.key === 'Enter') {
          readData()
+         self.data.eventorigin = 'user'
          allCallback()
       }
    })
@@ -226,6 +227,7 @@ let createUrlManager = (prop: UrlManagerProp) => {
       setData: (data) => {
          let hash = ''
          Object.entries(data).forEach(([key, value]) => {
+            if (key == 'eventorigin') return
             if (value === true) {
                hash += `#${encode(key)}`
             } else {
@@ -240,6 +242,7 @@ let createUrlManager = (prop: UrlManagerProp) => {
 
          self.data = data
 
+         self.data.eventorigin = 'program'
          allCallback()
          return self
       },
@@ -315,6 +318,13 @@ let setup2 = () => {
       if ('rule' in data) {
          rule = ruleN(parseInt(data.rule))
       }
+      if (data.eventorigin === 'user' && 'redraw' in data) {
+         afProp.skip = true
+         afProp = {
+            drawAgain: true,
+         }
+         requestAnimationFrame(animationFrame(afProp))
+      }
    })
 }
 
@@ -337,10 +347,19 @@ let drawRuleCanvas = async ({ rule, ctx, beforeDraw }) => {
    timed('computeImage', () => {
       if (1) {
          let ky = 0
-         for (let k = 0; k < 4 * imSize.x; k += 4) {
-            data[k] = data[k + 1] = data[k + 2] =
-               255 * Math.floor(2 * Math.random())
-            data[k + 3] = 255
+         if ('one' in urlManager.data) {
+            for (let k = 0; k < 4 * imSize.x; k += 4) {
+               data[k] = data[k + 1] = data[k + 2] = 0
+               data[k + 3] = 255
+            }
+            let khx = 4 * Math.floor(imSize.x / 2)
+            data[khx] = data[khx + 1] = data[khx + 2] = 255
+         } else {
+            for (let k = 0; k < 4 * imSize.x; k += 4) {
+               data[k] = data[k + 1] = data[k + 2] =
+                  255 * Math.floor(2 * Math.random())
+               data[k + 3] = 255
+            }
          }
       }
       for (let ky = 1; ky < imSize.y; ky += 1) {
@@ -404,13 +423,16 @@ let animationFrame = (prop: AnimationFrameProp = {}) => () => {
 
       drawAgain =
          drawAgain ||
+         urlManager.data.mad ||
          (urlManager.data.auto && count % frameCountBetweenChange() == 0) ||
          !lastLine
 
       if (drawAgain) {
          // draw (new) rule //
-         let ruleNumber = select(selectableRuleArray, roundIndex)
-         urlManager.updateData({ rule: ruleNumber })
+         if (urlManager.data.auto) {
+            let ruleNumber = select(selectableRuleArray, roundIndex)
+            urlManager.updateData({ rule: ruleNumber })
+         }
 
          timed('drawRuleCanvas', () => {
             drawRuleCanvas({
