@@ -2,6 +2,10 @@
 
 API: Application Programming Interface
 
+AC: Automate cellulaire
+
+AE: Automate cellulaire élémentaire - AC unidimensionel à 2 états
+
 Automate cellulaire: Un automate cellulaire consiste en une grille régulière de « cellules » contenant chacune un « état » choisi parmi un ensemble fini et qui peut évoluer au cours du temps.
 
 BabylonJS: Framework web de rendu graphique 3D en WebGL.

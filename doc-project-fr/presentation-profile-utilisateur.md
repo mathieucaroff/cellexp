@@ -52,4 +52,4 @@ Le mode avancé donne accès à toutes les fonctionalités de CAE1D qui peuvent,
 
 ### Utilisation développeur
 
-Utilisation d'au moins une des fonctionalités en mode "custome code". L'utilisateur développeur fourni son code qui sera executé par la fonctionalité pour déterminer son comprotement.
+Utilisation d'au moins une des fonctionalités en mode "code utilisateur". L'utilisateur développeur fourni son code qui sera executé par la fonctionalité pour déterminer son comprotement.
