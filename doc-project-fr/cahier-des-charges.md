@@ -67,5 +67,5 @@ Le but de ce projet est la réalisation d'un explorateur automate cellulair unid
 ## Références
 
 1. Le glossaire en français du projet [glossaire](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/glossaire.md)
-2. La présentation du concepte d'[automate cellulaire](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-automate-cellulaire.md)
-3. La présentation des [profils d'utilisateur](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-profile-utilisateur.md)
+2. La présentation du concept d'[automate cellulaire](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-automate-cellulaire.md)
+3. La présentation des [profils d'utilisateur](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-profil-utilisateur.md)
