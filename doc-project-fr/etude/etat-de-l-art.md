@@ -4,13 +4,15 @@
 
 ### Automates cellulaires
 
-Se référer à la [présentation des automates cellulaires](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-automate-cellulaire.md).
+Se référer à la [présentation des automates cellulaires](./presentation-automate-cellulaire.md).
 
 ## Outils
 
 ### Explorateurs existant
 
 #### Explorateurs unidimensionnels
+
+Les outils permettant de découvrir les automates cellulaires unidimensionnels sont peu nombreux et peu fourni en fonctionnalités. L'outil le plus convaincant est Wolframe Alpha, qui affiche des échantillons d'automate cellulaire
 
 [Wolframe alpha] + web + description de l'automate - aucune fonctionnalité de calcul, d'interactivité ou de défilement
 

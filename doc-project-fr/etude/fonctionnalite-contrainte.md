@@ -4,7 +4,7 @@
 
 Cette partie liste les exigences fermes de fonctionnalité du projet.
 
-- Calculer et afficher n'importe quel automate cellulaire tels qu'ils sont définis dans [présentation des automates cellulaires [2]](https://github.com/mathieucaroff/cellular-automaton-explorer-1d/blob/master/doc-project-fr/presentation-automate-cellulaire.md).
+- Calculer et afficher n'importe quel automate cellulaire tels qu'ils sont définis dans [présentation des automates cellulaires](./presentation-automate-cellulaire.md).
 
   - Le comportement des bords de l'automate cellulaire doit être paramétrable (état fixe, topologie circulaire, etc...).
   - L'automate cellulaire doit pouvoir défiler indéfiniment.

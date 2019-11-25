@@ -296,7 +296,7 @@ let interestingRuleArray = [
 
 let rule = ruleN(0)
 let afProp: AnimationFrameProp = {}
-let lastImage: ImageBitmap
+let lastImage: ImageData
 let lastLine: ImageData
 
 let count = -1
@@ -374,17 +374,18 @@ let drawRuleCanvas = async ({ rule, ctx, beforeDraw }) => {
          })
       }
    })
-   let imageBitmap = await timed('createImageBitmap', () =>
-      createImageBitmap(imageData),
-   )
+   // let imageBitmap = await timed('createImageBitmap', () =>
+   //    createImageBitmap(imageData),
+   // )
 
    timed('beforeDraw', beforeDraw)
 
-   timed('drawImageBitmap', () => ctx.drawImage(imageBitmap, 0, 0))
+   // timed('drawImageBitmap', () => ctx.drawImage(imageBitmap, 0, 0))
+   timed('drawImageBitmap', () => ctx.putImageData(imageData, 0, 0))
 
    let lastLineData = data.slice(4 * imSize.x * (imSize.y - 1))
    return {
-      lastImage: imageBitmap,
+      lastImage: imageData,
       lastLine: new ImageData(lastLineData, imSize.x, 1),
    }
 }
@@ -458,14 +459,15 @@ let animationFrame = (prop: AnimationFrameProp = {}) => () => {
             count: imSize.x,
          })
 
-         let lineBitmap = await timed('createImageBitmapLine', () =>
-            createImageBitmap(line),
-         )
+         // let lineBitmap = await timed('createImageBitmapLine', () =>
+         //    createImageBitmap(line),
+         // )
 
          timed('drawImageCanvas', () => ctx.drawImage(ctx.canvas, 0, -1))
-         timed('drawImageLine', () =>
-            ctx.drawImage(lineBitmap, 0, imSize.y - 1),
-         )
+         // timed('drawImageLine', () =>
+         //    ctx.drawImage(lineBitmap, 0, imSize.y - 1),
+         // )
+         timed('drawImageLine', () => ctx.putImageData(line, 0, imSize.y - 1))
 
          lastLine = line
       }
