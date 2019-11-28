@@ -264,7 +264,7 @@ let createUrlManager = (prop: UrlManagerProp) => {
    return self
 }
 
-let rule110 = (p, q, r) => (q & (255 ^ p)) | (q ^ r)
+let rule110 = (a, b, c) => (b & (255 ^ a)) | (b ^ c)
 
 let ruleN = (N) => (p, q, r) => {
    let k = (4 & p) + (2 & q) + (1 & r)

@@ -24,3 +24,5 @@ Les outils permettant de découvrir les automates cellulaires unidimensionnels s
 ### Algorithmes
 
 [Hashlife] - Réduit la quantité de calculs CPU en échange de plus de RAM
+
+[Hashlife](https://en.wikipedia.org/wiki/Hashlife) est un algorithmes de calcul du [Jeu de la vie](https://fr.wikipedia.org/wiki/Jeu_de_la_vie)
