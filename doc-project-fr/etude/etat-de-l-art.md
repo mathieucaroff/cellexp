@@ -4,7 +4,7 @@
 
 ### Automates cellulaires
 
-Se référer à la [présentation des automates cellulaires](./presentation-automate-cellulaire.md).
+Se référer à la [présentation des automates cellulaires](./automate-cellulaire.md).
 
 ## Outils
 

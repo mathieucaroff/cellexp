@@ -1,5 +1,7 @@
 # CAE1D - Fonctionnalités et contraintes
 
+_Le [glossaire] défini la plupart des termes techniques utilisés_
+
 ## Vue d'ensemble
 
 L'application est constituée d'un ensembles de composants qui intéragissent entre eux :

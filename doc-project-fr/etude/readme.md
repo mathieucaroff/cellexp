@@ -1,5 +1,7 @@
 # CAE1D - Explorateur d'automate cellulaire unidimensionnel
 
+_Le [glossaire] défini la plupart des termes techniques utilisés_
+
 Un automate cellulaire est un simulateur basé sur une grille de cellules. À chaque pas de temps, un nouvel état est calculé pour chaque cellule, à partir de son état précédent et de l'état des cellules voisines.
 
 Les automates cellulaires (AC) existent avec des grilles de différentes dimensions. L'AC le plus célèbre est le jeu de la vie, de John Horton Conway. C'est un AC de dimension 2. En dimension 1, l'AC le plus connu est la règle 110. Elle partage avec le jeu de la vie, la caractéristique de Turing-completness, aussi dite universalité : tout calcul discret peut-être simulé dans ces automates cellulaires.
@@ -13,7 +15,8 @@ Malgré l'utilité des automates cellulaires, les outils riches en fonctionnalit
 
 Ce projet vise à produire cet outil : un explorateur d'automate cellulaire 1D web.
 
-1. [Glossaire](./glossaire.md)
-2. [État de l'art](./etat-de-l-art.md)
-3. [Fonctionnalités et contraintes](./fonctionnalite-contrainte.md)
-4. [Roadmap](./roadmap.md)
+1. [Automates cellulaires](./automate-cellulaire.md)
+2. [Fonctionnalités](./fonctionnalite.md)
+3. [Roadmap](./roadmap.md)
+
+_La [bibliographie](./bibliographie.md) liste des ressources utiles_

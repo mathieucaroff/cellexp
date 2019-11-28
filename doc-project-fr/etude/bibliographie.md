@@ -1,5 +1,7 @@
 # Bibliographie
 
+_Le [glossaire] défini la plupart des termes techniques utilisés_
+
 - R. Wm. Gosper, Exploiting Regularities in Large Cellular Spaces. Physica 10D (1984) 75-80
 
 ## Outils Wolfram Alpha
@@ -10,7 +12,7 @@
   https://www.wolframalpha.com/input/?i=rule+1%2C222%2C193%2C931+k%3D2+r%3D2
 - Explorateur stratégique des règles à voisinage de 5 cellules (r=2)
   https://demonstrations.wolfram.com/AStrategyForExploringK2R2CellularAutomata/
-- Générateur de paneaux aux motifs d'automates cellulaires:
+- Générateur de panneaux aux motifs d'automates cellulaires:
   https://www.wolframcloud.com/objects/sw-blog/capanels
 
 ## Autres outils

@@ -1,5 +1,7 @@
 # Présentation du concept d'automate cellulaire
 
+_Le [glossaire] défini la plupart des termes techniques utilisés_
+
 Voir :
 https ://fr.wikipedia.org/wiki/Automate_cellulaire
 
