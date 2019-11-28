@@ -1,6 +1,6 @@
 # Bibliographie
 
-_Le [glossaire] défini la plupart des termes techniques utilisés_
+_Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilisés_
 
 - R. Wm. Gosper, Exploiting Regularities in Large Cellular Spaces. Physica 10D (1984) 75-80
 
@@ -18,3 +18,5 @@ _Le [glossaire] défini la plupart des termes techniques utilisés_
 ## Autres outils
 
 - Défileur à 256: http://mbostock.github.io/protovis/ex/cell.html
+
+[Revenir à l'accueil](..)

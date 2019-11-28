@@ -1,15 +1,14 @@
 # CAE1D - Fonctionnalités et contraintes
 
-_Le [glossaire] défini la plupart des termes techniques utilisés_
+_Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilisés_
 
 ## Vue d'ensemble
 
-L'application est constituée d'un ensembles de composants qui intéragissent entre eux :
+L'application est constituée d'un ensemble de composants qui interagissent entre eux :
 
-Le **calculateur-afficheur** reçois la description d'un automate cellulaire et d'un état initiale, et calcule et affiche cette automate cellulaire.
+Le **calculateur-afficheur** reçoit la description d'un automate cellulaire et d'un état initial, calcule et affiche cette automate cellulaire.
 
-Le **configurateur du calculateur-afficheur** présente une interface qui
-affiche la configuration du calculateur-afficheur et permet sa modification.
+Le **configurateur du calculateur-afficheur** présente une interface qui affiche la configuration du calculateur-afficheur et permet sa modification.
 
 L'**éditeur de règles** affiche un automate cellulaire élémentaire et permet de le modifier. Les propriétés de l'automate cellulaire sont rapportées.
 
@@ -19,12 +18,12 @@ L'**éditeur de règles** affiche un automate cellulaire élémentaire et permet
 
 #### Automate cellulaire
 
-- Calcul et affichage des 256 automates cellulaires élémentaires (**Fca-compute8**, **Fca-show2**)
-  - La taille de l'espace dans lequel l'automate est calculé est paramétrable. Il peut être borné à droite ou à gauche ou infini (**Fca-size**).
+- Calcul et affichage des 256 automates cellulaires élémentaires (**Fca-compute**, **Fca-show**)
+  - La taille de l'espace dans lequel l'automate est calculé est paramétrable. Il peut être borné à droite, à gauche ou infini (**Fca-size**).
     - Le comportement des bords de l'automate cellulaire est paramétrable (état fixe, topologie circulaire, etc...) (**Fca-border**).
-- L'application propose au minimum 4 thèmes de coloration des cellules(**Fca-theme**).
+- L'application propose au minimum 4 thèmes de coloration des cellules (**Fca-theme**).
 
-Les fonctionnalités (**Fca-compute8**) et (**Fca-show2**) intéragissent avec l'éditeur de règles, et permettent un changement de règle à chaud. Voir (**Fedit-bases**).
+Les fonctionnalités (**Fca-compute**) et (**Fca-show**) interagissent avec l'éditeur de règles, et permettent un changement de règle à chaud. Voir (**Fedit-bases**).
 
 Les fonctionnalités (**Fca-size**), (**Fca-border**) et (**Fca-theme**) sont contrôlées par le configurateur du calculateur-afficheur. Voir (**Fconfig-size**), (**Fconfig-border**) et (**Fconfig-theme**).
 
@@ -37,7 +36,7 @@ Les fonctionnalités (**Fca-size**), (**Fca-border**) et (**Fca-theme**) sont co
   - Accélération au minimum jusqu'à 300 générations par seconde
 - Le niveau de zoom de l'affichage peut être modifier par l'utilisateur et afficher plus d'une cellule par pixel (**Fnav-zoom**).
 - Lorsque la taille de la fenêtre contenant le calculateur-afficheur est augmentée, le zoom augmente pour que l'automate occupe la totalité de l'espace disponible en largeur (**Fnav-resize**). Ce comportement peut être désactivé.
-- Lorsque un automate cellulaire est plus large que la zone d'affichage, il est possible déplacer la zone d'affichage horizontalement avec la souris ou avec le clavier (**Fnav-pan-horiz**). De même, lorsque l'historique d'un automate cellulaire est trop long pour être affiché dans la zone d'affichage, il est possible de déplacer la zone d'affichage verticalement. Un tel déplacement interrompt le défilement de l'automate cellulaire (**Fnav-pan-vert**). Le déplacement verticale n'est pas tenu de permettre de remonter jusqu'au début de l'automate cellulaire. Cependant, il doit permettre pour un automate cellulaire calculé sur un espace borné de 1000 cellules de large, de remonter de 60 000 générations
+- Lorsque un automate cellulaire est plus large que la zone d'affichage, il est possible de déplacer la zone d'affichage horizontalement avec la souris ou avec le clavier (**Fnav-pan-horiz**). De même, lorsque l'historique d'un automate cellulaire est trop long pour être affiché dans la zone d'affichage, il est possible de déplacer la zone d'affichage verticalement. Un tel déplacement interrompt le défilement de l'automate cellulaire (**Fnav-pan-vert**). Le déplacement vertical n'est pas tenu de permettre de remonter jusqu'au début de l'automate cellulaire. Cependant, il doit permettre, pour un automate cellulaire calculé sur un espace borné de 1000 cellules de large, de remonter de 60 000 générations.
 
 #### Détection de motifs
 
@@ -48,13 +47,13 @@ Les fonctionnalités (**Fca-size**), (**Fca-border**) et (**Fca-theme**) sont co
 
 #### Détection de motifs
 
-- Les motifs peuvent être extrait de l'afficheur par sélection d'une zone par l'utilisateur (**Fpattern-select**).
-- Zoom en arrière de l'automate cellulaire.
+- Les motifs peuvent être extraits de l'afficheur par sélection d'une zone par l'utilisateur (**Fpattern-select**).
 
 #### Défilement et zoom
 
 - Mode pas à pas : En mode pause, il est possible de faire défiler l'automate cellulaire d'une seul génération, sur commande. Si l'automate n'est pas en pause, la commande de pas à pas le met en pause (**Fnav-step**).
 - Paramétrage du comportement de l'afficheur et de l'automate cellulaire lors du redimensionnement de l'affichage (**Fnav-custom-resize**).
+- Le zoom de l'affichage peut être modifier par l'utilisateur et afficher plus d'une cellule par pixel (**Fnav-zoom**).
 
 #### Automates cellulaires
 
@@ -62,7 +61,7 @@ Les fonctionnalités (**Fca-size**), (**Fca-border**) et (**Fca-theme**) sont co
 
 Le calculateur afficheur offre une API Javascript et Typescript qui permet de modifier sa configuration et d'effectuer toutes les actions que l'utilisateur peut effectuer (**Fscripting**).
 
-Ceci permet le scriptage temporel, et sur évènement de l'automate cellulaire et de la configuration de l'explorateur, permettant à un développeur de scénariser une expérience scriptée pour un utilisateur novice.
+L'API permet le scriptage temporel et le scriptage sur évènement de l'automate cellulaire et de la configuration de l'explorateur. Le développeur peut ainsi scénariser une expérience scriptée pour un utilisateur novice.
 
 ## Configurateur du calculateur-afficheur
 
@@ -70,9 +69,9 @@ Ceci permet le scriptage temporel, et sur évènement de l'automate cellulaire e
 
 Cette interface met à disposition de l'utilisateur l'ensemble des possibilités de configuration du calculateur-afficheur. Il affiche la configuration actuellement utilisée. Il permet le changement de la configuration à froid ou à chaud (**Fconfig-hot**). Il n'y a donc pas besoin de recharger l'automate cellulaire pour appliquer les configurations.
 
-- Le thème de l'automate peut être changé (**Fconfig-theme**). Voir (**Fca-theme**).
-- La taille de l'espace dans lequel l'automate est calculé peut être changée (**Fconfig-border**). Voir (**Fca-size**).
-- Le comportement des bords peut être changé (**Fconfig-border**). Voir (**Fca-border**).
+- Le thème de l'automate peut être modifié (**Fconfig-theme**). Voir (**Fca-theme**).
+- La taille de l'espace dans lequel l'automate est calculé peut être modifiée (**Fconfig-border**). Voir (**Fca-size**).
+- Le comportement des bords peut être modifié (**Fconfig-border**). Voir (**Fca-border**).
 
 On trouve aussi les fonctionnalités suivantes :
 
@@ -88,7 +87,7 @@ On trouve aussi les fonctionnalités suivantes :
 
 Lorsque deux éléments de configuration sont incompatibles, certaines options peuvent être rendue indisponibles. Le configurateur-afficheur retranscrira l'état de disponibilité dans la manière dont l'interface s'affiche et permettra de savoir la raison pour laquelle une configuration est indisponible (**Fconf-reason**).
 
-L'utilisateur pourra décider du comportement à adopter lorsque l'automate est redimensionné, parmi un ensemble de comportements utils (**Fca-custom-redimension** et **Fconf-custom-redimension**).
+L'utilisateur pourra décider du comportement à adopter lorsque l'automate est redimensionné, parmi un ensemble de comportements utiles (**Fca-custom-redimension** et **Fconf-custom-redimension**).
 
 On trouve encore les fonctionnalités suivantes :
 
@@ -97,19 +96,19 @@ On trouve encore les fonctionnalités suivantes :
 
 ### Éditeur de règles
 
-L'éditeur de règles, affiche un automate cellulaire unidimensionnel et permet d'y apporter des changements.
+L'éditeur de règles affiche un automate cellulaire unidimensionnel et permet d'y apporter des modifications.
 
 Ses fonctionnalités principales sont les suivantes:
 
 - L'écriture de la règle dans différentes bases (**Fedit-bases**) : les bases 10, 2, 4, 8 et 16.
-- L'affichage de l'application de l'automate à l'entrée 1000101110. Ceci affiche les chiffres binaire de l'écriture du numéro de la règle dans l'ordre
+- L'affichage de l'application de l'automate à l'entrée 1000101110. Ceci affiche les chiffres binaires de l'écriture du numéro de la règle dans l'ordre
   (40125376) plutôt que (76543210), ce qui permet une lecture condensée.
-- Les règles de transition locale obtenue par symétrie horizontale ou par symétrie des couleurs peuvent être chargés. Si l'automate est horizontalement auto-symétrique, cela est indiqué (**Fload-symmetry**).
+- Les règles de transition locale obtenue par symétrie horizontale ou par symétrie des couleurs peuvent être chargées. Si l'automate est horizontalement auto-symétrique, cela est indiqué (**Fload-symmetry**).
 - Les cellules parents ignorées par la règle de transition locale sont indiquées (**Finfo-ignore**).
-- Les cellules parents pour lesquelles la règle de transition locale est linéaire sont indiquées (**Finfo-ignore**).
-- Si la règle est totalisateur, c'est à dire qu'elle ne dépend que de la somme des états du voisinage, cela est indiqué (**Finfo-totalistic**).
+- Les cellules parents pour lesquelles la règle de transition locale est linéaire sont indiquées (**Finfo-linear**).
+- Si l'automate cellulaire est totalisateur, c'est à dire qu'elle ne dépend que de la somme des états du voisinage, cela est indiqué (**Finfo-totalistic**).
 
-Optionnellement, l'éditeur de règle pourra prendre en charge les automates cellulaires unidimensionnels avec des voisinages de taille arbitraire, et avec un nombre arbitraire d'état.
+Optionnellement, l'éditeur de règle pourra prendre en charge les automates cellulaires unidimensionnels avec des voisinages de taille arbitraire, et avec un nombre arbitraire d'états.
 
 ## Contraintes non fonctionnelles
 
@@ -117,11 +116,13 @@ Cette partie liste les contraintes d'environnement d'exécution et de performanc
 
 Environnement :
 
-- Le logiciel doit fonctionner sans installation, **sous forme d'application web**, sur la dernières version publique du navigateur Chrome. Ceci pose des contraintes sur les langages qui peuvent être utilisé pour la réalisation de l'application.
+- Le logiciel doit fonctionner sans installation, **sous forme d'application web**, sur la dernière version publique du navigateur Chrome. Ceci pose des contraintes sur les langages qui peuvent être utilisés pour la réalisation de l'application.
 - L'afficheur-calculateur doit pouvoir être utilisé en plein écran ou embarqué dans une page.
 
 Performance :
 
 - Un automate cellulaire calculé sur un espace borné de 1000 cellules de large, doit pouvoir défiler sur 300 000 générations.
 - L'affichage doit pouvoir fonctionner à 60 fps sur Chrome avec un zoom de une cellule par pixel, sur un écran Full HD.
-- L'application doit assurer de respecter une limite d'utilisation de la RAM fixée par l'utilisateur, tant que cette limite est supérieur à 200 Mo.
+- L'utilisateur peut fixer une limite d'utilisation de la RAM de 200 Mo ou plus. L'application assure le respect de cette consigne.
+
+[Revenir à l'accueil](..)

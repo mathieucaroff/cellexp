@@ -1,6 +1,6 @@
 # Automate cellulaire
 
-_Le [glossaire] défini la plupart des termes techniques utilisés_
+_Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilisés_
 
 ## Définition
 
@@ -99,3 +99,5 @@ Les outils permettant de découvrir les automates cellulaires unidimensionnels s
 #### Wolfram Alpha
 
 Wolfram Alpha est un moteur de calcul de connaissance. Il est accessible en ligne, et fourni une description des caractéristique de n'importe quel automate cellulaire unidimensionnel. Cette description inclut des échantillons de calcul de l'automate dans différentes configuration de départ.
+
+[Revenir à l'accueil](..)

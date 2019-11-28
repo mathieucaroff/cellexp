@@ -68,3 +68,5 @@ Utilisation de **script**, ou écriture de **script**.
 #### Script
 
 Programme constitué d’une suite de commandes dispensant l’utilisateur de les saisir, et permettant d’effectuer une fonction particulière ou de contribuer à l’exécution d’un autre programme.
+
+[Revenir à l'accueil](..)
