@@ -26,7 +26,7 @@ Voir /GLOSSARY.md::Flasher.
 
 #### Grille d'automate unidimensionnel
 
-Certains automates unidimensionnels peuvent contenir des motifs qui apparaissent de manière horizontalement répétés, plutôt qu'unique. Une grille peu avoir différent alignements, par exemple la règle 110.
+Certains automates unidimensionnels peuvent contenir des motifs qui apparaissent de manière horizontalement répétés, plutôt qu'unique. Une grille peut avoir différent alignements, par exemple la règle 110.
 
 #### Règle
 
@@ -48,7 +48,7 @@ Programme constitué d’une suite de commandes dispensant l’utilisateur de le
 
 _ou Turing-completness_
 
-Un système est Turing complet s'il peu réaliser des calculs arbitraires et donc émuler une machine de Turing ou un ordinateur.
+Un système est Turing complet s'il peut réaliser des calculs arbitraires et donc émuler une machine de Turing ou un ordinateur.
 
 #### UI
 

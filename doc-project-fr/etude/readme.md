@@ -11,7 +11,7 @@ Au premier abord, les automates cellulaires sont intéressants pour leur aspect 
 - (E1) La recherche d'automates cellulaires simples et intéressants ainsi que la recherche de leurs propriétés
 - (E2) La construction d'automates cellulaires aux propriétés spécifiques, pouvant s'inspirer de situations réelles
 
-Malgré l'utilité des automates cellulaires, les outils riches en fonctionnalités permettant leur exploration et leur visualisation sont peu nombreux. Pour les automates cellulaires 2D, [Golly](./automate-cellulaire.md#Golly) est incontestablement l'outil avec le plus de fonctionnalités. On trouve aussi [LifeViewer](./automate-cellulaire.md#LifeViewer), un simulateur web gratuit, mais propriétaire. Pour les automates cellulaires 1Ds, aucun outil ne se démarque : l'outil qui propose le plus de fonctionnalités est Wolfram Alpha.
+Malgré l'utilité des automates cellulaires, les outils riches en fonctionnalités permettant leur exploration et leur visualisation sont peu nombreux. Pour les automates cellulaires 2D, [Golly](./automate-cellulaire.md#Golly) est incontestablement l'outil avec le plus de fonctionnalités. On trouve aussi [LifeViewer](./automate-cellulaire.md#LifeViewer), un simulateur web gratuit, mais propriétaire. Pour les automates cellulaires 1D, aucun outil ne se démarque : l'outil qui propose le plus de fonctionnalités est Wolfram Alpha.
 
 Ce projet vise à produire cet outil : un explorateur d'automate cellulaire 1D web.
 

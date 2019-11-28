@@ -2,7 +2,7 @@
 
 _Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilisés_
 
-L'explorateur d'automates cellulaires 1Ds vise un publique intéressés par les automates cellulaires. Les utilisateurs souhaitent connaître les automates cellulaires plus en détail, même si leurs connaissances sur le sujet peuvent être limitées. Ils peuvent être développeurs ou non.
+L'explorateur d'automates cellulaires 1D vise un publique intéressés par les automates cellulaires. Les utilisateurs souhaitent connaître les automates cellulaires plus en détail, même si leurs connaissances sur le sujet peuvent être limitées. Ils peuvent être développeurs ou non.
 
 ## Vue d'ensemble
 
