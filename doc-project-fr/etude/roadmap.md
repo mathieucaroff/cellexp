@@ -2,13 +2,12 @@
 
 _Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilisés_
 
-La première étape du projet sera la réalisation de prototypes permettant de mesurer la viabilité de différentes approches du problème de l'affichage de l'automate et de son temps calcul. Ces prototypes serviront aussi à évaluer la maturité des outils récents de programmation Web tel que la librairie Rust stdweb.
-
-Dans un second temps, il s'agira de produire un schéma de conception du projet. Ce schéma découpera le projet en modules, leur attribuant des responsabilités définies. Cette étape de conception inclura aussi une proposition d'interfaces à utiliser entres les différents modules.
-
-L'étape de réalisation inclura des tests pour chaque module, et des tests pour les groupes de modules qui peuvent être testés.
-
-- (2019-12-01) Prototype en Rust stdweb
-- (2019-12-15) Prototype sommaire, mais avec les trois modules distincts
+1. (2019-11-28) Présentation textuelle du projet (étude)
+1. (2019-12-01) Prototype d'exploration technologique avec Rust stdweb. Affichage et calcule des 256 règles seulement.
+1. (2019-12-15) Livrable sommaire, mais avec les trois modules distincts. Affiche tout les automates élémentaires et gère la pause et le changement de vitesse. Suivit d'une présentation orale du projet le jeudi 2019-12-18.
+1. (2019-01-19) Fonctionnalités de déplacement horizontale et verticale, de zoom et de réaction au redimensionnement
+1. (2019-02-02) Fonctionnalités de détection de motifs
+1. (2019-02-16) Fonctionnalités de l'éditeur de règles
+1. (2019-03-01) Zoom arrière, et patterns commun pour la règle 110
 
 [Revenir à l'accueil](..)
