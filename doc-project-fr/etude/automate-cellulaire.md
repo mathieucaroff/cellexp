@@ -19,9 +19,7 @@ La fonction d'évolution d'une cellule, dite **règle locale de transition**, es
 
 S ^ (S ^ V)
 
-## Exemple
-
-### Le jeu de la vie
+## Le jeu de la vie
 
 Extrait de l'article Wikipédia [Jeu de la vie](https://fr.wikipedia.org/wiki/Jeu_de_la_vie) :
 
@@ -35,7 +33,7 @@ Extrait de l'article Wikipédia [Jeu de la vie](https://fr.wikipedia.org/wiki/Je
 > - Une cellule morte possédant exactement trois voisines vivantes devient vivante (elle naît).
 > - Une cellule vivante possédant deux ou trois voisines vivantes le reste, sinon elle meurt.
 
-### Les automates cellulaires élémentaires
+## Les automates cellulaires élémentaires
 
 Les automates cellulaires élémentaires figurent parmi les automates cellulaires les plus simples qui puissent être concus. Ils sont au nombre de 256. Ils sont définis par les caractéristiques suivantes :
 
@@ -49,7 +47,7 @@ Notons q le cardinal de Q et v le cardinal de V. La formule donnant le nombre de
 
 Dans ces conditions, pour un AC élémentaire, les règles d'évolution sont au nombre de `2 ** (2 ** 3),` soit `2 ** 8`, d'ou 256 règles d'évolution possibles.
 
-### La règle 110
+## La règle 110
 
 La règle 110 est un des 256 AC élémentaires, et est donc unidimensionnelle. Il a été prouvé en 2004, par Matthew Cook, que la règle 110 est Turing Complete. À la date du 2019-11-22, c'est le seul automate élémentaire dont la Turing Completeness a été prouvé.
 
@@ -66,3 +64,38 @@ abc   a, b, c   a, b, c   a, b, c   a, b, c   a, b, c   a, b, c   a, b, c   a, b
       1, 1, 1   1, 1, 0   1, 0, 1   1, 0, 0   0, 1, 1   0, 1, 0   0, 0, 1   0, 0, 0
 0b_      0         1         1         0         1         1         1         0
 ```
+
+## Algorithmes relatifs aux automates cellulaires
+
+### Hashlife
+
+[Hashlife](https://en.wikipedia.org/wiki/Hashlife) est un algorithmes de calcul du [Jeu de la vie](https://fr.wikipedia.org/wiki/Jeu_de_la_vie). Il est le résultat de l'application de l'algorithme décrit par Gosper Bill dans sa publication "Exploiting Regularities in Large Cellular Spaces", en 1984, à l'automate cellulaire du Jeu de la Vie.
+
+Cette algorithme permet de réduire la quantité de calculs CPU, en mémorisant les résultats intermédiaires de simulation, afin d'éviter de les recalculer. Le nom est la concaténation de "Hash" et "Life". "Hash" provient de l'utilisation par l'algorithme d'une [table de hachage](https://fr.wikipedia.org/wiki/Table_de_hachage) pour mémoriser les résultats intermédiaires. "Life" désigne l'application de l'algorithme au jeu de la vie (Game of **Life**).
+
+Cette algorithme permet d'accélérer les calculs, avec le contre-parti qu'il requière plus de RAM qu'un algorithme naïf.
+
+### Généralisation de Hashlife
+
+Bien que la publication de 1984 de Gosper Bill précédemment cité ne présente que le calcul du jeu de la vie, ses principes ne sont nullement limité à cette automates cellulaire et peuvent même s'appliquer à des automates cellulaires de toutes dimensionnalité.
+
+## Explorateurs d'automates cellulaires existants
+
+### Explorateurs bidimensionnels
+
+#### Golly
+
+[Golly](<https://en.wikipedia.org/wiki/Golly_(program)>) est un outils de simulation d'automates cellulaire bidimensionnels arbitraires. Il est open-source, écrit en C++ et il fonctionne comme application de bureau.
+Golly utilise Hashlife pour accélérer la simulation des automates. Golly ne calcul pas d'automates 1D ni 3D, uniquement des automates 2D.
+
+#### LifeViewer
+
+[LifeViewer](https://conwaylife.com/wiki/LifeViewer) est tout comme Golly, un simulateur d'automates cellulaires bidimensionnels. Comparé à Golly, il a l'avantage de fonctionner dans le navigateur, mais c'est un logiciel propriétaire, et il n'utilise pas Hashlife.
+
+### Explorateurs unidimensionnels
+
+Les outils permettant de découvrir les automates cellulaires unidimensionnels sont peu nombreux et peu fourni en fonctionnalités. L'outil le plus convaincant est Wolfram Alpha, qui affiche des échantillons d'automate cellulaire
+
+#### Wolfram Alpha
+
+Wolfram Alpha est un moteur de calcul de connaissance. Il est accessible en ligne, et fourni une description des caractéristique de n'importe quel automate cellulaire unidimensionnel. Cette description inclut des échantillons de calcul de l'automate dans différentes configuration de départ.
