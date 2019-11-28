@@ -8,13 +8,13 @@ Application Programming Interface
 
 Automate cellulaire
 
-#### AE
-
-Automate cellulaire élémentaire - AC unidimensionnel à 2 états
-
 #### Automate cellulaire
 
 Un automate cellulaire consiste en une grille régulière de « cellules » contenant chacune un « état » choisi parmi un ensemble fini et qui peut évoluer au cours du temps.
+
+#### Automate cellulaire élémentaire
+
+Automate cellulaire unidimensionnel à 2 états, avec des voisinages de trois cellules.
 
 #### CAE1D
 
@@ -36,7 +36,17 @@ Nom court pour désigner un des 256 automates cellulaires élémentaires par sa 
 
 Loi qui décrit l'état d'une cellule à la prochaine génération, en fonction de l'état actuelle des cellules de son voisinage. Se référer à la présentation des automates cellulaires pour plus de détail.
 
+#### Scriptage, scripting
+
+Utilisation de **script**, ou écriture de **script**.
+
+#### Script
+
+Programme constitué d’une suite de commandes dispensant l’utilisateur de les saisir, et permettant d’effectuer une fonction particulière ou de contribuer à l’exécution d’un autre programme.
+
 #### Turing-complet
+
+_ou Turing-completness_
 
 Un système est Turing complet s'il peu réaliser des calculs arbitraires et donc émuler une machine de Turing ou un ordinateur.
 
@@ -60,13 +70,5 @@ UIS / UID Entrées - Les entrées des l'UI Simple ou Difficile
 #### Universel
 
 (Système universel) Voir **Turing-complet**.
-
-#### Scriptage, scripting
-
-Utilisation de **script**, ou écriture de **script**.
-
-#### Script
-
-Programme constitué d’une suite de commandes dispensant l’utilisateur de les saisir, et permettant d’effectuer une fonction particulière ou de contribuer à l’exécution d’un autre programme.
 
 [Revenir à l'accueil](..)

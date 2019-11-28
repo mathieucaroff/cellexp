@@ -4,6 +4,16 @@ _Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilis
 
 - R. Wm. Gosper, Exploiting Regularities in Large Cellular Spaces. Physica 10D (1984) 75-80
 
+## Présentation des automates cellulaires
+
+Stephen Wolfram, A New Kind of Science,
+https://www.wolframscience.com/nks/
+
+Daniel Shiffman, The Nature of Code, Chapter 7. Cellular Automata
+https://natureofcode.com/book/chapter-7-cellular-automata/
+
+Propose des extensions aux automates cellulaires traditionnels.
+
 ## Outils Wolfram Alpha
 
 - Règle 30: https://www.wolframalpha.com/input/?i=rule+30

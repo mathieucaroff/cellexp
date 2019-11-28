@@ -276,6 +276,7 @@ let interestingRuleArray = [
    22,
    26,
    30,
+   41,
    45,
    54,
    60,
