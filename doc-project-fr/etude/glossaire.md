@@ -26,7 +26,7 @@ Voir /GLOSSARY.md::Flasher.
 
 #### Grille d'automate unidimensionnel
 
-Certains automates unidimensionnels peuvent contenir des motifs qui apparaissent de manière horizontalement répétés, plutôt qu'unique. Une grille peut avoir différent alignements, par exemple la règle 110.
+Certains automates unidimensionnels peuvent contenir des motifs qui apparaissent de manière horizontalement répétés, plutôt qu'uniques. Une grille peut avoir différents alignements, par exemple la règle 110.
 
 #### Règle
 
@@ -34,7 +34,7 @@ Nom court pour désigner un des 256 automates cellulaires élémentaires par sa 
 
 #### Règle de transition locale
 
-Loi qui décrit l'état d'une cellule à la prochaine génération, en fonction de l'état actuelle des cellules de son voisinage. Se référer à la présentation des automates cellulaires pour plus de détail.
+Loi qui décrit l'état d'une cellule à la prochaine génération, en fonction de l'état actuel des cellules de son voisinage. Se référer à la présentation des automates cellulaires pour plus de détails.
 
 #### Scriptage, scripting
 
