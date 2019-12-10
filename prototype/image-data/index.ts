@@ -276,12 +276,12 @@ let interestingRuleArray = [
    22,
    26,
    30,
-   41,
+   41, // miscategorized as a class 2 rule by Wolfram Alpha :T - Turing Complete ?
    45,
-   54,
+   54, // class 4 - Turing Complete ?
    60,
    62,
-   73,
+   73, // Nice but isolated columns
    75,
    86,
    89,
