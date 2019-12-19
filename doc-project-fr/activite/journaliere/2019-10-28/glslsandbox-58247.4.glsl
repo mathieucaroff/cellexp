@@ -1,3 +1,5 @@
+// http://glslsandbox.com/e#58247.4
+
 // Rule 110 (& Game of life)
 
 // Find the list of controls below
