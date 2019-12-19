@@ -24,6 +24,10 @@ Cellular Automaton Explorer 1D - cet explorateur d'automate cellulaire.
 
 Voir /GLOSSARY.md::Flasher.
 
+#### DSL
+
+Domain Specific Language : Langage Spécific à un Domaine - langage de programmation dont l'utilisation est dédié à un domaine.
+
 #### Grille d'automate unidimensionnel
 
 Certains automates unidimensionnels peuvent contenir des motifs qui apparaissent de manière horizontalement répétés, plutôt qu'uniques. Une grille peut avoir différents alignements, par exemple la règle 110.
@@ -71,4 +75,4 @@ UIS / UID Entrées - Les entrées des l'UI Simple ou Difficile
 
 (Système universel) Voir **Turing-complet**.
 
-[Revenir à l'accueil](..)
+[Revenir à l'accueil](.)

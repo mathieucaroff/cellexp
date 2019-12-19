@@ -29,4 +29,4 @@ Propose des extensions aux automates cellulaires traditionnels.
 
 - Défileur à 256: http://mbostock.github.io/protovis/ex/cell.html
 
-[Revenir à l'accueil](..)
+[Revenir à l'accueil](.)

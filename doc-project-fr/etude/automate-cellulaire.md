@@ -4,20 +4,51 @@ _Le [glossaire](./glossaire.md) définit la plupart des termes techniques utilis
 
 ## Définition
 
+### Principe
+
 Extrait de l'article Wikipédia [Automate cellulaire](https://fr.wikipedia.org/wiki/Automate_cellulaire) :
 
 > Un automate cellulaire est un simulateur basé sur une grille de cellules. À chaque pas de temps, un nouvel état est calculé pour chaque cellule, à partir de son état précédent et de l'état des cellules voisines. Chaque pas de temps correspond à une génération de cellules.
 
-Dans les automates cellulaires standards, la liste complète des états que peut prendre une cellule est prédéfinie et est statique. De même, le voisinage de cellule est clairement identifié par l'ensemble des positions relatives des cellules du voisinage. La règle d'évolution est alors définie comme une fonction qui associe à chaque cellule un nouvel état en fonction de la liste des états des cellules du voisinage. Ainsi, avec les notations suivantes :
+Dans les automates cellulaires standards, la liste complète des états que peut prendre une cellule est prédéfinie et est statique. De même, le voisinage de cellule est clairement identifié par l'ensemble des positions relatives des cellules du voisinage. La règle d'évolution est alors définie comme une fonction qui associe à chaque cellule un nouvel état en fonction de la liste des états des cellules du voisinage.
 
-- d : **dimension** de l'automate cellulaire
-- Z^d : espace des positions des cellules de l'automate : le **réseau**
-- S : ensemble des états possibles pour une cellule : **l'alphabet**
-- V, partie de Z^d : ensemble définissant la forme des **voisinages**; c'est donc une partie finie du réseau
+### Notation
 
-La fonction d'évolution d'une cellule, dite **règle locale de transition**, est alors un élément de :
+On utilise la notation `x ^ y` pour parler de x à la puissance y.
+`^` désigne l'opérateur **puissance**, tant sur les réels que sur les ensembles : Soient E et G deux ensembles. E ^ 4 désigne E x E x E x E, le (produit cartésien)[https://fr.wikipedia.org/wiki/Produit_cart%C3%A9sien] de E par lui-même quatre fois. G ^ E désigne l'ensemble des fonctions allant de E dans G. Voir l'article Wikipédia (Espace fonctionnel)[https://fr.wikipedia.org/wiki/Espace_fonctionnel].
 
-S ^ (S ^ V)
+La lettre majuscule Z, en gras, **Z**, désigne l'ensemble des entiers relatifs. Similairement, **N**, **Q** et **R** désigne les ensembles des entiers naturels, des fractions d'entiers et des nombres réels.
+
+### Définition formelle
+
+#### Automate cellulaire
+
+Dans la littérature, un **automate cellulaire** est défini comme un quadruplet de valeurs:
+
+- d : la **dimension** du réseau de l'automate cellulaire
+- S : l'**alphabet** de l'automate cellulaire, c'est-à-dire, l'ensemble des états que ses cellules peuvent prendre
+- V : le **voisinage** de l'automate cellulaire
+- f : la **règle locale de transition**
+
+Mathématiquement, d est un entier naturel, S est un ensemble de symboles, V est une partie finie de **Z** ^ d, et f est un élément de S ^ (S ^ V).
+
+La règle de transition f est une fonction arbitraire allant de S ^ V dans S.
+
+f prend en paramètre une fonction u. La fonction u va de V dans S. Elle décrit chaque état des cellules d'un voisinage. f doit produire un nouvel état à partir de cette fonction u.
+
+#### Simulateur
+
+Nous nous proposons de définir formellement le concepte de simulateur.
+
+Un **simulateur** est un triplet de valeurs:
+
+- A : l'**automate cellulaire** simulé
+- E : l'**espace** dans lequel il est simulé
+- r : l'état initiale
+
+Mathématiquement, A est un automate cellulaire (d, S, V, f) tel défini précédemment, E est le produit carthésien de d espaces de dimension 1, et r est une fonction de E dans S.
+
+Chaque direction de l'espace E peut être: infini, fini cyclique ou fini à bord. Dans le troisième cas, une fonction b est associée au bord, afin de décrire son comportement. Cette fonction b va de **N** dans S, donnant l'état du bord à chaque nouvelle génération.
 
 ## Le jeu de la vie
 
@@ -136,7 +167,7 @@ Golly utilise Hashlife pour accélérer la simulation des automates. Golly ne ca
 
 ### Explorateurs unidimensionnels
 
-Les outils permettant de découvrir les automates cellulaires unidimensionnels sont peu nombreux et peu fournis en fonctionnalités. L'outil le plus convaincant est Wolfram Alpha, qui affiche des échantillons d'automate cellulaire
+Les outils permettant de découvrir les automates cellulaires unidimensionnels sont nombreux mais peu fournis en fonctionnalités. L'outil le plus convaincant est Wolfram Alpha, qui affiche des échantillons d'automate cellulaire.
 
 #### Wolfram Alpha
 
@@ -151,4 +182,13 @@ Wolfram Alpha définit une notation pour les automates cellulaires. Un automate 
 
 Voire par exemple la description d'[un automate à trois états, avec des voisinages de 5 cellules](https://www.wolframalpha.com/input/?i=rule+7%2C111%2C222%2C193%2C931+k%3D3+r%3D2).
 
-[Revenir à l'accueil](..)
+##### Explorateurs d'automates cellulaires élémentaires
+
+Les pages suivantes permettent le calcul et l'affichage des 256 automates élémentaires :
+
+- [Celldemo](http://devinacker.github.io/celldemo/)
+- [Elementary Cellular Automata Explorer ](https://www.xanxys.net/ecax/)
+- [Elementary Cellular Automata in HTML5 Canvas](http://www.cs.swan.ac.uk/~csandy/research/play/ca/)
+- [Elementary Cellular Automata 256 Preview](http://www.emergentmind.com/elementary-cellular-automata)
+
+[Revenir à l'accueil](.)

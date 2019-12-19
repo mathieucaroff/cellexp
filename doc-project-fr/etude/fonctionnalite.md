@@ -50,12 +50,17 @@ Les fonctionnalités (**Fca-size**), (**Fca-border**) et (**Fca-theme**) sont co
 #### Détection de motifs
 
 - Les motifs peuvent être extraits de l'afficheur par sélection d'une zone par l'utilisateur (**Fpattern-select**).
+- L'application dispose d'une banque de motifs communs pour une ou plusieurs règles élémentaires (**Fpattern-110**).
 
 #### Défilement et zoom
 
 - Mode pas à pas : En mode pause, il est possible de faire défiler l'automate cellulaire d'une seul génération, sur commande. Si l'automate n'est pas en pause, la commande de pas à pas le met en pause (**Fnav-step**).
 - Paramétrage du comportement de l'afficheur et de l'automate cellulaire lors du redimensionnement de l'affichage (**Fnav-custom-resize**).
 - Le zoom de l'affichage peut être modifier par l'utilisateur et afficher plus d'une cellule par pixel (**Fnav-zoom**).
+
+#### Minimap
+
+Une carte de l'ensemble des cellules actives (calculées) de l'automate cellulaire est affichée dans l'un des coins du calculateur-afficheur (**Fminimap**). Cette carte permet d'afficher la taille de la partie visible de l'automate cellulaire, comparée à celle de l'automate complet.
 
 #### Automates cellulaires
 
@@ -87,9 +92,11 @@ On trouve aussi les fonctionnalités suivantes :
 
 ### Fonctionnalités secondaires
 
-Lorsque deux éléments de configuration sont incompatibles, certaines options peuvent être rendue indisponibles. Le configurateur-afficheur retranscrira l'état de disponibilité dans la manière dont l'interface s'affiche et permettra de savoir la raison pour laquelle une configuration est indisponible (**Fconf-reason**).
+Lorsque deux éléments de configuration sont incompatibles, certaines options peuvent être rendues indisponibles. Le configurateur-afficheur retranscrira l'état de disponibilité dans la manière dont l'interface s'affiche et permettra de savoir la raison pour laquelle une configuration est indisponible (**Fconfig-reason**).
 
-L'utilisateur pourra décider du comportement à adopter lorsque l'automate est redimensionné, parmi un ensemble de comportements utiles (**Fca-custom-redimension** et **Fconf-custom-redimension**).
+L'utilisateur pourra décider du comportement à adopter lorsque l'automate est redimensionné, parmi un ensemble de comportements utiles (**Fca-custom-redimension** et **Fconfig-custom-redimension**).
+
+L'initialisation des cellules de la simulation de l'AC pourra être réalisée de manière précise grace à un DSL dédié documenté (**Fconfig-specific-initialisation**).
 
 On trouve encore les fonctionnalités suivantes :
 
@@ -104,13 +111,23 @@ Ses fonctionnalités principales sont les suivantes:
 
 - L'écriture de la règle dans différentes bases (**Fedit-bases**) : les bases 10, 2, 4, 8 et 16.
 - L'affichage de l'application de l'automate à l'entrée 1000101110. Ceci affiche les chiffres binaires de l'écriture du numéro de la règle dans l'ordre
-  (40125376) plutôt que (76543210), ce qui permet une lecture condensée.
+  (40125376) plutôt que (76543210), ce qui permet une lecture condensée (**Finfo-condensed**).
 - Les règles de transition locale obtenue par symétrie horizontale ou par symétrie des couleurs peuvent être chargées. Si l'automate est horizontalement auto-symétrique, cela est indiqué (**Fload-symmetry**).
 - Les cellules parents ignorées par la règle de transition locale sont indiquées (**Finfo-ignore**).
 - Les cellules parents pour lesquelles la règle de transition locale est linéaire sont indiquées (**Finfo-linear**).
 - Si l'automate cellulaire est totalisateur, c'est à dire qu'elle ne dépend que de la somme des états du voisinage, cela est indiqué (**Finfo-totalistic**).
+- Suivant le nombre de bits à 1, l'éditeur indiquera si la règle est équilibré en couleur, ou bien biaisée vers la mort ou bien biaisé vers la vie (**Finfo-color-tendency**).
+- L'éditeur indiquera si la règle a tendance à produire des cellules de couleur même couleur que la couleur dominante de leur voisinage, ou si a contrario elles tendent à être de la couleur opposée (**Finfo-scintillement**).
 
 Optionnellement, l'éditeur de règle pourra prendre en charge les automates cellulaires unidimensionnels avec des voisinages de taille arbitraire, et avec un nombre arbitraire d'états.
+
+### Prévisualiseur de règles
+
+Ce composant est entièrement optionnel.
+
+Ce composant permet de voir comment une règle traite différents motifs (**Fpreview**). Il s'agit simplement d'instances de calculateur-afficheur préconfigurées pour afficher entre 3 et 5 générations, à partir d'un motif très régulier.
+
+Ces instances seront modifiées pour permettre la détection d'une éventuelle répétition d'un motif, signalant l'existence d'une grille.
 
 ## Contraintes non fonctionnelles
 
@@ -127,4 +144,4 @@ Performance :
 - L'affichage doit pouvoir fonctionner à 60 fps sur Chrome avec un zoom de une cellule par pixel, sur un écran Full HD.
 - L'utilisateur peut fixer une limite d'utilisation de la RAM de 200 Mo ou plus. L'application assure le respect de cette consigne.
 
-[Revenir à l'accueil](..)
+[Revenir à l'accueil](.)
