@@ -15,7 +15,7 @@ Dans les automates cellulaires standards, la liste complète des états que peut
 ### Notation
 
 On utilise la notation `x ^ y` pour parler de x à la puissance y.
-`^` désigne l'opérateur **puissance**, tant sur les réels que sur les ensembles : Soient E et G deux ensembles. E ^ 4 désigne E x E x E x E, le (produit cartésien)[https://fr.wikipedia.org/wiki/Produit_cart%C3%A9sien] de E par lui-même quatre fois. G ^ E désigne l'ensemble des fonctions allant de E dans G. Voir l'article Wikipédia (Espace fonctionnel)[https://fr.wikipedia.org/wiki/Espace_fonctionnel].
+`^` désigne l'opérateur **puissance**, tant sur les réels que sur les ensembles : Soient E et G deux ensembles. E ^ 4 désigne E x E x E x E, le [produit cartésien](https://fr.wikipedia.org/wiki/Produit_cart%C3%A9sien) de E par lui-même quatre fois. G ^ E désigne l'ensemble des fonctions allant de E dans G. Voir l'article Wikipédia [Espace fonctionnel](https://fr.wikipedia.org/wiki/Espace_fonctionnel).
 
 La lettre majuscule Z, en gras, **Z**, désigne l'ensemble des entiers relatifs. Similairement, **N**, **Q** et **R** désigne les ensembles des entiers naturels, des fractions d'entiers et des nombres réels.
 
