@@ -1,12 +1,23 @@
 {
-  "name": "cellular-automaton-explorer-1d",
-  "version": "1.0.0",
-  "description": "Unidimensional cellular automaton explorer to highlight their unique properties",
-  "main": "index.js",
-  "repository": "git@github.com:mathieucaroff/cellular-automaton-explorer-1d.git",
-  "author": "Mathieu CAROFF <mathieu.caroff@free.fr>",
-  "license": "ISC",
-  "dependencies": {
-    "typescript": "^3.7.2"
-  }
+   "name": "cellular-automaton-explorer-1d",
+   "version": "1.0.0",
+   "description": "Unidimensional cellular automaton explorer to highlight their unique properties",
+   "repository": "git@github.com:mathieucaroff/cellular-automaton-explorer-1d.git",
+   "author": "Mathieu CAROFF <mathieu.caroff@free.fr>",
+   "license": "ISC",
+   "devDependencies": {
+      "@types/node": "^13.1.1",
+      "prettier": "^1.19.1",
+      "ts-node": "^8.5.4",
+      "typescript": "^3.7.4"
+   },
+   "dependencies": {
+      "@material-ui/core": "^4.8.2",
+      "mobx": "^5.15.1",
+      "mobx-react-lite": "^1.5.2",
+      "parcel": "^1.12.4",
+      "react": "^16.12.0",
+      "react-dom": "^16.12.0",
+      "rxjs": "^6.5.4"
+   }
 }

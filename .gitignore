@@ -1,10 +1,12 @@
 # Folders
 /*/
+tmp/
 
+!/contribute/
 !/doc-*/
 !/measure/
 !/prototype/
-!/contribute/
+!/src/
 
 # Files
 /.*
