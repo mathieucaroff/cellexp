@@ -40,6 +40,10 @@ Nom court pour désigner un des 256 automates cellulaires élémentaires par sa 
 
 Loi qui décrit l'état d'une cellule à la prochaine génération, en fonction de l'état actuel des cellules de son voisinage. Se référer à la présentation des automates cellulaires pour plus de détails.
 
+#### Ruban
+
+Espace des cellules d'un automate cellulaire unidimensionnel. Un ruban peu être infini, bouclé sur lui-même, ou bien avoir des bords.
+
 #### Scriptage, scripting
 
 Utilisation de **script**, ou écriture de **script**.

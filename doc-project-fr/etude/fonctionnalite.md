@@ -64,6 +64,15 @@ Une carte de l'ensemble des cellules actives (calculées) de l'automate cellulai
 
 #### Automates cellulaires
 
+Il est possible d'afficher des automates cellulaires ayant un jusqu'à 10 états
+(**Fca-10state**).
+
+#### Interpretation musicale du ruban
+
+- Il est possible d'associé un son à chaque état et de lire successivement le son correspondant à chaque cellule d'un ruban de l'automate cellulaire. (**Fmusic-play**).
+  - Il est possible de choisir entre une lecture de gauche à droite et de droite à gauche (**Fmusic-direction**).
+  - Il est possible de former des groupes de 2 ou 3 cellules et ainsi de former des états complexes, associés à une plus grande diversité de sons.
+
 #### API, scriptage
 
 Le calculateur afficheur offre une API Javascript et Typescript qui permet de modifier sa configuration et d'effectuer toutes les actions que l'utilisateur peut effectuer (**Fscripting**).
