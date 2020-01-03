@@ -25,8 +25,9 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 - simulator
   - compute
   - display
-- editor -- rule editor
-- ui -- simulation configurator
+- ui
+  - editor -- rule editor
+  - control -- simulation configurator
 
 ## verbe
 
@@ -68,13 +69,13 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 
 ### used moods
 
+- `+` big / major
 - `-` small / minor
 - `~` work in progress
 
 ### unused moods
 
 - `#` fix
-- `+` big / major
 - `&` feature
 - `$` quantified / measured
 - `@` inside
