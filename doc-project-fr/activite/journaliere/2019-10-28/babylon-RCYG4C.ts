@@ -57,9 +57,7 @@ class Playground {
          }
          // line uses rand as many times as needed to get a line of (arr.length) or more (01) digits
          let line = ([] as number[]).concat(
-            ...Array(Math.ceil(arr.length / 53))
-               .fill(0)
-               .map(rand),
+            ...Array.from({ length: Math.ceil(arr.length / 53) }, rand),
          )
          return line.slice(0, arr.length)
       })
