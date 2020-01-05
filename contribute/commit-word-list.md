@@ -42,6 +42,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 
 - carry -- from WIP to WIP
 - complete -- reach a form of completness
+- improve -- from finished to finished
 
 ### goal verbs
 
