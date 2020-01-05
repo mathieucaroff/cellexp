@@ -6,7 +6,7 @@
    "author": "Mathieu CAROFF <mathieu.caroff@free.fr>",
    "license": "ISC",
    "scripts": {
-      "build": "parcel build src/www/page.html -d dist -o page.html"
+      "build": "parcel build src/www/page.html -d public -o index.html"
    },
    "devDependencies": {
       "@types/node": "^13.1.1",
