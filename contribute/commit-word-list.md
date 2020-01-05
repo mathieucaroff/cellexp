@@ -67,6 +67,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 ### documentation verbs
 
 - explain
+- extend
 - doc-change
 - doc-clean
 
