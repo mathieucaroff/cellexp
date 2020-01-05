@@ -5,6 +5,9 @@
    "repository": "git@github.com:mathieucaroff/cellular-automaton-explorer-1d.git",
    "author": "Mathieu CAROFF <mathieu.caroff@free.fr>",
    "license": "ISC",
+   "scripts": {
+      "build": "parcel build src/www/page.html -d dist -o page.html"
+   },
    "devDependencies": {
       "@types/node": "^13.1.1",
       "prettier": "^1.19.1",

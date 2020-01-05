@@ -1,0 +1,7 @@
+{
+   "name": "cellexp",
+   "rewrites": [
+      { "source": "/", "destination": "/dist/page.html" },
+      { "source": "/(.*)", "destination": "/dist/$1" }
+    ]
+}

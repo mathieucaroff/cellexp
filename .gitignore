@@ -15,5 +15,6 @@ tmp/
 
 !/.editorconfig
 !/.gitignore
+!/.now.json
 !/.prettier*
 !/.yarnrc
