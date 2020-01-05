@@ -24,11 +24,11 @@ export interface Store {
 export let createStore = (): Store => {
    return {
       // MCompute + ui
-      rule: 30,
+      rule: 73,
       size: 333, // Good for 1366-pixel-width displays
 
       // MDisplay + ui
-      speed: 1,
+      speed: 2,
       theme: 'blackCyan',
       posS: createPosition(30),
       posT: createPosition(30),
@@ -36,6 +36,6 @@ export let createStore = (): Store => {
       zoom: 4,
 
       // MDisplay
-      canvasSize: { x: 0, y: 332 }, // (0, 16387)
+      canvasSize: { x: 0, y: 200 }, // (0, 16387)
    }
 }

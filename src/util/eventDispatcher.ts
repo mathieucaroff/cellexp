@@ -23,3 +23,5 @@ export let createEventDispatcher = () => {
       },
    }
 }
+
+export type EventDispatcher = ReturnType<typeof createEventDispatcher>

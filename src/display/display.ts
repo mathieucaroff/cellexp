@@ -1,11 +1,15 @@
+import { observable, autorun, action, reaction } from 'mobx'
+
 import { Store } from '../state/store'
+import { Hub } from '../state/hub'
+
 import { Computer } from '../compute/compute'
-import { observable, autorun, action } from 'mobx'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
+
 import { themeObj } from './theme'
 
-export let createDisplay = (store: Store, computer: Computer) => {
+export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let data = observable({
       ctx: undefined as CanvasRenderingContext2D | undefined,
       get pixT() {
@@ -17,24 +21,12 @@ export let createDisplay = (store: Store, computer: Computer) => {
    let discardLoop: (() => void) | undefined
    let clockTick = createEventDispatcher()
 
-   autorun(
-      () => {
-         store.canvasSize.x = store.size * store.zoom
-      },
-      { name: 'display canvasSize.x' },
-   )
-
-   clockTick.register(
-      action(() => {
-         store.posT.microPos += store.speed * 2
-      }),
-   )
-
    let me = {
       data,
       renderDisplay: (root: HTMLElement) => {
          let document = root.ownerDocument!
          let canvas = document.createElement('canvas')
+         let h2 = document.createElement('h2')
 
          autorun(
             () => {
@@ -44,6 +36,9 @@ export let createDisplay = (store: Store, computer: Computer) => {
             { name: 'display canvas.width&height' },
          )
 
+         h2.textContent = 'Display'
+         h2.style.marginLeft = '10px'
+         root.appendChild(h2)
          root.appendChild(canvas)
 
          action(() => {
@@ -51,6 +46,7 @@ export let createDisplay = (store: Store, computer: Computer) => {
          })()
       },
       start: () => {
+         discardLoop?.()
          let ref = emitterLoop(requestAnimationFrame).link(me.tick)
          discardLoop = ref.discard
       },
@@ -63,57 +59,104 @@ export let createDisplay = (store: Store, computer: Computer) => {
       },
    }
 
-   // Render cellular automaton
+   clockTick.register(
+      action(() => {
+         let { microPos } = store.posT
+         let newMPos = microPos + 2 * store.speed
+         store.posT.microPos = newMPos
+      }),
+   )
+
+   // Update canvasSize.x
    autorun(
       () => {
-         store.rule
-         let { ctx } = me.data
-         if (!ctx) return
-
-         let area = {
-            pos: {
-               x: store.posS.wholePos,
-               y: store.posT.wholePos,
-            },
-            size: {
-               x: Math.floor(store.canvasSize.x / store.zoom),
-               y: Math.floor(store.canvasSize.y / store.zoom),
-            },
-         }
-
-         computer.request(area)
-
-         let { cache } = computer.data
-
-         let { alive, dead } = themeObj[store.theme]
-
-         if (area.size.x * area.size.y === 0) return
-
-         let imageData = new ImageData(area.size.x, area.size.y)
-         let { data } = imageData
-
-         let areaSizeX = area.size.x
-
-         Array.from({ length: area.size.y }, (_, k) => {
-            let posY = area.pos.y + k
-            let dataK0 = k * areaSizeX * 4
-            cache[posY].forEach((v, m) => {
-               let dataK = dataK0 + m * 4
-               ;[data[dataK], data[dataK + 1], data[dataK + 2]] = v
-                  ? alive
-                  : dead
-               data[dataK + 3] = 255
-            })
-         })
-
-         createImageBitmap(imageData).then((bitmap) => {
-            let { x: w, y: h } = store.canvasSize
-            ctx!.imageSmoothingEnabled = false
-            ctx!.drawImage(bitmap, 0, 0, w, h)
-         })
+         store.canvasSize.x = store.size * store.zoom
       },
-      { name: 'display rendering' },
+      { name: 'display canvasSize.x' },
    )
+
+   // Trigger clock start / stop
+   autorun(() => {
+      if (store.play) {
+         me.start()
+      } else {
+         me.stop()
+      }
+   })
+
+   // Render cellular automaton
+   reaction(
+      () => store.rule,
+      () => {
+         store.posT.wholePos = 0
+         store.posT.microPos = 0
+         store.posS.wholePos = 0
+         store.posS.microPos = 0
+      },
+   )
+
+   // Render cellular automaton
+   let renderCanvas = () => {
+      store.rule
+      let { ctx } = me.data
+      if (!ctx) return
+
+      let drawArea = {
+         pos: {
+            x: store.posS.wholePos,
+            y: store.posT.wholePos,
+         },
+         size: {
+            x: Math.floor(store.canvasSize.x / store.zoom),
+            y: Math.floor(store.canvasSize.y / store.zoom),
+         },
+      }
+
+      let marginY = 2
+
+      let requestArea = {
+         pos: drawArea.pos,
+         size: {
+            x: drawArea.size.x,
+            y: drawArea.size.y + marginY,
+         },
+      }
+
+      computer.request(requestArea)
+
+      let { cache } = computer.data
+
+      let { alive, dead } = themeObj[store.theme]
+
+      if (drawArea.size.x * drawArea.size.y === 0) return
+
+      let imageData = new ImageData(requestArea.size.x, requestArea.size.y)
+      let { data } = imageData
+
+      let requestAreaSizeX = requestArea.size.x
+
+      Array.from({ length: requestArea.size.y }, (_, k) => {
+         let posY = requestArea.pos.y + k
+         let dataK0 = k * requestAreaSizeX * 4
+         cache[posY].forEach((v, m) => {
+            let dataK = dataK0 + m * 4
+            ;[data[dataK], data[dataK + 1], data[dataK + 2]] = v ? alive : dead
+            data[dataK + 3] = 255
+         })
+      })
+
+      let { pixT } = me.data
+      let w = store.canvasSize.x
+      let h = requestArea.size.y * store.zoom
+      createImageBitmap(imageData).then((bitmap) => {
+         ctx!.imageSmoothingEnabled = false
+         ctx!.drawImage(bitmap, 0, -pixT, w, h)
+      })
+   }
+
+   autorun(renderCanvas, { name: 'display rendering' })
+
+   hub.reroll.register(renderCanvas)
 
    return me
 }

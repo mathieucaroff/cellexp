@@ -26,7 +26,10 @@ let useStyle = makeStyles((theme: Theme) => {
    }
 
    return createStyles({
-      tableContainer: { ...style, display: 'inline-block' },
+      container: {
+         display: 'inline-block',
+      },
+      tableContainer: style,
       table: style,
    })
 })
@@ -66,37 +69,39 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
    let TC = TableCell
 
    return (
-      <TableContainer className={classes.tableContainer} component={Paper}>
+      <div className={classes.container}>
          <h4>
             {label} <Rule rule={rule} />
          </h4>
-         <Table className={classes.table} size="small">
-            <TableHead>
-               <TableRow>
-                  <TC>
-                     <strong>Name</strong>
-                  </TC>
-                  <TC align="center">
-                     <strong>Symmetric Rule</strong>
-                  </TC>
-               </TableRow>
-            </TableHead>
-            <TableBody>
-               {tableInfo.map(([name, someRule]) => {
-                  let status = getStatus(someRule)
+         <TableContainer className={classes.tableContainer} component={Paper}>
+            <Table className={classes.table} size="small">
+               <TableHead>
+                  <TableRow>
+                     <TC>
+                        <strong>Name</strong>
+                     </TC>
+                     <TC align="center">
+                        <strong>Symmetric Rule</strong>
+                     </TC>
+                  </TableRow>
+               </TableHead>
+               <TableBody>
+                  {tableInfo.map(([name, someRule]) => {
+                     let status = getStatus(someRule)
 
-                  return (
-                     <TableRow key={name}>
-                        <TC>{name}</TC>
-                        <TC align="center">
-                           {status ? `${status} ` : ''}
-                           <Rule rule={someRule} />
-                        </TC>
-                     </TableRow>
-                  )
-               })}
-            </TableBody>
-         </Table>
-      </TableContainer>
+                     return (
+                        <TableRow key={name}>
+                           <TC>{name}</TC>
+                           <TC align="center">
+                              {status ? `${status} ` : ''}
+                              <Rule rule={someRule} />
+                           </TC>
+                        </TableRow>
+                     )
+                  })}
+               </TableBody>
+            </Table>
+         </TableContainer>
+      </div>
    )
 }

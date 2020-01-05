@@ -7,25 +7,25 @@ export interface OxPosition {
 }
 
 export let createPosition = (microFactor: number): OxPosition => {
-   let microPos: number = 0
    let me = observable({
       microFactor,
+      _microPos: 0,
       wholePos: 0,
       set microPos(v: number) {
-         microPos = v
+         me._microPos = v
          let wholePos = me.wholePos
-         while (microPos < 0) {
-            microPos += microFactor
+         while (me._microPos < 0) {
+            me._microPos += microFactor
             wholePos -= 1
          }
-         while (microPos >= microFactor) {
-            microPos -= microFactor
+         while (me._microPos >= microFactor) {
+            me._microPos -= microFactor
             wholePos += 1
          }
          me.wholePos = wholePos
       },
       get microPos() {
-         return microPos
+         return me._microPos
       },
    })
    return me

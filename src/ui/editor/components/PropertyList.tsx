@@ -21,7 +21,7 @@ export let PropertyList = observer(() => {
    let { rule } = store
 
    return (
-      <span>
+      <>
          <SymmetricTable
             label="Symmetrics of current rule"
             rule={rule}
@@ -35,6 +35,6 @@ export let PropertyList = observer(() => {
             symmetricReferenceRule={rule}
             symmetricMessage="remote-self-symmetric"
          />
-      </span>
+      </>
    )
 })

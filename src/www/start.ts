@@ -4,20 +4,22 @@ import { renderController } from '../ui/control/control'
 import { renderEditor } from '../ui/editor/editor'
 
 import { observable } from 'mobx'
+import { createHub } from '../state/hub'
 import { createStore } from '../state/store'
 import { createComputer } from '../compute/compute'
 import { createDisplay } from '../display/display'
 
 function main() {
-   let store = createStore()
+   let bareStore = createStore()
+   let hub = createHub()
 
-   let observableStore = observable(store)
+   let store = observable(bareStore)
 
-   let computer = createComputer(observableStore)
-   let display = createDisplay(observableStore, computer)
+   let computer = createComputer(store, hub)
+   let display = createDisplay(store, computer, hub)
 
-   renderEditor(document.getElementById('editorRoot')!, observableStore)
-   renderController(document.getElementById('controlRoot')!, observableStore)
+   renderEditor(document.getElementById('editorRoot')!, store, hub)
+   renderController(document.getElementById('controlRoot')!, store, hub)
    display.renderDisplay(document.getElementById('displayRoot')!)
 }
 

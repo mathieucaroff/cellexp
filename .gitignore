@@ -10,8 +10,10 @@ tmp/
 
 # Files
 /.*
+*.log
 *.js
 
 !/.editorconfig
 !/.gitignore
 !/.prettier*
+!/.yarnrc
