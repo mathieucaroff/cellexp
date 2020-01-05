@@ -3,6 +3,7 @@
 tmp/
 
 !/contribute/
+!/doc/
 !/doc-*/
 !/measure/
 !/prototype/
