@@ -77,6 +77,8 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 - `+` big / major
 - `-` small / minor
 - `~` work in progress
+- `;` part of an unfinished series of commits
+- `!` last of a series of commits
 
 ### unused moods
 

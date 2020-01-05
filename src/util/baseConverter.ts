@@ -1,4 +1,4 @@
-import { Result } from './resultType'
+import { Result } from './ResultType'
 
 export interface ToBaseParam {
    prefix?: boolean
