@@ -22,6 +22,8 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 
 ### modules
 
+- src
+
 - simulator
   - compute
   - display
