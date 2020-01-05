@@ -2,18 +2,18 @@
 
 A cellular automaton (CA) explorer to understand and unveil properties of CAs in 1D.
 
-[![Cellexp preview](doc/img/cellexp-screencap.png)](https://cellexp.github.io/index.html)
+[![Cellexp preview](doc/img/cellexp-screencap.png)](https://cellexp.now.sh)
 
 ## Try it out
 
-The first version of the Cellexp has been [deployed to Github Pages](https://cellexp.github.io/index.html).
+The first version of Cellexp has been [deployed to Now.sh](https://cellexp.now.sh) (aka Zeit.co).
 
 ## Alternatives
 
-[ECAX](https://www.xanxys.net/ecax/) - Zoom, Navigation, Compute-on-demand
-[ECA Canvas](http://www.cs.swan.ac.uk/~csandy/research/play/ca/) - Size, Border, Random
-[Celldemo](http://devinacker.github.io/celldemo/) - Autoscrolling, Impuse, Random proportion,
-[WoflramAlpha](https://www.wolframalpha.com/input/?i=rule+110) - Description (symétries, propriétés, classe), Propagation differentielle
+- [ECAX](https://www.xanxys.net/ecax/) - Zoom, Navigation, Compute-on-demand
+- [ECA Canvas](http://www.cs.swan.ac.uk/~csandy/research/play/ca/) - Size, Border, Random
+- [Celldemo](http://devinacker.github.io/celldemo/) - Autoscrolling, Impuse, Random proportion,
+- [WoflramAlpha](https://www.wolframalpha.com/input/?i=rule+110) - Description (symétries, propriétés, classe), Propagation differentielle
 
 ## Study and roadmap
 
@@ -24,6 +24,9 @@ Find the french presentation of the projet in [doc-projet-fr](./doc-project-fr/)
 #### Planned features
 
 (including some optional features)
+
+The number preceding the feature name is the number of the release it's expected
+to be shipped in. A feature when it has been shipped in a release.
 
 - [x] (1) **Fca-compute**
 - [x] (1) **Fca-show**
@@ -69,6 +72,16 @@ Find the french presentation of the projet in [doc-projet-fr](./doc-project-fr/)
 - [ ] **Fconfig-reason**
 - [ ] **Fnav-resize**
 - [ ] **Fscripting**
+
+## Release calendar
+
+The releases are planned for the following dates:
+
+1. (2019-01-05)
+2. (2019-01-19)
+3. (2019-02-02)
+4. (2019-02-16)
+5. (2019-03-01)
 
 ## Prototypes
 
