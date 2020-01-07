@@ -42,6 +42,9 @@ export let useLocalStyle = makeStyles((theme: Theme) =>
          height: 20,
       },
       panel: {
+         '&': {
+            backgroundColor: '#F6F6F6',
+         },
          '& .Mui-expanded': {
             minHeight: 0,
             ...noVeritcalMargins,

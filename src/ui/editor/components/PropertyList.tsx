@@ -8,8 +8,8 @@ import { SymmetricTable } from './SymmetricTable'
 
 let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
-      spacer: {
-         marginLeft: '2em',
+      spacerRight: {
+         marginRight: '2em',
       },
    })
 })
@@ -22,19 +22,22 @@ export let PropertyList = observer(() => {
 
    return (
       <>
-         <SymmetricTable
-            label="Symmetrics of current rule"
-            rule={rule}
-            symmetricReferenceRule={rule}
-            symmetricMessage="self-symmetric"
-         />
-         <span className={classes.spacer}></span>
-         <SymmetricTable
-            label="Symmetrics of color output complement rule"
-            rule={255 - rule}
-            symmetricReferenceRule={rule}
-            symmetricMessage="remote-self-symmetric"
-         />
+         <div className={classes.spacerRight}>
+            <SymmetricTable
+               label="Symmetrics of current rule"
+               rule={rule}
+               symmetricReferenceRule={rule}
+               symmetricMessage="self-symmetric"
+            />
+         </div>
+         <div>
+            <SymmetricTable
+               label="Symmetrics of color output complement rule"
+               rule={255 - rule}
+               symmetricReferenceRule={rule}
+               symmetricMessage="remote-self-symmetric"
+            />
+         </div>
       </>
    )
 })

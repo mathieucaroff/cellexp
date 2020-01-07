@@ -13,6 +13,8 @@ export interface SlowTextFieldProp {
 }
 
 export let SlowTextField = (prop: SlowTextFieldProp) => {
+   let mayBeDirty = prop.slowValue !== prop.fastValue ? 'dirty' : ''
+
    return (
       <form
          onSubmit={(ev: React.FormEvent) => {
@@ -24,6 +26,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
       >
          <TextField
             label={prop.label + ` (${prop.slowValue})`}
+            className={mayBeDirty}
             value={prop.fastValue}
             error={prop.error}
             helperText={prop.helperText}

@@ -4,16 +4,13 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core'
 
 import { Rule } from './Rule'
 import { OxTable } from '../../components/OxTable'
-let noVeritcalMargins = {
-   marginTop: 0,
-   marginBottom: 0,
-}
+import { clx } from '../../util/clx'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       inlineBlock: { display: 'inline-block' },
       spacer: {
-         marginLeft: '2em',
+         marginRight: '2em',
       },
    }),
 )
@@ -30,7 +27,7 @@ export let InterestingRuleList = () => {
 
    return (
       <>
-         <div className={classes.inlineBlock}>
+         <div className={clx(classes.inlineBlock, classes.spacer)}>
             <OxTable
                tableHead={[['Description'], ['Rules']]}
                tableData={[
@@ -41,7 +38,6 @@ export let InterestingRuleList = () => {
                ]}
             />
          </div>
-         <span className={classes.spacer}></span>
          <div className={classes.inlineBlock}>
             <OxTable
                tableHead={[['Description'], ['Rules']]}
