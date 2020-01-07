@@ -1,6 +1,6 @@
 {
    "name": "cellular-automaton-explorer-1d",
-   "version": "1.0.0",
+   "version": "0.1.1",
    "description": "Unidimensional cellular automaton explorer to highlight their unique properties",
    "repository": "git@github.com:mathieucaroff/cellular-automaton-explorer-1d.git",
    "author": "Mathieu CAROFF <mathieu.caroff@free.fr>",
