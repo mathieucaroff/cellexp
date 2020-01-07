@@ -2,16 +2,9 @@ import * as React from 'react'
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core'
 
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-
 import { Rule } from './Rule'
 import { toBase } from '../../../util/baseConverter'
+import { OxTable } from '../../components/OxTable'
 
 let reverse = (v: string): string => {
    return v
@@ -56,8 +49,15 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
    let lrSymmetric = parseInt(lrSwapped, 2)
    let bothSymmetric = 255 - parseInt(reverse(lrSwapped), 2)
 
-   let getStatus = (someRule: number): string => {
-      return someRule === symmetricReferenceRule ? symmetricMessage : ''
+   let describe = (symmetricRule: number) => {
+      let status =
+         symmetricRule === symmetricReferenceRule ? `${symmetricMessage} ` : ''
+      return (
+         <>
+            {status}
+            <Rule rule={symmetricRule} />
+         </>
+      )
    }
 
    let tableInfo: [string, number][] = [
@@ -66,42 +66,17 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
       ['Both symmetries', bothSymmetric],
    ]
 
-   let TC = TableCell
+   let tableData = tableInfo.map(([name, r]) => [name, describe(r)])
 
    return (
       <div className={classes.container}>
          <h4>
             {label} <Rule rule={rule} />
          </h4>
-         <TableContainer className={classes.tableContainer} component={Paper}>
-            <Table className={classes.table} size="small">
-               <TableHead>
-                  <TableRow>
-                     <TC>
-                        <strong>Name</strong>
-                     </TC>
-                     <TC align="center">
-                        <strong>Symmetric Rule</strong>
-                     </TC>
-                  </TableRow>
-               </TableHead>
-               <TableBody>
-                  {tableInfo.map(([name, someRule]) => {
-                     let status = getStatus(someRule)
-
-                     return (
-                        <TableRow key={name}>
-                           <TC>{name}</TC>
-                           <TC align="center">
-                              {status ? `${status} ` : ''}
-                              <Rule rule={someRule} />
-                           </TC>
-                        </TableRow>
-                     )
-                  })}
-               </TableBody>
-            </Table>
-         </TableContainer>
+         <OxTable
+            tableHead={[['Name'], ['Symmetric Rule', 'center']]}
+            tableData={tableData}
+         />
       </div>
    )
 }

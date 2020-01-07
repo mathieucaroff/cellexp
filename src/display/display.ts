@@ -36,7 +36,10 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
             { name: 'display canvas.width&height' },
          )
 
-         h2.textContent = 'Display'
+         autorun(() => {
+            h2.textContent = `Display (rule ${store.rule})`
+         })
+
          h2.style.marginLeft = '10px'
          root.appendChild(h2)
          root.appendChild(canvas)

@@ -15,6 +15,7 @@ tmp/
 *.js
 
 !/.editorconfig
+!/.env
 !/.gitignore
 !/.now.json
 !/.prettier*

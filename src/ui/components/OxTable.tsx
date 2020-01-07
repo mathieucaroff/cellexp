@@ -43,11 +43,16 @@ export let OxTable = (prop: SymmetricTableProp) => {
 
    return (
       <TableContainer className={classes.tableContainer} component={Paper}>
-         <Table className={classes.table} size="small">
+         <Table className={classes.table}>
+            {/* size="small" -- has no effect in production :c */}
             <TableHead>
                <TableRow>
                   {tableHead.map(([content, align], k) => (
-                     <TC align={align} key={k}>
+                     <TC
+                        className={'MuiTableCell-sizeSmall'}
+                        align={align}
+                        key={k}
+                     >
                         <strong>{content}</strong>
                      </TC>
                   ))}
@@ -57,7 +62,11 @@ export let OxTable = (prop: SymmetricTableProp) => {
                {tableData.map((line, j) => (
                   <TableRow key={j}>
                      {line.map((content, k) => (
-                        <TC align={(tableHead[k] || [])[1]} key={k}>
+                        <TC
+                           className={'MuiTableCell-sizeSmall'}
+                           align={(tableHead[k] || [])[1]}
+                           key={k}
+                        >
                            {content}
                         </TC>
                      ))}

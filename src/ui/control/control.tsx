@@ -25,6 +25,9 @@ import { ResetTime } from './components/ResetTime'
 import { ThemeSelector } from './components/ThemeSelector'
 import { RerollButton } from './components/RerollButton'
 import { PlayPauseButton } from './components/PlayPauseButton'
+import { observer } from 'mobx-react-lite'
+import { useStore } from '../util/useStore'
+import { Rule } from '../editor/components/Rule'
 
 let noVeritcalMargins = {
    marginTop: 0,
@@ -33,7 +36,7 @@ let noVeritcalMargins = {
 
 export let useLocalStyle = makeStyles((theme: Theme) =>
    createStyles({
-      ruleSelection: {
+      block: {
          display: 'block',
       },
       noPaddingTop: {
@@ -44,6 +47,9 @@ export let useLocalStyle = makeStyles((theme: Theme) =>
          height: 20,
       },
       panel: {
+         '&': {
+            backgroundColor: '#F6F6F6',
+         },
          '& .Mui-expanded': {
             minHeight: 0,
             ...noVeritcalMargins,
@@ -57,38 +63,73 @@ export let useLocalStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-let Controller = () => {
+let Controller = observer(() => {
    let common = useStyle()
    let classes = useLocalStyle()
+   let store = useStore()
 
    let EP = ExpansionPanel
    let EPSm = ExpansionPanelSummary
    let EPDt = ExpansionPanelDetails
 
-   return (
-      <EP className={classes.panel} defaultExpanded>
+   let simulationController = (
+      <EP className={classes.panel} elevation={2}>
          <EPSm expandIcon={<ExpandMoreIcon />}>
-            <h2 className={classes.noVeritcalMargins}>Simulation Controller</h2>
+            <h3 className={classes.noVeritcalMargins}>
+               Simulation Controller <Rule rule={store.rule} />
+            </h3>
          </EPSm>
          <EPDt
             className={clx(
                classes.inputSizing,
                classes.noPaddingTop,
-               common.inputList,
+               classes.block,
             )}
          >
-            <CaSizeSelector />
-            <SpeedSelector />
-            <CanvasHeight />
-            <FieldPosT />
-            <ResetTime />
-            <ThemeSelector />
-            <RerollButton />
-            <PlayPauseButton />
+            <div className={common.inputList}>
+               <CaSizeSelector />
+               <RerollButton />
+            </div>
          </EPDt>
       </EP>
    )
-}
+
+   let displayController = (
+      <EP className={classes.panel} defaultExpanded>
+         <EPSm expandIcon={<ExpandMoreIcon />}>
+            <h3 className={classes.noVeritcalMargins}>
+               Display Controller <Rule rule={store.rule} />
+            </h3>
+         </EPSm>
+         <EPDt
+            className={clx(
+               classes.inputSizing,
+               classes.noPaddingTop,
+               classes.block,
+            )}
+         >
+            <div className={common.inputList}>
+               <SpeedSelector />
+               <FieldPosT />
+               <ResetTime />
+               <PlayPauseButton />
+            </div>
+            <div className={common.inputList}>
+               <CanvasHeight />
+               <ThemeSelector />
+            </div>
+         </EPDt>
+      </EP>
+   )
+
+   return (
+      <div className={common.ui}>
+         <h2>Controllers</h2>
+         {simulationController}
+         {displayController}
+      </div>
+   )
+})
 
 export let renderController = (
    rootElement: HTMLElement,
