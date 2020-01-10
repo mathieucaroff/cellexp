@@ -1,9 +1,8 @@
-import { autorun } from 'mobx'
-
 import { Store } from '../state/store'
 import { Hub } from '../state/hub'
 
 import { Rect } from '../util/RectType'
+import { autox } from '../util/autox'
 
 export let createComputer = (store: Store, hub: Hub) => {
    let cache: Record<number, Uint8Array> = {}
@@ -27,7 +26,7 @@ export let createComputer = (store: Store, hub: Hub) => {
 
    hub.reroll.register(initialize)
 
-   autorun(initialize, { name: 'computer initialisation' })
+   autox.computer_initialisation(initialize)
 
    let computeRule = (a: number = 0, b: number = 0, c: number = 0) => {
       let k = (a << 2) | (b << 1) | c

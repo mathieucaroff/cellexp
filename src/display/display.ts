@@ -1,4 +1,4 @@
-import { observable, autorun, action, reaction } from 'mobx'
+import { observable, action, reaction } from 'mobx'
 
 import { Store } from '../state/store'
 import { Hub } from '../state/hub'
@@ -8,6 +8,7 @@ import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
 
 import { themeObj } from './theme'
+import { autox } from '../util/autox'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let data = observable({
@@ -28,15 +29,12 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          let canvas = document.createElement('canvas')
          let h2 = document.createElement('h2')
 
-         autorun(
-            () => {
-               canvas.width = store.canvasSize.x
-               canvas.height = store.canvasSize.y
-            },
-            { name: 'display canvas.width&height' },
-         )
+         autox.canvas_width_height(() => {
+            canvas.width = store.canvasSize.x
+            canvas.height = store.canvasSize.y
+         })
 
-         autorun(() => {
+         autox.display_title_update(() => {
             h2.textContent = `Display (rule ${store.rule})`
          })
 
@@ -71,15 +69,12 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    )
 
    // Update canvasSize.x
-   autorun(
-      () => {
-         store.canvasSize.x = store.size * store.zoom
-      },
-      { name: 'display canvasSize.x' },
-   )
+   autox.display_canvasSizeX(() => {
+      store.canvasSize.x = store.size * store.zoom
+   })
 
    // Trigger clock start / stop
-   autorun(() => {
+   autox.clock_start_stop(() => {
       if (store.play) {
          me.start()
       } else {
@@ -157,7 +152,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       })
    }
 
-   autorun(renderCanvas, { name: 'display rendering' })
+   autox.display_rendering(renderCanvas)
 
    hub.reroll.register(renderCanvas)
 
