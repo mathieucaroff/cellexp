@@ -21,9 +21,6 @@ function main() {
    renderEditor(document.getElementById('editorRoot')!, store, hub)
    renderController(document.getElementById('controlRoot')!, store, hub)
    display.renderDisplay(document.getElementById('displayRoot')!)
-
-   let versionRoot = document.getElementById('versionRoot')!
-   versionRoot.textContent = process.env.VERSION || 'missing VERSION'
 }
 
 main()

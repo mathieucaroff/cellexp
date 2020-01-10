@@ -15,7 +15,7 @@ import { storeContext } from '../../www/global'
 import { Store } from '../../state/store'
 import { Hub } from '../../state/hub'
 
-import { useStyle } from '../style'
+import { useSharedStyle } from '../style'
 import { RuleSelector } from './components/RuleSelector'
 import { PropertyList } from './components/PropertyList'
 import { InterestingRuleList } from './components/InterestingRuleList'
@@ -24,72 +24,51 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from '../util/useStore'
 import { Rule } from './components/Rule'
 
-let noVeritcalMargins = {
-   marginTop: 0,
-   marginBottom: 0,
-}
-
-export let useLocalStyle = makeStyles((theme: Theme) =>
+export let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       ruleSelection: {
          display: 'block',
-      },
-      noPaddingTop: {
-         paddingTop: 0,
-      },
-      noVeritcalMargins,
-      verticalSeparator: {
-         height: 20,
-      },
-      panel: {
-         '&': {
-            backgroundColor: '#F6F6F6',
-         },
-         '& .Mui-expanded': {
-            minHeight: 0,
-            ...noVeritcalMargins,
-         },
       },
    }),
 )
 
 let Editor = observer(() => {
+   let shared = useSharedStyle()
+   let classes = useStyle()
    let store = useStore()
-   let common = useStyle()
-   let classes = useLocalStyle()
 
    let EP = ExpansionPanel
    let EPSm = ExpansionPanelSummary
    let EPDt = ExpansionPanelDetails
 
    return (
-      <div className={common.ui}>
+      <div className={shared.ui}>
          <h2>
             Rule Picker <Rule rule={store.rule} />
          </h2>
-         <EP className={classes.panel}>
+         <EP className={shared.panel}>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={classes.noVeritcalMargins}>Rule Editor</h3>
+               <h3 className={shared.noVeritcalMargins}>Rule Editor</h3>
             </EPSm>
-            <EPDt className={classes.noPaddingTop}>
-               <div className={common.inputList}>
+            <EPDt className={shared.noPaddingTop}>
+               <div className={shared.inputList}>
                   <RuleSelector />
                </div>
             </EPDt>
          </EP>
-         <EP className={classes.panel} defaultExpanded>
+         <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={classes.noVeritcalMargins}>Rule Selector</h3>
+               <h3 className={shared.noVeritcalMargins}>Rule Selector</h3>
             </EPSm>
-            <EPDt className={clx(classes.ruleSelection, classes.noPaddingTop)}>
+            <EPDt className={clx(classes.ruleSelection, shared.noPaddingTop)}>
                <InterestingRuleList />
             </EPDt>
          </EP>
-         <EP className={classes.panel}>
+         <EP className={shared.panel}>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={classes.noVeritcalMargins}>Property List</h3>
+               <h3 className={shared.noVeritcalMargins}>Property List</h3>
             </EPSm>
-            <EPDt className={classes.noPaddingTop}>
+            <EPDt className={shared.noPaddingTop}>
                <PropertyList />
             </EPDt>
          </EP>

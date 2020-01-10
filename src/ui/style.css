@@ -20,10 +20,12 @@ input {
 
 .title {
    margin-left: 10px;
+   margin-bottom: 8px;
 }
 
 .subtitle {
-   margin-left: 2em;
+   margin-top: 8px;
+   margin-left: 40px;
    font-style: italic;
    font-size: 20px;
    font-weight: 400;
@@ -41,4 +43,11 @@ input {
    color: white;
    background: rgba(0, 0, 0, 0.6);
    font-size: 10px;
+}
+
+/* Material-ui themeing */
+
+.MuiExpansionPanelSummary-root {
+   background-color: #F6F6F6;
+   border-bottom: solid 1px #BBB;
 }

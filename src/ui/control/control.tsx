@@ -14,7 +14,7 @@ import { storeContext, hubContext } from '../../www/global'
 import { Store } from '../../state/store'
 import { Hub } from '../../state/hub'
 
-import { useStyle } from '../style'
+import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 
 import { CaSizeSelector } from './components/CaSizeSelector'
@@ -29,43 +29,25 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from '../util/useStore'
 import { Rule } from '../editor/components/Rule'
 
-let noVeritcalMargins = {
-   marginTop: 0,
-   marginBottom: 0,
-}
-
-export let useLocalStyle = makeStyles((theme: Theme) =>
+export let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      block: {
-         display: 'block',
-      },
-      noPaddingTop: {
-         paddingTop: 0,
-      },
-      noVeritcalMargins,
-      verticalSeparator: {
-         height: 20,
-      },
-      panel: {
-         '&': {
-            backgroundColor: '#F6F6F6',
-         },
-         '& .Mui-expanded': {
-            minHeight: 0,
-            ...noVeritcalMargins,
-         },
-      },
       inputSizing: {
          '& input': {
             width: '120px',
+         },
+      },
+      inputList: {
+         '& > *': {
+            margin: theme.spacing(1),
+            display: 'inline-block',
          },
       },
    }),
 )
 
 let Controller = observer(() => {
-   let common = useStyle()
-   let classes = useLocalStyle()
+   let shared = useSharedStyle()
+   let classes = useStyle()
    let store = useStore()
 
    let EP = ExpansionPanel
@@ -73,20 +55,20 @@ let Controller = observer(() => {
    let EPDt = ExpansionPanelDetails
 
    let simulationController = (
-      <EP className={classes.panel} elevation={2}>
+      <EP className={shared.panel} elevation={2}>
          <EPSm expandIcon={<ExpandMoreIcon />}>
-            <h3 className={classes.noVeritcalMargins}>
+            <h3 className={shared.noVeritcalMargins}>
                Simulation Controller <Rule rule={store.rule} />
             </h3>
          </EPSm>
          <EPDt
             className={clx(
                classes.inputSizing,
-               classes.noPaddingTop,
-               classes.block,
+               shared.noPaddingTop,
+               shared.block,
             )}
          >
-            <div className={common.inputList}>
+            <div className={shared.inputList}>
                <CaSizeSelector />
                <RerollButton />
             </div>
@@ -95,26 +77,26 @@ let Controller = observer(() => {
    )
 
    let displayController = (
-      <EP className={classes.panel} defaultExpanded>
+      <EP className={shared.panel} defaultExpanded>
          <EPSm expandIcon={<ExpandMoreIcon />}>
-            <h3 className={classes.noVeritcalMargins}>
+            <h3 className={shared.noVeritcalMargins}>
                Display Controller <Rule rule={store.rule} />
             </h3>
          </EPSm>
          <EPDt
             className={clx(
                classes.inputSizing,
-               classes.noPaddingTop,
-               classes.block,
+               shared.noPaddingTop,
+               shared.block,
             )}
          >
-            <div className={common.inputList}>
+            <div className={classes.inputList}>
                <SpeedSelector />
                <FieldPosT />
                <ResetTime />
                <PlayPauseButton />
             </div>
-            <div className={common.inputList}>
+            <div className={classes.inputList}>
                <CanvasHeight />
                <ThemeSelector />
             </div>
@@ -123,7 +105,7 @@ let Controller = observer(() => {
    )
 
    return (
-      <div className={common.ui}>
+      <div className={shared.ui}>
          <h2>Controllers</h2>
          {simulationController}
          {displayController}
