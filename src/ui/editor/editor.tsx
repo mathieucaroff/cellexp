@@ -16,9 +16,9 @@ import { Store } from '../../state/store'
 import { Hub } from '../../state/hub'
 
 import { useSharedStyle } from '../style'
-import { RuleSelector } from './components/RuleSelector'
+import { RuleEditor } from './components/RuleEditor'
 import { PropertyList } from './components/PropertyList'
-import { InterestingRuleList } from './components/InterestingRuleList'
+import { RuleSelector } from './components/RuleSelector'
 import { clx } from '../util/clx'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../util/useStore'
@@ -50,25 +50,25 @@ let Editor = observer(() => {
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Rule Editor</h3>
             </EPSm>
-            <EPDt className={shared.noPaddingTop}>
+            <EPDt>
                <div className={shared.inputList}>
-                  <RuleSelector />
+                  <RuleEditor />
                </div>
             </EPDt>
          </EP>
          <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Rule Selector</h3>
+               <h3 className={shared.noVeritcalMargins}>Rule Picker</h3>
             </EPSm>
-            <EPDt className={clx(classes.ruleSelection, shared.noPaddingTop)}>
-               <InterestingRuleList />
+            <EPDt className={clx(classes.ruleSelection)}>
+               <RuleSelector />
             </EPDt>
          </EP>
          <EP className={shared.panel}>
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Property List</h3>
             </EPSm>
-            <EPDt className={shared.noPaddingTop}>
+            <EPDt>
                <PropertyList />
             </EPDt>
          </EP>

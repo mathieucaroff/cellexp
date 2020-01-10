@@ -61,13 +61,7 @@ let Controller = observer(() => {
                Simulation Controller <Rule rule={store.rule} />
             </h3>
          </EPSm>
-         <EPDt
-            className={clx(
-               classes.inputSizing,
-               shared.noPaddingTop,
-               shared.block,
-            )}
-         >
+         <EPDt className={clx(classes.inputSizing, shared.block)}>
             <div className={shared.inputList}>
                <CaSizeSelector />
                <RerollButton />
@@ -83,13 +77,7 @@ let Controller = observer(() => {
                Display Controller <Rule rule={store.rule} />
             </h3>
          </EPSm>
-         <EPDt
-            className={clx(
-               classes.inputSizing,
-               shared.noPaddingTop,
-               shared.block,
-            )}
-         >
+         <EPDt className={clx(classes.inputSizing, shared.block)}>
             <div className={classes.inputList}>
                <SpeedSelector />
                <FieldPosT />

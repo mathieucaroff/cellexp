@@ -16,9 +16,6 @@ export let useSharedStyle = makeStyles((theme: Theme) =>
             display: 'inline-block',
          },
       },
-      noPaddingTop: {
-         paddingTop: 0,
-      },
       noVeritcalMargins,
       panel: {
          '& .MuiExpansionPanelSummary-root': {

@@ -8,11 +8,11 @@ import { SlowTextField } from '../../components/SlowTextField'
 import { errorCheck } from '../../../util/errorCheck'
 import { toBase, fromBase } from '../../../util/baseConverter'
 
-export interface BasenumRuleSelectorProp {
+export interface BasenumRuleFieldProp {
    base: number
 }
 
-export let BasenumRuleSelector = observer((prop: BasenumRuleSelectorProp) => {
+export let BasenumRuleField = observer((prop: BasenumRuleFieldProp) => {
    let store = useStore()
    let { base } = prop
    if (~~base !== base || !(base >= 2)) {
