@@ -35,8 +35,7 @@ export let createComputer = (store: Store, hub: Hub) => {
 
    let computeLine = (line: Uint8Array) => {
       let newLine = new Uint8Array(line.length)
-      let death = true
-      line.map((b, k) => {
+      line.map((_b, k) => {
          return (newLine[k] = computeRule(line[k - 1], line[k], line[k + 1]))
       })
       return newLine
