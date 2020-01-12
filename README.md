@@ -12,8 +12,9 @@ The first version of Cellexp has been [deployed to Now.sh](https://cellexp.now.s
 
 - [ECAX](https://www.xanxys.net/ecax/) - Zoom, Navigation, Compute-on-demand
 - [ECA Canvas](http://www.cs.swan.ac.uk/~csandy/research/play/ca/) - Size, Border, Random
+- [ECA EmergentMind](http://www.emergentmind.com/elementary-cellular-automata) - Zoom, Board of 256 rules
 - [Celldemo](http://devinacker.github.io/celldemo/) - Autoscrolling, Impuse, Random proportion,
-- [WoflramAlpha](https://www.wolframalpha.com/input/?i=rule+110) - Description (symétries, propriétés, classe), Propagation differentielle
+- [WolframAlpha](https://www.wolframalpha.com/input/?i=rule+110) - Description (symétries, propriétés, classe), Propagation differentielle
 
 ## Study and roadmap
 
