@@ -26,6 +26,7 @@ import { AlignTime } from './components/AlignTime'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
 import { ZoomSelector } from './components/ZoomSelector'
 import { CanvasWidth } from './components/CanvasWidth'
+import { FieldPosS } from './components/FieldPosS'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -96,7 +97,10 @@ export let Controller = observer(() => {
                <CanvasHeight />
                <CanvasWidth />
                <SpeedSelector />
+            </div>
+            <div className={classes.inputList}>
                <FieldPosT />
+               <FieldPosS />
                <ResetTime />
                <PlayPauseButton />
                <SingleStep />
