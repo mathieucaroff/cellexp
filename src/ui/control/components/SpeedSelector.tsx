@@ -9,13 +9,13 @@ import { SelectorInput } from './SelectorInput'
 let validation = (value: string) => {
    let notAnInteger = () => !value.match(/^-?\d*$/)
    let notPositive = () => !!value.match(/^-/)
-   let tooLong = () => value.length > 2
+   let outOfRange = () => +value < 1 || +value > 99
 
    return errorCheck(
       'Display run speed',
       [notAnInteger, 'Speed must be an integer'],
       [notPositive, 'Speed must be positive'],
-      [tooLong, 'Speed must between 0 and 99'],
+      [outOfRange, 'Speed must between 1 and 99'],
    )
 }
 
