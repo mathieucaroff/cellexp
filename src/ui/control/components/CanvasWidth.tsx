@@ -5,23 +5,25 @@ import { errorCheck } from '../../../util/errorCheck'
 import { SelectorInput } from './SelectorInput'
 
 let validation = (value: string) => {
+   const fourKWidth = 3840
+
    let notAnInteger = () => !value.match(/^-?\d*$/)
    let notPositive = () => !!value.match(/^-/)
-   let tooLong = () => value.length > 4
+   let outOfBoundary = () => +value > 3 * fourKWidth
 
    return errorCheck(
-      'Canvas height',
-      [notAnInteger, 'Size must be an integer'],
-      [notPositive, 'Size must be positive'],
-      [tooLong, 'Size must between 0 and 9999'],
+      'Canvas width',
+      [notAnInteger, 'Width must be an integer'],
+      [notPositive, 'Width must be positive'],
+      [outOfBoundary, `Width must between 0 and ${3 * fourKWidth}`],
    )
 }
 
-export let CanvasHeight = () => {
+export let CanvasWidth = () => {
    return (
       <SelectorInput
-         label="Height"
-         property={'y'}
+         label="Width"
+         property={'x'}
          store={useStore().canvasSize}
          validation={validation}
       />

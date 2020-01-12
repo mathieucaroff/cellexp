@@ -33,13 +33,13 @@ export let createStore = (): Store => {
       theme: 'darkLyra',
       displayTheme: 'unset',
 
-      speed: 2,
+      speed: 4,
       posS: createPosition(30),
       posT: createPosition(30),
       play: false,
-      zoom: 4,
+      zoom: 24,
 
       // MDisplay
-      canvasSize: { x: 0, y: 200 }, // (0, 16387)
+      canvasSize: { x: 1320, y: 440 }, // (0, 16387)
    }
 }

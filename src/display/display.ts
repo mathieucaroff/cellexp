@@ -12,16 +12,19 @@ import { createImageData } from './util/createImageData'
 import { displayThemeFromCellexp, themeSet } from '../www/theme'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
-   let data = observable({
+   let local = observable({
       ctx: undefined as CanvasRenderingContext2D | undefined,
-      get pixT() {
-         let { microFactor, microPos } = store.posT
-         return Math.floor((microPos * store.zoom) / microFactor)
-      },
       get displayTheme() {
          let theme =
             store.displayTheme !== 'unset' ? store.displayTheme : store.theme
          return displayThemeFromCellexp(themeSet[theme])
+      },
+      get pixT() {
+         let { microFactor, microPos } = store.posT
+         return Math.floor((microPos * local.zoom) / microFactor)
+      },
+      get zoom() {
+         return store.zoom / 6
       },
    })
 
@@ -29,7 +32,6 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let clockTick = createEventDispatcher()
 
    let me = {
-      data,
       renderDisplay: (root: HTMLElement) => {
          let document = root.ownerDocument!
          let canvas = document.createElement('canvas')
@@ -42,7 +44,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          root.appendChild(canvas)
 
          action(() => {
-            me.data.ctx = canvas.getContext('2d')!
+            local.ctx = canvas.getContext('2d')!
          })()
       },
       start: () => {
@@ -62,15 +64,15 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    clockTick.register(
       action(() => {
          let { microPos } = store.posT
-         let newMPos = microPos + 2 * store.speed
+         let newMPos = microPos + store.speed
          store.posT.microPos = newMPos
       }),
    )
 
    // Update canvasSize.x
-   autox.display_canvasSizeX(() => {
-      store.canvasSize.x = store.size * store.zoom
-   })
+   // autox.display_canvasSizeX(() => {
+   //    store.canvasSize.x = store.size * local.zoom
+   // })
 
    // Trigger clock start / stop
    autox.clock_start_stop(() => {
@@ -102,8 +104,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
             y: store.posT.wholePos,
          },
          size: {
-            x: Math.floor(store.canvasSize.x / store.zoom),
-            y: Math.floor(store.canvasSize.y / store.zoom),
+            x: Math.floor(store.canvasSize.x / local.zoom),
+            y: Math.floor(store.canvasSize.y / local.zoom),
          },
       }
 
@@ -120,7 +122,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          size,
       }
 
-      let { alive, dead } = data.displayTheme
+      let { alive, dead } = local.displayTheme
 
       if (drawArea.size.x * drawArea.size.y === 0) return
 
@@ -135,11 +137,11 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          },
       })
 
-      let { pixT } = me.data
+      let { pixT } = local
       let w = store.canvasSize.x
-      let h = requestArea.size.y * store.zoom
+      let h = requestArea.size.y * local.zoom
       createImageBitmap(imageData).then((bitmap) => {
-         let { ctx } = me.data
+         let { ctx } = local
          if (ctx === undefined) return
          ctx.imageSmoothingEnabled = false
          ctx.drawImage(bitmap, 0, -pixT, w, h)

@@ -7,10 +7,11 @@ export interface SlowTextFieldProp {
    slowValue: string
    fastValue: string
    error: boolean
-   disabled?: boolean
    helperText: string
    onChange: (v: string) => void
    onSubmit: (v: string) => void
+   disabled?: boolean
+   type?: string
 }
 
 export let SlowTextField = (prop: SlowTextFieldProp) => {
@@ -21,6 +22,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
       error,
       disabled = false,
       helperText,
+      type,
       onChange,
       onSubmit,
    } = prop
@@ -43,6 +45,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
             error={error}
             disabled={disabled}
             helperText={helperText}
+            type={type}
             onChange={(ev) => onChange(ev.currentTarget.value)}
          />
       </form>

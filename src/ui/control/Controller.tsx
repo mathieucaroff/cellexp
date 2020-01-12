@@ -24,6 +24,8 @@ import { Rule } from '../editor/components/Rule'
 import { SingleStep } from './components/SingleStep'
 import { AlignTime } from './components/AlignTime'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
+import { ZoomSelector } from './components/ZoomSelector'
+import { CanvasWidth } from './components/CanvasWidth'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -90,7 +92,9 @@ export let Controller = observer(() => {
          <EPDt className={clx(classes.inputSizing, shared.block)}>
             {displayExtraControls}
             <div className={classes.inputList}>
+               <ZoomSelector />
                <CanvasHeight />
+               <CanvasWidth />
                <SpeedSelector />
                <FieldPosT />
                <ResetTime />
