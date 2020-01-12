@@ -5,18 +5,20 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from '../../util/useStore'
 import { errorCheck } from '../../../util/errorCheck'
 import { SelectorInput } from './SelectorInput'
+import { clip } from '../../../util/clip'
+
+let lowBound = 6
+let highBound = 300
 
 let validation = (value: string) => {
    let notAnInteger = () => !value.match(/^-?\d*$/)
-   let notPositive = () => !!value.match(/^-/)
-   let outOfRange = () => +value < 6 || +value > 120
+   let outOfRange = () => +value < 6 || +value > 300
    let badMultiplicity = () => +value % 6 !== 0
 
    return errorCheck(
       'Display Zoom',
       [notAnInteger, 'Zoom must be an integer'],
-      [notPositive, 'Zoom must be positive'],
-      [outOfRange, 'Zoom must between 6 and 120'],
+      [outOfRange, 'Zoom must between 6 and 300'],
       [badMultiplicity, 'Zoom must a multiple of 6'],
    )
 }
@@ -40,6 +42,7 @@ export let ZoomSelector = observer(() => {
                while (res % 6 !== 0) {
                   res += diff
                }
+               res = clip(res, lowBound, highBound)
                textResult = '' + res
                let [error] = validation(textResult)
                submit = !error
