@@ -104,8 +104,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
             y: store.posT.wholePos,
          },
          size: {
-            x: Math.floor(store.canvasSize.x / local.zoom),
-            y: Math.floor(store.canvasSize.y / local.zoom),
+            x: Math.ceil(store.canvasSize.x / local.zoom),
+            y: Math.ceil(store.canvasSize.y / local.zoom),
          },
       }
 
@@ -138,8 +138,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       })
 
       let { pixT } = local
-      let w = store.canvasSize.x
-      let h = requestArea.size.y * local.zoom
+      let w = size.x * local.zoom
+      let h = size.y * local.zoom
       createImageBitmap(imageData).then((bitmap) => {
          let { ctx } = local
          if (ctx === undefined) return

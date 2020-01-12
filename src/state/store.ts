@@ -27,7 +27,7 @@ export let createStore = (): Store => {
    return {
       // MCompute + ui
       rule: 73,
-      size: 333, // Good for 1366-pixel-width displays
+      size: 1320,
 
       // MDisplay + ui
       theme: 'darkLyra',
@@ -40,6 +40,6 @@ export let createStore = (): Store => {
       zoom: 24,
 
       // MDisplay
-      canvasSize: { x: 1320, y: 440 }, // (0, 16387)
+      canvasSize: { x: 1320, y: 440 }, // x: 1320 - good for 1366-pixel-width displays
    }
 }

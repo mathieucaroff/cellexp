@@ -9,17 +9,18 @@ import { clip } from '../../../util/clip'
 
 let lowBound = 6
 let highBound = 300
+let modulo = 6
 
 let validation = (value: string) => {
    let notAnInteger = () => !value.match(/^-?\d*$/)
-   let outOfRange = () => +value < 6 || +value > 300
-   let badMultiplicity = () => +value % 6 !== 0
+   let outOfRange = () => +value < lowBound || +value > highBound
+   let badMultiplicity = () => +value % modulo !== 0
 
    return errorCheck(
       'Display Zoom',
       [notAnInteger, 'Zoom must be an integer'],
-      [outOfRange, 'Zoom must between 6 and 300'],
-      [badMultiplicity, 'Zoom must a multiple of 6'],
+      [outOfRange, `Zoom must between ${lowBound} and ${highBound}`],
+      [badMultiplicity, `Zoom must a multiple of ${modulo}`],
    )
 }
 
@@ -39,7 +40,7 @@ export let ZoomSelector = observer(() => {
             if (Math.abs(n - o) === 1) {
                let diff = n - o
                let res = n
-               while (res % 6 !== 0) {
+               while (res % modulo !== 0) {
                   res += diff
                }
                res = clip(res, lowBound, highBound)
