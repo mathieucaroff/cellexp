@@ -10,14 +10,12 @@ export interface Computer {
 
 export let createComputer = (store: Store, hub: Hub) => {
    let cache: Record<number, Uint8Array> = {}
-   let currentTime
-   let data = { cache }
+   let currentTime: number
    let rule: number
 
    let initialize = () => {
       currentTime = 0
-      cache = data.cache = {}
-      // ;({ rule } = store)
+      cache = {}
       rule = store.rule
 
       let firstLine = new Uint8Array(store.size).map(() =>
