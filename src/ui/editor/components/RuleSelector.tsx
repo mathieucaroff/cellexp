@@ -47,7 +47,7 @@ export let RuleSelector = () => {
                tableData={[
                   ['XOR', rr(60, 90, 105, 150)],
                   ['Twinkling', rr(41, 45, 62, 73, 105, 94, 15, 51)],
-                  ['Triangle', rr(18, 22, 26, 86, 122, 126)],
+                  ['Triangle', rr(18, 22, 26, 30, 122, 126)],
                   ['Primitives', rr(0, 255, 204, 51, 170, 240)],
                ]}
             />
