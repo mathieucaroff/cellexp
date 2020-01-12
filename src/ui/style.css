@@ -14,6 +14,13 @@ input {
    width: 135px;
 }
 
+.bodyDiv {
+   margin-left: 16px;
+   margin-right: 16px;
+   padding-top: 1px;
+   padding-bottom: 12px;
+}
+
 .inline {
    display: inline;
 }
@@ -47,7 +54,7 @@ input {
 
 /* Material-ui themeing */
 
-.MuiExpansionPanelSummary-root {
+/* .MuiExpansionPanelSummary-root {
    background-color: #F6F6F6;
    border-bottom: solid 1px #BBB;
-}
+} */

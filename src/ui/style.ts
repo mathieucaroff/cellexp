@@ -19,7 +19,7 @@ export let useSharedStyle = makeStyles((theme: Theme) =>
       noVeritcalMargins,
       panel: {
          '& .MuiExpansionPanelSummary-root': {
-            backgroundColor: '#EEE',
+            backgroundColor: theme.palette.type == 'light' ? '#EEE' : '#555',
             boxShadow: [
                // Copy-pasted from `.MuiPaper-elevation1`, then formatted
                '0px 2px 1px -1px rgba(0, 0, 0, 0.2)',

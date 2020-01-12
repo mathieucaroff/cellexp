@@ -16,7 +16,6 @@ import { SpeedSelector } from './components/SpeedSelector'
 import { CanvasHeight } from './components/CanvasHeight'
 import { FieldPosT } from './components/FieldPosT'
 import { ResetTime } from './components/ResetTime'
-import { ThemeSelector } from './components/ThemeSelector'
 import { RerollButton } from './components/RerollButton'
 import { PlayPauseButton } from './components/PlayPauseButton'
 import { observer } from 'mobx-react-lite'
@@ -68,7 +67,7 @@ export let Controller = observer(() => {
    )
 
    let displayExtraControls = (
-      <EP className={shared.panel} defaultExpanded>
+      <EP className={shared.panel} TransitionProps={{ unmountOnExit: true }}>
          <EPSm expandIcon={<ExpandMoreIcon />}>
             <h4 className={shared.noVeritcalMargins}>Extra Controls</h4>
          </EPSm>
@@ -92,9 +91,6 @@ export let Controller = observer(() => {
             {displayExtraControls}
             <div className={classes.inputList}>
                <CanvasHeight />
-               <ThemeSelector />
-            </div>
-            <div className={classes.inputList}>
                <SpeedSelector />
                <FieldPosT />
                <ResetTime />

@@ -7,9 +7,9 @@ import { Computer } from '../compute/compute'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
 
-import { themeObj } from './theme'
 import { autox } from '../util/autox'
 import { createImageData } from './util/createImageData'
+import { displayThemeFromCellexp, themeSet } from '../www/theme'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let data = observable({
@@ -17,6 +17,11 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       get pixT() {
          let { microFactor, microPos } = store.posT
          return Math.floor((microPos * store.zoom) / microFactor)
+      },
+      get displayTheme() {
+         let theme =
+            store.displayTheme !== 'unset' ? store.displayTheme : store.theme
+         return displayThemeFromCellexp(themeSet[theme])
       },
    })
 
@@ -115,7 +120,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          size,
       }
 
-      let { alive, dead } = themeObj[store.theme]
+      let { alive, dead } = data.displayTheme
 
       if (drawArea.size.x * drawArea.size.y === 0) return
 
