@@ -53,10 +53,13 @@ let dryThemeSet = {
    darkLyra: color(0x94, 0xff, 0x220),
    darkCyan: color01(0, 1, 1),
    darkCream: color(0xff, 0xfd, 0xd0),
+   darkGrey: color(0x88, 0x88, 0x88),
+   darkAlbescent: color(0xfc, 0xfc, 0xfc),
    // darkRed: color(1, 0, 0),
    // darkMagenta: color(1, 0, 1),
    lightRed: color01(1, 0, 0),
    lightBlue: color01(0, 0, 1),
+   lightCoal: color(0x38, 0x38, 0x38),
 }
 
 let makeThemeSet = () => {
