@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { render } from 'react-dom'
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core'
 import {
@@ -8,11 +7,6 @@ import {
    ExpansionPanelDetails,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-
-import { storeContext, hubContext } from '../../www/global'
-
-import { Store } from '../../state/store'
-import { Hub } from '../../state/hub'
 
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
@@ -48,7 +42,7 @@ export let useStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-let Controller = observer(() => {
+export let Controller = observer(() => {
    let shared = useSharedStyle()
    let classes = useStyle()
    let store = useStore()
@@ -112,26 +106,10 @@ let Controller = observer(() => {
    )
 
    return (
-      <div className={shared.ui}>
+      <div>
          <h2>Controllers</h2>
          {simulationController}
          {displayController}
       </div>
    )
 })
-
-export let renderController = (
-   rootElement: HTMLElement,
-   store: Store,
-   hub: Hub,
-) => {
-   let wrappedController = (
-      <hubContext.Provider value={hub}>
-         <storeContext.Provider value={store}>
-            <Controller />
-         </storeContext.Provider>
-      </hubContext.Provider>
-   )
-
-   render(wrappedController, rootElement)
-}

@@ -28,19 +28,12 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       renderDisplay: (root: HTMLElement) => {
          let document = root.ownerDocument!
          let canvas = document.createElement('canvas')
-         let h2 = document.createElement('h2')
 
          autox.canvas_width_height(() => {
             canvas.width = store.canvasSize.x
             canvas.height = store.canvasSize.y
          })
 
-         autox.display_title_update(() => {
-            h2.textContent = `Display (rule ${store.rule})`
-         })
-
-         h2.style.marginLeft = '10px'
-         root.appendChild(h2)
          root.appendChild(canvas)
 
          action(() => {

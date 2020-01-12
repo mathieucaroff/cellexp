@@ -32,8 +32,5 @@ export let useSharedStyle = makeStyles((theme: Theme) =>
             ...noVeritcalMargins,
          },
       },
-      ui: {
-         marginLeft: '1em',
-      },
    }),
 )

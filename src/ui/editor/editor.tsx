@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { render } from 'react-dom'
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core'
 
@@ -9,11 +8,6 @@ import {
    ExpansionPanelDetails,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-
-import { storeContext } from '../../www/global'
-
-import { Store } from '../../state/store'
-import { Hub } from '../../state/hub'
 
 import { useSharedStyle } from '../style'
 import { RuleEditor } from './components/RuleEditor'
@@ -32,7 +26,7 @@ export let useStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-let Editor = observer(() => {
+export let Editor = observer(() => {
    let shared = useSharedStyle()
    let classes = useStyle()
    let store = useStore()
@@ -42,7 +36,7 @@ let Editor = observer(() => {
    let EPDt = ExpansionPanelDetails
 
    return (
-      <div className={shared.ui}>
+      <div>
          <h2>
             Rule Picker <Rule rule={store.rule} />
          </h2>
@@ -75,16 +69,3 @@ let Editor = observer(() => {
       </div>
    )
 })
-
-export let renderEditor = (
-   rootElement: HTMLElement,
-   store: Store,
-   hub: Hub,
-) => {
-   render(
-      <storeContext.Provider value={store}>
-         <Editor />
-      </storeContext.Provider>,
-      rootElement,
-   )
-}

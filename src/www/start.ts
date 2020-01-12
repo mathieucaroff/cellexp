@@ -1,9 +1,10 @@
 import '../ui/style.css'
 
-import { renderController } from '../ui/control/control'
-import { renderEditor } from '../ui/editor/editor'
-
+import { render } from 'react-dom'
 import { observable } from 'mobx'
+
+import { appElement } from './app'
+
 import { createHub } from '../state/hub'
 import { createStore } from '../state/store'
 import { createComputer } from '../compute/compute'
@@ -11,16 +12,20 @@ import { createDisplay } from '../display/display'
 
 function main() {
    let bareStore = createStore()
-   let hub = createHub()
-
    let store = observable(bareStore)
+   let hub = createHub()
 
    let computer = createComputer(store, hub)
    let display = createDisplay(store, computer, hub)
 
-   renderEditor(document.getElementById('editorRoot')!, store, hub)
-   renderController(document.getElementById('controlRoot')!, store, hub)
-   display.renderDisplay(document.getElementById('displayRoot')!)
+   render(
+      appElement({
+         display,
+         hub,
+         store,
+      }),
+      document.getElementById('appRoot'),
+   )
 }
 
 main()
