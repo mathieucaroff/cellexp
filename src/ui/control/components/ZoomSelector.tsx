@@ -1,11 +1,9 @@
-import * as React from 'react'
-
 import { observer } from 'mobx-react-lite'
-
-import { useStore } from '../../util/useStore'
-import { errorCheck } from '../../../util/errorCheck'
-import { SelectorInput } from './SelectorInput'
+import * as React from 'react'
 import { clip } from '../../../util/clip'
+import { errorCheck } from '../../../util/errorCheck'
+import { useStore } from '../../util/useStore'
+import { SelectorInput } from './SelectorInput'
 
 let lowBound = 6
 let highBound = 300

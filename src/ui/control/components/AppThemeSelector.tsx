@@ -1,15 +1,12 @@
-import * as React from 'react'
-
-import { observer, useLocalStore } from 'mobx-react-lite'
-
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
-
+import { observer } from 'mobx-react-lite'
+import * as React from 'react'
 import { Store } from '../../../state/store'
-import { ThemeString, themeSet, CellexpTheme } from '../../../www/theme'
+import { CellexpTheme, themeSet, ThemeString } from '../../../www/theme'
 
 export interface AppThemeSelectorProp {
    label: string

@@ -1,9 +1,8 @@
+import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-
 import { Display } from '../display/display'
 import { Rule } from './editor/components/Rule'
 import { useStore } from './util/useStore'
-import { observer } from 'mobx-react-lite'
 
 export interface DisplayAdapterProp {
    display: Display

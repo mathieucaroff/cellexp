@@ -1,8 +1,7 @@
-import { Store } from '../state/store'
 import { Hub } from '../state/hub'
-
-import { Rect, Pair } from '../util/RectType'
+import { Store } from '../state/store'
 import { autox } from '../util/autox'
+import { Pair } from '../util/RectType'
 
 export interface Computer {
    getCell(pos: Pair): number

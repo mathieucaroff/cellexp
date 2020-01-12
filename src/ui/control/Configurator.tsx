@@ -1,23 +1,22 @@
-import * as React from 'react'
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
 import {
+   createStyles,
    ExpansionPanel,
-   ExpansionPanelSummary,
    ExpansionPanelDetails,
+   ExpansionPanelSummary,
+   makeStyles,
+   Theme,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-
+import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import {
+   displayThemeNameFromCellexp,
+   themeNameFromCellexp,
+} from '../../www/theme'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
-
-import { ThemeSelector } from './components/AppThemeSelector'
-import { observer } from 'mobx-react-lite'
 import { useStore } from '../util/useStore'
-import {
-   themeNameFromCellexp,
-   displayThemeNameFromCellexp,
-} from '../../www/theme'
+import { ThemeSelector } from './components/AppThemeSelector'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({

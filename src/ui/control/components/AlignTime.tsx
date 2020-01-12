@@ -1,9 +1,7 @@
-import * as React from 'react'
-import { action, reaction } from 'mobx'
-import { observer, useLocalStore } from 'mobx-react-lite'
-
 import Button from '@material-ui/core/Button'
-
+import { action } from 'mobx'
+import { observer } from 'mobx-react-lite'
+import * as React from 'react'
 import { useStore } from '../../util/useStore'
 
 export let AlignTime = observer(() => {

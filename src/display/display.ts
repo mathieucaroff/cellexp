@@ -1,15 +1,12 @@
-import { observable, action, reaction } from 'mobx'
-
-import { Store } from '../state/store'
-import { Hub } from '../state/hub'
-
+import { action, observable, reaction } from 'mobx'
 import { Computer } from '../compute/compute'
+import { Hub } from '../state/hub'
+import { Store } from '../state/store'
+import { autox } from '../util/autox'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
-
-import { autox } from '../util/autox'
-import { createImageData } from './util/createImageData'
 import { displayThemeFromCellexp, themeSet } from '../www/theme'
+import { createImageData } from './util/createImageData'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let local = observable({

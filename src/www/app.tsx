@@ -1,16 +1,15 @@
+import { CssBaseline, ThemeProvider } from '@material-ui/core'
+import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
-
-import { Store } from '../state/store'
-import { Hub } from '../state/hub'
 import { Display } from '../display/display'
-import { hubContext, storeContext } from './global'
-import { Editor } from '../ui/editor/Editor'
-import { Controller } from '../ui/control/Controller'
+import { Hub } from '../state/hub'
+import { Store } from '../state/store'
 import { Configurator } from '../ui/control/Configurator'
+import { Controller } from '../ui/control/Controller'
 import { DisplayAdapter } from '../ui/DisplayAdapter'
-import { useLocalStore, observer } from 'mobx-react-lite'
+import { Editor } from '../ui/editor/Editor'
+import { hubContext, storeContext } from './global'
 import { muiThemeFromCellexp, themeSet } from './theme'
-import { ThemeProvider, CssBaseline, Box } from '@material-ui/core'
 
 export interface AppProp {
    display: Display

@@ -1,14 +1,11 @@
-import '../ui/style.css'
-
-import { render } from 'react-dom'
 import { observable } from 'mobx'
-
-import { appElement } from './app'
-
-import { createHub } from '../state/hub'
-import { createStore } from '../state/store'
+import { render } from 'react-dom'
 import { createComputer } from '../compute/compute'
 import { createDisplay } from '../display/display'
+import { createHub } from '../state/hub'
+import { createStore } from '../state/store'
+import '../ui/style.css'
+import { appElement } from './app'
 
 function main() {
    let bareStore = createStore()

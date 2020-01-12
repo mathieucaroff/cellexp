@@ -1,6 +1,5 @@
-import { Size } from '../util/RectType'
-
 import { createPosition, OxPosition } from '../display/position'
+import { Size } from '../util/RectType'
 import { ThemeString } from '../www/theme'
 
 /**

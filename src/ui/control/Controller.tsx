@@ -1,32 +1,31 @@
-import * as React from 'react'
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
 import {
+   createStyles,
    ExpansionPanel,
-   ExpansionPanelSummary,
    ExpansionPanelDetails,
+   ExpansionPanelSummary,
+   makeStyles,
+   Theme,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-
+import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import { Rule } from '../editor/components/Rule'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
-
-import { CaSizeSelector } from './components/CaSizeSelector'
-import { SpeedSelector } from './components/SpeedSelector'
-import { CanvasHeight } from './components/CanvasHeight'
-import { FieldPosT } from './components/FieldPosT'
-import { ResetTime } from './components/ResetTime'
-import { RerollButton } from './components/RerollButton'
-import { PlayPauseButton } from './components/PlayPauseButton'
-import { observer } from 'mobx-react-lite'
 import { useStore } from '../util/useStore'
-import { Rule } from '../editor/components/Rule'
-import { SingleStep } from './components/SingleStep'
 import { AlignTime } from './components/AlignTime'
-import { FieldPrecisePosT } from './components/FieldPrecisePosT'
-import { ZoomSelector } from './components/ZoomSelector'
+import { CanvasHeight } from './components/CanvasHeight'
 import { CanvasWidth } from './components/CanvasWidth'
+import { CaSizeSelector } from './components/CaSizeSelector'
 import { FieldPosS } from './components/FieldPosS'
+import { FieldPosT } from './components/FieldPosT'
+import { FieldPrecisePosT } from './components/FieldPrecisePosT'
+import { PlayPauseButton } from './components/PlayPauseButton'
+import { RerollButton } from './components/RerollButton'
+import { ResetTime } from './components/ResetTime'
+import { SingleStep } from './components/SingleStep'
+import { SpeedSelector } from './components/SpeedSelector'
+import { ZoomSelector } from './components/ZoomSelector'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({

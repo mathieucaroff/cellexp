@@ -1,9 +1,7 @@
+import { action } from 'mobx'
+import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { useState } from 'react'
-
-import { action } from 'mobx'
-
-import { observer } from 'mobx-react-lite'
 import { SlowTextField } from '../../components/SlowTextField'
 import { useReaction } from '../../util/useReaction'
 

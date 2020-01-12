@@ -1,9 +1,7 @@
-import * as React from 'react'
-
 import { observer } from 'mobx-react-lite'
-
-import { useStore } from '../../util/useStore'
+import * as React from 'react'
 import { errorCheck } from '../../../util/errorCheck'
+import { useStore } from '../../util/useStore'
 import { SelectorInput } from './SelectorInput'
 
 export let FieldPosS = observer(() => {

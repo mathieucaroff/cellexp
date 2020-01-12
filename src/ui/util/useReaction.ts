@@ -1,5 +1,5 @@
-import { useEffect, DependencyList } from 'react'
-import { reaction, IReactionPublic, IReactionOptions } from 'mobx'
+import { IReactionOptions, IReactionPublic, reaction } from 'mobx'
+import { DependencyList, useEffect } from 'react'
 
 export type UseReaction = <T>(
    expression: (r: IReactionPublic) => T,
