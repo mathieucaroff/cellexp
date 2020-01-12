@@ -11,7 +11,7 @@ export let AlignTime = observer(() => {
 
    let handleClick = action(() => {
       store.play = false
-      store.posT.microPos = 0
+      store.posT.microPos = store.posT.microPos < 15 ? 0 : 30
    })
 
    return (
@@ -21,7 +21,7 @@ export let AlignTime = observer(() => {
             disabled={store.play || store.posT.microPos === 0}
             onClick={handleClick}
          >
-            Align
+            Align Generation
          </Button>
       </div>
    )

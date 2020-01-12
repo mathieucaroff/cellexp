@@ -25,7 +25,7 @@ export let FieldPrecisePosT = observer(() => {
 
    return (
       <SelectorInput
-         label="Generation"
+         label="Fractional Generation"
          property={'microPos'}
          disabled={store.play === true}
          store={store.posT}
