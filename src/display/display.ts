@@ -9,6 +9,7 @@ import { createEventDispatcher } from '../util/eventDispatcher'
 
 import { themeObj } from './theme'
 import { autox } from '../util/autox'
+import { createImageData } from './util/createImageData'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let data = observable({
@@ -96,8 +97,6 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    // Render cellular automaton
    let renderCanvas = () => {
       store.rule
-      let { ctx } = me.data
-      if (!ctx) return
 
       let drawArea = {
          pos: {
@@ -112,43 +111,40 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
       let marginY = 2
 
-      let requestArea = {
-         pos: drawArea.pos,
-         size: {
-            x: drawArea.size.x,
-            y: drawArea.size.y + marginY,
-         },
+      let pos = drawArea.pos
+      let size = {
+         x: drawArea.size.x,
+         y: drawArea.size.y + marginY,
       }
 
-      computer.request(requestArea)
-
-      let { cache } = computer.data
+      let requestArea = {
+         pos,
+         size,
+      }
 
       let { alive, dead } = themeObj[store.theme]
 
       if (drawArea.size.x * drawArea.size.y === 0) return
 
-      let imageData = new ImageData(requestArea.size.x, requestArea.size.y)
-      let { data } = imageData
-
-      let requestAreaSizeX = requestArea.size.x
-
-      Array.from({ length: requestArea.size.y }, (_, k) => {
-         let posY = requestArea.pos.y + k
-         let dataK0 = k * requestAreaSizeX * 4
-         cache[posY].forEach((v, m) => {
-            let dataK = dataK0 + m * 4
-            ;[data[dataK], data[dataK + 1], data[dataK + 2]] = v ? alive : dead
-            data[dataK + 3] = 255
-         })
+      let imageData = createImageData({
+         size,
+         callback: ({ data, y: yy, x: xx, p }) => {
+            let y = pos.y + yy
+            let x = pos.x + xx
+            let color = computer.getCell({ y, x }) ? alive : dead
+            ;[data[p], data[p + 1], data[p + 2]] = color
+            data[p + 3] = 255
+         },
       })
 
       let { pixT } = me.data
       let w = store.canvasSize.x
       let h = requestArea.size.y * store.zoom
       createImageBitmap(imageData).then((bitmap) => {
-         ctx!.imageSmoothingEnabled = false
-         ctx!.drawImage(bitmap, 0, -pixT, w, h)
+         let { ctx } = me.data
+         if (ctx === undefined) return
+         ctx.imageSmoothingEnabled = false
+         ctx.drawImage(bitmap, 0, -pixT, w, h)
       })
    }
 

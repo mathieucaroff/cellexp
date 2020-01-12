@@ -1,8 +1,12 @@
 import { Store } from '../state/store'
 import { Hub } from '../state/hub'
 
-import { Rect } from '../util/RectType'
+import { Rect, Pair } from '../util/RectType'
 import { autox } from '../util/autox'
+
+export interface Computer {
+   getCell(pos: Pair): number
+}
 
 export let createComputer = (store: Store, hub: Hub) => {
    let cache: Record<number, Uint8Array> = {}
@@ -34,23 +38,27 @@ export let createComputer = (store: Store, hub: Hub) => {
    }
 
    let computeLine = (line: Uint8Array) => {
-      let newLine = new Uint8Array(line.length)
-      line.map((_b, k) => {
-         return (newLine[k] = computeRule(line[k - 1], line[k], line[k + 1]))
+      return Uint8Array.from({ length: line.length }, (_b, k) => {
+         return computeRule(line[k - 1], line[k], line[k + 1])
       })
-      return newLine
+   }
+
+   let request = (targetTime: number) => {
+      while (currentTime < targetTime) {
+         cache[currentTime] = computeLine(cache[currentTime - 1])
+         currentTime++
+      }
    }
 
    return {
-      request(area: Rect) {
-         let targetTime = area.pos.y + area.size.y
-         while (currentTime < targetTime) {
-            cache[currentTime] = computeLine(cache[currentTime - 1])
-            currentTime++
+      getCell(pos: Pair) {
+         pos.y >= currentTime && request(pos.y + 1)
+         try {
+            return cache[pos.y][pos.x]
+         } catch (e) {
+            console.error(e, e.stack, pos)
+            throw e
          }
       },
-      data,
    }
 }
-
-export type Computer = ReturnType<typeof createComputer>
