@@ -3,12 +3,13 @@ import * as React from 'react'
 import { Display } from '../display/display'
 import { Rule } from './editor/components/Rule'
 import { useStore } from './util/useStore'
+import { observer } from 'mobx-react-lite'
 
 export interface DisplayAdapterProp {
    display: Display
 }
 
-export let DisplayAdapter = (prop: DisplayAdapterProp) => {
+export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
    let { display } = prop
 
    let store = useStore()
@@ -17,13 +18,12 @@ export let DisplayAdapter = (prop: DisplayAdapterProp) => {
 
    React.useEffect(() => {
       if (!ref.current) {
-         let message =
-            "Unexpected lifecycle in `DisplayAdapter.tsx`. The display won't mount."
-         console.error(message, new Error().stack)
-         return
+         let message = 'Unexpected lifecycle in `DisplayAdapter.tsx`'
+         console.warn(message, new Error().stack)
+      } else {
+         display.renderDisplay(ref.current)
       }
-      display.renderDisplay(ref.current)
-   })
+   }, [])
 
    return (
       <div ref={ref}>
@@ -32,4 +32,4 @@ export let DisplayAdapter = (prop: DisplayAdapterProp) => {
          </h2>
       </div>
    )
-}
+})
