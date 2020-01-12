@@ -7,15 +7,17 @@ import { errorCheck } from '../../../util/errorCheck'
 import { SelectorInput } from './SelectorInput'
 
 let validation = (value: string) => {
+   let high = 999
+
    let notAnInteger = () => !value.match(/^-?\d*$/)
    let notPositive = () => !!value.match(/^-/)
-   let outOfRange = () => +value < 1 || +value > 99
+   let outOfRange = () => +value < 1 || +value > high
 
    return errorCheck(
       'Display run speed',
       [notAnInteger, 'Speed must be an integer'],
       [notPositive, 'Speed must be positive'],
-      [outOfRange, 'Speed must between 1 and 99'],
+      [outOfRange, `Speed must between 1 and ${high}`],
    )
 }
 
