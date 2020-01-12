@@ -13,6 +13,8 @@ import { autorun } from 'mobx'
  *   render(data.screen)
  * })
  * ```
+ *
+ * @returns the function to dispose of the mobx subscription
  */
 
 export let autox = new Proxy(autorun, {
@@ -29,7 +31,7 @@ export let autox = new Proxy(autorun, {
                `Autox got a debug name twice (${propName}) and (${param.name})`,
             )
          }
-         autorun_(func, { ...param, name: '' + propName })
+         return autorun_(func, { ...param, name: '' + propName })
       }
    },
 }) as typeof autorun & Record<string, typeof autorun>
