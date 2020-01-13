@@ -18,7 +18,7 @@ export let createComputer = (store: Store, hub: Hub) => {
       rule = store.rule
 
       let firstLine = new Uint8Array(store.size).map(() =>
-         Math.floor(2 * Math.random()),
+         Math.random() < 0.5 ? 0 : 1,
       )
 
       cache[0] = firstLine

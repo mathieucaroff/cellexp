@@ -114,11 +114,6 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          y: drawArea.size.y + marginY,
       }
 
-      let requestArea = {
-         pos,
-         size,
-      }
-
       let { alive, dead } = local.displayTheme
 
       if (drawArea.size.x * drawArea.size.y === 0) return
