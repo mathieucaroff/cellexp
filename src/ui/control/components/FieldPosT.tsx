@@ -6,23 +6,25 @@ import { SelectorInput } from './SelectorInput'
 
 export let FieldPosT = observer(() => {
    let store = useStore()
-   let { wholePos } = store.posT
 
    let validation = (value: string): [boolean, string] => {
+      let { wholePos } = store.posT
+
+      let low = 0
+      let high = 99999
+
       let defaultHelp = 'Elapsed generations (time)'
       if (value === '' + wholePos) {
          return [false, defaultHelp]
       }
 
       let notAnInteger = () => !value.match(/^-?\d*$/)
-      let notPositive = () => !!value.match(/^-/)
-      let tooLong = () => value.length > 5
+      let outOfBound = () => +value < low || +value > high
 
       return errorCheck(
          defaultHelp,
          [notAnInteger, 'Generation must be an integer'],
-         [notPositive, 'Generation must be positive'],
-         [tooLong, 'Generation must between 0 and 99999'],
+         [outOfBound, `Generation must between ${low} and ${high}`],
       )
    }
 

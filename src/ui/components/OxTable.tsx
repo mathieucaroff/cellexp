@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import * as React from 'react'
+import { Xelement } from '../util/Xelement'
 
 let useStyle = makeStyles((theme: Theme) => {
    let style = {
@@ -20,7 +21,6 @@ let useStyle = makeStyles((theme: Theme) => {
 })
 
 export type Align = 'left' | 'right' | 'inherit' | 'center' | 'justify'
-export type Xelement = string | React.ReactElement
 
 export interface SymmetricTableProp {
    tableHead: [Xelement, Align?][]

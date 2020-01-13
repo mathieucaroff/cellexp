@@ -6,13 +6,13 @@ import { SelectorInput } from './SelectorInput'
 
 export let FieldPosS = observer(() => {
    let store = useStore()
-   let { size: caWidth } = store
-   let { wholePos } = store.posS
-
-   let low = -300
-   let high = caWidth - 1
 
    let validation = (value: string): [boolean, string] => {
+      let { wholePos } = store.posS
+
+      let low = -4
+      let high = store.size - (store.canvasSize.x / store.zoom) * 6 + 4
+
       let defaultHelp = 'Spatial Position on the CA'
       if (value === '' + wholePos) {
          return [false, defaultHelp]
