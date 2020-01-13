@@ -89,5 +89,5 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 - `&` feature
 - `$` quantified / measured
 - `@` inside
-- `!`, `%`, `^`, `*`, `_`, `=`
-- `;`, `:`, `\`, `|`, `,`, `.`, `/`, `?`
+- `%`, `^`, `*`, `_`, `=`
+- `:`, `\`, `|`, `,`, `.`, `/`, `?`
