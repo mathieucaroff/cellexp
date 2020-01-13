@@ -35,9 +35,9 @@ export let useStyle = makeStyles((theme: Theme) =>
 )
 
 export let Configurator = observer(() => {
-   let store = useStore()
-   let shared = useSharedStyle()
    let classes = useStyle()
+   let shared = useSharedStyle()
+   let store = useStore()
 
    let EP = ExpansionPanel
    let EPSm = ExpansionPanelSummary

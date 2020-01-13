@@ -15,8 +15,8 @@ let useStyle = makeStyles((theme: Theme) => {
 })
 
 export let PropertyList = observer(() => {
-   let store = useStore()
    let classes = useStyle()
+   let store = useStore()
 
    let { rule } = store
 

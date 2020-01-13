@@ -27,8 +27,8 @@ export let useStyle = makeStyles((theme: Theme) =>
 )
 
 export let Editor = observer(() => {
-   let shared = useSharedStyle()
    let classes = useStyle()
+   let shared = useSharedStyle()
    let store = useStore()
 
    let EP = ExpansionPanel
