@@ -1,22 +1,21 @@
-import * as React from 'react'
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
-
 import {
+   createStyles,
    ExpansionPanel,
-   ExpansionPanelSummary,
    ExpansionPanelDetails,
+   ExpansionPanelSummary,
+   makeStyles,
+   Theme,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-
-import { useSharedStyle } from '../style'
-import { RuleEditor } from './components/RuleEditor'
-import { PropertyList } from './components/PropertyList'
-import { RuleSelector } from './components/RuleSelector'
-import { clx } from '../util/clx'
 import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import { useSharedStyle } from '../style'
+import { clx } from '../util/clx'
 import { useStore } from '../util/useStore'
+import { PropertyList } from './components/PropertyList'
 import { Rule } from './components/Rule'
+import { RuleEditor } from './components/RuleEditor'
+import { RuleSelector } from './components/RuleSelector'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({

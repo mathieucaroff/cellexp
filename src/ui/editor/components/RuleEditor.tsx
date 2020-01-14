@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import { BasenumRuleField } from './BasenumRuleField'
 
 export let RuleEditor = () => {

@@ -1,10 +1,8 @@
-import * as React from 'react'
-
 import { Link } from '@material-ui/core'
 import { action } from 'mobx'
-
-import { useStore } from '../../util/useStore'
 import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import { useStore } from '../../util/useStore'
 
 export interface RuleProp {
    rule: number

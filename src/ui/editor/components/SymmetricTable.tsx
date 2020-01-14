@@ -1,10 +1,8 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
-
-import { Rule } from './Rule'
 import { toBase } from '../../../util/baseConverter'
 import { OxTable } from '../../components/OxTable'
+import { Rule } from './Rule'
 
 let reverse = (v: string): string => {
    return v

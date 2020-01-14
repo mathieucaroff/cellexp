@@ -1,10 +1,8 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
-
-import { Rule } from './Rule'
 import { OxTable } from '../../components/OxTable'
 import { clx } from '../../util/clx'
+import { Rule } from './Rule'
 
 export let useStyle = makeStyles((theme: Theme) =>
    createStyles({

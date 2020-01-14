@@ -1,13 +1,11 @@
-import * as React from 'react'
-
 import { action, observable } from 'mobx'
 import { observer } from 'mobx-react-lite'
-
-import { useStore } from '../../util/useStore'
-import { SlowTextField } from '../../components/SlowTextField'
+import * as React from 'react'
+import { fromBase, toBase } from '../../../util/baseConverter'
 import { errorCheck } from '../../../util/errorCheck'
-import { toBase, fromBase } from '../../../util/baseConverter'
+import { SlowTextField } from '../../components/SlowTextField'
 import { useReaction } from '../../util/useReaction'
+import { useStore } from '../../util/useStore'
 
 export interface BasenumRuleFieldProp {
    base: number
