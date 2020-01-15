@@ -49,7 +49,7 @@ export let HorizontalPanning = () => {
    }
 
    let relativeMoveList = [
-      gather('(<)', () => {
+      gather('⬵', () => {
          posS.wholePos -= Math.floor((store.canvasSize.x / store.zoom) * 6)
       }),
       gather('<', () => {
@@ -58,22 +58,22 @@ export let HorizontalPanning = () => {
       gather('>', () => {
          posS.wholePos += Math.floor(store.canvasSize.x / store.zoom / 2)
       }),
-      gather('(>)', () => {
+      gather('⤁', () => {
          posS.wholePos += Math.floor((store.canvasSize.x / store.zoom) * 6)
       }),
    ]
 
    let absoluteMoveList = [
-      gather('<<', () => {
+      gather('⇤', () => {
          posS.wholePos = 0
          posS.microPos = 0
       }),
-      gather('::', () => {
+      gather('|', () => {
          posS.wholePos = Math.floor(
             store.size / 2 - ((store.canvasSize.x / store.zoom) * 6) / 2,
          )
       }),
-      gather('>>', () => {
+      gather('⇥', () => {
          posS.wholePos =
             store.size - Math.floor((store.canvasSize.x / store.zoom) * 6)
       }),

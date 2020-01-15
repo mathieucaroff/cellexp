@@ -17,11 +17,12 @@ let useStyle = makeStyles((theme: Theme) =>
 export interface DisplayAdapterProp {
    display: Display
    header: React.ReactElement
+   footer: React.ReactElement
 }
 
 export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
    let classes = useStyle()
-   let { display, header } = prop
+   let { display, header, footer } = prop
 
    let ref = React.useRef<HTMLDivElement>(null)
 
@@ -35,8 +36,10 @@ export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
    }, [])
 
    return (
-      <div className={classes.display} ref={ref}>
+      <div>
          {header}
+         <div className={classes.display} ref={ref}></div>
+         {footer}
       </div>
    )
 })

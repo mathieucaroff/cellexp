@@ -9,12 +9,14 @@ import { Xelement } from '../../../util/Xelement'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      sameLine: {
+      buttonContainer: {
          '&': {
             display: 'flex',
          },
          '& > *': {
-            marginLeft: theme.spacing(2),
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
          },
       },
    }),
@@ -91,7 +93,7 @@ export let VerticalPanning = () => {
    ]
 
    return (
-      <div className={classes.sameLine}>
+      <div className={classes.buttonContainer}>
          <ButtonGroup orientation="vertical" size="small">
             {relativeSmallMoveList.map(toButton)}
          </ButtonGroup>

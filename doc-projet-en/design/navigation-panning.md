@@ -25,7 +25,9 @@ This will require the following:
 
 Time estimate: 4h
 2020-01-15T22:34+01 -> 2020-01-15T23:06+01 :: writing `display/keyboardManager.ts`
-2020-01-15T23:06+01
+2020-01-15T23:06+01 -> 2020-01-16T00:09+01 :: moving arrows and centering them (2x the expected time)
+2020-01-16T00:09+01 -> 2020-01-16T00:22+01 :: moving the display block to the top (.7x the expected time)
+2020-01-16T00:23+01 -> 2020-01-16T00:30+01 (.7x the expected time)
 
 #### Design
 
