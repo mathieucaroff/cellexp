@@ -1,17 +1,27 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { Display } from '../display/display'
-import { Rule } from './editor/components/Rule'
-import { useStore } from './util/useStore'
+
+let useStyle = makeStyles((theme: Theme) =>
+   createStyles({
+      display: {
+         '& canvas': {
+            display: 'block',
+            margin: 'auto',
+         },
+      },
+   }),
+)
 
 export interface DisplayAdapterProp {
    display: Display
+   header: React.ReactElement
 }
 
 export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
-   let { display } = prop
-
-   let store = useStore()
+   let classes = useStyle()
+   let { display, header } = prop
 
    let ref = React.useRef<HTMLDivElement>(null)
 
@@ -25,10 +35,8 @@ export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
    }, [])
 
    return (
-      <div ref={ref}>
-         <h2>
-            Display <Rule rule={store.rule} />
-         </h2>
+      <div className={classes.display} ref={ref}>
+         {header}
       </div>
    )
 })

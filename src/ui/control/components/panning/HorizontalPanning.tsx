@@ -1,14 +1,27 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
 import { useStore } from '../../../util/useStore'
 import { Xelement } from '../../../util/Xelement'
 
+let useStyle = makeStyles((theme: Theme) =>
+   createStyles({
+      sameLine: {
+         '& > *': {
+            display: 'flex',
+            justifyContent: 'center',
+         },
+      },
+   }),
+)
+
 /**
  * (1) Small moves + Big move (<) < > (>)
  * (2) Absolute moves << :: >>
  */
 export let HorizontalPanning = () => {
+   let classes = useStyle()
    let store = useStore()
    let { posS } = store
 
@@ -67,7 +80,7 @@ export let HorizontalPanning = () => {
    ]
 
    return (
-      <div>
+      <div className={classes.sameLine}>
          <div>
             <ButtonGroup size="small">
                {relativeMoveList.map(toButton)}

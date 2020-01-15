@@ -20,8 +20,6 @@ import { CaSizeSelector } from './components/CaSizeSelector'
 import { FieldPosT } from './components/FieldPosT'
 import { FieldPosS } from './components/FieldPosS'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
-import { HorizontalPanning } from './components/panning/HorizontalPanning'
-import { VerticalPanning } from './components/panning/VerticalPanning'
 import { PlayPauseButton } from './components/PlayPauseButton'
 import { RerollButton } from './components/RerollButton'
 import { ResetTime } from './components/ResetTime'
@@ -29,7 +27,7 @@ import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
 import { ZoomSelector } from './components/ZoomSelector'
 
-export let useStyle = makeStyles((theme: Theme) =>
+let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       inputSizing: {
          '& input': {
@@ -105,10 +103,6 @@ export let Controller = observer(() => {
                <ResetTime />
                <PlayPauseButton />
                <SingleStep />
-            </div>
-            <div className={classes.inputList}>
-               <HorizontalPanning />
-               <VerticalPanning />
             </div>
          </EPDt>
       </EP>

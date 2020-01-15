@@ -18,7 +18,7 @@ import { clx } from '../util/clx'
 import { useStore } from '../util/useStore'
 import { ThemeSelector } from './components/AppThemeSelector'
 
-export let useStyle = makeStyles((theme: Theme) =>
+let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       inputSizing: {
          '& input': {

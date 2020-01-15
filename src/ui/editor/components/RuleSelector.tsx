@@ -4,7 +4,7 @@ import { OxTable } from '../../components/OxTable'
 import { clx } from '../../util/clx'
 import { Rule } from './Rule'
 
-export let useStyle = makeStyles((theme: Theme) =>
+let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       inlineBlock: { display: 'inline-block' },
       spacer: {

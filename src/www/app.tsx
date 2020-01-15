@@ -10,6 +10,7 @@ import { DisplayAdapter } from '../ui/DisplayAdapter'
 import { Editor } from '../ui/editor/Editor'
 import { hubContext, storeContext } from './global'
 import { muiThemeFromCellexp, themeSet } from './theme'
+import { DisplayHeader } from '../ui/control/DisplayHeader'
 
 export interface AppProp {
    display: Display
@@ -33,7 +34,7 @@ let App = observer((prop: AppProp) => {
                <Configurator />
                <Editor />
                <Controller />
-               <DisplayAdapter display={display} />
+               <DisplayAdapter display={display} header={<DisplayHeader />} />
                <CssBaseline />
             </ThemeProvider>
          </storeContext.Provider>

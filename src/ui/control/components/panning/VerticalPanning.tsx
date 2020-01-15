@@ -1,10 +1,24 @@
-import * as React from 'react'
-import { useStore } from '../../../util/useStore'
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-import { Xelement } from '../../../util/Xelement'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import * as React from 'react'
+import { useStore } from '../../../util/useStore'
+import { Xelement } from '../../../util/Xelement'
+
+let useStyle = makeStyles((theme: Theme) =>
+   createStyles({
+      sameLine: {
+         '&': {
+            display: 'flex',
+         },
+         '& > *': {
+            marginLeft: theme.spacing(2),
+         },
+      },
+   }),
+)
 
 /**
  * (1) Small moves
@@ -12,6 +26,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess'
  * (3) Go to top
  */
 export let VerticalPanning = () => {
+   let classes = useStyle()
    let store = useStore()
    let { posT } = store
 
@@ -39,16 +54,24 @@ export let VerticalPanning = () => {
    }
 
    let relativeSmallMoveList = [
-      gather(<ExpandLessIcon />, () => {
-         posT.wholePos -= Math.floor(
-            ((store.canvasSize.y / store.zoom) * 6) / 12,
-         )
-      }),
-      gather(<ExpandMoreIcon />, () => {
-         posT.wholePos += Math.floor(
-            ((store.canvasSize.y / store.zoom) * 6) / 12,
-         )
-      }),
+      gather(
+         <ExpandLessIcon />,
+         () => {
+            posT.wholePos -= Math.floor(
+               ((store.canvasSize.y / store.zoom) * 6) / 12,
+            )
+         },
+         'muiArrowUp',
+      ),
+      gather(
+         <ExpandMoreIcon />,
+         () => {
+            posT.wholePos += Math.floor(
+               ((store.canvasSize.y / store.zoom) * 6) / 12,
+            )
+         },
+         'muiArrowDown',
+      ),
    ]
 
    let relativeBigMoveList = [
@@ -68,7 +91,7 @@ export let VerticalPanning = () => {
    ]
 
    return (
-      <div>
+      <div className={classes.sameLine}>
          <ButtonGroup orientation="vertical" size="small">
             {relativeSmallMoveList.map(toButton)}
          </ButtonGroup>

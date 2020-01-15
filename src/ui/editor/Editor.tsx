@@ -17,7 +17,7 @@ import { Rule } from './components/Rule'
 import { RuleEditor } from './components/RuleEditor'
 import { RuleSelector } from './components/RuleSelector'
 
-export let useStyle = makeStyles((theme: Theme) =>
+let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       ruleSelection: {
          display: 'block',
