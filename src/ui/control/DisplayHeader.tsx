@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Rule } from '../editor/components/Rule'
 import { useStore } from '../util/useStore'
+import { observer } from 'mobx-react-lite'
 
-export let DisplayHeader = () => {
+export let DisplayHeader = observer(() => {
    let store = useStore()
 
    return (
@@ -12,4 +13,4 @@ export let DisplayHeader = () => {
          </h2>
       </>
    )
-}
+})

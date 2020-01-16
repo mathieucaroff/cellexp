@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import * as React from 'react'
 import { useStore } from '../../../util/useStore'
 import { Xelement } from '../../../util/Xelement'
+import { observer } from 'mobx-react-lite'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -27,7 +28,7 @@ let useStyle = makeStyles((theme: Theme) =>
  * (2) Big move
  * (3) Go to top
  */
-export let VerticalPanning = () => {
+export let VerticalPanning = observer(() => {
    let classes = useStyle()
    let store = useStore()
    let { posT } = store
@@ -36,12 +37,13 @@ export let VerticalPanning = () => {
       content: Xelement
       key: string
       action: () => void
+      disabled: boolean
    }
 
    let toButton = (prop: ButtonInfo) => {
-      let { content, action, key } = prop
+      let { content, action, key, disabled } = prop
       return (
-         <Button onClick={action} key={key}>
+         <Button onClick={action} key={key} disabled={disabled}>
             {content}
          </Button>
       )
@@ -50,9 +52,10 @@ export let VerticalPanning = () => {
    let gather = (
       content: Xelement,
       action: () => void,
+      disabled: boolean,
       key?: string,
    ): ButtonInfo => {
-      return { content, action, key: key || (content as string) }
+      return { content, disabled, action, key: key || (content as string) }
    }
 
    let relativeSmallMoveList = [
@@ -63,6 +66,7 @@ export let VerticalPanning = () => {
                ((store.canvasSize.y / store.zoom) * 6) / 12,
             )
          },
+         posT.wholePos <= 0 && posT.microPos <= 0,
          'muiArrowUp',
       ),
       gather(
@@ -72,24 +76,37 @@ export let VerticalPanning = () => {
                ((store.canvasSize.y / store.zoom) * 6) / 12,
             )
          },
+         false,
          'muiArrowDown',
       ),
    ]
 
    let relativeBigMoveList = [
-      gather('⇞', () => {
-         posT.wholePos -= Math.floor((store.canvasSize.y / store.zoom) * 6)
-      }),
-      gather('⇟', () => {
-         posT.wholePos += Math.floor((store.canvasSize.y / store.zoom) * 6)
-      }),
+      gather(
+         '⇞',
+         () => {
+            posT.wholePos -= Math.floor((store.canvasSize.y / store.zoom) * 6)
+         },
+         posT.wholePos <= 0 && posT.microPos <= 0,
+      ),
+      gather(
+         '⇟',
+         () => {
+            posT.wholePos += Math.floor((store.canvasSize.y / store.zoom) * 6)
+         },
+         false,
+      ),
    ]
 
    let absoluteMoveList = [
-      gather('⏏', () => {
-         posT.wholePos = 0
-         posT.microPos = 0
-      }),
+      gather(
+         '⏏',
+         () => {
+            posT.wholePos = 0
+            posT.microPos = 0
+         },
+         posT.wholePos <= 0 && posT.microPos <= 0,
+      ),
    ]
 
    return (
@@ -105,4 +122,4 @@ export let VerticalPanning = () => {
          </ButtonGroup>
       </div>
    )
-}
+})

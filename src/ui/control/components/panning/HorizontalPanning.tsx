@@ -4,6 +4,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
 import { useStore } from '../../../util/useStore'
 import { Xelement } from '../../../util/Xelement'
+import { observer } from 'mobx-react-lite'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -20,21 +21,40 @@ let useStyle = makeStyles((theme: Theme) =>
  * (1) Small moves + Big move (<) < > (>)
  * (2) Absolute moves << :: >>
  */
-export let HorizontalPanning = () => {
+export let HorizontalPanning = observer(() => {
    let classes = useStyle()
    let store = useStore()
    let { posS } = store
 
+   let maxLeft = posS.wholePos * posS.microFactor + posS.microPos <= 0
+   let maxRight =
+      posS.wholePos * posS.microFactor + posS.microPos >=
+      posS.microFactor * (store.size - (store.canvasSize.x / store.zoom) * 6)
+
+   let rightBorderFact =
+      posS.microFactor * (store.size - (store.canvasSize.x / store.zoom) * 6)
+   let leftBorderFact = 0
+   let centerFact = Math.floor((rightBorderFact + leftBorderFact) / 2)
+
+   let atLeftBorder =
+      posS.wholePos * posS.microFactor + posS.microPos === leftBorderFact
+   let atRightBorder =
+      posS.wholePos * posS.microFactor + posS.microPos === rightBorderFact
+   let atCenter =
+      posS.wholePos * posS.microFactor + posS.microPos === centerFact
+
    interface ButtonInfo {
       content: Xelement
       key: string
+      disabled: boolean
       action: () => void
    }
 
    let toButton = (prop: ButtonInfo) => {
-      let { content, action, key } = prop
+      let { content, action, disabled, key } = prop
+
       return (
-         <Button onClick={action} key={key}>
+         <Button onClick={action} key={key} disabled={disabled}>
             {content}
          </Button>
       )
@@ -42,38 +62,40 @@ export let HorizontalPanning = () => {
 
    let gather = (
       content: Xelement,
+      disabled: boolean,
       action: () => void,
       key?: string,
    ): ButtonInfo => {
-      return { content, action, key: key || (content as string) }
+      return { content, action, disabled, key: key || (content as string) }
    }
 
    let relativeMoveList = [
-      gather('⬵', () => {
+      gather('⬵', maxLeft, () => {
          posS.wholePos -= Math.floor((store.canvasSize.x / store.zoom) * 6)
       }),
-      gather('<', () => {
+      gather('<', maxLeft, () => {
          posS.wholePos -= Math.floor(store.canvasSize.x / store.zoom / 2)
       }),
-      gather('>', () => {
+      gather('>', maxRight, () => {
          posS.wholePos += Math.floor(store.canvasSize.x / store.zoom / 2)
       }),
-      gather('⤁', () => {
+      gather('⤁', maxRight, () => {
          posS.wholePos += Math.floor((store.canvasSize.x / store.zoom) * 6)
       }),
    ]
 
    let absoluteMoveList = [
-      gather('⇤', () => {
+      gather('⇤', atLeftBorder, () => {
          posS.wholePos = 0
          posS.microPos = 0
       }),
-      gather('|', () => {
+      gather('|', atCenter, () => {
          posS.wholePos = Math.floor(
             store.size / 2 - ((store.canvasSize.x / store.zoom) * 6) / 2,
          )
       }),
-      gather('⇥', () => {
+      gather('⇥', atRightBorder, () => {
+         posS.microPos = 0
          posS.wholePos =
             store.size - Math.floor((store.canvasSize.x / store.zoom) * 6)
       }),
@@ -93,4 +115,4 @@ export let HorizontalPanning = () => {
          </div>
       </div>
    )
-}
+})
