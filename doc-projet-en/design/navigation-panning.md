@@ -27,7 +27,17 @@ Time estimate: 4h
 2020-01-15T22:34+01 -> 2020-01-15T23:06+01 :: writing `display/keyboardManager.ts`
 2020-01-15T23:06+01 -> 2020-01-16T00:09+01 :: moving arrows and centering them (2x the expected time)
 2020-01-16T00:09+01 -> 2020-01-16T00:22+01 :: moving the display block to the top (.7x the expected time)
-2020-01-16T00:23+01 -> 2020-01-16T00:30+01 (.7x the expected time)
+2020-01-16T00:23+01 -> 2020-01-16T00:30+01 :: changing the button symbols (.7x the expected time)
+2020-01-16T07:13+01 -> 2020-01-16T07:45+01 :: disabling arrow that cannot be used (1.5x the expected time)
+:: Move key logic to display.tsx
+
+#### Todo
+
+- ~~Disable keys that cannot be used [20 min]~~
+- Move key logic to display.tsx, and use the hub to send events [40 min]
+  - Prevent logic from moving generation below 0 [5 min - included]
+- Adding a file in `display/` which does binding of the keyboard keys between the manager and the hub [30 min]
+- Reconfigure now.sh to have a shorter address for :develop builds
 
 #### Design
 

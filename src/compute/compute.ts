@@ -18,7 +18,7 @@ export let createComputer = (store: Store, hub: Hub) => {
       rule = store.rule
 
       let firstLine = new Uint8Array(store.size).map(() =>
-         Math.random() < 0.5 ? 0 : 1,
+         Math.random() < 0.5 ? 1 : 0,
       )
 
       cache[0] = firstLine
@@ -34,10 +34,25 @@ export let createComputer = (store: Store, hub: Hub) => {
       return (rule & (1 << k)) >> k
    }
 
+   let { border } = store
+
    let computeLine = (line: Uint8Array) => {
-      return Uint8Array.from({ length: line.length }, (_b, k) => {
+      let newLine = Uint8Array.from({ length: line.length }, (_b, k) => {
          return computeRule(line[k - 1], line[k], line[k + 1])
       })
+
+      if (border.left.kind === 'loop') {
+         newLine[0] = computeRule(line[line.length - 1], line[0], line[1])
+      }
+
+      if (border.right.kind === 'loop') {
+         newLine[line.length - 1] = computeRule(
+            line[line.length - 2],
+            line[line.length - 1],
+            line[0],
+         )
+      }
+      return newLine
    }
 
    let request = (targetTime: number) => {
@@ -51,7 +66,7 @@ export let createComputer = (store: Store, hub: Hub) => {
       getCell(pos: Pair) {
          pos.y >= currentTime && request(pos.y + 1)
          try {
-            return cache[pos.y][pos.x]
+            return cache[pos.y]?.[pos.x]
          } catch (e) {
             console.error(e, e.stack, pos)
             throw e
