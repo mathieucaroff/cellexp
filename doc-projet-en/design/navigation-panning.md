@@ -38,7 +38,7 @@ Time estimate: 4h
 
 - ~~Disable keys that cannot be used [20 min]~~
 - ~~Move key logic to display.tsx, and use the hub to send events [40 min]~~
-  - Prevent logic from moving generation below 0 [5 min - included]
+  - ~~Prevent logic from moving generation below 0 [5 min - included -- not timed]
 - Adding a file in `display/` which does binding of the keyboard keys between the manager and the hub [30 min]
 - Reconfigure now.sh to have a shorter address for :develop builds
 

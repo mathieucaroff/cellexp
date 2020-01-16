@@ -1,9 +1,30 @@
 import { observable } from 'mobx'
+import { Store } from '../state/store'
 
-export let getInfo = (store) => {
+export interface Info {
+   horizontalPage: number
+   horizontalMove: number
+   maxLeft: number
+   maxRight: number
+   center: number
+
+   atLeftBorder: boolean
+   atRightBorder: boolean
+   atCenter: boolean
+   passingLeftBorder: boolean
+   passingRightBorder: boolean
+
+   verticalPage: number
+   verticalMove: number
+
+   atTop: boolean
+   passingTop: boolean
+}
+
+export let getInfo = (store: Store): Info => {
    let { posS, posT } = store
 
-   let info = observable({
+   let _info = {
       /** ** Horizontal ** **/
       /** Sizes */
       get horizontalPage() {
@@ -65,13 +86,15 @@ export let getInfo = (store) => {
       },
 
       /** Boolean indicators */
-      get atTheTop() {
+      get atTop() {
          return posT.totalPos === info.top
       },
       get passingTop() {
          return posT.totalPos <= info.top
       },
-   })
+   }
+
+   let info = observable(_info)
 
    return info
 }
