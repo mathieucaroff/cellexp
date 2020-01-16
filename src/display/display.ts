@@ -7,6 +7,8 @@ import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
 import { displayThemeFromCellexp, themeSet } from '../www/theme'
 import { createImageData } from './util/createImageData'
+import { getInfo } from './info'
+import { getAct } from './act'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let local = observable({
@@ -28,34 +30,19 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let discardLoop: (() => void) | undefined
    let clockTick = createEventDispatcher()
 
-   let me = {
-      renderDisplay: (root: HTMLElement) => {
-         let document = root.ownerDocument!
-         let canvas = document.createElement('canvas')
+   let tick = () => {
+      clockTick.dispatch()
+   }
 
-         autox.canvas_width_height(() => {
-            canvas.width = store.canvasSize.x
-            canvas.height = store.canvasSize.y
-         })
+   let start = () => {
+      discardLoop?.()
+      let ref = emitterLoop(requestAnimationFrame).link(tick)
+      discardLoop = ref.discard
+   }
 
-         root.appendChild(canvas)
-
-         action(() => {
-            local.ctx = canvas.getContext('2d')!
-         })()
-      },
-      start: () => {
-         discardLoop?.()
-         let ref = emitterLoop(requestAnimationFrame).link(me.tick)
-         discardLoop = ref.discard
-      },
-      stop: () => {
-         discardLoop?.()
-         discardLoop = undefined
-      },
-      tick: () => {
-         clockTick.dispatch()
-      },
+   let stop = () => {
+      discardLoop?.()
+      discardLoop = undefined
    }
 
    clockTick.register(
@@ -66,17 +53,12 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       }),
    )
 
-   // Update canvasSize.x
-   // autox.display_canvasSizeX(() => {
-   //    store.canvasSize.x = store.size * local.zoom
-   // })
-
    // Trigger clock start / stop
    autox.clock_start_stop(() => {
       if (store.play) {
-         me.start()
+         start()
       } else {
-         me.stop()
+         stop()
       }
    })
 
@@ -84,10 +66,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    reaction(
       () => store.rule,
       () => {
-         store.posT.wholePos = 0
-         store.posT.microPos = 0
-         store.posS.wholePos = 0
-         store.posS.microPos = 0
+         act.gotoCenter()
+         act.gotoTop()
       },
    )
 
@@ -143,6 +123,30 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    autox.display_rendering(renderCanvas)
 
    hub.reroll.register(renderCanvas)
+
+   let info = getInfo(store)
+
+   let act = getAct(store, info)
+
+   let me = {
+      info,
+      act,
+      renderDisplay: (root: HTMLElement) => {
+         let document = root.ownerDocument!
+         let canvas = document.createElement('canvas')
+
+         autox.canvas_width_height(() => {
+            canvas.width = store.canvasSize.x
+            canvas.height = store.canvasSize.y
+         })
+
+         root.appendChild(canvas)
+
+         action(() => {
+            local.ctx = canvas.getContext('2d')!
+         })()
+      },
+   }
 
    return me
 }

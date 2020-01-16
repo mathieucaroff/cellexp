@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
-import { useStore } from '../../../util/useContextHook'
+import { useStore, useDisplay } from '../../../util/useContextHook'
 import { Xelement } from '../../../util/Xelement'
 import { observer } from 'mobx-react-lite'
 
@@ -23,25 +23,7 @@ let useStyle = makeStyles((theme: Theme) =>
  */
 export let HorizontalPanning = observer(() => {
    let classes = useStyle()
-   let store = useStore()
-   let { posS } = store
-
-   let maxLeft = posS.wholePos * posS.microFactor + posS.microPos <= 0
-   let maxRight =
-      posS.wholePos * posS.microFactor + posS.microPos >=
-      posS.microFactor * (store.size - (store.canvasSize.x / store.zoom) * 6)
-
-   let rightBorderFact =
-      posS.microFactor * (store.size - (store.canvasSize.x / store.zoom) * 6)
-   let leftBorderFact = 0
-   let centerFact = Math.floor((rightBorderFact + leftBorderFact) / 2)
-
-   let atLeftBorder =
-      posS.wholePos * posS.microFactor + posS.microPos === leftBorderFact
-   let atRightBorder =
-      posS.wholePos * posS.microFactor + posS.microPos === rightBorderFact
-   let atCenter =
-      posS.wholePos * posS.microFactor + posS.microPos === centerFact
+   let display = useDisplay()
 
    interface ButtonInfo {
       content: Xelement
@@ -69,36 +51,19 @@ export let HorizontalPanning = observer(() => {
       return { content, action, disabled, key: key || (content as string) }
    }
 
+   let { info, act } = display
+
    let relativeMoveList = [
-      gather('⬵', maxLeft, () => {
-         posS.wholePos -= Math.floor((store.canvasSize.x / store.zoom) * 6)
-      }),
-      gather('<', maxLeft, () => {
-         posS.wholePos -= Math.floor(store.canvasSize.x / store.zoom / 2)
-      }),
-      gather('>', maxRight, () => {
-         posS.wholePos += Math.floor(store.canvasSize.x / store.zoom / 2)
-      }),
-      gather('⤁', maxRight, () => {
-         posS.wholePos += Math.floor((store.canvasSize.x / store.zoom) * 6)
-      }),
+      gather('⬵', info.passingLeftBorder, act.pageLeft),
+      gather('<', info.passingLeftBorder, act.goLeft),
+      gather('>', info.passingRightBorder, act.goRight),
+      gather('⤁', info.passingRightBorder, act.pageRight),
    ]
 
    let absoluteMoveList = [
-      gather('⇤', atLeftBorder, () => {
-         posS.wholePos = 0
-         posS.microPos = 0
-      }),
-      gather('|', atCenter, () => {
-         posS.wholePos = Math.floor(
-            store.size / 2 - ((store.canvasSize.x / store.zoom) * 6) / 2,
-         )
-      }),
-      gather('⇥', atRightBorder, () => {
-         posS.microPos = 0
-         posS.wholePos =
-            store.size - Math.floor((store.canvasSize.x / store.zoom) * 6)
-      }),
+      gather('⇤', info.atLeftBorder, act.gotoMaxLeft),
+      gather('|', info.atCenter, act.gotoCenter),
+      gather('⇥', info.atRightBorder, act.gotoMaxRight),
    ]
 
    return (

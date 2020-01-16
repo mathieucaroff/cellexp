@@ -4,7 +4,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import * as React from 'react'
-import { useStore } from '../../../util/useContextHook'
+import { useStore, useDisplay } from '../../../util/useContextHook'
 import { Xelement } from '../../../util/Xelement'
 import { observer } from 'mobx-react-lite'
 
@@ -30,8 +30,8 @@ let useStyle = makeStyles((theme: Theme) =>
  */
 export let VerticalPanning = observer(() => {
    let classes = useStyle()
-   let store = useStore()
-   let { posT } = store
+   let display = useDisplay()
+   let { info, act } = display
 
    interface ButtonInfo {
       content: Xelement
@@ -51,63 +51,24 @@ export let VerticalPanning = observer(() => {
 
    let gather = (
       content: Xelement,
-      action: () => void,
       disabled: boolean,
+      action: () => void,
       key?: string,
    ): ButtonInfo => {
       return { content, disabled, action, key: key || (content as string) }
    }
 
    let relativeSmallMoveList = [
-      gather(
-         <ExpandLessIcon />,
-         () => {
-            posT.wholePos -= Math.floor(
-               ((store.canvasSize.y / store.zoom) * 6) / 12,
-            )
-         },
-         posT.wholePos <= 0 && posT.microPos <= 0,
-         'muiArrowUp',
-      ),
-      gather(
-         <ExpandMoreIcon />,
-         () => {
-            posT.wholePos += Math.floor(
-               ((store.canvasSize.y / store.zoom) * 6) / 12,
-            )
-         },
-         false,
-         'muiArrowDown',
-      ),
+      gather(<ExpandLessIcon />, info.passingTop, act.goUp, 'muiArrowUp'),
+      gather(<ExpandMoreIcon />, false, act.goDown, 'muiArrowDown'),
    ]
 
    let relativeBigMoveList = [
-      gather(
-         '⇞',
-         () => {
-            posT.wholePos -= Math.floor((store.canvasSize.y / store.zoom) * 6)
-         },
-         posT.wholePos <= 0 && posT.microPos <= 0,
-      ),
-      gather(
-         '⇟',
-         () => {
-            posT.wholePos += Math.floor((store.canvasSize.y / store.zoom) * 6)
-         },
-         false,
-      ),
+      gather('⇞', info.passingTop, act.pageUp),
+      gather('⇟', false, act.pageDown),
    ]
 
-   let absoluteMoveList = [
-      gather(
-         '⏏',
-         () => {
-            posT.wholePos = 0
-            posT.microPos = 0
-         },
-         posT.wholePos <= 0 && posT.microPos <= 0,
-      ),
-   ]
+   let absoluteMoveList = [gather('⏏', info.atTop, act.gotoTop)]
 
    return (
       <div className={classes.buttonContainer}>

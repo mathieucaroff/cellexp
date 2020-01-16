@@ -1,9 +1,11 @@
 import { observable } from 'mobx'
+import { mod } from '../util/mod'
 
 export interface OxPosition {
    microFactor: number
    wholePos: number
    microPos: number
+   totalPos: number
 }
 
 export let createPosition = (microFactor: number): OxPosition => {
@@ -11,6 +13,14 @@ export let createPosition = (microFactor: number): OxPosition => {
       microFactor,
       _microPos: 0,
       wholePos: 0,
+      get microPos() {
+         return me._microPos
+      },
+
+      get totalPos() {
+         return me.microFactor * me.wholePos + me.microPos
+      },
+
       set microPos(v: number) {
          me._microPos = v
          let wholePos = me.wholePos
@@ -24,8 +34,10 @@ export let createPosition = (microFactor: number): OxPosition => {
          }
          me.wholePos = wholePos
       },
-      get microPos() {
-         return me._microPos
+
+      set totalPos(v: number) {
+         me._microPos = mod(v, me.microFactor)
+         me.wholePos = Math.round((v - me._microPos) / me.microFactor)
       },
    })
    return me
