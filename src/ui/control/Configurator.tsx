@@ -15,7 +15,7 @@ import {
 } from '../../www/theme'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
-import { useStore } from '../util/useStore'
+import { useStore } from '../util/useContextHook'
 import { ThemeSelector } from './components/AppThemeSelector'
 
 let useStyle = makeStyles((theme: Theme) =>

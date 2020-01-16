@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button'
 import * as React from 'react'
-import { useHub } from '../../util/useHub'
+import { useHub } from '../../util/useContextHook'
 
 export let RerollButton = () => {
    let hub = useHub()

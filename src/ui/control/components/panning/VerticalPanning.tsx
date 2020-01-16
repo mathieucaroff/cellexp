@@ -4,7 +4,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import * as React from 'react'
-import { useStore } from '../../../util/useStore'
+import { useStore } from '../../../util/useContextHook'
 import { Xelement } from '../../../util/Xelement'
 import { observer } from 'mobx-react-lite'
 

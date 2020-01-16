@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { clip } from '../../../util/clip'
 import { errorCheck } from '../../../util/errorCheck'
-import { useStore } from '../../util/useStore'
+import { useStore } from '../../util/useContextHook'
 import { SelectorInput } from './SelectorInput'
 
 let lowBound = 6

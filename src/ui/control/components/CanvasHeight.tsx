@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { errorCheck } from '../../../util/errorCheck'
-import { useStore } from '../../util/useStore'
+import { useStore } from '../../util/useContextHook'
 import { SelectorInput } from './SelectorInput'
 
 let validation = (value: string) => {

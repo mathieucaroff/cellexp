@@ -2,7 +2,7 @@ import Button from '@material-ui/core/Button'
 import { action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { useStore } from '../../util/useStore'
+import { useStore } from '../../util/useContextHook'
 
 export let SingleStep = observer(() => {
    let store = useStore()

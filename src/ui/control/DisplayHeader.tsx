@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Rule } from '../editor/components/Rule'
-import { useStore } from '../util/useStore'
+import { useStore } from '../util/useContextHook'
 import { observer } from 'mobx-react-lite'
 
 export let DisplayHeader = observer(() => {

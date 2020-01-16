@@ -5,7 +5,7 @@ import { fromBase, toBase } from '../../../util/baseConverter'
 import { errorCheck } from '../../../util/errorCheck'
 import { SlowTextField } from '../../components/SlowTextField'
 import { useReaction } from '../../util/useReaction'
-import { useStore } from '../../util/useStore'
+import { useStore } from '../../util/useContextHook'
 
 export interface BasenumRuleFieldProp {
    base: number

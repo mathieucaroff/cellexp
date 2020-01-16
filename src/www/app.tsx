@@ -8,7 +8,7 @@ import { Configurator } from '../ui/control/Configurator'
 import { Controller } from '../ui/control/Controller'
 import { DisplayAdapter } from '../ui/DisplayAdapter'
 import { Editor } from '../ui/editor/Editor'
-import { hubContext, storeContext } from './global'
+import { displayContext, hubContext, storeContext } from './global'
 import { muiThemeFromCellexp, themeSet } from './theme'
 import { DisplayHeader } from '../ui/control/DisplayHeader'
 import { DisplayFooter } from '../ui/control/DisplayFooter'
@@ -31,17 +31,19 @@ let App = observer((prop: AppProp) => {
    return (
       <hubContext.Provider value={hub}>
          <storeContext.Provider value={store}>
-            <ThemeProvider theme={local.muiTheme}>
-               <DisplayAdapter
-                  display={display}
-                  header={<DisplayHeader />}
-                  footer={<DisplayFooter />}
-               />
-               <Configurator />
-               <Editor />
-               <Controller />
-               <CssBaseline />
-            </ThemeProvider>
+            <displayContext.Provider value={display}>
+               <ThemeProvider theme={local.muiTheme}>
+                  <DisplayAdapter
+                     display={display}
+                     header={<DisplayHeader />}
+                     footer={<DisplayFooter />}
+                  />
+                  <Configurator />
+                  <Editor />
+                  <Controller />
+                  <CssBaseline />
+               </ThemeProvider>
+            </displayContext.Provider>
          </storeContext.Provider>
       </hubContext.Provider>
    )

@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { useStore } from '../../util/useStore'
+import { useStore } from '../../util/useContextHook'
 import { SymmetricTable } from './SymmetricTable'
 
 let useStyle = makeStyles((theme: Theme) => {

@@ -2,7 +2,7 @@ import { Link } from '@material-ui/core'
 import { action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { useStore } from '../../util/useStore'
+import { useStore } from '../../util/useContextHook'
 
 export interface RuleProp {
    rule: number
