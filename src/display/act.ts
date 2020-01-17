@@ -59,6 +59,9 @@ export let getAct = (store, info) => {
          posT.totalPos -= info.verticalMove
          fixTop()
       }),
+      goOneDown: action(() => {
+         posT.wholePos += 1
+      }),
       goDown: action(() => {
          posT.totalPos += info.verticalMove
       }),

@@ -33,6 +33,8 @@ Time estimate: 4h
 2020-01-16T18:51+01 => 2020-01-16T19:22+01 :
 2020-01-16T19:53+01 => 2020-01-16T21:18+01 :
 : Move key logic to display.tsx (3x -- 1h50 instead of 40min)
+2020-01-16T21:55+01 ->
+:: Keyboard binding (~1x ?)
 
 #### Todo
 

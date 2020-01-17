@@ -9,6 +9,8 @@ import { displayThemeFromCellexp, themeSet } from '../www/theme'
 import { createImageData } from './util/createImageData'
 import { getInfo } from './info'
 import { getAct } from './act'
+import { keyboardBinding } from './keyboardBinding'
+import { createKeyboardManager } from './keyboardManager'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let local = observable({
@@ -128,24 +130,36 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
    let act = getAct(store, info)
 
+   let renderDisplay = (prop: {
+      rootElement: HTMLElement
+      keyboardElement: HTMLElement
+   }) => {
+      let { rootElement, keyboardElement } = prop
+      let document = rootElement.ownerDocument!
+      let canvas = document.createElement('canvas')
+
+      let keyboardManager = createKeyboardManager({
+         element: keyboardElement,
+         evPropName: 'key',
+      })
+      keyboardBinding(me, keyboardManager)
+
+      autox.canvas_width_height(() => {
+         canvas.width = store.canvasSize.x
+         canvas.height = store.canvasSize.y
+      })
+
+      rootElement.appendChild(canvas)
+
+      action(() => {
+         local.ctx = canvas.getContext('2d')!
+      })()
+   }
+
    let me = {
       info,
       act,
-      renderDisplay: (root: HTMLElement) => {
-         let document = root.ownerDocument!
-         let canvas = document.createElement('canvas')
-
-         autox.canvas_width_height(() => {
-            canvas.width = store.canvasSize.x
-            canvas.height = store.canvasSize.y
-         })
-
-         root.appendChild(canvas)
-
-         action(() => {
-            local.ctx = canvas.getContext('2d')!
-         })()
-      },
+      renderDisplay,
    }
 
    return me

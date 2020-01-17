@@ -68,7 +68,10 @@ export let VerticalPanning = observer(() => {
       gather('⇟', false, act.pageDown),
    ]
 
-   let absoluteMoveList = [gather('⏏', info.atTop, act.gotoTop)]
+   let absoluteMoveList = [
+      gather('⏏', info.atTop, act.gotoTop),
+      gather('1', false, act.goOneDown),
+   ]
 
    return (
       <div className={classes.buttonContainer}>

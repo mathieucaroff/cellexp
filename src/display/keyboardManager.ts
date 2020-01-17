@@ -1,18 +1,60 @@
+import { Remover } from '../util/RemoverType'
+
 export interface KeyboardManagerProp {
    element: Element
    evPropName: keyof KeyboardEvent
 }
 
-let createKeyboardManager = (prop: KeyboardManagerProp) => {
+export interface KeyboardManager {
+   onKeydown: (key: string, callback: () => void) => Remover
+   onBoth: (prop: {
+      key: string
+      keydown: () => void
+      keyup: () => void
+   }) => Remover
+}
+
+export let createKeyboardManager = (prop: KeyboardManagerProp) => {
    let { element, evPropName } = prop
 
-   let onKeydownMap: Record<string, () => void> = {}
-   let onKeyupMap: Record<string, () => void> = {}
+   let isFocused = false
+   console.log('element', element)
+   let handleFocus = () => {
+      console.log('got focus')
+      isFocused = true
+   }
+   let handleUnfocus = () => {
+      console.log('lost focus')
+      isFocused = false
+   }
+   element.addEventListener('focus', handleFocus, true)
+   element.addEventListener('blur', handleUnfocus, true)
 
-   element.addEventListener('keydown', (ev) => {
+   type EventMap = Record<string, (() => void) | undefined>
+   let onKeydownMap: EventMap = {}
+   let onKeyupMap: EventMap = {}
+
+   let eventHandler = (closureName: string, onEventMap: EventMap) => (ev) => {
       let key = '' + ev[evPropName]
-      onKeydownMap[key]?.()
-   })
+      let handler = onEventMap[key]
+      if (handler !== undefined) {
+         handler()
+         ev.preventDefault()
+      }
+   }
+
+   let handleKeydown = eventHandler('down', onKeydownMap)
+   let handleKeyup = eventHandler('up', onKeyupMap)
+   element.addEventListener('keydown', handleKeydown, true)
+   element.addEventListener('keyup', handleKeyup, true)
+
+   let removeAll = () => {
+      element.removeEventListener('focus', handleFocus, true)
+      element.removeEventListener('blur', handleUnfocus, true)
+
+      element.removeEventListener('keydown', handleKeydown, true)
+      element.removeEventListener('keyup', handleKeyup, true)
+   }
 
    return {
       onKeydown: (key: string, callback: () => void) => {
@@ -20,12 +62,14 @@ let createKeyboardManager = (prop: KeyboardManagerProp) => {
             throw new Error(`keyboard event ${key}(down) assigned twice`)
          }
          onKeydownMap[key] = callback
+
          return {
             remove: () => {
                delete onKeydownMap[key]
             },
          }
       },
+
       onBoth: (prop) => {
          let { key, keydown, keyup } = prop
          if (onKeydownMap[key] !== undefined) {
@@ -34,8 +78,10 @@ let createKeyboardManager = (prop: KeyboardManagerProp) => {
          if (onKeyupMap[key] !== undefined) {
             throw new Error(`keyboard event ${key}(up) assigned twice`)
          }
+
          onKeydownMap[key] = keydown
          onKeyupMap[key] = keyup
+
          return {
             remove: () => {
                delete onKeydownMap[key]
@@ -43,5 +89,6 @@ let createKeyboardManager = (prop: KeyboardManagerProp) => {
             },
          }
       },
+      removeAll,
    }
 }
