@@ -32,6 +32,7 @@ export let createKeyboardManager = (prop: KeyboardManagerProp) => {
 
    let handleKeydown = eventHandler('down', onKeydownMap)
    let handleKeyup = eventHandler('up', onKeyupMap)
+
    element.addEventListener('keydown', handleKeydown, true)
    element.addEventListener('keyup', handleKeyup, true)
 

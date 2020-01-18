@@ -86,11 +86,21 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       let document = rootElement.ownerDocument!
       let canvas = document.createElement('canvas')
 
-      let keyboardManager = createKeyboardManager({
+      let keyKeyboardManager = createKeyboardManager({
          element: keyboardElement,
          evPropName: 'key',
       })
-      keyboardBinding(me, keyboardManager)
+
+      let codeKeyboardManager = createKeyboardManager({
+         element: keyboardElement,
+         evPropName: 'code',
+      })
+
+      keyboardBinding({
+         display: me,
+         keyKb: keyKeyboardManager,
+         codeKb: codeKeyboardManager,
+      })
 
       autox.canvas_width_height(() => {
          canvas.width = store.canvasSize.x
