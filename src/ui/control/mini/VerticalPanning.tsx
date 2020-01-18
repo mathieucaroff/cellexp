@@ -4,8 +4,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import * as React from 'react'
-import { useStore, useDisplay } from '../../../util/useContextHook'
-import { Xelement } from '../../../util/Xelement'
+import { useStore, useDisplay } from '../../util/useContextHook'
+import { Xelement } from '../../util/Xelement'
 import { observer } from 'mobx-react-lite'
 
 let useStyle = makeStyles((theme: Theme) =>
@@ -33,56 +33,48 @@ export let VerticalPanning = observer(() => {
    let display = useDisplay()
    let { info, act } = display
 
-   interface ButtonInfo {
-      content: Xelement
-      key: string
-      action: () => void
-      disabled: boolean
-   }
-
-   let toButton = (prop: ButtonInfo) => {
-      let { content, action, key, disabled } = prop
+   let toButton = (
+      content: Xelement,
+      disabled: boolean,
+      action: () => void,
+      key?: string,
+   ): React.ReactElement => {
       return (
-         <Button onClick={action} key={key} disabled={disabled}>
+         <Button
+            onClick={action}
+            key={key || (content as string)}
+            disabled={disabled}
+         >
             {content}
          </Button>
       )
    }
 
-   let gather = (
-      content: Xelement,
-      disabled: boolean,
-      action: () => void,
-      key?: string,
-   ): ButtonInfo => {
-      return { content, disabled, action, key: key || (content as string) }
-   }
-
    let relativeSmallMoveList = [
-      gather(<ExpandLessIcon />, info.passingTop, act.goUp, 'muiArrowUp'),
-      gather(<ExpandMoreIcon />, false, act.goDown, 'muiArrowDown'),
+      toButton(<ExpandLessIcon />, info.passingTop, act.goUp, 'muiArrowUp'),
+      toButton(<ExpandMoreIcon />, false, act.goDown, 'muiArrowDown'),
    ]
 
    let relativeBigMoveList = [
-      gather('⇞', info.passingTop, act.pageUp),
-      gather('⇟', false, act.pageDown),
+      toButton('⇞', info.passingTop, act.pageUp),
+      toButton('⇟', false, act.pageDown),
    ]
 
    let absoluteMoveList = [
-      gather('⏏', info.atTop, act.gotoTop),
-      gather('1', false, act.goOneDown),
+      toButton('⏏', info.atTop, act.gotoTop),
+      toButton('1', false, act.goOneDown),
    ]
 
    return (
       <div className={classes.buttonContainer}>
          <ButtonGroup orientation="vertical" size="small">
-            {relativeSmallMoveList.map(toButton)}
+            {relativeSmallMoveList}
          </ButtonGroup>
          <ButtonGroup orientation="vertical" size="small">
-            {relativeBigMoveList.map(toButton)}
+            {relativeBigMoveList}
          </ButtonGroup>
          <ButtonGroup orientation="vertical" size="small">
-            {absoluteMoveList.map(toButton)}
+            {absoluteMoveList}
          </ButtonGroup>
       </div>
    )

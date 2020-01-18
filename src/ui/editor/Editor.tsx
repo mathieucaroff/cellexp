@@ -39,6 +39,14 @@ export let Editor = observer(() => {
          <h2>
             Rule Picker <Rule rule={store.rule} />
          </h2>
+         <EP className={shared.panel} defaultExpanded>
+            <EPSm expandIcon={<ExpandMoreIcon />}>
+               <h3 className={shared.noVeritcalMargins}>Rule Picker</h3>
+            </EPSm>
+            <EPDt className={clx(classes.ruleSelection)}>
+               <RuleSelector />
+            </EPDt>
+         </EP>
          <EP className={shared.panel}>
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Rule Editor</h3>
@@ -47,14 +55,6 @@ export let Editor = observer(() => {
                <div className={shared.inputList}>
                   <RuleEditor />
                </div>
-            </EPDt>
-         </EP>
-         <EP className={shared.panel} defaultExpanded>
-            <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Rule Picker</h3>
-            </EPSm>
-            <EPDt className={clx(classes.ruleSelection)}>
-               <RuleSelector />
             </EPDt>
          </EP>
          <EP className={shared.panel}>

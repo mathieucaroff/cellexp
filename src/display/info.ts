@@ -1,7 +1,12 @@
 import { observable } from 'mobx'
 import { Store } from '../state/store'
 
-export interface Info {
+interface Info_ {
+   minSpeed: number
+   maxSpeed: number
+   passingMinSpeed: boolean
+   passingMaxSpeed: boolean
+
    horizontalPage: number
    horizontalMove: number
    maxLeft: number
@@ -21,10 +26,32 @@ export interface Info {
    passingTop: boolean
 }
 
+export type Info = Readonly<Info_>
+
 export let getInfo = (store: Store): Info => {
    let { posS, posT } = store
 
    let _info = {
+      /*****************/
+      /* Autoscrolling */
+      /*****************/
+      /** Speed */
+      get minSpeed() {
+         return 1
+      },
+      get maxSpeed() {
+         return 999
+      },
+      get passingMinSpeed() {
+         return store.speed <= info.minSpeed
+      },
+      get passingMaxSpeed() {
+         return store.speed >= info.maxSpeed
+      },
+
+      /***********/
+      /* Panning */
+      /***********/
       /** ** Horizontal ** **/
       /** Sizes */
       get horizontalPage() {

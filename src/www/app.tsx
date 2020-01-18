@@ -38,9 +38,9 @@ let App = observer((prop: AppProp) => {
                      header={<DisplayHeader />}
                      footer={<DisplayFooter />}
                   />
-                  <Configurator />
                   <Editor />
                   <Controller />
+                  <Configurator />
                   <CssBaseline />
                </ThemeProvider>
             </displayContext.Provider>

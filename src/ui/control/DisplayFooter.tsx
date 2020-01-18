@@ -1,7 +1,9 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
-import { HorizontalPanning } from './components/panning/HorizontalPanning'
-import { VerticalPanning } from './components/panning/VerticalPanning'
+import { HorizontalPanning } from './mini/HorizontalPanning'
+import { MiniPlayPause } from './mini/MiniPlayPause'
+import { MiniZoom } from './mini/MiniZoom'
+import { VerticalPanning } from './mini/VerticalPanning'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -24,8 +26,10 @@ export let DisplayFooter = () => {
    return (
       <>
          <div className={classes.panningButtons}>
+            <MiniZoom />
             <HorizontalPanning />
             <VerticalPanning />
+            <MiniPlayPause />
          </div>
       </>
    )

@@ -21,6 +21,47 @@ export let getAct = (store, info) => {
    }
 
    let act = {
+      /*****************/
+      /* Autoscrolling */
+      /*****************/
+      togglePlay: action(() => {
+         store.play = !store.play
+      }),
+      halfSpeed: action(() => {
+         store.speed /= 2
+         if (info.passingMinSpeed) {
+            act.setToMinSpeed()
+         }
+      }),
+      doubleSpeed: action(() => {
+         store.speed *= 2
+         if (info.passingMaxSpeed) {
+            act.setToMaxSpeed()
+         }
+      }),
+      decreaseSpeed: action(() => {
+         store.speed -= Math.floor(Math.sqrt(store.speed))
+         if (info.passingMinSpeed) {
+            act.setToMinSpeed()
+         }
+      }),
+      increaseSpeed: action(() => {
+         store.speed += Math.ceil(Math.sqrt(store.speed))
+         if (info.passingMaxSpeed) {
+            act.setToMaxSpeed()
+         }
+      }),
+      setToMaxSpeed: action(() => {
+         store.speed = info.maxSpeed
+      }),
+      setToMinSpeed: action(() => {
+         store.speed = info.minSpeed
+      }),
+
+      /***********/
+      /* Panning */
+      /***********/
+
       /** Relative move */
       pageLeft: action(() => {
          posS.totalPos -= info.horizontalPage
