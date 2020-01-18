@@ -26,37 +26,25 @@ let useStyle = makeStyles((theme: Theme) =>
  * (2) Big move
  * (3) Go to top
  */
-export let MiniZoom = observer(() => {
+export let MiniSpeedChange = observer(() => {
    let classes = useStyle()
    let display = useDisplay()
-   let store = useStore()
-
-   let toButton = (
-      content: Xelement,
-      disabled: boolean,
-      action: () => void,
-      key?: string,
-   ): React.ReactElement => {
-      return (
-         <Button
-            onClick={action}
-            key={key || (content as string)}
-            disabled={disabled}
-         >
-            {content}
-         </Button>
-      )
-   }
-
-   let relativeSmallMoveList = [
-      toButton('+', store.zoom === 300, display.act.increaseZoom),
-      toButton('-', store.zoom === 6, display.act.decreaseZoom),
-   ]
 
    return (
       <div className={classes.buttonContainer}>
          <ButtonGroup orientation="vertical" size="small">
-            {relativeSmallMoveList}
+            <Button
+               disabled={display.info.passingMinSpeed}
+               onClick={display.act.halfSpeed}
+            >
+               /2
+            </Button>
+            <Button
+               disabled={display.info.passingMaxSpeed}
+               onClick={display.act.doubleSpeed}
+            >
+               x2
+            </Button>
          </ButtonGroup>
       </div>
    )

@@ -4,6 +4,7 @@ import { HorizontalPanning } from './mini/HorizontalPanning'
 import { MiniPlayPause } from './mini/MiniPlayPause'
 import { MiniZoom } from './mini/MiniZoom'
 import { VerticalPanning } from './mini/VerticalPanning'
+import { MiniSpeedChange } from './mini/MiniSpeedChange'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -26,10 +27,11 @@ export let DisplayFooter = () => {
    return (
       <>
          <div className={classes.panningButtons}>
+            <MiniPlayPause />
+            <MiniSpeedChange />
+            <VerticalPanning />
             <MiniZoom />
             <HorizontalPanning />
-            <VerticalPanning />
-            <MiniPlayPause />
          </div>
       </>
    )

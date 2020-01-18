@@ -60,10 +60,7 @@ export let VerticalPanning = observer(() => {
       toButton('⇟', false, act.pageDown),
    ]
 
-   let absoluteMoveList = [
-      toButton('⏏', info.atTop, act.gotoTop),
-      toButton('1', false, act.goOneDown),
-   ]
+   let absoluteMoveList = [toButton('⏏', info.atTop, act.gotoTop)]
 
    return (
       <div className={classes.buttonContainer}>

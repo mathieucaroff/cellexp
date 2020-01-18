@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
 import { observer } from 'mobx-react-lite'
-import { Xelement } from '../../util/Xelement'
 import { useDisplay, useStore } from '../../util/useContextHook'
 
 let useStyle = makeStyles((theme: Theme) =>
@@ -37,20 +36,7 @@ export let MiniPlayPause = observer(() => {
             <Button onClick={display.act.togglePlay}>
                {store.play ? '⏸' : '▶'}
             </Button>
-         </ButtonGroup>
-         <ButtonGroup orientation="vertical" size="small">
-            <Button
-               disabled={display.info.passingMinSpeed}
-               onClick={display.act.halfSpeed}
-            >
-               --
-            </Button>
-            <Button
-               disabled={display.info.passingMaxSpeed}
-               onClick={display.act.doubleSpeed}
-            >
-               ++
-            </Button>
+            <Button onClick={display.act.singleStep}>1</Button>
          </ButtonGroup>
       </div>
    )
