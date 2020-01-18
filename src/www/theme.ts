@@ -58,7 +58,7 @@ let dryThemeSet = {
    // darkRed: color(1, 0, 0),
    // darkMagenta: color(1, 0, 1),
    lightRed: color01(1, 0, 0),
-   lightBlue: color01(0, 0, 1),
+   lightBlue: color01(0, 0, 0.6),
    lightCoal: color(0x38, 0x38, 0x38),
 }
 
