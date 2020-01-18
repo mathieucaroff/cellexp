@@ -24,17 +24,16 @@ export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
    let classes = useStyle()
    let { display, header, footer } = prop
 
-   let outerRef = React.useRef<any>(null)
    let rootRef = React.useRef<HTMLDivElement>(null)
 
    React.useEffect(() => {
-      if (!rootRef.current || !outerRef.current) {
+      if (!rootRef.current) {
          let message = 'Unexpected lifecycle in `DisplayAdapter.tsx`'
-         console.warn(message, rootRef, outerRef, new Error().stack)
+         console.warn(message, rootRef, new Error().stack)
       } else {
          display.initialize({
-            rootElement: rootRef.current,
-            keyboardElement: outerRef.current,
+            rootElement: rootRef.current as any,
+            keyboardElement: rootRef.current as any,
          })
       }
    }, [])
@@ -42,11 +41,7 @@ export let DisplayAdapter = observer((prop: DisplayAdapterProp) => {
    return (
       <div>
          {header}
-         <div className={classes.display}>
-            <ButtonBase ref={outerRef}>
-               <div ref={rootRef}></div>
-            </ButtonBase>
-         </div>
+         <div className={classes.display} ref={rootRef} tabIndex={0}></div>
          {footer}
       </div>
    )

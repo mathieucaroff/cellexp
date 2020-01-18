@@ -65,6 +65,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 - rename
 - reordre
 - restructure
+- simplify
 
 ### documentation verbs
 
