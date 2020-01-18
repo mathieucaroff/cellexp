@@ -21,6 +21,7 @@ interface Info_ {
 
    verticalPage: number
    verticalMove: number
+   top: number
 
    atTop: boolean
    passingTop: boolean

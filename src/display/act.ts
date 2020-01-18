@@ -1,6 +1,8 @@
 import { action } from 'mobx'
+import { Store } from '../state/store'
+import { Info } from './info'
 
-export let getAct = (store, info) => {
+export let getAct = (store: Store, info: Info) => {
    let { posS, posT } = store
 
    let isBigEnough = () => info.maxLeft < info.maxRight
@@ -20,13 +22,37 @@ export let getAct = (store, info) => {
       }
    }
 
+   let fixZoom = () => {
+      if (store.zoom > 300) {
+         store.zoom = 300
+      } else if (store.zoom < 6) {
+         store.zoom = 6
+      } else if (store.zoom % 6 != 0) {
+         store.zoom += 3
+         store.zoom -= store.zoom % 6
+      }
+   }
+
    let act = {
-      /*****************/
-      /* Autoscrolling */
-      /*****************/
+      /****************/
+      /* Play / Pause */
+      /****************/
       togglePlay: action(() => {
          store.play = !store.play
       }),
+      singleStep: action(() => {
+         if (store.play) {
+            store.play = false
+            let r = store.posT.microFactor
+            store.posT.microPos = r * Math.round(store.posT.microPos / r)
+         } else {
+            store.posT.wholePos += 1
+         }
+      }),
+
+      /********************/
+      /* Autoscroll speed */
+      /********************/
       halfSpeed: action(() => {
          store.speed /= 2
          if (info.passingMinSpeed) {
@@ -56,6 +82,19 @@ export let getAct = (store, info) => {
       }),
       setToMinSpeed: action(() => {
          store.speed = info.minSpeed
+      }),
+
+      /********/
+      /* Zoom */
+      /********/
+
+      increaseZoom: action(() => {
+         store.zoom *= 2
+         fixZoom()
+      }),
+      decreaseZoom: action(() => {
+         store.zoom /= 2
+         fixZoom()
       }),
 
       /***********/
@@ -100,9 +139,6 @@ export let getAct = (store, info) => {
          posT.totalPos -= info.verticalMove
          fixTop()
       }),
-      goOneDown: action(() => {
-         posT.wholePos += 1
-      }),
       goDown: action(() => {
          posT.totalPos += info.verticalMove
       }),
@@ -112,6 +148,7 @@ export let getAct = (store, info) => {
 
       /** Goto */
       gotoTop: action(() => {
+         store.play = false
          posT.totalPos = info.top
       }),
    }
