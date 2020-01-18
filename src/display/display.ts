@@ -64,7 +64,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       }
    })
 
-   // Render cellular automaton
+   // reinitialize panning position when rule changes
    reaction(
       () => store.rule,
       () => {
@@ -72,6 +72,37 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          act.gotoTop()
       },
    )
+
+   /**
+    * initialize the display
+    * @param prop.rootElement an HTMLElement inside which the canvas will be created
+    * @param prop.keyboardElement another HTMLElement to hook for keyboard events
+    */
+   let initialize = (prop: {
+      rootElement: HTMLElement
+      keyboardElement: HTMLElement
+   }) => {
+      let { rootElement, keyboardElement } = prop
+      let document = rootElement.ownerDocument!
+      let canvas = document.createElement('canvas')
+
+      let keyboardManager = createKeyboardManager({
+         element: keyboardElement,
+         evPropName: 'key',
+      })
+      keyboardBinding(me, keyboardManager)
+
+      autox.canvas_width_height(() => {
+         canvas.width = store.canvasSize.x
+         canvas.height = store.canvasSize.y
+      })
+
+      rootElement.appendChild(canvas)
+
+      action(() => {
+         local.ctx = canvas.getContext('2d')!
+      })()
+   }
 
    // Render cellular automaton
    let renderCanvas = () => {
@@ -130,36 +161,10 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
    let act = getAct(store, info)
 
-   let renderDisplay = (prop: {
-      rootElement: HTMLElement
-      keyboardElement: HTMLElement
-   }) => {
-      let { rootElement, keyboardElement } = prop
-      let document = rootElement.ownerDocument!
-      let canvas = document.createElement('canvas')
-
-      let keyboardManager = createKeyboardManager({
-         element: keyboardElement,
-         evPropName: 'key',
-      })
-      keyboardBinding(me, keyboardManager)
-
-      autox.canvas_width_height(() => {
-         canvas.width = store.canvasSize.x
-         canvas.height = store.canvasSize.y
-      })
-
-      rootElement.appendChild(canvas)
-
-      action(() => {
-         local.ctx = canvas.getContext('2d')!
-      })()
-   }
-
    let me = {
       info,
       act,
-      renderDisplay,
+      initialize,
    }
 
    return me

@@ -17,19 +17,6 @@ export interface KeyboardManager {
 export let createKeyboardManager = (prop: KeyboardManagerProp) => {
    let { element, evPropName } = prop
 
-   let isFocused = false
-   console.log('element', element)
-   let handleFocus = () => {
-      console.log('got focus')
-      isFocused = true
-   }
-   let handleUnfocus = () => {
-      console.log('lost focus')
-      isFocused = false
-   }
-   element.addEventListener('focus', handleFocus, true)
-   element.addEventListener('blur', handleUnfocus, true)
-
    type EventMap = Record<string, (() => void) | undefined>
    let onKeydownMap: EventMap = {}
    let onKeyupMap: EventMap = {}
@@ -49,9 +36,6 @@ export let createKeyboardManager = (prop: KeyboardManagerProp) => {
    element.addEventListener('keyup', handleKeyup, true)
 
    let removeAll = () => {
-      element.removeEventListener('focus', handleFocus, true)
-      element.removeEventListener('blur', handleUnfocus, true)
-
       element.removeEventListener('keydown', handleKeydown, true)
       element.removeEventListener('keyup', handleKeyup, true)
    }
