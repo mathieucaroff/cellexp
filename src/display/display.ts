@@ -1,4 +1,4 @@
-import { action, observable, reaction } from 'mobx'
+import { action, observable } from 'mobx'
 import { Computer } from '../compute/compute'
 import { Hub } from '../state/hub'
 import { Store } from '../state/store'
@@ -14,7 +14,9 @@ import { createKeyboardManager } from './keyboardManager'
 import { createImageData } from './util/createImageData'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
-   let local = observable({
+   let { posS, posT } = store
+
+   let local_ = {
       ctx: undefined as CanvasRenderingContext2D | undefined,
       get displayTheme() {
          let theme =
@@ -22,13 +24,22 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          return displayThemeFromCellexp(themeSet[theme])
       },
       get pixT() {
-         let { microFactor, microPos } = store.posT
+         let { microFactor, microPos } = posT
+         return Math.floor((microPos * local.zoom) / microFactor)
+      },
+      get pixS() {
+         let { microFactor, microPos } = posS
          return Math.floor((microPos * local.zoom) / microFactor)
       },
       get zoom() {
          return store.zoom / 6
       },
-   })
+   }
+   let local = observable(local_)
+
+   let info = getInfo(store)
+
+   let act = getAct(store, info)
 
    let discardLoop: (() => void) | undefined
    let clockTick = createEventDispatcher()
@@ -50,9 +61,9 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
    clockTick.register(
       action(() => {
-         let { microPos } = store.posT
+         let { microPos } = posT
          let newMPos = microPos + store.speed
-         store.posT.microPos = newMPos
+         posT.microPos = newMPos
       }),
    )
 
@@ -66,13 +77,11 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    })
 
    // reinitialize panning position when rule changes
-   reaction(
-      () => store.rule,
-      () => {
-         act.gotoCenter()
-         act.gotoTop()
-      },
-   )
+   autox.center_top_new_rule(() => {
+      store.rule
+      act.gotoCenter()
+      act.gotoTop()
+   })
 
    /**
     * initialize the display
@@ -103,8 +112,6 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          codeKb: codeKeyboardManager,
       })
 
-      let { posS, posT } = store
-
       let isBigEnough = () => info.maxLeft <= info.maxRight
       let maxRight = () => {
          return Math.ceil((store.zoom * store.size) / 6 - store.canvasSize.x)
@@ -114,8 +121,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          element: canvas,
          getDisplayInit: () => {
             return {
-               x: store.posS.toPix(store.zoom),
-               y: store.posT.toPix(store.zoom),
+               x: posS.toPix(store.zoom),
+               y: posT.toPix(store.zoom),
             }
          },
       })
@@ -127,12 +134,12 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          if (x > maxRight() && isBigEnough()) {
             x = maxRight()
          }
-         store.posS.fromPix(x, store.zoom)
+         posS.fromPix(x, store.zoom)
          if (!store.play) {
             if (y < 0) {
                y = 0
             }
-            store.posT.fromPix(y, store.zoom)
+            posT.fromPix(y, store.zoom)
          }
       })
 
@@ -154,8 +161,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
       let drawArea = {
          pos: {
-            x: store.posS.wholePos,
-            y: store.posT.wholePos,
+            x: posS.wholePos,
+            y: posT.wholePos,
          },
          size: {
             x: Math.ceil(store.canvasSize.x / local.zoom),
@@ -163,11 +170,12 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          },
       }
 
-      let marginY = 2
+      let marginX = 1
+      let marginY = 1
 
       let pos = drawArea.pos
       let size = {
-         x: drawArea.size.x,
+         x: drawArea.size.x + marginX,
          y: drawArea.size.y + marginY,
       }
 
@@ -186,24 +194,20 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          },
       })
 
-      let { pixT } = local
+      let { pixS, pixT } = local
       let w = size.x * local.zoom
       let h = size.y * local.zoom
       createImageBitmap(imageData).then((bitmap) => {
          let { ctx } = local
          if (ctx === undefined) return
          ctx.imageSmoothingEnabled = false
-         ctx.drawImage(bitmap, 0, -pixT, w, h)
+         ctx.drawImage(bitmap, -pixS, -pixT, w, h)
       })
    }
 
    autox.display_rendering(renderCanvas)
 
    hub.reroll.register(renderCanvas)
-
-   let info = getInfo(store)
-
-   let act = getAct(store, info)
 
    let me = {
       info,
