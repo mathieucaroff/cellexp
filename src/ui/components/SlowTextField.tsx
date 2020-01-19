@@ -1,6 +1,5 @@
+import TextField from '@material-ui/core/TextField'
 import * as React from 'react'
-
-import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 
 export interface SlowTextFieldProp {
    label: string
@@ -10,27 +9,43 @@ export interface SlowTextFieldProp {
    helperText: string
    onChange: (v: string) => void
    onSubmit: (v: string) => void
+   disabled?: boolean
+   type?: string
 }
 
 export let SlowTextField = (prop: SlowTextFieldProp) => {
-   let mayBeDirty = prop.slowValue !== prop.fastValue ? 'dirty' : ''
+   let {
+      label,
+      slowValue,
+      fastValue,
+      error,
+      disabled = false,
+      helperText,
+      type,
+      onChange,
+      onSubmit,
+   } = prop
+
+   let maybeDirty = slowValue !== fastValue ? 'dirty' : ''
 
    return (
       <form
+         className={maybeDirty}
          onSubmit={(ev: React.FormEvent) => {
-            if (!prop.error) {
-               prop.onSubmit((ev.target as any).value)
+            if (!error) {
+               onSubmit((ev.target as any).value)
             }
             ev.preventDefault()
          }}
       >
          <TextField
-            label={prop.label + ` (${prop.slowValue})`}
-            className={mayBeDirty}
-            value={prop.fastValue}
-            error={prop.error}
-            helperText={prop.helperText}
-            onChange={(ev) => prop.onChange(ev.currentTarget.value)}
+            label={label + ` (${slowValue})`}
+            value={fastValue}
+            error={error}
+            disabled={disabled}
+            helperText={helperText}
+            type={type}
+            onChange={(ev) => onChange(ev.currentTarget.value)}
          />
       </form>
    )

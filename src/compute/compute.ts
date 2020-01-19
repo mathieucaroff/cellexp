@@ -1,24 +1,24 @@
-import { autorun } from 'mobx'
-
-import { Store } from '../state/store'
 import { Hub } from '../state/hub'
+import { Store } from '../state/store'
+import { autox } from '../util/autox'
+import { Pair } from '../util/RectType'
 
-import { Rect } from '../util/RectType'
+export interface Computer {
+   getCell(pos: Pair): number
+}
 
 export let createComputer = (store: Store, hub: Hub) => {
    let cache: Record<number, Uint8Array> = {}
-   let currentTime
-   let data = { cache }
+   let currentTime: number
    let rule: number
 
    let initialize = () => {
       currentTime = 0
-      cache = data.cache = {}
-      // ;({ rule } = store)
+      cache = {}
       rule = store.rule
 
       let firstLine = new Uint8Array(store.size).map(() =>
-         Math.floor(2 * Math.random()),
+         Math.random() < 0.5 ? 1 : 0,
       )
 
       cache[0] = firstLine
@@ -27,32 +27,50 @@ export let createComputer = (store: Store, hub: Hub) => {
 
    hub.reroll.register(initialize)
 
-   autorun(initialize, { name: 'computer initialisation' })
+   autox.computer_initialisation(initialize)
 
    let computeRule = (a: number = 0, b: number = 0, c: number = 0) => {
       let k = (a << 2) | (b << 1) | c
       return (rule & (1 << k)) >> k
    }
 
+   let { border } = store
+
    let computeLine = (line: Uint8Array) => {
-      let newLine = new Uint8Array(line.length)
-      let death = true
-      line.map((b, k) => {
-         return (newLine[k] = computeRule(line[k - 1], line[k], line[k + 1]))
+      let newLine = Uint8Array.from({ length: line.length }, (_b, k) => {
+         return computeRule(line[k - 1], line[k], line[k + 1])
       })
+
+      if (border.left.kind === 'loop') {
+         newLine[0] = computeRule(line[line.length - 1], line[0], line[1])
+      }
+
+      if (border.right.kind === 'loop') {
+         newLine[line.length - 1] = computeRule(
+            line[line.length - 2],
+            line[line.length - 1],
+            line[0],
+         )
+      }
       return newLine
    }
 
+   let request = (targetTime: number) => {
+      while (currentTime < targetTime) {
+         cache[currentTime] = computeLine(cache[currentTime - 1])
+         currentTime++
+      }
+   }
+
    return {
-      request(area: Rect) {
-         let targetTime = area.pos.y + area.size.y
-         while (currentTime < targetTime) {
-            cache[currentTime] = computeLine(cache[currentTime - 1])
-            currentTime++
+      getCell(pos: Pair) {
+         pos.y >= currentTime && request(pos.y + 1)
+         try {
+            return cache[pos.y]?.[pos.x]
+         } catch (e) {
+            console.error(e, e.stack, pos)
+            throw e
          }
       },
-      data,
    }
 }
-
-export type Computer = ReturnType<typeof createComputer>

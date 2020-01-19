@@ -1,18 +1,17 @@
-import * as React from 'react'
-
-import { action, reaction, observable } from 'mobx'
+import { action, observable } from 'mobx'
 import { observer } from 'mobx-react-lite'
-
-import { useStore } from '../../util/useStore'
-import { SlowTextField } from '../../components/SlowTextField'
+import * as React from 'react'
+import { fromBase, toBase } from '../../../util/baseConverter'
 import { errorCheck } from '../../../util/errorCheck'
-import { toBase, fromBase } from '../../../util/baseConverter'
+import { SlowTextField } from '../../components/SlowTextField'
+import { useReaction } from '../../util/useReaction'
+import { useStore } from '../../util/useContextHook'
 
-export interface BasenumRuleSelectorProp {
+export interface BasenumRuleFieldProp {
    base: number
 }
 
-export let BasenumRuleSelector = observer((prop: BasenumRuleSelectorProp) => {
+export let BasenumRuleField = observer((prop: BasenumRuleFieldProp) => {
    let store = useStore()
    let { base } = prop
    if (~~base !== base || !(base >= 2)) {
@@ -34,7 +33,7 @@ export let BasenumRuleSelector = observer((prop: BasenumRuleSelectorProp) => {
    let [value, setValue] = React.useState<string>(local.slowValue)
 
    // Subscribe to changes to store.rule
-   reaction(
+   useReaction(
       () => store.rule,
       () => setValue(local.slowValue),
    )

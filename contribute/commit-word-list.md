@@ -31,6 +31,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
   - editor -- rule editor
   - control -- simulation configurator
 - util
+- www
 
 ## verbe
 
@@ -64,6 +65,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 - rename
 - reordre
 - restructure
+- simplify
 
 ### documentation verbs
 
@@ -88,5 +90,5 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 - `&` feature
 - `$` quantified / measured
 - `@` inside
-- `!`, `%`, `^`, `*`, `_`, `=`
-- `;`, `:`, `\`, `|`, `,`, `.`, `/`, `?`
+- `%`, `^`, `*`, `_`, `=`
+- `:`, `\`, `|`, `,`, `.`, `/`, `?`

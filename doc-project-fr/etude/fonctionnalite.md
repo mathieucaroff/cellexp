@@ -58,6 +58,18 @@ Les fonctionnalités (**Fca-size**), (**Fca-border**) et (**Fca-theme**) sont co
 - Paramétrage du comportement de l'afficheur et de l'automate cellulaire lors du redimensionnement de l'affichage (**Fnav-custom-resize**).
 - Le zoom de l'affichage peut être modifier par l'utilisateur et afficher plus d'une cellule par pixel (**Fnav-zoom**).
 
+#### Propagation de l'information et intervention sur le ruban
+
+Le calculateur-afficheur permet d'observer comment l'information se propage au
+sein de l'automate cellulaire. En pratique, il est possible de mettre en couleur
+l'ensemble des cellules qui seraient affectés par le changement de l'état d'une
+des cellules du ruban (**Fshow-propagation**).
+
+Une fonctionnalité voisine est la possibilité d'intervenir et de modifier l'état
+de l'automate cellulaire à un instant donné. Cette intervention n'ayant aucune
+cause à l'interieur de l'univers de l'automate, il est pertinent de la qualifier
+de "divine" (**Fca-divine-intervention**).
+
 #### Minimap
 
 Une carte de l'ensemble des cellules actives (calculées) de l'automate cellulaire est affichée dans l'un des coins du calculateur-afficheur (**Fminimap**). Cette carte permet d'afficher la taille de la partie visible de l'automate cellulaire, comparée à celle de l'automate complet.

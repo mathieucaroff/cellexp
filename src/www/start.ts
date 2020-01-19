@@ -1,29 +1,28 @@
-import '../ui/style.css'
-
-import { renderController } from '../ui/control/control'
-import { renderEditor } from '../ui/editor/editor'
-
 import { observable } from 'mobx'
-import { createHub } from '../state/hub'
-import { createStore } from '../state/store'
+import { render } from 'react-dom'
 import { createComputer } from '../compute/compute'
 import { createDisplay } from '../display/display'
+import { createHub } from '../state/hub'
+import { createStore } from '../state/store'
+import '../ui/style.css'
+import { appElement } from './app'
 
 function main() {
    let bareStore = createStore()
-   let hub = createHub()
-
    let store = observable(bareStore)
+   let hub = createHub()
 
    let computer = createComputer(store, hub)
    let display = createDisplay(store, computer, hub)
 
-   renderEditor(document.getElementById('editorRoot')!, store, hub)
-   renderController(document.getElementById('controlRoot')!, store, hub)
-   display.renderDisplay(document.getElementById('displayRoot')!)
-
-   let versionRoot = document.getElementById('versionRoot')!
-   versionRoot.textContent = process.env.VERSION || 'missing VERSION'
+   render(
+      appElement({
+         display,
+         hub,
+         store,
+      }),
+      document.getElementById('appRoot'),
+   )
 }
 
 main()

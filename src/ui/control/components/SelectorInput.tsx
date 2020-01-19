@@ -1,41 +1,72 @@
-import * as React from 'react'
-
-import { action, reaction } from 'mobx'
-
+import { action } from 'mobx'
 import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import { useState } from 'react'
 import { SlowTextField } from '../../components/SlowTextField'
+import { useReaction } from '../../util/useReaction'
 
+/**
+ * SelectorInputProp
+ *
+ * @property validation - function returning a tuple [hasError, helpText]
+ * @property doChange? - hook function receiving the new value and the old
+ *   value of the input. It must return what value should be shown in the field
+ */
 export interface SelectorInputProp<T extends { [k: string]: any }> {
    label: string
    property: keyof T
    store: T
    validation: (v: string) => [boolean, string]
+   disabled?: boolean
+   type?: string
+   doChange?: (newValue: string, oldValue: string) => [boolean, string]
 }
 
-export let SelectorInput = observer(
-   <T extends { [k: string]: any }>(prop: SelectorInputProp<T>) => {
-      let { label, property, store, validation } = prop
-      let [value, setValue] = React.useState<string>(() => '' + store[property])
+type RecAny = { [k: string]: any }
+type Prop<T> = SelectorInputProp<T>
 
-      reaction(
-         () => store[property],
-         (storeValue) => setValue('' + storeValue),
-      )
+export let SelectorInput = observer(<T extends RecAny>(prop: Prop<T>) => {
+   let { label, property, store, validation, disabled = false, type } = prop
+   const { doChange } = prop
 
-      let [error, help] = validation(value)
+   let [value, setValue] = useState<string>(() => '' + store[property])
 
-      return (
-         <SlowTextField
-            label={label}
-            slowValue={'' + store[property]}
-            fastValue={value}
-            error={error}
-            helperText={help}
-            onChange={setValue}
-            onSubmit={action(() => {
-               store[property] = +value as any
-            })}
-         />
-      )
-   },
-)
+   useReaction(
+      () => store[property],
+      (storeValue) => setValue('' + storeValue),
+   )
+
+   let [error, help] = validation(value)
+
+   let onChange: (val: string) => void
+
+   if (!doChange) {
+      onChange = setValue
+   } else {
+      onChange = (newValue: string) => {
+         let [submit, resValue] = doChange(newValue, value)
+         setValue(resValue)
+         if (submit) {
+            action(() => {
+               store[property] = +resValue as any
+            })()
+         }
+      }
+   }
+
+   return (
+      <SlowTextField
+         label={label}
+         slowValue={'' + store[property]}
+         fastValue={value}
+         error={error}
+         disabled={disabled}
+         helperText={help}
+         type={type}
+         onChange={onChange}
+         onSubmit={action(() => {
+            store[property] = +value as any
+         })}
+      />
+   )
+})

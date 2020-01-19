@@ -1,165 +1,219 @@
-import { observable, autorun, action, reaction } from 'mobx'
-
-import { Store } from '../state/store'
-import { Hub } from '../state/hub'
-
+import { action, observable } from 'mobx'
 import { Computer } from '../compute/compute'
+import { Hub } from '../state/hub'
+import { Store } from '../state/store'
+import { autox } from '../util/autox'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
-
-import { themeObj } from './theme'
+import { displayThemeFromCellexp, themeSet } from '../www/theme'
+import { getAct } from './act'
+import { createDragManager } from './dragManager'
+import { getInfo } from './info'
+import { keyboardBinding } from './keyboardBinding'
+import { createKeyboardManager } from './keyboardManager'
+import { createImageData } from './util/createImageData'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
-   let data = observable({
+   let { posS, posT } = store
+
+   let local_ = {
       ctx: undefined as CanvasRenderingContext2D | undefined,
-      get pixT() {
-         let { microFactor, microPos } = store.posT
-         return Math.floor((microPos * store.zoom) / microFactor)
+      get displayTheme() {
+         let theme =
+            store.displayTheme !== 'unset' ? store.displayTheme : store.theme
+         return displayThemeFromCellexp(themeSet[theme])
       },
-   })
+      get pixT() {
+         let { microFactor, microPos } = posT
+         return Math.floor((microPos * local.zoom) / microFactor)
+      },
+      get pixS() {
+         let { microFactor, microPos } = posS
+         return Math.floor((microPos * local.zoom) / microFactor)
+      },
+      get zoom() {
+         return store.zoom / 6
+      },
+   }
+   let local = observable(local_)
+
+   let info = getInfo(store)
+
+   let act = getAct(store, info)
 
    let discardLoop: (() => void) | undefined
    let clockTick = createEventDispatcher()
 
-   let me = {
-      data,
-      renderDisplay: (root: HTMLElement) => {
-         let document = root.ownerDocument!
-         let canvas = document.createElement('canvas')
-         let h2 = document.createElement('h2')
+   let tick = () => {
+      clockTick.dispatch()
+   }
 
-         autorun(
-            () => {
-               canvas.width = store.canvasSize.x
-               canvas.height = store.canvasSize.y
-            },
-            { name: 'display canvas.width&height' },
-         )
+   let start = () => {
+      discardLoop?.()
+      let ref = emitterLoop(requestAnimationFrame).link(tick)
+      discardLoop = ref.discard
+   }
 
-         autorun(() => {
-            h2.textContent = `Display (rule ${store.rule})`
-         })
-
-         h2.style.marginLeft = '10px'
-         root.appendChild(h2)
-         root.appendChild(canvas)
-
-         action(() => {
-            me.data.ctx = canvas.getContext('2d')!
-         })()
-      },
-      start: () => {
-         discardLoop?.()
-         let ref = emitterLoop(requestAnimationFrame).link(me.tick)
-         discardLoop = ref.discard
-      },
-      stop: () => {
-         discardLoop?.()
-         discardLoop = undefined
-      },
-      tick: () => {
-         clockTick.dispatch()
-      },
+   let stop = () => {
+      discardLoop?.()
+      discardLoop = undefined
    }
 
    clockTick.register(
       action(() => {
-         let { microPos } = store.posT
-         let newMPos = microPos + 2 * store.speed
-         store.posT.microPos = newMPos
+         let { microPos } = posT
+         let newMPos = microPos + store.speed
+         posT.microPos = newMPos
       }),
    )
 
-   // Update canvasSize.x
-   autorun(
-      () => {
-         store.canvasSize.x = store.size * store.zoom
-      },
-      { name: 'display canvasSize.x' },
-   )
-
    // Trigger clock start / stop
-   autorun(() => {
+   autox.clock_start_stop(() => {
       if (store.play) {
-         me.start()
+         start()
       } else {
-         me.stop()
+         stop()
       }
    })
 
-   // Render cellular automaton
-   reaction(
-      () => store.rule,
-      () => {
-         store.posT.wholePos = 0
-         store.posT.microPos = 0
-         store.posS.wholePos = 0
-         store.posS.microPos = 0
-      },
-   )
+   // reinitialize panning position when rule changes
+   autox.center_top_new_rule(() => {
+      store.rule
+      act.gotoCenter()
+      act.gotoTop()
+   })
+
+   /**
+    * initialize the display
+    * @param prop.rootElement an HTMLElement inside which the canvas will be created
+    * @param prop.keyboardElement another HTMLElement to hook for keyboard events
+    */
+   let initialize = (prop: {
+      rootElement: HTMLElement
+      keyboardElement: HTMLElement
+   }) => {
+      let { rootElement, keyboardElement } = prop
+      let document = rootElement.ownerDocument!
+      let canvas = document.createElement('canvas')
+
+      let keyKeyboardManager = createKeyboardManager({
+         element: keyboardElement,
+         evPropName: 'key',
+      })
+
+      let codeKeyboardManager = createKeyboardManager({
+         element: keyboardElement,
+         evPropName: 'code',
+      })
+
+      keyboardBinding({
+         display: me,
+         keyKb: keyKeyboardManager,
+         codeKb: codeKeyboardManager,
+      })
+
+      let isBigEnough = () => info.maxLeft <= info.maxRight
+      let maxRight = () => {
+         return Math.ceil((store.zoom * store.size) / 6 - store.canvasSize.x)
+      }
+
+      let dragManager = createDragManager({
+         element: canvas,
+         getDisplayInit: () => {
+            return {
+               x: posS.toPix(store.zoom),
+               y: posT.toPix(store.zoom),
+            }
+         },
+      })
+
+      dragManager.onMove(({ x, y }) => {
+         if (x < 0 && isBigEnough()) {
+            x = 0
+         }
+         if (x > maxRight() && isBigEnough()) {
+            x = maxRight()
+         }
+         posS.fromPix(x, store.zoom)
+         if (!store.play) {
+            if (y < 0) {
+               y = 0
+            }
+            posT.fromPix(y, store.zoom)
+         }
+      })
+
+      autox.canvas_width_height(() => {
+         canvas.width = store.canvasSize.x
+         canvas.height = store.canvasSize.y
+      })
+
+      rootElement.appendChild(canvas)
+
+      action(() => {
+         local.ctx = canvas.getContext('2d')!
+      })()
+   }
 
    // Render cellular automaton
    let renderCanvas = () => {
       store.rule
-      let { ctx } = me.data
-      if (!ctx) return
 
       let drawArea = {
          pos: {
-            x: store.posS.wholePos,
-            y: store.posT.wholePos,
+            x: posS.wholePos,
+            y: posT.wholePos,
          },
          size: {
-            x: Math.floor(store.canvasSize.x / store.zoom),
-            y: Math.floor(store.canvasSize.y / store.zoom),
+            x: Math.ceil(store.canvasSize.x / local.zoom),
+            y: Math.ceil(store.canvasSize.y / local.zoom),
          },
       }
 
-      let marginY = 2
+      let marginX = 1
+      let marginY = 1
 
-      let requestArea = {
-         pos: drawArea.pos,
-         size: {
-            x: drawArea.size.x,
-            y: drawArea.size.y + marginY,
-         },
+      let pos = drawArea.pos
+      let size = {
+         x: drawArea.size.x + marginX,
+         y: drawArea.size.y + marginY,
       }
 
-      computer.request(requestArea)
-
-      let { cache } = computer.data
-
-      let { alive, dead } = themeObj[store.theme]
+      let { alive, dead } = local.displayTheme
 
       if (drawArea.size.x * drawArea.size.y === 0) return
 
-      let imageData = new ImageData(requestArea.size.x, requestArea.size.y)
-      let { data } = imageData
-
-      let requestAreaSizeX = requestArea.size.x
-
-      Array.from({ length: requestArea.size.y }, (_, k) => {
-         let posY = requestArea.pos.y + k
-         let dataK0 = k * requestAreaSizeX * 4
-         cache[posY].forEach((v, m) => {
-            let dataK = dataK0 + m * 4
-            ;[data[dataK], data[dataK + 1], data[dataK + 2]] = v ? alive : dead
-            data[dataK + 3] = 255
-         })
+      let imageData = createImageData({
+         size,
+         callback: ({ data, y: yy, x: xx, p }) => {
+            let y = pos.y + yy
+            let x = pos.x + xx
+            let color = computer.getCell({ y, x }) ? alive : dead
+            ;[data[p], data[p + 1], data[p + 2]] = color
+            data[p + 3] = 255
+         },
       })
 
-      let { pixT } = me.data
-      let w = store.canvasSize.x
-      let h = requestArea.size.y * store.zoom
+      let { pixS, pixT } = local
+      let w = size.x * local.zoom
+      let h = size.y * local.zoom
       createImageBitmap(imageData).then((bitmap) => {
-         ctx!.imageSmoothingEnabled = false
-         ctx!.drawImage(bitmap, 0, -pixT, w, h)
+         let { ctx } = local
+         if (ctx === undefined) return
+         ctx.imageSmoothingEnabled = false
+         ctx.drawImage(bitmap, -pixS, -pixT, w, h)
       })
    }
 
-   autorun(renderCanvas, { name: 'display rendering' })
+   autox.display_rendering(renderCanvas)
 
    hub.reroll.register(renderCanvas)
+
+   let me = {
+      info,
+      act,
+      initialize,
+   }
 
    return me
 }

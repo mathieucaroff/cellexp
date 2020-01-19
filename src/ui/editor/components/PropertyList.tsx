@@ -1,28 +1,33 @@
-import * as React from 'react'
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core'
-
-import { useStore } from '../../util/useStore'
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import { useStore } from '../../util/useContextHook'
 import { SymmetricTable } from './SymmetricTable'
+import { clx } from '../../util/clx'
 
 let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
+      displayBlock: {
+         display: 'block',
+      },
       spacerRight: {
          marginRight: '2em',
+      },
+      respectParentWidth: {
+         width: '100%',
       },
    })
 })
 
 export let PropertyList = observer(() => {
-   let store = useStore()
    let classes = useStyle()
+   let store = useStore()
 
    let { rule } = store
 
    return (
-      <>
-         <div className={classes.spacerRight}>
+      <div className={clx(classes.displayBlock, classes.respectParentWidth)}>
+         <div className={clx(classes.spacerRight)}>
             <SymmetricTable
                label="Symmetrics of current rule"
                rule={rule}
@@ -38,6 +43,6 @@ export let PropertyList = observer(() => {
                symmetricMessage="remote-self-symmetric"
             />
          </div>
-      </>
+      </div>
    )
 })
