@@ -6,11 +6,12 @@ import { autox } from '../util/autox'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
 import { displayThemeFromCellexp, themeSet } from '../www/theme'
-import { createImageData } from './util/createImageData'
-import { getInfo } from './info'
 import { getAct } from './act'
+import { createDragManager } from './dragManager'
+import { getInfo } from './info'
 import { keyboardBinding } from './keyboardBinding'
 import { createKeyboardManager } from './keyboardManager'
+import { createImageData } from './util/createImageData'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let local = observable({
@@ -100,6 +101,39 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          display: me,
          keyKb: keyKeyboardManager,
          codeKb: codeKeyboardManager,
+      })
+
+      let { posS, posT } = store
+
+      let isBigEnough = () => info.maxLeft <= info.maxRight
+      let maxRight = () => {
+         return Math.ceil((store.zoom * store.size) / 6 - store.canvasSize.x)
+      }
+
+      let dragManager = createDragManager({
+         element: canvas,
+         getDisplayInit: () => {
+            return {
+               x: store.posS.toPix(store.zoom),
+               y: store.posT.toPix(store.zoom),
+            }
+         },
+      })
+
+      dragManager.onMove(({ x, y }) => {
+         if (x < 0 && isBigEnough()) {
+            x = 0
+         }
+         if (x > maxRight() && isBigEnough()) {
+            x = maxRight()
+         }
+         store.posS.fromPix(x, store.zoom)
+         if (!store.play) {
+            if (y < 0) {
+               y = 0
+            }
+            store.posT.fromPix(y, store.zoom)
+         }
       })
 
       autox.canvas_width_height(() => {

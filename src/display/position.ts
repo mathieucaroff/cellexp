@@ -6,6 +6,8 @@ export interface OxPosition {
    wholePos: number
    microPos: number
    totalPos: number
+   toPix: (zoom: number) => number
+   fromPix: (pix: number, zoom: number) => void
 }
 
 export let createPosition = (microFactor: number): OxPosition => {
@@ -38,6 +40,12 @@ export let createPosition = (microFactor: number): OxPosition => {
       set totalPos(v: number) {
          me._microPos = mod(v, me.microFactor)
          me.wholePos = Math.round((v - me._microPos) / me.microFactor)
+      },
+      toPix(zoom: number) {
+         return Math.round((me.totalPos * zoom) / (me.microFactor * 6))
+      },
+      fromPix(pix: number, zoom: number) {
+         me.totalPos = Math.round((pix * me.microFactor * 6) / zoom)
       },
    })
    return me
