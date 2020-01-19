@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v0.1.1] - 2020-01-19
+## [v0.1.2] - 2020-01-19
 
 ### Added
 
@@ -45,11 +45,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     chosen among 8 options (5 in dark mode, 3 in light mode)
   - By default, the display theme follows the application theme, but it can be
     set to its own theme using the "Display Theme" selector
-- Version info
-  - the version is displayed at the top right
-- Github link
-  - the link to the source code repository is present at the top right of the
-    page
 
 ### Changed
 
@@ -69,6 +64,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rule number
   - The rule number is now shown in more places than before
 - Improved the application layout for phones
+
+## [v0.1.1] - 2020-01-05
+
+### Added
+
+- Version info
+  - the version is displayed at the top right
+- Github link
+  - the link to the source code repository is present at the top right of the
+    page
+
+### Changed
+
+- Improved layout and contrasts
 
 ## [v0.1.0] - 2020-01-05
 
