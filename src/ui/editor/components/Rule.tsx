@@ -23,15 +23,15 @@ export let Rule = observer((prop: RuleProp) => {
    let onClick = action(() => {
       store.rule = prop.rule
    })
-   let text = `rule ${prop.rule}`
+   let textContent = <>rule&nbsp;{prop.rule}</>
 
    let content
    if (store.rule === prop.rule) {
-      content = text
+      content = textContent
    } else {
       content = (
          <Link className={classes.fakeHref} onClick={onClick}>
-            {text}
+            {textContent}
          </Link>
       )
    }

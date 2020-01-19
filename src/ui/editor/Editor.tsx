@@ -19,7 +19,7 @@ import { RuleSelector } from './components/RuleSelector'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      ruleSelection: {
+      displayBlock: {
          display: 'block',
       },
    }),
@@ -43,7 +43,7 @@ export let Editor = observer(() => {
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Rule Picker</h3>
             </EPSm>
-            <EPDt className={clx(classes.ruleSelection)}>
+            <EPDt className={clx(classes.displayBlock)}>
                <RuleSelector />
             </EPDt>
          </EP>

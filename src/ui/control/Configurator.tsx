@@ -47,7 +47,7 @@ export let Configurator = observer(() => {
       <div>
          <EP className={shared.panel}>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Application Config</h3>
+               <h3 className={shared.noVeritcalMargins}>Theme</h3>
             </EPSm>
             <EPDt className={clx(classes.inputSizing, shared.block)}>
                <div className={classes.inputList}>

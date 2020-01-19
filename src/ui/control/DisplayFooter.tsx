@@ -11,10 +11,12 @@ let useStyle = makeStyles((theme: Theme) =>
       panningButtons: {
          '&': {
             display: 'flex',
+            flexFlow: 'wrap',
             justifyContent: 'center',
             margin: theme.spacing(2),
          },
          '& > *': {
+            marginTop: theme.spacing(2),
             marginLeft: theme.spacing(3),
          },
       },

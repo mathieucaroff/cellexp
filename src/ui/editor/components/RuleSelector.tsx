@@ -6,15 +6,17 @@ import { Rule } from './Rule'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      inlineBlock: { display: 'inline-block' },
-      spacer: {
+      inlineBlock: {
+         display: 'inline-block',
+      },
+      spacerRight: {
          marginRight: '2em',
       },
    }),
 )
 
 /**
- * RuleSelector / InterestingRuleList
+ * RuleSelector / InterestingRuleList / Rule Picker
  */
 export let RuleSelector = () => {
    let classes = useStyle()
@@ -28,7 +30,7 @@ export let RuleSelector = () => {
 
    return (
       <>
-         <div className={clx(classes.inlineBlock, classes.spacer)}>
+         <div className={clx(classes.inlineBlock, classes.spacerRight)}>
             <OxTable
                tableHead={[['Description'], ['Rules']]}
                tableData={[
