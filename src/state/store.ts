@@ -31,6 +31,7 @@ export let createStore = (): Store => {
    return {
       // MCompute + ui
       rule: {
+         dimension: 1,
          stateCount: 2,
          neighborhoodSize: 3,
          number: 73,

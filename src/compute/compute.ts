@@ -3,27 +3,37 @@ import { Pair } from '../util/RectType'
 import { Computer, ComputerOpenProp } from './ComputerType'
 import { randrange } from './randrange'
 import { BorderPattern, StochasticState } from './topology'
+import { timed, timedExpr } from '../util/timeMeasure'
+import { warnOnce } from '../util/warnOnce'
 
 export let createComputer = (): Computer => {
-   let ruleCache: Record<number, Record<number, 0 | 1>> = {}
+   let ruleCache: Uint8Array[] = []
 
    let lastProp: ComputerOpenProp
 
-   let open = (prop: ComputerOpenProp) => {
+   let open = timed('!computer.open', (prop: ComputerOpenProp) => {
       if (!deepEqual(prop, lastProp)) {
          lastProp = prop
-         ruleCache = {}
+         ruleCache = []
+         ;(window as any).ruleCache = ruleCache
       }
 
       let { rule, seed: seedString, topology } = prop
       let ruleNumber = rule.number
-      if (rule.stateCount !== 2 || rule.neighborhoodSize !== 3) {
+      if (
+         rule.dimension !== 1 ||
+         rule.stateCount !== 2 ||
+         rule.neighborhoodSize !== 3
+      ) {
+         console.error(rule)
          throw new Error('only elementary rules are supported for now')
       }
 
       if (topology.finitness === 'infinite') {
          throw new Error('infinte topologies are unimplemented for now')
       }
+
+      let { width } = topology
 
       let computeRule = (
          a: number = 0,
@@ -79,52 +89,52 @@ export let createComputer = (): Computer => {
          }
       }
 
-      let otherSideX = topology.width - 1
+      let otherSideX = width - 1
       let getLeftest = getLeftestOrRightest('left', 'borderLeft', otherSideX, 0)
       let getRightest = getLeftestOrRightest('right', 'borderRight', 0, 1)
 
-      let get = (pos: Pair) => {
-         // console.log('get', pos)
+      let get = timed('getCell', (pos: Pair): 0 | 1 => {
          if (ruleCache[pos.y] === undefined) {
-            ruleCache[pos.y] = {}
+            ruleCache[pos.y] = new Uint8Array(width)
          }
-         if (ruleCache[pos.y][pos.x] === undefined) {
-            if (pos.y <= 0) {
-               let seedInt = pos.x
-               let res = randrange(seedString, seedInt, 2) as 0 | 1
-               ruleCache[pos.y][pos.x] = res
-            } else {
-               let y = pos.y - 1
-               let x = pos.x
-
-               let above = get({ y, x })
-               let aboveLeft = get({ y, x: x - 1 })
-               let aboveRight = get({ y, x: x + 1 })
-
-               if (topology.finitness === 'infinite') {
-                  throw new Error(
-                     'infinte topologies are unimplemented for now',
-                  )
-               }
-
-               if (y === 0) {
-                  aboveLeft = getLeftest(y)
-               }
-               if (y === topology.width - 1) {
-                  aboveRight = getRightest(y)
-               }
-               ruleCache[pos.y][pos.x] = computeRule(
-                  aboveLeft,
-                  above,
-                  aboveRight,
-               )
-            }
+         if (pos.x < 0 || pos.x > width - 1) {
+            warnOnce('getCell() out of topology area', pos)
+            return 0
          }
-         return ruleCache[pos.y][pos.x]
-      }
+         if (ruleCache[pos.y][pos.x] === 0) {
+            timedExpr('ruleSolve', () => {
+               if (pos.y <= 0) {
+                  let seedInt = pos.x
+                  let res = randrange(seedString, seedInt, 2) as 0 | 1
+                  ruleCache[pos.y][pos.x] = res
+               } else {
+                  let y = pos.y - 1
+                  let x = pos.x
+
+                  let above = get({ y, x })
+                  let aboveLeft, aboveRight: 0 | 1
+                  if (x === 0) {
+                     aboveLeft = getLeftest(y)
+                  } else {
+                     aboveLeft = get({ y, x: x - 1 })
+                  }
+
+                  if (x === width - 1) {
+                     aboveRight = getRightest(y)
+                  } else {
+                     aboveRight = get({ y, x: x + 1 })
+                  }
+
+                  ruleCache[pos.y][pos.x] =
+                     computeRule(aboveLeft, above, aboveRight) + 1
+               }
+            })
+         }
+         return (ruleCache[pos.y][pos.x] - 1) as 0 | 1
+      })
 
       return { get }
-   }
+   })
 
    return { open }
 }

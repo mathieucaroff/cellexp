@@ -191,24 +191,34 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
       if (drawArea.size.x * drawArea.size.y === 0) return
 
+      let openedComputer = computer.open({
+         seed: '',
+         topology: {
+            finitness: 'finite',
+            kind: 'loop',
+            width: store.size,
+         },
+         rule: {
+            dimension: store.rule.dimension,
+            stateCount: store.rule.stateCount,
+            neighborhoodSize: store.rule.neighborhoodSize,
+            number: store.rule.number,
+         },
+      })
+
       let imageData = createImageData({
          size,
          callback: ({ data, y: yy, x: xx, p }) => {
             let y = pos.y + yy
             let x = pos.x + xx
-            let color = computer
-               .open({
-                  seed: '',
-                  topology: {
-                     finitness: 'finite',
-                     kind: 'loop',
-                     width: store.size,
-                  },
-                  rule: store.rule,
-               })
-               .get({ y, x })
-               ? alive
-               : dead
+            let state: 0 | 1
+            try {
+               state = openedComputer.get({ y, x })
+            } catch (err) {
+               state = 0
+               console.error(err, yy, xx)
+            }
+            let color = state ? alive : dead
             ;[data[p], data[p + 1], data[p + 2]] = color
             data[p + 3] = 255
          },

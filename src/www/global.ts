@@ -13,3 +13,7 @@ export let timeStore: {
       count: number
    }
 } = ((window as any).timeStore = {})
+
+export let warnOnceStore: {
+   [k: string]: true
+} = ((window as any).warnOnceStore = {})
