@@ -12,6 +12,8 @@ interface Info_ {
    maxLeft: number
    maxRight: number
    center: number
+   pockingLeft: boolean
+   pockingRight: boolean
 
    atLeftBorder: boolean
    atRightBorder: boolean
@@ -78,6 +80,13 @@ export let getInfo = (store: Store): Info => {
       },
       get center() {
          return Math.floor((info.maxLeft + info.maxRight) / 2)
+      },
+      /** Position tests */
+      get pockingLeft() {
+         return posS.totalPos < info.maxLeft
+      },
+      get pockingRight() {
+         return posS.totalPos > info.maxRight
       },
 
       /** Boolean indicators */
