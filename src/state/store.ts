@@ -46,7 +46,7 @@ export let createStore = (): Store => {
       posS: createPosition(30),
       posT: createPosition(30),
       play: false,
-      zoom: 24,
+      zoom: 6,
       border: {
          left: { kind: 'loop' },
          right: { kind: 'loop' },
