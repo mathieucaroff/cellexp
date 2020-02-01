@@ -18,7 +18,7 @@ export interface RuleProp {
    rule: RuleType
 }
 
-export let Rule = observer((prop: RuleProp) => {
+export let RuleLink = observer((prop: RuleProp) => {
    let classes = useStyle()
    let store = useStore()
    let onClick = action(() => {

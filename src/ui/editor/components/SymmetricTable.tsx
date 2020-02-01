@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
 import { toBase } from '../../../util/baseConverter'
 import { OxTable } from '../../components/OxTable'
-import { Rule } from './Rule'
+import { RuleLink } from './RuleLink'
 import { createElementaryRule } from '../../../compute/Rule'
 
 let reverse = (v: string): string => {
@@ -54,7 +54,7 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
       return (
          <>
             {status}
-            <Rule rule={createElementaryRule(symmetricRule)} />
+            <RuleLink rule={createElementaryRule(symmetricRule)} />
          </>
       )
    }
@@ -70,7 +70,7 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
    return (
       <div className={classes.container}>
          <h4>
-            {label} <Rule rule={createElementaryRule(ruleNumber)} />
+            {label} <RuleLink rule={createElementaryRule(ruleNumber)} />
          </h4>
          <OxTable
             tableHead={[['Name'], ['Symmetric Rule', 'center']]}

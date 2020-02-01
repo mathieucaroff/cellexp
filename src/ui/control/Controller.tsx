@@ -9,7 +9,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { Rule } from '../editor/components/Rule'
+import { RuleLink } from '../editor/components/RuleLink'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
@@ -56,7 +56,7 @@ export let Controller = observer(() => {
       <EP className={shared.panel} elevation={2}>
          <EPSm expandIcon={<ExpandMoreIcon />}>
             <h3 className={shared.noVeritcalMargins}>
-               Simulation Controller <Rule rule={store.rule} />
+               Simulation Controller <RuleLink rule={store.rule} />
             </h3>
          </EPSm>
          <EPDt className={clx(classes.inputSizing, shared.block)}>
@@ -86,7 +86,7 @@ export let Controller = observer(() => {
       <EP className={shared.panel} defaultExpanded>
          <EPSm expandIcon={<ExpandMoreIcon />}>
             <h3 className={shared.noVeritcalMargins}>
-               Display Controller <Rule rule={store.rule} />
+               Display Controller <RuleLink rule={store.rule} />
             </h3>
          </EPSm>
          <EPDt className={clx(classes.inputSizing, shared.block)}>

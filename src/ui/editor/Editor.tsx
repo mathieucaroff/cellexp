@@ -13,7 +13,7 @@ import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
 import { PropertyList } from './components/PropertyList'
-import { Rule } from './components/Rule'
+import { RuleLink } from './components/RuleLink'
 import { RuleEditor } from './components/RuleEditor'
 import { RuleSelector } from './components/RuleSelector'
 
@@ -37,7 +37,7 @@ export let Editor = observer(() => {
    return (
       <div>
          <h2>
-            Rule Picker <Rule rule={store.rule} />
+            Rule Picker <RuleLink rule={store.rule} />
          </h2>
          <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
