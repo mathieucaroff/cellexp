@@ -63,7 +63,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    clockTick.register(
       action(() => {
          let { microPos } = posT
-         let newMPos = microPos + store.speed
+         let newMPos = microPos + (store.speed * 36) / store.zoom
          posT.microPos = newMPos
       }),
    )

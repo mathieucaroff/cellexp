@@ -41,7 +41,7 @@ export let getInfo = (store: Store): Info => {
          return 1
       },
       get maxSpeed() {
-         return 999
+         return 256
       },
       get passingMinSpeed() {
          return store.speed <= info.minSpeed
