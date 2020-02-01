@@ -39,7 +39,7 @@ export let createStore = (): Store => {
       size: 1320,
 
       // MDisplay + ui
-      theme: 'darkLyra',
+      theme: 'darkCream',
       displayTheme: 'unset',
 
       speed: 4,
