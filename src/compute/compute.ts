@@ -1,76 +1,130 @@
-import { Hub } from '../state/hub'
-import { Store } from '../state/store'
-import { autox } from '../util/autox'
+import { deepEqual } from '../util/deepEqual'
 import { Pair } from '../util/RectType'
+import { Computer, ComputerOpenProp } from './ComputerType'
+import { randrange } from './randrange'
+import { BorderPattern, StochasticState } from './topology'
 
-export interface Computer {
-   getCell(pos: Pair): number
-}
+export let createComputer = (): Computer => {
+   let ruleCache: Record<number, Record<number, 0 | 1>> = {}
 
-export let createComputer = (store: Store, hub: Hub) => {
-   let cache: Record<number, Uint8Array> = {}
-   let currentTime: number
-   let rule: number
+   let lastProp: ComputerOpenProp
 
-   let initialize = () => {
-      currentTime = 0
-      cache = {}
-      rule = store.rule
-
-      let firstLine = new Uint8Array(store.size).map(() =>
-         Math.random() < 0.5 ? 1 : 0,
-      )
-
-      cache[0] = firstLine
-      currentTime++
-   }
-
-   hub.reroll.register(initialize)
-
-   autox.computer_initialisation(initialize)
-
-   let computeRule = (a: number = 0, b: number = 0, c: number = 0) => {
-      let k = (a << 2) | (b << 1) | c
-      return (rule & (1 << k)) >> k
-   }
-
-   let { border } = store
-
-   let computeLine = (line: Uint8Array) => {
-      let newLine = Uint8Array.from({ length: line.length }, (_b, k) => {
-         return computeRule(line[k - 1], line[k], line[k + 1])
-      })
-
-      if (border.left.kind === 'loop') {
-         newLine[0] = computeRule(line[line.length - 1], line[0], line[1])
+   let open = (prop: ComputerOpenProp) => {
+      if (!deepEqual(prop, lastProp)) {
+         lastProp = prop
+         ruleCache = {}
       }
 
-      if (border.right.kind === 'loop') {
-         newLine[line.length - 1] = computeRule(
-            line[line.length - 2],
-            line[line.length - 1],
-            line[0],
-         )
+      let { rule, seed: seedString, topology } = prop
+      let ruleNumber = rule.number
+      if (rule.stateCount !== 2 || rule.neighborhoodSize !== 3) {
+         throw new Error('only elementary rules are supported for now')
       }
-      return newLine
-   }
 
-   let request = (targetTime: number) => {
-      while (currentTime < targetTime) {
-         cache[currentTime] = computeLine(cache[currentTime - 1])
-         currentTime++
+      if (topology.finitness === 'infinite') {
+         throw new Error('infinte topologies are unimplemented for now')
       }
-   }
 
-   return {
-      getCell(pos: Pair) {
-         pos.y >= currentTime && request(pos.y + 1)
-         try {
-            return cache[pos.y]?.[pos.x]
-         } catch (e) {
-            console.error(e, e.stack, pos)
-            throw e
+      let computeRule = (
+         a: number = 0,
+         b: number = 0,
+         c: number = 0,
+      ): 0 | 1 => {
+         let k = (a << 2) | (b << 1) | c
+         return ruleNumber & (1 << k) ? 1 : 0
+      }
+
+      let getFromBorder = (
+         seedInt: number,
+         y: number,
+         border: BorderPattern,
+      ): 0 | 1 => {
+         let stochastic: StochasticState
+         if (border.init.length > y) {
+            stochastic = border.init[y]
+         } else {
+            stochastic =
+               border.cycle[(y - border.init.length) % border.cycle.length]
          }
-      },
+         if (stochastic.total === 1) {
+            return stochastic.cumulativeMap[0] === 1 ? 0 : 1
+         } else {
+            let randomValue = randrange(seedString, seedInt, stochastic.total)
+            return randomValue < stochastic.cumulativeMap[0] ? 0 : 1
+         }
+      }
+
+      let getLeftestOrRightest = (
+         lr: 'left' | 'right',
+         blr: 'borderLeft' | 'borderRight',
+         otherSideX: number,
+         seedBonus: number,
+      ) => (y: number): 0 | 1 => {
+         if (
+            topology.kind === 'loop' ||
+            (topology.kind === 'porous' && topology.porousness === lr)
+         ) {
+            return get({ y, x: otherSideX })
+         } else {
+            let border: BorderPattern
+            if (topology.kind === 'border') {
+               border = topology[blr]
+            } else if (topology.kind === 'porous') {
+               border = topology.borderOther
+            } else {
+               throw topology
+            }
+            let seedInt = 2 * y + seedBonus
+            return getFromBorder(seedInt, y, border)
+         }
+      }
+
+      let otherSideX = topology.width - 1
+      let getLeftest = getLeftestOrRightest('left', 'borderLeft', otherSideX, 0)
+      let getRightest = getLeftestOrRightest('right', 'borderRight', 0, 1)
+
+      let get = (pos: Pair) => {
+         // console.log('get', pos)
+         if (ruleCache[pos.y] === undefined) {
+            ruleCache[pos.y] = {}
+         }
+         if (ruleCache[pos.y][pos.x] === undefined) {
+            if (pos.y <= 0) {
+               let seedInt = pos.x
+               let res = randrange(seedString, seedInt, 2) as 0 | 1
+               ruleCache[pos.y][pos.x] = res
+            } else {
+               let y = pos.y - 1
+               let x = pos.x
+
+               let above = get({ y, x })
+               let aboveLeft = get({ y, x: x - 1 })
+               let aboveRight = get({ y, x: x + 1 })
+
+               if (topology.finitness === 'infinite') {
+                  throw new Error(
+                     'infinte topologies are unimplemented for now',
+                  )
+               }
+
+               if (y === 0) {
+                  aboveLeft = getLeftest(y)
+               }
+               if (y === topology.width - 1) {
+                  aboveRight = getRightest(y)
+               }
+               ruleCache[pos.y][pos.x] = computeRule(
+                  aboveLeft,
+                  above,
+                  aboveRight,
+               )
+            }
+         }
+         return ruleCache[pos.y][pos.x]
+      }
+
+      return { get }
    }
+
+   return { open }
 }

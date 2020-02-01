@@ -1,22 +1,7 @@
 import { createPosition, OxPosition } from '../display/position'
 import { Size } from '../util/RectType'
 import { ThemeString } from '../www/theme'
-
-export type State = {
-   proba1: number
-}
-
-export interface BorderPattern {
-   kind: 'pattern'
-   initial: State[]
-   repeat: State[]
-}
-
-export interface BorderLoop {
-   kind: 'loop'
-}
-
-export type Border = BorderLoop | BorderPattern
+import { Rule } from '../compute/Rule'
 
 /**
  * @param postS Spatial position
@@ -26,7 +11,7 @@ export interface Store {
    theme: ThemeString
    displayTheme: ThemeString | 'unset'
 
-   rule: number
+   rule: Rule
    size: number
 
    speed: number
@@ -45,7 +30,11 @@ export interface Store {
 export let createStore = (): Store => {
    return {
       // MCompute + ui
-      rule: 73,
+      rule: {
+         stateCount: 2,
+         neighborhoodSize: 3,
+         number: 73,
+      },
       size: 1320,
 
       // MDisplay + ui

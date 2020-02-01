@@ -30,16 +30,16 @@ export let PropertyList = observer(() => {
          <div className={clx(classes.spacerRight)}>
             <SymmetricTable
                label="Symmetrics of current rule"
-               rule={rule}
-               symmetricReferenceRule={rule}
+               ruleNumber={rule.number}
+               symmetricReferenceRule={rule.number}
                symmetricMessage="self-symmetric"
             />
          </div>
          <div>
             <SymmetricTable
                label="Symmetrics of color output complement rule"
-               rule={255 - rule}
-               symmetricReferenceRule={rule}
+               ruleNumber={255 - rule.number}
+               symmetricReferenceRule={rule.number}
                symmetricMessage="remote-self-symmetric"
             />
          </div>

@@ -26,13 +26,13 @@ export let BasenumRuleField = observer((prop: BasenumRuleFieldProp) => {
             ...(base !== 10 ? { size: 255 } : {}),
             prefix: true,
          }
-         return toBase(store.rule, base, param)
+         return toBase(store.rule.number, base, param)
       },
    })
 
    let [value, setValue] = React.useState<string>(local.slowValue)
 
-   // Subscribe to changes to store.rule
+   // Subscribe to changes of store.rule, to reset the value
    useReaction(
       () => store.rule,
       () => setValue(local.slowValue),
@@ -66,7 +66,7 @@ export let BasenumRuleField = observer((prop: BasenumRuleFieldProp) => {
          helperText={help}
          onChange={(v) => setValue(v.trim())}
          onSubmit={action(() => {
-            store.rule = convertedValue
+            store.rule.number = convertedValue
          })}
       />
    )

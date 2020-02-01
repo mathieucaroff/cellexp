@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx'
-import { Computer } from '../compute/compute'
+
+import { Computer } from '../compute/ComputerType'
 import { Hub } from '../state/hub'
 import { Store } from '../state/store'
 import { autox } from '../util/autox'
@@ -78,7 +79,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
    // reinitialize panning position when rule changes
    autox.center_top_new_rule(() => {
-      store.rule
+      store.rule.number
       act.gotoCenter()
       act.gotoTop()
    })
@@ -153,11 +154,18 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       action(() => {
          local.ctx = canvas.getContext('2d')!
       })()
+
+      me.initialize = () => {
+         console.error(
+            'display.initialized was called several times',
+            new Error().stack,
+         )
+      }
    }
 
    // Render cellular automaton
    let renderCanvas = () => {
-      store.rule
+      store.rule.number
 
       let drawArea = {
          pos: {
@@ -188,7 +196,19 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
          callback: ({ data, y: yy, x: xx, p }) => {
             let y = pos.y + yy
             let x = pos.x + xx
-            let color = computer.getCell({ y, x }) ? alive : dead
+            let color = computer
+               .open({
+                  seed: '',
+                  topology: {
+                     finitness: 'finite',
+                     kind: 'loop',
+                     width: store.size,
+                  },
+                  rule: store.rule,
+               })
+               .get({ y, x })
+               ? alive
+               : dead
             ;[data[p], data[p + 1], data[p + 2]] = color
             data[p + 3] = 255
          },
