@@ -1,40 +1,49 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import sys
+
+import yaml # pip install PyYaml
 
 def eprint(*a, **kw):
    print(*a, file=sys.stderr, **kw)
 
-book = []
+def toDate(text):
+   return datetime.fromisoformat(text.split("+")[0])
 
-with open("time.md") as f:
-   it = iter(f)
-   for line in it:
-      if line == f"## {sys.argv[1]}\n":
-         break
-   for line in it:
-      if line.startswith("## "):
-         break
-      if line.startswith("2020") and "> 2020" in line:
-         book.append(line)
-
-print(f"{len(book)=}")
-
-total = 0
-
-for line in book:
-   sep = " -> "
-   if sep not in line:
-      sep = " => "
-   if sep not in line:
-      eprint(f"WARNING, with line [{line}]")
-      continue
-   a, bc = line.split(sep)
-   b, cc = bc.split(" :")
-   da = datetime.fromisoformat(a.split("+")[0])
-   db = datetime.fromisoformat(b.split("+")[0])
+def toDelta(text):
+   a, b = text.split(" -> ")
+   da = toDate(a)
+   db = toDate(b)
    delta = db - da
-   print(f"{dir(delta)=}")
-   total += delta.total_seconds()
+   return delta
 
-print(f"{total=}")
-print(f"{total//60=}")
+if len(sys.argv) >= 2:
+   timeFileName = sys.argv[1]
+else:
+   timeFileName = "time.yaml"
+   try:
+      with open(timeFileName):
+         pass
+   except Exception:
+      timeFileName = "doc-project-en/" + timeFileName
+
+with open(timeFileName) as f:
+   data = yaml.safe_load(f)
+   del data["title"]
+
+   for goalName, goal in data.items():
+      print(f"{goalName=}")
+      total = timedelta()
+      for item in goal["result"]:
+         if "time" in item:
+            total += toDelta(item["time"])
+         elif "timeList" in item:
+            for timeText in item["timeList"]:
+               total += toDelta(timeText)
+         elif "start" in item:
+            pass
+         else:
+            eprint(f"unrecognized {item=}")
+
+      totalMinute, second = divmod(total.seconds, 60)
+      totalHour, minute = divmod(totalMinute, 60)
+      print(f"{totalHour}h{minute:02}m{second:02}s")

@@ -1,0 +1,43 @@
+%YAML 1.1
+---
+title: "Time tracking"
+
+"Keyboard binding":
+  estimate: "4h"
+  result:
+  - time: 2020-01-15T22:34+01 -> 2020-01-15T23:06+01
+    with: writing `display/keyboardManager.ts`
+
+  - time: 2020-01-15T23:06+01 -> 2020-01-16T00:09+01
+    with: moving arrows and centering them (2x the expected time)
+
+  - time: 2020-01-16T00:09+01 -> 2020-01-16T00:22+01
+    with: moving the display block to the top (.7x the expected time)
+
+  - time: 2020-01-16T00:23+01 -> 2020-01-16T00:30+01
+    with: changing the button symbols (.7x the expected time)
+
+  - time: 2020-01-16T07:13+01 -> 2020-01-16T07:45+01
+    with: disabling arrow that cannot be used (1.5x the expected time)
+
+  - time: 2020-01-16T18:35+01 -> 2020-01-16T18:51+01
+    with: add a context for accessing the display (1.1x)
+
+  - timeList:
+    - 2020-01-16T18:51+01 -> 2020-01-16T19:22+01
+    - 2020-01-16T19:53+01 -> 2020-01-16T21:18+01
+    with: Move key logic to display.tsx (3x -- 1h50 instead of 40min)
+
+  - start: 2020-01-16T21:55+01
+    end: "?"
+    with: Keyboard binding (~1x ?)
+
+  total: 5h10
+  comment: The estimate was rather decent!
+  group: 2
+
+"Border and State Design":
+  estimate: "2h"
+  result:
+  - time: 2020-02-01T12:24+01
+    with:
