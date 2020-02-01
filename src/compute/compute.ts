@@ -93,7 +93,7 @@ export let createComputer = (): Computer => {
       let getLeftest = getLeftestOrRightest('left', 'borderLeft', otherSideX, 0)
       let getRightest = getLeftestOrRightest('right', 'borderRight', 0, 1)
 
-      let get = timed('getCell', (pos: Pair): 0 | 1 => {
+      let get = timed('get', (pos: Pair): 0 | 1 => {
          if (ruleCache[pos.y] === undefined) {
             ruleCache[pos.y] = new Uint8Array(width)
          }
@@ -106,7 +106,7 @@ export let createComputer = (): Computer => {
                if (pos.y <= 0) {
                   let seedInt = pos.x
                   let res = randrange(seedString, seedInt, 2) as 0 | 1
-                  ruleCache[pos.y][pos.x] = res
+                  ruleCache[pos.y][pos.x] = res + 1
                } else {
                   let y = pos.y - 1
                   let x = pos.x
