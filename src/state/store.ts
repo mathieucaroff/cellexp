@@ -55,6 +55,17 @@ export let createStore = (): Store => {
       seed: '',
 
       // MDisplay
-      canvasSize: { x: 1320, y: 440 }, // x: 1320 - good for 1366-pixel-width displays
+      canvasSize: defaultCanvasSize(), // x: 1320 - good for 1366-pixel-width displays
    }
+}
+
+let defaultCanvasSize = () => {
+   let x = 1320
+   let y = 440
+   let mx = window.innerWidth * 0.8
+   let my = window.innerHeight * 0.8
+   let m = Math.min(mx, my)
+   x = Math.ceil(Math.min(x, m))
+   y = Math.ceil(Math.min(y, x))
+   return { x, y }
 }
