@@ -9,7 +9,7 @@ import { createHub } from '../state/hub'
 import { createStore } from '../state/store'
 import { appElement } from './app'
 
-import packageInfo from '../../package.json'
+import * as packageInfo from '../../package.json'
 
 function main() {
    let cellexp_version = document.getElementById('cellexp_version')
