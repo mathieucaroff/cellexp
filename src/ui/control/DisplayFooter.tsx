@@ -16,8 +16,7 @@ let useStyle = makeStyles((theme: Theme) =>
             margin: theme.spacing(2),
          },
          '& > *': {
-            marginTop: theme.spacing(2),
-            marginLeft: theme.spacing(3),
+            margin: theme.spacing(1),
          },
       },
    }),
