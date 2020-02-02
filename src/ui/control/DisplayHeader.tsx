@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { RuleLink } from '../editor/components/RuleLink'
 import { useStore } from '../util/useContextHook'
 import { observer } from 'mobx-react-lite'
+import { RuleBox } from '../editor/components/RuleBox'
 
 export let DisplayHeader = observer(() => {
    let store = useStore()
@@ -9,7 +9,7 @@ export let DisplayHeader = observer(() => {
    return (
       <>
          <h2>
-            Display <RuleLink rule={store.rule} />
+            Display <RuleBox />
          </h2>
       </>
    )

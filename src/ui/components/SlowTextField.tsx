@@ -9,28 +9,35 @@ export interface SlowTextFieldProp {
    helperText: string
    onChange: (v: string) => void
    onSubmit: (v: string) => void
+   className?: string
    disabled?: boolean
+   inline?: boolean
    type?: string
 }
 
 export let SlowTextField = (prop: SlowTextFieldProp) => {
    let {
-      label,
-      slowValue,
-      fastValue,
       error,
-      disabled = false,
+      fastValue,
       helperText,
-      type,
+      label,
       onChange,
       onSubmit,
+      slowValue,
+      className,
+      disabled = false,
+      inline = false,
+      type,
    } = prop
 
    let maybeDirty = slowValue !== fastValue ? 'dirty' : ''
 
+   let formAddition = inline ? { style: { display: 'inline' } } : {}
+
    return (
       <form
          className={maybeDirty}
+         {...formAddition}
          onSubmit={(ev: React.FormEvent) => {
             if (!error) {
                onSubmit((ev.target as any).value)
@@ -39,6 +46,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
          }}
       >
          <TextField
+            className={className}
             label={label + ` (${slowValue})`}
             value={fastValue}
             error={error}

@@ -34,7 +34,7 @@ export let BasenumRuleField = observer((prop: BasenumRuleFieldProp) => {
 
    // Subscribe to changes of store.rule, to reset the value
    useReaction(
-      () => store.rule,
+      () => store.rule.number,
       () => setValue(local.slowValue),
    )
 
