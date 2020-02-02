@@ -60,7 +60,7 @@ export let Controller = observer(() => {
                Simulation Controller <RuleLink rule={store.rule} />
             </h3>
          </EPSm>
-         <EPDt className={clx(classes.inputSizing, shared.block)}>
+         <EPDt className={clx(shared.block)}>
             <div className={shared.inputList}>
                <TopologyController />
                <WidthSelector />

@@ -13,14 +13,12 @@ import { SlowTextField } from '../../components/SlowTextField'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      borderSelector: {
-         width: '200px',
-      },
+      borderSelector: {},
    }),
 )
 
 export interface BorderSelectorProp {
-   property: 'borderLeft' | 'borderRight'
+   property: 'borderLeft' | 'borderRight' | 'genesis'
    side: 'left' | 'right'
    topology: TopologyFinite
 }
