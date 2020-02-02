@@ -4,8 +4,10 @@ import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
 import {
    BdslResultSuccess,
-   bdslToBorder,
+   bdslParsePattern,
    borderToBdsl,
+   bdslParseSideBorder,
+   bdslParseTopBorder,
 } from '../../../compute/bdsl'
 import { TopologyFinite } from '../../../compute/topology'
 import { capitalize } from '../../../util/capitalize'
@@ -17,21 +19,21 @@ let useStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-export interface BorderSelectorProp {
+export interface BorderFieldProp {
    property: 'borderLeft' | 'borderRight' | 'genesis'
-   side: 'left' | 'right'
+   side: 'left' | 'right' | 'top'
    topology: TopologyFinite
 }
 
-export let BorderSelector = observer((prop: BorderSelectorProp) => {
+export let BorderField = observer((prop: BorderFieldProp) => {
    let { property, side, topology } = prop
 
    let classes = useStyle()
 
    let local = useLocalStore(() => {
       return {
-         slowValue: '0',
-         value: '0',
+         slowValue: '(0)',
+         value: '(0)',
       }
    })
 
@@ -49,7 +51,12 @@ export let BorderSelector = observer((prop: BorderSelectorProp) => {
    let label = `Border ${capitalize(side)}`
    let helperText = ''
 
-   let bdslResult = bdslToBorder(local.value)
+   let bdslParse: any = bdslParseSideBorder
+   if (side === 'top') {
+      bdslParse = bdslParseTopBorder
+   }
+
+   let bdslResult = bdslParse(local.value)
    if (!bdslResult.success) {
       helperText = bdslResult.info
    }
@@ -67,8 +74,8 @@ export let BorderSelector = observer((prop: BorderSelectorProp) => {
          }}
          onSubmit={(submittedV) => {
             local.slowValue = submittedV
-            let { border } = bdslResult as BdslResultSuccess
-            topology[property] = border
+            let { result } = bdslResult as BdslResultSuccess<any>
+            topology[property] = result
          }}
          slowValue={local.slowValue}
       />

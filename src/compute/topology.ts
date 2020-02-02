@@ -7,36 +7,46 @@ export interface StochasticState {
    total: number
 }
 
-export interface BorderPattern {
-   init: StochasticState[]
-   cycle: StochasticState[]
+export type BasePattern = StochasticState[]
+
+export interface SideBorderPattern {
+   kind: 'side'
+   init: BasePattern
+   cycle: BasePattern
 }
 
-export interface __TopologyFiniteBase {
+export interface TopBorderPattern {
+   kind: 'top'
+   center: BasePattern
+   cycleLeft: BasePattern
+   cycleRight: BasePattern
+}
+
+export type BorderPattern = SideBorderPattern | TopBorderPattern
+
+interface __TopologyBase {
+   genesis: TopBorderPattern
+}
+
+interface __TopologyFiniteBase extends __TopologyBase {
    finitness: 'finite'
    width: number
 }
 
-export interface TopologyFiniteBorder {
-   finitness: 'finite'
+export interface TopologyFiniteBorder extends __TopologyFiniteBase {
    kind: 'border'
-   width: number
-   borderLeft: BorderPattern
-   borderRight: BorderPattern
+   borderLeft: SideBorderPattern
+   borderRight: SideBorderPattern
 }
 
-export interface TopologyFiniteLoop {
-   finitness: 'finite'
+export interface TopologyFiniteLoop extends __TopologyFiniteBase {
    kind: 'loop'
-   width: number
 }
 
-export interface TopologyFinitePorous {
-   finitness: 'finite'
+export interface TopologyFinitePorous extends __TopologyFiniteBase {
    kind: 'porous'
-   width: number
    porousness: Side
-   borderOther: BorderPattern
+   borderOther: SideBorderPattern
 }
 
 export type TopologyFinite =
@@ -44,12 +54,12 @@ export type TopologyFinite =
    | TopologyFiniteLoop
    | TopologyFinitePorous
 
-export interface TopologyInfiniteBoth {
+export interface TopologyInfiniteBoth extends __TopologyBase {
    finitness: 'infinite'
    kind: 'both'
 }
 
-export interface TopologyInfiniteSemi {
+export interface TopologyInfiniteSemi extends __TopologyBase {
    finitness: 'infinite'
    kind: 'semi'
    infinite: Side

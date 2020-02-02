@@ -2,7 +2,7 @@ import { deepEqual } from '../util/deepEqual'
 import { Pair } from '../util/RectType'
 import { Computer, ComputerOpenProp } from './ComputerType'
 import { randrange } from './randrange'
-import { BorderPattern, StochasticState } from './topology'
+import { StochasticState, SideBorderPattern } from './topology'
 import { timed, timedExpr } from '../util/timeMeasure'
 import { warnOnce } from '../util/warnOnce'
 
@@ -47,7 +47,7 @@ export let createComputer = (): Computer => {
       let getFromBorder = (
          seedInt: number,
          y: number,
-         border: BorderPattern,
+         border: SideBorderPattern,
       ): 0 | 1 => {
          let stochastic: StochasticState
          if (border.init.length > y) {
@@ -76,7 +76,7 @@ export let createComputer = (): Computer => {
          ) {
             return get({ y, x: otherSideX })
          } else {
-            let border: BorderPattern
+            let border: SideBorderPattern
             if (topology.kind === 'border') {
                border = topology[blr]
             } else if (topology.kind === 'porous') {

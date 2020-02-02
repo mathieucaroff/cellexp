@@ -26,6 +26,11 @@ export interface Store {
 }
 
 export let createStore = (): Store => {
+   let random01 = {
+      cumulativeMap: [1, 2],
+      total: 2,
+   }
+
    return {
       // MCompute + ui
       rule: {
@@ -46,8 +51,14 @@ export let createStore = (): Store => {
       zoom: 30,
       topology: {
          finitness: 'finite',
-         width: 1320,
          kind: 'loop',
+         width: 1320,
+         genesis: {
+            kind: 'top',
+            center: [],
+            cycleLeft: [random01],
+            cycleRight: [random01],
+         },
       },
       seed: '',
 
@@ -59,7 +70,7 @@ export let createStore = (): Store => {
 let defaultCanvasSize = () => {
    let x = 1320
    let y = 440
-   let mx = window.innerWidth * 0.99
+   let mx = window.innerWidth * 0.99 - 50
    let my = window.innerHeight * 0.8
    x = Math.ceil(Math.min(x, mx))
    y = Math.ceil(Math.min(y, x, my))
