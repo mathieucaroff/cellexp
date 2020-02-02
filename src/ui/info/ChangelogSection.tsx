@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs'
 import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
-// import { default as html } from 'remark-html'
 import { default as remark } from 'remark-parse'
 import { default as unified } from 'unified'
 import { default as rehype2react } from 'rehype-react'
@@ -12,18 +11,6 @@ const markdownContent = readFileSync(
    __dirname + '../../../../CHANGELOG.md',
    'utf-8',
 )
-
-// const initialContent = 'Converting markdown to html...'
-// let content = initialContent
-
-// let converter = unified()
-//    .use(markdown)
-//    .use(html)
-
-// converter.process(markdownContent, (err, result) => {
-//    if (err) throw err
-//    content = '' + result
-// })
 
 let createElement = (component, ...args) => {
    if (component !== 'a') {
@@ -48,9 +35,7 @@ processer.process(markdownContent, (err, result) => {
 
 export let ChangelogSection = observer(() => {
    let local = useLocalStore(() => ({
-      // content,
       treeOutput,
    }))
-   // return <section dangerouslySetInnerHTML={{ __html: local.content }} />
    return <section>{local.treeOutput}</section>
 })
