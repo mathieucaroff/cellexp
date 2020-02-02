@@ -2,31 +2,31 @@ import TextField from '@material-ui/core/TextField'
 import * as React from 'react'
 
 export interface SlowTextFieldProp {
-   label: string
-   slowValue: string
-   fastValue: string
-   error: boolean
-   helperText: string
-   onChange: (v: string) => void
-   onSubmit: (v: string) => void
    className?: string
    disabled?: boolean
+   error: boolean
+   fastValue: string
+   helperText: string
    inline?: boolean
+   label: string
+   onChange: (v: string) => void
+   onSubmit: (v: string) => void
+   slowValue: string
    type?: string
 }
 
 export let SlowTextField = (prop: SlowTextFieldProp) => {
    let {
+      className,
+      disabled = false,
       error,
       fastValue,
       helperText,
+      inline = false,
       label,
       onChange,
       onSubmit,
       slowValue,
-      className,
-      disabled = false,
-      inline = false,
       type,
    } = prop
 
@@ -40,7 +40,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
          {...formAddition}
          onSubmit={(ev: React.FormEvent) => {
             if (!error) {
-               onSubmit((ev.target as any).value)
+               onSubmit(fastValue)
             }
             ev.preventDefault()
          }}

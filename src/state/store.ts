@@ -2,6 +2,7 @@ import { createPosition, OxPosition } from '../display/position'
 import { Size } from '../util/RectType'
 import { ThemeString } from '../www/theme'
 import { Rule } from '../compute/Rule'
+import { Topology, TopologyFinite } from '../compute/topology'
 
 /**
  * @param postS Spatial position
@@ -12,17 +13,13 @@ export interface Store {
    displayTheme: ThemeString | 'unset'
 
    rule: Rule
-   size: number
 
    speed: number
    posS: OxPosition
    posT: OxPosition
    play: boolean
    zoom: number
-   border: {
-      left: { kind: 'loop' }
-      right: { kind: 'loop' }
-   }
+   topology: TopologyFinite
    seed: string
 
    canvasSize: Size
@@ -37,7 +34,6 @@ export let createStore = (): Store => {
          neighborhoodSize: 3,
          number: 73,
       },
-      size: 1320,
 
       // MDisplay + ui
       theme: 'darkCream',
@@ -47,10 +43,11 @@ export let createStore = (): Store => {
       posS: createPosition(30),
       posT: createPosition(30),
       play: false,
-      zoom: 6,
-      border: {
-         left: { kind: 'loop' },
-         right: { kind: 'loop' },
+      zoom: 30,
+      topology: {
+         finitness: 'finite',
+         width: 1320,
+         kind: 'loop',
       },
       seed: '',
 
@@ -62,10 +59,9 @@ export let createStore = (): Store => {
 let defaultCanvasSize = () => {
    let x = 1320
    let y = 440
-   let mx = window.innerWidth * 0.8
+   let mx = window.innerWidth * 0.99
    let my = window.innerHeight * 0.8
-   let m = Math.min(mx, my)
-   x = Math.ceil(Math.min(x, m))
-   y = Math.ceil(Math.min(y, x))
+   x = Math.ceil(Math.min(x, mx))
+   y = Math.ceil(Math.min(y, x, my))
    return { x, y }
 }

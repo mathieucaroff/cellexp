@@ -71,11 +71,9 @@ export let getInfo = (store: Store): Info => {
          return 0
       },
       get maxRight() {
-         let right = Math.floor(
-            ((store.size * store.zoom - store.canvasSize.x * 6) *
-               posS.microFactor) /
-               store.zoom,
-         )
+         let pixel6 = store.topology.width * store.zoom
+         let difference = pixel6 - store.canvasSize.x * 6
+         let right = Math.floor((difference * posS.microFactor) / store.zoom)
          return right
       },
       get center() {

@@ -10,8 +10,9 @@ export let FieldPosS = observer(() => {
    let validation = (value: string): [boolean, string] => {
       let { wholePos } = store.posS
 
+      let { width } = store.topology
       let low = -4
-      let high = store.size - (store.canvasSize.x / store.zoom) * 6 + 4
+      let high = width - (store.canvasSize.x / store.zoom) * 6 + 4
 
       let defaultHelp = 'Spatial Position on the CA'
       if (value === '' + wholePos) {

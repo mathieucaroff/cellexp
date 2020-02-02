@@ -26,14 +26,12 @@ export let DisplayFooter = () => {
    let classes = useStyle()
 
    return (
-      <>
-         <div className={classes.panningButtons}>
-            <MiniPlayPause />
-            <MiniSpeedChange />
-            <VerticalPanning />
-            <MiniZoom />
-            <HorizontalPanning />
-         </div>
-      </>
+      <div className={classes.panningButtons}>
+         <MiniPlayPause />
+         <MiniSpeedChange />
+         <MiniZoom />
+         <VerticalPanning />
+         <HorizontalPanning />
+      </div>
    )
 }

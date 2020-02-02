@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx'
+import { action, observable, toJS, observe } from 'mobx'
 
 import { Computer } from '../compute/ComputerType'
 import { Hub } from '../state/hub'
@@ -13,9 +13,12 @@ import { getInfo } from './info'
 import { keyboardBinding } from './keyboardBinding'
 import { createKeyboardManager } from './keyboardManager'
 import { createImageData } from './util/createImageData'
+import { TopologyFinite } from '../compute/topology'
 
 export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    let { posS, posT } = store
+
+   let topology = store.topology as TopologyFinite
 
    let local_ = {
       ctx: undefined as CanvasRenderingContext2D | undefined,
@@ -77,9 +80,10 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       }
    })
 
-   // reinitialize panning position when rule changes
+   // reinitialize panning position when rule or topology changes
    autox.center_top_new_rule(() => {
       store.rule.number
+      store.topology.kind
       act.gotoCenter()
       act.gotoTop()
    })
@@ -115,7 +119,9 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
       let isBigEnough = () => info.maxLeft <= info.maxRight
       let maxRight = () => {
-         return Math.ceil((store.zoom * store.size) / 6 - store.canvasSize.x)
+         return Math.ceil(
+            (store.zoom * topology.width) / 6 - store.canvasSize.x,
+         )
       }
 
       let dragManager = createDragManager({
@@ -165,8 +171,6 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
    // Render cellular automaton
    let renderCanvas = () => {
-      store.rule.number
-
       let drawArea = {
          pos: {
             x: posS.wholePos,
@@ -193,17 +197,8 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
 
       let openedComputer = computer.open({
          seed: store.seed,
-         topology: {
-            finitness: 'finite',
-            kind: 'loop',
-            width: store.size,
-         },
-         rule: {
-            dimension: store.rule.dimension,
-            stateCount: store.rule.stateCount,
-            neighborhoodSize: store.rule.neighborhoodSize,
-            number: store.rule.number,
-         },
+         topology: toJS(topology),
+         rule: toJS(store.rule),
       })
 
       let imageData = createImageData({
@@ -212,12 +207,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
             let y = pos.y + yy
             let x = pos.x + xx
             let state: 0 | 1
-            try {
-               state = openedComputer.get({ y, x })
-            } catch (err) {
-               state = 0
-               console.error(err, yy, xx)
-            }
+            state = openedComputer.get({ y, x })
             let color = state ? alive : dead
             ;[data[p], data[p + 1], data[p + 2]] = color
             data[p + 3] = 255
@@ -236,6 +226,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    }
 
    autox.display_rendering(renderCanvas)
+   observe(topology, renderCanvas)
 
    let me = {
       info,

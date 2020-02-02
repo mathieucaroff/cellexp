@@ -17,12 +17,12 @@ let validation = (value: string) => {
    )
 }
 
-export let CaSizeSelector = observer(() => {
+export let WidthSelector = observer(() => {
    return (
       <SelectorInput
-         label="Size"
-         property={'size'}
-         store={useStore()}
+         label="Width"
+         property={'width'}
+         store={useStore().topology}
          validation={validation}
       />
    )
