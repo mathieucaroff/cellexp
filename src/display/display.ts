@@ -192,7 +192,7 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
       if (drawArea.size.x * drawArea.size.y === 0) return
 
       let openedComputer = computer.open({
-         seed: '',
+         seed: store.seed,
          topology: {
             finitness: 'finite',
             kind: 'loop',
@@ -236,8 +236,6 @@ export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
    }
 
    autox.display_rendering(renderCanvas)
-
-   hub.reroll.register(renderCanvas)
 
    let me = {
       info,

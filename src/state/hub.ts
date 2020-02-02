@@ -1,9 +1,7 @@
 import { createEventDispatcher } from '../util/eventDispatcher'
 
 export let createHub = () => {
-   return {
-      reroll: createEventDispatcher(),
-   }
+   return {}
 }
 
 export type Hub = ReturnType<typeof createHub>

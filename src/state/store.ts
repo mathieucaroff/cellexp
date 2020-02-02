@@ -23,6 +23,7 @@ export interface Store {
       left: { kind: 'loop' }
       right: { kind: 'loop' }
    }
+   seed: string
 
    canvasSize: Size
 }
@@ -51,6 +52,7 @@ export let createStore = (): Store => {
          left: { kind: 'loop' },
          right: { kind: 'loop' },
       },
+      seed: '',
 
       // MDisplay
       canvasSize: { x: 1320, y: 440 }, // x: 1320 - good for 1366-pixel-width displays
