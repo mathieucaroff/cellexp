@@ -12,7 +12,7 @@
       "@types/node": "^13.1.1",
       "prettier": "^1.19.1",
       "ts-node": "^8.5.4",
-      "typescript": "^3.7.4"
+      "typescript": "^3.7.5"
    },
    "dependencies": {
       "@material-ui/core": "^4.8.2",
