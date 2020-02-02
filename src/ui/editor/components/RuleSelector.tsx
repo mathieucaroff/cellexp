@@ -2,7 +2,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
 import { OxTable } from '../../components/OxTable'
 import { clx } from '../../util/clx'
-import { Rule } from './Rule'
+import { RuleLink } from './RuleLink'
+import { createElementaryRule } from '../../../compute/Rule'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -22,8 +23,11 @@ export let RuleSelector = () => {
    let classes = useStyle()
 
    let rr = (...ruleList) => {
+      let r = createElementaryRule
       let joinedList = ([] as any[])
-         .concat(...ruleList.map((n, k) => [' ', <Rule key={k} rule={n} />]))
+         .concat(
+            ...ruleList.map((n, k) => [' ', <RuleLink key={k} rule={r(n)} />]),
+         )
          .slice(1)
       return React.createElement(React.Fragment, null, ...joinedList)
    }

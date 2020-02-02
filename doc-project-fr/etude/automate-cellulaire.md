@@ -10,7 +10,23 @@ Extrait de l'article Wikipédia [Automate cellulaire](https://fr.wikipedia.org/w
 
 > Un automate cellulaire est un simulateur basé sur une grille de cellules. À chaque pas de temps, un nouvel état est calculé pour chaque cellule, à partir de son état précédent et de l'état des cellules voisines. Chaque pas de temps correspond à une génération de cellules.
 
-Dans les automates cellulaires standards, la liste complète des états que peut prendre une cellule est prédéfinie et est statique. De même, le voisinage de cellule est clairement identifié par l'ensemble des positions relatives des cellules du voisinage. La règle d'évolution est alors définie comme une fonction qui associe à chaque cellule un nouvel état en fonction de la liste des états des cellules du voisinage.
+Les changements d'états des cellules sont dictées par une fonction, appelée la **règle de transition locale**. Pour chaque cellule, à chaque génération, la **règle de transition locale** indique le nouvel état de la cellule en fonction de son état précédent, et de l'état précédent des cellules voisine. La **règle de transition locale** doit s'appliquer de la même manière quelque soit la position de la cellule : ses seules entrées sont l'état de la cellule et les états des cellules voisine.
+
+Dans le projet CellExp, l'application simultanée de la **règle de transition locale** à l'ensemble des cellules d'une grille s'appelle la **fonction d'évolution**. Chaque application de la **fonction d'évolution** calcul une nouvelle génération.
+
+#### Alphabet
+
+L'**alphabet** désigne l'ensemble des états que peuvent prendre les cellules d'un automates cellulaire. Cet ensemble doit être fini. L'**alphabet** permet de caractériser le nombre d'états différents utilisé par un automate cellulaire.
+
+#### Voisinage
+
+Le **voisinage** permet de caractériser la distance à laquelle l'état d'une cellule peut avoir un effet. Le **voisinage** est donc une contrainte de la **règle de transition locale** : les cellules qui ne font pas partie du voisinage ne peuvent pas être utilisées pour le calcul de l'état futur d'une cellule.
+
+Formellement, le voisinage est un ensemble de positions : C'est l'ensemble des positions relatives des cellules accessibles par la **règle de transition locale** lors du calcul de l'état futur d'une cellule.
+
+#### Rêgle de transition locale
+
+Formellement, la **règle de transition locale** est une fonction produisant un état (de l'**alphabet**). Cet élément correspond à l'état futur d'une cellule. La **règle de transition** locale peut se baser sur les états des cellules voisines de la cellules dont l'état futur est calculé, telle que défini par le **voisinage**. Mathématiquement, le paramètre de la **règle de transition locale** est donc une fonction associant à chaque élément du **voisinage** un élément (de l'**alphabet**).
 
 ### Notation
 
@@ -23,22 +39,22 @@ La lettre majuscule Z, en gras, **Z**, désigne l'ensemble des entiers relatifs.
 
 #### Automate cellulaire
 
-Dans la littérature, un **automate cellulaire** est défini comme un quadruplet de valeurs:
+Dans la littérature, un **automate cellulaire** est concept mathématique, défini comme un quadruplet de valeurs:
 
 - d : la **dimension** du réseau de l'automate cellulaire
 - S : l'**alphabet** de l'automate cellulaire, c'est-à-dire, l'ensemble des états que ses cellules peuvent prendre
 - V : le **voisinage** de l'automate cellulaire
 - f : la **règle locale de transition**
 
-Mathématiquement, d est un entier naturel, S est un ensemble de symboles, V est une partie finie de **Z** ^ d, et f est un élément de S ^ (S ^ V).
+Mathématiquement, d est un entier naturel, S est un ensemble de symboles, V est une partie finie de (**Z** ^ d), et f est un élément de (S ^ (S ^ V)).
 
-La règle de transition f est une fonction arbitraire allant de S ^ V dans S.
+La règle locale de transition f est donc une fonction arbitraire à paramètre dans (S ^ V) et à valeur dans S.
 
 f prend en paramètre une fonction u. La fonction u va de V dans S. Elle décrit chaque état des cellules d'un voisinage. f doit produire un nouvel état à partir de cette fonction u.
 
 #### Simulateur
 
-Nous nous proposons de définir formellement le concepte de simulateur.
+Nous nous proposons de définir formellement le concept de simulateur.
 
 Un **simulateur** est un triplet de valeurs:
 

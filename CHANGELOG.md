@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Space does play/pause
   - Enter does a single step
   - `-` and `+` do zoom decrease and increase (`_` and `=` work too)
-  - `[` and `]` do having and doubling the speed
+  - `[` and `]` do halving and doubling the speed
   - `{`, `|` and `}` do go to the left end, the right end or the center
   - The directional arrows move the camera in the given direction by a twelfth
     of the width or the heigth of the camera

@@ -12,6 +12,8 @@ interface Info_ {
    maxLeft: number
    maxRight: number
    center: number
+   pockingLeft: boolean
+   pockingRight: boolean
 
    atLeftBorder: boolean
    atRightBorder: boolean
@@ -41,7 +43,7 @@ export let getInfo = (store: Store): Info => {
          return 1
       },
       get maxSpeed() {
-         return 999
+         return 256
       },
       get passingMinSpeed() {
          return store.speed <= info.minSpeed
@@ -69,15 +71,20 @@ export let getInfo = (store: Store): Info => {
          return 0
       },
       get maxRight() {
-         let right = Math.floor(
-            ((store.size * store.zoom - store.canvasSize.x * 6) *
-               posS.microFactor) /
-               store.zoom,
-         )
+         let pixel6 = store.topology.width * store.zoom
+         let difference = pixel6 - store.canvasSize.x * 6
+         let right = Math.floor((difference * posS.microFactor) / store.zoom)
          return right
       },
       get center() {
          return Math.floor((info.maxLeft + info.maxRight) / 2)
+      },
+      /** Position tests */
+      get pockingLeft() {
+         return posS.totalPos < info.maxLeft
+      },
+      get pockingRight() {
+         return posS.totalPos > info.maxRight
       },
 
       /** Boolean indicators */

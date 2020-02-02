@@ -49,8 +49,8 @@ export let MiniZoom = observer(() => {
    }
 
    let relativeSmallMoveList = [
-      toButton('+', store.zoom === 300, display.act.increaseZoom),
-      toButton('-', store.zoom === 6, display.act.decreaseZoom),
+      toButton('🔍+', store.zoom === 300, display.act.increaseZoom),
+      toButton('🔍-', store.zoom === 6, display.act.decreaseZoom),
    ]
 
    return (

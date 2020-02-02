@@ -5,15 +5,23 @@ import { Info } from './info'
 export let getAct = (store: Store, info: Info) => {
    let { posS, posT } = store
 
-   let isBigEnough = () => info.maxLeft < info.maxRight
+   let isBigEnough = () => info.maxLeft <= info.maxRight
    let fixLeft = () => {
-      if (posS.totalPos < info.maxLeft && isBigEnough()) {
+      if (info.pockingLeft && isBigEnough()) {
          act.gotoMaxLeft()
       }
    }
    let fixRight = () => {
-      if (posS.totalPos > info.maxRight && isBigEnough()) {
+      if (info.pockingRight && isBigEnough()) {
          act.gotoMaxRight()
+      }
+   }
+   let fixPosition = () => {
+      if (isBigEnough()) {
+         fixLeft()
+         fixRight()
+      } else {
+         act.gotoCenter()
       }
    }
    let fixTop = () => {
@@ -91,10 +99,12 @@ export let getAct = (store: Store, info: Info) => {
       increaseZoom: action(() => {
          store.zoom *= 2
          fixZoom()
+         fixPosition()
       }),
       decreaseZoom: action(() => {
          store.zoom /= 2
          fixZoom()
+         fixPosition()
       }),
 
       /***********/

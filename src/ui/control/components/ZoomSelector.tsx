@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { clip } from '../../../util/clip'
+import { clamp } from '../../../util/clamp'
 import { errorCheck } from '../../../util/errorCheck'
 import { useStore } from '../../util/useContextHook'
 import { SelectorInput } from './SelectorInput'
@@ -41,7 +41,7 @@ export let ZoomSelector = observer(() => {
                while (res % modulo !== 0) {
                   res += diff
                }
-               res = clip(res, lowBound, highBound)
+               res = clamp(res, lowBound, highBound)
                textResult = '' + res
                let [error] = validation(textResult)
                submit = !error

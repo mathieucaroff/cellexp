@@ -16,8 +16,7 @@ let useStyle = makeStyles((theme: Theme) =>
             margin: theme.spacing(2),
          },
          '& > *': {
-            marginTop: theme.spacing(2),
-            marginLeft: theme.spacing(3),
+            margin: theme.spacing(1),
          },
       },
    }),
@@ -27,14 +26,12 @@ export let DisplayFooter = () => {
    let classes = useStyle()
 
    return (
-      <>
-         <div className={classes.panningButtons}>
-            <MiniPlayPause />
-            <MiniSpeedChange />
-            <VerticalPanning />
-            <MiniZoom />
-            <HorizontalPanning />
-         </div>
-      </>
+      <div className={classes.panningButtons}>
+         <MiniPlayPause />
+         <MiniSpeedChange />
+         <MiniZoom />
+         <VerticalPanning />
+         <HorizontalPanning />
+      </div>
    )
 }

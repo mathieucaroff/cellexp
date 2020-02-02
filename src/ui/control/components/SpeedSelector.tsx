@@ -5,7 +5,7 @@ import { useStore } from '../../util/useContextHook'
 import { SelectorInput } from './SelectorInput'
 
 let validation = (value: string) => {
-   let high = 999
+   let high = 256
 
    let notAnInteger = () => !value.match(/^-?\d*$/)
    let notPositive = () => !!value.match(/^-/)

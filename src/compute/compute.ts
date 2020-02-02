@@ -1,76 +1,140 @@
-import { Hub } from '../state/hub'
-import { Store } from '../state/store'
-import { autox } from '../util/autox'
+import { deepEqual } from '../util/deepEqual'
 import { Pair } from '../util/RectType'
+import { Computer, ComputerOpenProp } from './ComputerType'
+import { randrange } from './randrange'
+import { BorderPattern, StochasticState } from './topology'
+import { timed, timedExpr } from '../util/timeMeasure'
+import { warnOnce } from '../util/warnOnce'
 
-export interface Computer {
-   getCell(pos: Pair): number
-}
+export let createComputer = (): Computer => {
+   let ruleCache: Uint8Array[] = []
 
-export let createComputer = (store: Store, hub: Hub) => {
-   let cache: Record<number, Uint8Array> = {}
-   let currentTime: number
-   let rule: number
+   let lastProp: ComputerOpenProp
 
-   let initialize = () => {
-      currentTime = 0
-      cache = {}
-      rule = store.rule
+   let open = timed('!computer.open', (prop: ComputerOpenProp) => {
+      if (!deepEqual(prop, lastProp)) {
+         lastProp = prop
+         ruleCache = []
+         ;(window as any).ruleCache = ruleCache
+      }
 
-      let firstLine = new Uint8Array(store.size).map(() =>
-         Math.random() < 0.5 ? 1 : 0,
-      )
+      let { rule, seed: seedString, topology } = prop
+      let ruleNumber = rule.number
+      if (
+         rule.dimension !== 1 ||
+         rule.stateCount !== 2 ||
+         rule.neighborhoodSize !== 3
+      ) {
+         console.error(rule)
+         throw new Error('only elementary rules are supported for now')
+      }
 
-      cache[0] = firstLine
-      currentTime++
-   }
+      if (topology.finitness === 'infinite') {
+         throw new Error('infinte topologies are unimplemented for now')
+      }
 
-   hub.reroll.register(initialize)
+      let { width } = topology
 
-   autox.computer_initialisation(initialize)
+      let computeRule = (
+         a: number = 0,
+         b: number = 0,
+         c: number = 0,
+      ): 0 | 1 => {
+         let k = (a << 2) | (b << 1) | c
+         return ruleNumber & (1 << k) ? 1 : 0
+      }
 
-   let computeRule = (a: number = 0, b: number = 0, c: number = 0) => {
-      let k = (a << 2) | (b << 1) | c
-      return (rule & (1 << k)) >> k
-   }
+      let getFromBorder = (
+         seedInt: number,
+         y: number,
+         border: BorderPattern,
+      ): 0 | 1 => {
+         let stochastic: StochasticState
+         if (border.init.length > y) {
+            stochastic = border.init[y]
+         } else {
+            stochastic =
+               border.cycle[(y - border.init.length) % border.cycle.length]
+         }
+         if (stochastic.total === 1) {
+            return stochastic.cumulativeMap[0] === 1 ? 0 : 1
+         } else {
+            let randomValue = randrange(seedString, seedInt, stochastic.total)
+            return randomValue < stochastic.cumulativeMap[0] ? 0 : 1
+         }
+      }
 
-   let { border } = store
+      let getLeftestOrRightest = (
+         lr: 'left' | 'right',
+         blr: 'borderLeft' | 'borderRight',
+         otherSideX: number,
+         seedBonus: number,
+      ) => (y: number): 0 | 1 => {
+         if (
+            topology.kind === 'loop' ||
+            (topology.kind === 'porous' && topology.porousness === lr)
+         ) {
+            return get({ y, x: otherSideX })
+         } else {
+            let border: BorderPattern
+            if (topology.kind === 'border') {
+               border = topology[blr]
+            } else if (topology.kind === 'porous') {
+               border = topology.borderOther
+            } else {
+               throw topology
+            }
+            let seedInt = 3 * y + seedBonus
+            return getFromBorder(seedInt, y, border)
+         }
+      }
 
-   let computeLine = (line: Uint8Array) => {
-      let newLine = Uint8Array.from({ length: line.length }, (_b, k) => {
-         return computeRule(line[k - 1], line[k], line[k + 1])
+      let otherSideX = width - 1
+      let getLeftest = getLeftestOrRightest('left', 'borderLeft', otherSideX, 0)
+      let getRightest = getLeftestOrRightest('right', 'borderRight', 0, 1)
+
+      let get = timed('get', (pos: Pair): 0 | 1 => {
+         if (ruleCache[pos.y] === undefined) {
+            ruleCache[pos.y] = new Uint8Array(width)
+         }
+         if (pos.x < 0 || pos.x >= width) {
+            warnOnce('getCell() out of topology area', pos)
+            return 0
+         }
+         if (ruleCache[pos.y][pos.x] === 0) {
+            timedExpr('ruleSolve', () => {
+               if (pos.y <= 0) {
+                  let seedInt = pos.x
+                  let res = randrange(seedString, seedInt, 2) as 0 | 1
+                  ruleCache[pos.y][pos.x] = res + 1
+               } else {
+                  let y = pos.y - 1
+                  let x = pos.x
+
+                  let above = get({ y, x })
+                  let aboveLeft, aboveRight: 0 | 1
+                  if (x === 0) {
+                     aboveLeft = getLeftest(y)
+                  } else {
+                     aboveLeft = get({ y, x: x - 1 })
+                  }
+
+                  if (x === width - 1) {
+                     aboveRight = getRightest(y)
+                  } else {
+                     aboveRight = get({ y, x: x + 1 })
+                  }
+
+                  ruleCache[pos.y][pos.x] =
+                     computeRule(aboveLeft, above, aboveRight) + 1
+               }
+            })
+         }
+         return (ruleCache[pos.y][pos.x] - 1) as 0 | 1
       })
 
-      if (border.left.kind === 'loop') {
-         newLine[0] = computeRule(line[line.length - 1], line[0], line[1])
-      }
+      return { get }
+   })
 
-      if (border.right.kind === 'loop') {
-         newLine[line.length - 1] = computeRule(
-            line[line.length - 2],
-            line[line.length - 1],
-            line[0],
-         )
-      }
-      return newLine
-   }
-
-   let request = (targetTime: number) => {
-      while (currentTime < targetTime) {
-         cache[currentTime] = computeLine(cache[currentTime - 1])
-         currentTime++
-      }
-   }
-
-   return {
-      getCell(pos: Pair) {
-         pos.y >= currentTime && request(pos.y + 1)
-         try {
-            return cache[pos.y]?.[pos.x]
-         } catch (e) {
-            console.error(e, e.stack, pos)
-            throw e
-         }
-      },
-   }
+   return { open }
 }

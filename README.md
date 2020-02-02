@@ -40,16 +40,16 @@ to be shipped in. A feature when it has been shipped in a release.
 - [x] (1) **Fedit-bases**
 - [x] (1) **Fnav-speed**
 - [x] (2) **Fconfig-pause**
-- [ ] (2) **Fconfig-pos-t**
-- [ ] (2) **Fconfig-pos-x**
-- [ ] (2) **Fconfig-step-by-step**
-- [ ] (2) **Fconfig-zoom**
-- [ ] (2) **Fnav-custom-resize**
-- [ ] (2) **Fnav-jump**
-- [ ] (2) **Fnav-pan-horiz**
-- [ ] (2) **Fnav-pan-vert**
+- [x] (2) **Fconfig-pos-t**
+- [x] (2) **Fconfig-pos-x**
+- [x] (2) **Fconfig-step-by-step**
+- [x] (2) **Fconfig-zoom**
+- [x] (2) **Fnav-custom-resize**
+- [x] (2) **Fnav-jump**
+- [x] (2) **Fnav-pan-horiz**
+- [x] (2) **Fnav-pan-vert**
 - [x] (2) **Fnav-pause**
-- [ ] (2) **Fnav-step**
+- [x] (2) **Fnav-step**
 - [ ] (3) **Fca-border**
 - [ ] (3) **Fconfig-border**
 - [ ] (3) **Fconfig-pattern-grid**

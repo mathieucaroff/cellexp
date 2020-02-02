@@ -1,4 +1,4 @@
-export let clip = (val: number, low: number, high: number) => {
+export let clamp = (val: number, low: number, high: number) => {
    if (val < low) {
       return low
    } else if (val > high) {

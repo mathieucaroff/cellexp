@@ -8,13 +8,10 @@ import { clx } from '../../util/clx'
 let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
       displayBlock: {
-         display: 'block',
+         display: 'inline-block',
       },
       spacerRight: {
          marginRight: '2em',
-      },
-      respectParentWidth: {
-         width: '100%',
       },
    })
 })
@@ -26,20 +23,20 @@ export let PropertyList = observer(() => {
    let { rule } = store
 
    return (
-      <div className={clx(classes.displayBlock, classes.respectParentWidth)}>
-         <div className={clx(classes.spacerRight)}>
+      <div>
+         <div className={clx(classes.displayBlock, classes.spacerRight)}>
             <SymmetricTable
                label="Symmetrics of current rule"
-               rule={rule}
-               symmetricReferenceRule={rule}
+               ruleNumber={rule.number}
+               symmetricReferenceRule={rule.number}
                symmetricMessage="self-symmetric"
             />
          </div>
-         <div>
+         <div className={clx(classes.displayBlock)}>
             <SymmetricTable
                label="Symmetrics of color output complement rule"
-               rule={255 - rule}
-               symmetricReferenceRule={rule}
+               ruleNumber={255 - rule.number}
+               symmetricReferenceRule={rule.number}
                symmetricMessage="remote-self-symmetric"
             />
          </div>

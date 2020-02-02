@@ -4,6 +4,7 @@ import { action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { useStore } from '../../util/useContextHook'
+import { Rule as RuleType } from '../../../compute/Rule'
 
 let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
@@ -14,19 +15,19 @@ let useStyle = makeStyles((theme: Theme) => {
 })
 
 export interface RuleProp {
-   rule: number
+   rule: RuleType
 }
 
-export let Rule = observer((prop: RuleProp) => {
+export let RuleLink = observer((prop: RuleProp) => {
    let classes = useStyle()
    let store = useStore()
    let onClick = action(() => {
-      store.rule = prop.rule
+      store.rule.number = prop.rule.number
    })
-   let textContent = <>rule&nbsp;{prop.rule}</>
+   let textContent = <>rule&nbsp;{prop.rule.number}</>
 
-   let content
-   if (store.rule === prop.rule) {
+   let content: React.ReactElement
+   if (store.rule.number === prop.rule.number) {
       content = textContent
    } else {
       content = (

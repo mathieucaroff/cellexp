@@ -9,14 +9,14 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { Rule } from '../editor/components/Rule'
+import { RuleLink } from '../editor/components/RuleLink'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
 import { AlignTime } from './components/AlignTime'
 import { CanvasHeight } from './components/CanvasHeight'
 import { CanvasWidth } from './components/CanvasWidth'
-import { CaSizeSelector } from './components/CaSizeSelector'
+import { WidthSelector } from './components/WidthSelector'
 import { FieldPosT } from './components/FieldPosT'
 import { FieldPosS } from './components/FieldPosS'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
@@ -26,6 +26,7 @@ import { ResetTime } from './components/ResetTime'
 import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
 import { ZoomSelector } from './components/ZoomSelector'
+import { TopologyController } from './TopologyController'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -53,15 +54,16 @@ export let Controller = observer(() => {
    let EPDt = ExpansionPanelDetails
 
    let simulationController = (
-      <EP className={shared.panel} elevation={2}>
+      <EP className={shared.panel} defaultExpanded>
          <EPSm expandIcon={<ExpandMoreIcon />}>
             <h3 className={shared.noVeritcalMargins}>
-               Simulation Controller <Rule rule={store.rule} />
+               Simulation Controller <RuleLink rule={store.rule} />
             </h3>
          </EPSm>
          <EPDt className={clx(classes.inputSizing, shared.block)}>
             <div className={shared.inputList}>
-               <CaSizeSelector />
+               <TopologyController />
+               <WidthSelector />
                <RerollButton />
             </div>
          </EPDt>
@@ -83,10 +85,10 @@ export let Controller = observer(() => {
    )
 
    let displayController = (
-      <EP className={shared.panel} defaultExpanded>
+      <EP className={shared.panel}>
          <EPSm expandIcon={<ExpandMoreIcon />}>
             <h3 className={shared.noVeritcalMargins}>
-               Display Controller <Rule rule={store.rule} />
+               Display Controller <RuleLink rule={store.rule} />
             </h3>
          </EPSm>
          <EPDt className={clx(classes.inputSizing, shared.block)}>

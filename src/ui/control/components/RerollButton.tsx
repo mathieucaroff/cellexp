@@ -1,10 +1,16 @@
 import Button from '@material-ui/core/Button'
 import * as React from 'react'
-import { useHub } from '../../util/useContextHook'
+import { useStore } from '../../util/useContextHook'
 
 export let RerollButton = () => {
-   let hub = useHub()
-   let handleClick = hub.reroll.dispatch
+   let store = useStore()
+
+   let handleClick = () => {
+      store.seed = Math.random()
+         .toString(36)
+         .slice(2)
+   }
+
    return (
       <div>
          <Button variant="outlined" onClick={handleClick}>

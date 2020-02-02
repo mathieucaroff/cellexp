@@ -2,7 +2,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
 import { toBase } from '../../../util/baseConverter'
 import { OxTable } from '../../components/OxTable'
-import { Rule } from './Rule'
+import { RuleLink } from './RuleLink'
+import { createElementaryRule } from '../../../compute/Rule'
 
 let reverse = (v: string): string => {
    return v
@@ -19,6 +20,7 @@ let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
       container: {
          display: 'inline-block',
+         width: '100%',
       },
       tableContainer: style,
       table: style,
@@ -27,17 +29,17 @@ let useStyle = makeStyles((theme: Theme) => {
 
 export interface SymmetricTableProp {
    label: string
-   rule: number
+   ruleNumber: number
    symmetricReferenceRule: number
    symmetricMessage: string
 }
 
 export let SymmetricTable = (prop: SymmetricTableProp) => {
-   let { label, rule, symmetricReferenceRule, symmetricMessage } = prop
+   let { label, ruleNumber, symmetricReferenceRule, symmetricMessage } = prop
 
    let classes = useStyle()
 
-   let binary = toBase(rule, 2, { size: 255 })
+   let binary = toBase(ruleNumber, 2, { size: 255 })
    let colorInputComplement = parseInt(reverse(binary), 2)
    let colorSymmetric = 255 - colorInputComplement
 
@@ -53,7 +55,7 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
       return (
          <>
             {status}
-            <Rule rule={symmetricRule} />
+            <RuleLink rule={createElementaryRule(symmetricRule)} />
          </>
       )
    }
@@ -69,7 +71,7 @@ export let SymmetricTable = (prop: SymmetricTableProp) => {
    return (
       <div className={classes.container}>
          <h4>
-            {label} <Rule rule={rule} />
+            {label} <RuleLink rule={createElementaryRule(ruleNumber)} />
          </h4>
          <OxTable
             tableHead={[['Name'], ['Symmetric Rule', 'center']]}
