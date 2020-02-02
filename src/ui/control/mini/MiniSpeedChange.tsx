@@ -37,13 +37,13 @@ export let MiniSpeedChange = observer(() => {
                disabled={display.info.passingMinSpeed}
                onClick={display.act.halfSpeed}
             >
-               /2
+               /2 🐌
             </Button>
             <Button
                disabled={display.info.passingMaxSpeed}
                onClick={display.act.doubleSpeed}
             >
-               x2
+               x2 🚀
             </Button>
          </ButtonGroup>
       </div>
