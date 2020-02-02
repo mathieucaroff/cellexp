@@ -20,6 +20,7 @@ let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
       container: {
          display: 'inline-block',
+         width: '100%',
       },
       tableContainer: style,
       table: style,
