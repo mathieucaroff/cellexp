@@ -7,10 +7,9 @@ export let DisplayHeader = observer(() => {
    let store = useStore()
 
    return (
-      <>
-         <h2>
-            Display <RuleBox />
-         </h2>
-      </>
+      <div>
+         <h2>Display</h2>
+         <RuleBox />
+      </div>
    )
 })
