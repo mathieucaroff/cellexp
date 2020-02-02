@@ -18,6 +18,7 @@ function main() {
    let bareStore = createStore()
    let store = observable(bareStore)
    let hub = createHub()
+   ;(window as any).store = bareStore
 
    let computer = createComputer()
    let display = createDisplay(store, computer, hub)
