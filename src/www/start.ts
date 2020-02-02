@@ -9,7 +9,12 @@ import { createHub } from '../state/hub'
 import { createStore } from '../state/store'
 import { appElement } from './app'
 
+import packageInfo from '../../package.json'
+
 function main() {
+   let cellexp_version = document.getElementById('cellexp_version')
+   cellexp_version!.innerText = packageInfo.version
+
    let bareStore = createStore()
    let store = observable(bareStore)
    let hub = createHub()
