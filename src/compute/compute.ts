@@ -84,7 +84,7 @@ export let createComputer = (): Computer => {
             } else {
                throw topology
             }
-            let seedInt = 2 * y + seedBonus
+            let seedInt = 3 * y + seedBonus
             return getFromBorder(seedInt, y, border)
          }
       }
@@ -97,7 +97,7 @@ export let createComputer = (): Computer => {
          if (ruleCache[pos.y] === undefined) {
             ruleCache[pos.y] = new Uint8Array(width)
          }
-         if (pos.x < 0 || pos.x > width - 1) {
+         if (pos.x < 0 || pos.x >= width) {
             warnOnce('getCell() out of topology area', pos)
             return 0
          }
