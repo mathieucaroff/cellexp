@@ -1,10 +1,15 @@
 import { deepEqual } from '../util/deepEqual'
+import { modGet } from '../util/mod'
 import { Pair } from '../util/RectType'
-import { Computer, ComputerOpenProp } from './ComputerType'
-import { randrange } from './randrange'
-import { StochasticState, SideBorderPattern } from './topology'
 import { timed, timedExpr } from '../util/timeMeasure'
 import { warnOnce } from '../util/warnOnce'
+import { Computer, ComputerOpenProp } from './ComputerType'
+import { randrange } from './randrange'
+import {
+   SideBorderPattern,
+   StochasticState,
+   TopBorderPattern,
+} from './topology'
 
 export let createComputer = (): Computer => {
    let ruleCache: Uint8Array[] = []
@@ -29,10 +34,6 @@ export let createComputer = (): Computer => {
          throw new Error('only elementary rules are supported for now')
       }
 
-      if (topology.finitness === 'infinite') {
-         throw new Error('infinte topologies are unimplemented for now')
-      }
-
       let { width } = topology
 
       let computeRule = (
@@ -44,24 +45,53 @@ export let createComputer = (): Computer => {
          return ruleNumber & (1 << k) ? 1 : 0
       }
 
-      let getFromBorder = (
-         seedInt: number,
-         y: number,
-         border: SideBorderPattern,
-      ): 0 | 1 => {
-         let stochastic: StochasticState
-         if (border.init.length > y) {
-            stochastic = border.init[y]
-         } else {
-            stochastic =
-               border.cycle[(y - border.init.length) % border.cycle.length]
-         }
+      let runStochastic = (stochastic: StochasticState, seedInt: number) => {
          if (stochastic.total === 1) {
             return stochastic.cumulativeMap[0] === 1 ? 0 : 1
          } else {
             let randomValue = randrange(seedString, seedInt, stochastic.total)
             return randomValue < stochastic.cumulativeMap[0] ? 0 : 1
          }
+      }
+
+      let getFromTopBorder = (
+         seedInt: number,
+         x: number,
+         border: TopBorderPattern,
+      ): 0 | 1 => {
+         let { center, cycleLeft, cycleRight } = border
+
+         let stochastic: StochasticState
+
+         let cx = Math.floor(center.length / 2) + x
+         if (0 <= cx && cx < center.length) {
+            stochastic = border.center[cx]
+         } else if (cx < 0) {
+            let xx = -cx - 1
+            stochastic = modGet(cycleLeft, xx)
+         } else if (cx >= center.length) {
+            let xx = cx - center.length
+            stochastic = modGet(cycleRight, xx)
+         } else throw {}
+
+         return runStochastic(stochastic, seedInt)
+      }
+
+      let getFromBorder = (
+         seedInt: number,
+         y: number,
+         border: SideBorderPattern,
+      ): 0 | 1 => {
+         let { init, cycle } = border
+
+         let stochastic: StochasticState
+         if (init.length > y) {
+            stochastic = init[y]
+         } else {
+            stochastic = modGet(cycle, y - border.init.length)
+         }
+
+         return runStochastic(stochastic, seedInt)
       }
 
       let getLeftestOrRightest = (
@@ -90,8 +120,8 @@ export let createComputer = (): Computer => {
       }
 
       let otherSideX = width - 1
-      let getLeftest = getLeftestOrRightest('left', 'borderLeft', otherSideX, 0)
-      let getRightest = getLeftestOrRightest('right', 'borderRight', 0, 1)
+      let getLeftest = getLeftestOrRightest('left', 'borderLeft', otherSideX, 1)
+      let getRightest = getLeftestOrRightest('right', 'borderRight', 0, 2)
 
       let get = timed('get', (pos: Pair): 0 | 1 => {
          if (ruleCache[pos.y] === undefined) {
@@ -104,8 +134,10 @@ export let createComputer = (): Computer => {
          if (ruleCache[pos.y][pos.x] === 0) {
             timedExpr('ruleSolve', () => {
                if (pos.y <= 0) {
-                  let seedInt = pos.x
-                  let res = randrange(seedString, seedInt, 2) as 0 | 1
+                  let seedInt = pos.x * 3
+                  let { genesis } = topology
+                  let xx = pos.x - Math.floor(topology.width / 2)
+                  let res = getFromTopBorder(seedInt, xx, genesis) as 0 | 1
                   ruleCache[pos.y][pos.x] = res + 1
                } else {
                   let y = pos.y - 1

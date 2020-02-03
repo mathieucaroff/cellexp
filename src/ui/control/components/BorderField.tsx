@@ -3,11 +3,10 @@ import { reaction } from 'mobx'
 import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
 import {
-   BdslResultSuccess,
-   bdslParsePattern,
-   borderToBdsl,
    bdslParseSideBorder,
    bdslParseTopBorder,
+   BdslResultSuccess,
+   borderToBdsl,
 } from '../../../compute/bdsl'
 import { TopologyFinite } from '../../../compute/topology'
 import { capitalize } from '../../../util/capitalize'
@@ -31,9 +30,15 @@ export let BorderField = observer((prop: BorderFieldProp) => {
    let classes = useStyle()
 
    let local = useLocalStore(() => {
+      let value = ''
+      if (side === 'top') {
+         value = '([01])'
+      } else {
+         value = '(0)'
+      }
       return {
-         slowValue: '(0)',
-         value: '(0)',
+         slowValue: value,
+         value,
       }
    })
 
@@ -64,7 +69,7 @@ export let BorderField = observer((prop: BorderFieldProp) => {
    return (
       <SlowTextField
          className={classes.borderSelector}
-         disabled={topology.kind !== 'border'}
+         disabled={side !== 'top' && topology.kind !== 'border'}
          error={!bdslResult.success}
          fastValue={local.value}
          helperText={helperText}
