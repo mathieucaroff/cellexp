@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { errorCheck } from '../../../util/errorCheck'
 import { useStore } from '../../util/useContextHook'
-import { SelectorInput } from './SelectorInput'
+import { SelectorInput } from '../../components/SelectorInput'
 
 export let FieldPosS = observer(() => {
    let store = useStore()

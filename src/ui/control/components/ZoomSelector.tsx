@@ -3,7 +3,7 @@ import * as React from 'react'
 import { clamp } from '../../../util/clamp'
 import { errorCheck } from '../../../util/errorCheck'
 import { useStore } from '../../util/useContextHook'
-import { SelectorInput } from './SelectorInput'
+import { SelectorInput } from '../../components/SelectorInput'
 
 let lowBound = 6
 let highBound = 300

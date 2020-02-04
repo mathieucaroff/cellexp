@@ -2,8 +2,8 @@ import { action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { useState } from 'react'
-import { SlowTextField } from '../../components/SlowTextField'
-import { useReaction } from '../../util/useReaction'
+import { SlowTextField } from './SlowTextField'
+import { useReaction } from '../util/useReaction'
 
 /**
  * SelectorInputProp
