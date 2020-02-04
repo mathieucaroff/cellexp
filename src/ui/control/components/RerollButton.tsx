@@ -9,6 +9,7 @@ export let RerollButton = () => {
       store.seed = Math.random()
          .toString(36)
          .slice(2)
+         .toUpperCase()
    }
 
    return (

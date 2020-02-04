@@ -60,7 +60,7 @@ export let createStore = (): Store => {
             cycleRight: [random01],
          },
       },
-      seed: '',
+      seed: '_',
 
       // MDisplay
       canvasSize: defaultCanvasSize(), // x: 1320 - good for 1366-pixel-width displays

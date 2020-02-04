@@ -27,6 +27,7 @@ import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
 import { ZoomSelector } from './components/ZoomSelector'
 import { TopologyController } from './TopologyController'
+import { SeedSelector } from './components/SeedSelector'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -64,6 +65,7 @@ export let Controller = observer(() => {
             <div className={shared.inputList}>
                <TopologyController />
                <WidthSelector />
+               <SeedSelector />
                <RerollButton />
             </div>
          </EPDt>
