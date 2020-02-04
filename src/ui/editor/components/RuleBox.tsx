@@ -18,7 +18,7 @@ let useStyle = makeStyles((theme: Theme) => {
             width: 'fit-content',
          },
          '& input': {
-            width: '24em',
+            width: '19em',
          },
       },
    })
