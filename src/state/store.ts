@@ -26,9 +26,9 @@ export interface Store {
 }
 
 export let createStore = (): Store => {
-   let random01 = {
-      cumulativeMap: [1, 2],
-      total: 2,
+   let random7 = {
+      cumulativeMap: [6, 7],
+      total: 7,
    }
 
    return {
@@ -56,8 +56,8 @@ export let createStore = (): Store => {
          genesis: {
             kind: 'top',
             center: [],
-            cycleLeft: [random01],
-            cycleRight: [random01],
+            cycleLeft: [random7],
+            cycleRight: [random7],
          },
       },
       seed: '_',

@@ -8,7 +8,7 @@ import {
 import { set, action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { BorderPattern } from '../../compute/topology'
+import { BorderDescriptor } from '../../compute/topology'
 import { useStore } from '../util/useContextHook'
 import { BorderField } from './components/BorderField'
 
@@ -34,7 +34,7 @@ export let TopologyController = observer(() => {
       total: 1,
    }
 
-   let simpleDeadBorder: BorderPattern = {
+   let simpleDeadBorder: BorderDescriptor = {
       kind: 'side',
       init: [],
       cycle: [dead],

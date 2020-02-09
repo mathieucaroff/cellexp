@@ -6,9 +6,9 @@ import { warnOnce } from '../util/warnOnce'
 import { Computer, ComputerOpenProp } from './ComputerType'
 import { randrange } from './randrange'
 import {
-   SideBorderPattern,
+   SideBorderDescriptor,
    StochasticState,
-   TopBorderPattern,
+   TopBorderDescriptor,
 } from './topology'
 
 export let createComputer = (): Computer => {
@@ -57,7 +57,7 @@ export let createComputer = (): Computer => {
       let getFromTopBorder = (
          seedInt: number,
          x: number,
-         border: TopBorderPattern,
+         border: TopBorderDescriptor,
       ): 0 | 1 => {
          let { center, cycleLeft, cycleRight } = border
 
@@ -80,7 +80,7 @@ export let createComputer = (): Computer => {
       let getFromBorder = (
          seedInt: number,
          y: number,
-         border: SideBorderPattern,
+         border: SideBorderDescriptor,
       ): 0 | 1 => {
          let { init, cycle } = border
 
@@ -106,7 +106,7 @@ export let createComputer = (): Computer => {
          ) {
             return get({ y, x: otherSideX })
          } else {
-            let border: SideBorderPattern
+            let border: SideBorderDescriptor
             if (topology.kind === 'border') {
                border = topology[blr]
             } else if (topology.kind === 'porous') {

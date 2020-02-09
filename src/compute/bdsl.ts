@@ -1,9 +1,9 @@
 import {
-   BorderPattern,
+   BorderDescriptor,
    StochasticState,
    BasePattern,
-   TopBorderPattern,
-   SideBorderPattern,
+   TopBorderDescriptor,
+   SideBorderDescriptor,
 } from './topology'
 
 /**
@@ -39,7 +39,7 @@ export let patternToBdsl = (pattern: BasePattern): string => {
  *
  * @param border the border pattern to convert to bdsl
  */
-export let borderToBdsl = (border: BorderPattern): string => {
+export let borderToBdsl = (border: BorderDescriptor): string => {
    if (border.kind === 'side') {
       let init = patternToBdsl(border.init)
       let cycle = patternToBdsl(border.cycle)
@@ -139,7 +139,7 @@ export let bdslParsePattern = (bdsl: string): BdslResult<BasePattern> => {
 
 export let bdslParseTopBorder = (
    bdsl: string,
-): BdslResult<TopBorderPattern> => {
+): BdslResult<TopBorderDescriptor> => {
    let center, cycleLeft, cycleRight: BasePattern
 
    let m: RegExpMatchArray | null
@@ -197,7 +197,7 @@ export let bdslParseTopBorder = (
       }
    }
 
-   let border: TopBorderPattern = {
+   let border: TopBorderDescriptor = {
       kind: 'top',
       center,
       cycleLeft,
@@ -212,7 +212,7 @@ export let bdslParseTopBorder = (
 
 export let bdslParseSideBorder = (
    bdsl: string,
-): BdslResult<SideBorderPattern> => {
+): BdslResult<SideBorderDescriptor> => {
    let init, cycle: BasePattern
 
    let m: RegExpMatchArray | null
@@ -245,7 +245,7 @@ export let bdslParseSideBorder = (
       }
    }
 
-   let border: SideBorderPattern = {
+   let border: SideBorderDescriptor = {
       kind: 'side',
       init,
       cycle,
