@@ -48,3 +48,5 @@ export let randrange = (
 
    return res!
 }
+
+export type Randrange = typeof randrange
