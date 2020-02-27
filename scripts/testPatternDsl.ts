@@ -53,7 +53,7 @@ let patternList: Case<string, Pattern>[] = [
       output: {
          type: 'exact',
          repetition: 'none',
-         persistance: 'none',
+         persistence: 'none',
          pattern: pattern0,
       },
    },
@@ -63,7 +63,7 @@ let patternList: Case<string, Pattern>[] = [
       output: {
          type: 'triangle',
          repetition: 'none',
-         persistance: 'persistant',
+         persistence: 'persistent',
          pattern: pattern0,
       },
    },
@@ -73,7 +73,7 @@ let patternList: Case<string, Pattern>[] = [
       output: {
          type: 'cyclic',
          repetition: 'cycle',
-         persistance: 'none',
+         persistence: 'none',
          pattern: pattern0,
       },
    },
@@ -83,7 +83,7 @@ let patternList: Case<string, Pattern>[] = [
       output: {
          type: 'grid',
          repetition: 'cycle',
-         persistance: 'persistant',
+         persistence: 'persistent',
          pattern: pattern0,
       },
    },
@@ -93,7 +93,7 @@ let patternList: Case<string, Pattern>[] = [
       output: {
          type: 'grid',
          repetition: 'cycle',
-         persistance: 'persistant',
+         persistence: 'persistent',
          pattern: { type: 'group', content: [one], ...qwv1 },
       },
    },
@@ -103,7 +103,7 @@ let patternList: Case<string, Pattern>[] = [
       output: {
          type: 'grid',
          repetition: 'cycle',
-         persistance: 'persistant',
+         persistence: 'persistent',
          pattern: {
             type: 'group',
             content: [

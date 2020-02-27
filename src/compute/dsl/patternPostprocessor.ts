@@ -26,28 +26,28 @@ export let flag = ([input]): Pattern => {
       return {
          type: 'exact',
          repetition: 'none',
-         persistance: 'none',
+         persistence: 'none',
          pattern,
       }
    } else if (input === '^') {
       return {
          type: 'triangle',
          repetition: 'none',
-         persistance: 'persistant',
+         persistence: 'persistent',
          pattern,
       }
    } else if (input === '=') {
       return {
          type: 'cyclic',
          repetition: 'cycle',
-         persistance: 'none',
+         persistence: 'none',
          pattern,
       }
    } else if (input === '#') {
       return {
          type: 'grid',
          repetition: 'cycle',
-         persistance: 'persistant',
+         persistence: 'persistent',
          pattern,
       }
    } else {

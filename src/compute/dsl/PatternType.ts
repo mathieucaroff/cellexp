@@ -3,28 +3,28 @@
 export interface ExactPattern {
    type: 'exact'
    repetition: 'none'
-   persistance: 'none'
+   persistence: 'none'
    pattern: PatternRootGroup
 }
 
 export interface TrianglePattern {
    type: 'triangle'
    repetition: 'none'
-   persistance: 'persistant'
+   persistence: 'persistent'
    pattern: PatternRootGroup
 }
 
 export interface CyclicPattern {
    type: 'cyclic'
    repetition: 'cycle'
-   persistance: 'none'
+   persistence: 'none'
    pattern: PatternRootGroup
 }
 
 export interface GridPattern {
    type: 'grid'
    repetition: 'cycle'
-   persistance: 'persistant'
+   persistence: 'persistent'
    pattern: PatternRootGroup
 }
 
