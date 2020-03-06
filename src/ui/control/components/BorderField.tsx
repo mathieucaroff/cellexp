@@ -3,8 +3,9 @@ import { reaction } from 'mobx'
 import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
 import {
+   bdslParseSideBorder,
+   bdslParseTopBorder,
    BdslResultSuccess,
-   bdslToBorder,
    borderToBdsl,
 } from '../../../compute/bdsl'
 import { TopologyFinite } from '../../../compute/topology'
@@ -13,27 +14,31 @@ import { SlowTextField } from '../../components/SlowTextField'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      borderSelector: {
-         width: '200px',
-      },
+      borderSelector: {},
    }),
 )
 
-export interface BorderSelectorProp {
-   property: 'borderLeft' | 'borderRight'
-   side: 'left' | 'right'
+export interface BorderFieldProp {
+   property: 'borderLeft' | 'borderRight' | 'genesis'
+   side: 'left' | 'right' | 'top'
    topology: TopologyFinite
 }
 
-export let BorderSelector = observer((prop: BorderSelectorProp) => {
+export let BorderField = observer((prop: BorderFieldProp) => {
    let { property, side, topology } = prop
 
    let classes = useStyle()
 
    let local = useLocalStore(() => {
+      let value = ''
+      if (side === 'top') {
+         value = '([01])'
+      } else {
+         value = '(0)'
+      }
       return {
-         slowValue: '0',
-         value: '0',
+         slowValue: value,
+         value,
       }
    })
 
@@ -51,7 +56,12 @@ export let BorderSelector = observer((prop: BorderSelectorProp) => {
    let label = `Border ${capitalize(side)}`
    let helperText = ''
 
-   let bdslResult = bdslToBorder(local.value)
+   let bdslParse: any = bdslParseSideBorder
+   if (side === 'top') {
+      bdslParse = bdslParseTopBorder
+   }
+
+   let bdslResult = bdslParse(local.value)
    if (!bdslResult.success) {
       helperText = bdslResult.info
    }
@@ -59,7 +69,7 @@ export let BorderSelector = observer((prop: BorderSelectorProp) => {
    return (
       <SlowTextField
          className={classes.borderSelector}
-         disabled={topology.kind !== 'border'}
+         disabled={side !== 'top' && topology.kind !== 'border'}
          error={!bdslResult.success}
          fastValue={local.value}
          helperText={helperText}
@@ -69,8 +79,8 @@ export let BorderSelector = observer((prop: BorderSelectorProp) => {
          }}
          onSubmit={(submittedV) => {
             local.slowValue = submittedV
-            let { border } = bdslResult as BdslResultSuccess
-            topology[property] = border
+            let { result } = bdslResult as BdslResultSuccess<any>
+            topology[property] = result
          }}
          slowValue={local.slowValue}
       />

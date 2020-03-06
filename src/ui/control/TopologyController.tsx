@@ -8,9 +8,9 @@ import {
 import { set, action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { BorderPattern } from '../../compute/topology'
+import { BorderDescriptor } from '../../compute/topology'
 import { useStore } from '../util/useContextHook'
-import { BorderSelector } from './components/BorderSelector'
+import { BorderField } from './components/BorderField'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -34,7 +34,8 @@ export let TopologyController = observer(() => {
       total: 1,
    }
 
-   let simpleDeadBorder: BorderPattern = {
+   let simpleDeadBorder: BorderDescriptor = {
+      kind: 'side',
       init: [],
       cycle: [dead],
    }
@@ -65,12 +66,17 @@ export let TopologyController = observer(() => {
             <MenuItem value="loop">Loop</MenuItem>
             <MenuItem value="border">Border</MenuItem>
          </Select>
-         <BorderSelector
+         <BorderField
+            property={'genesis'}
+            side={'top'}
+            topology={store.topology}
+         />
+         <BorderField
             property={'borderLeft'}
             side={'left'}
             topology={store.topology}
          />
-         <BorderSelector
+         <BorderField
             property={'borderRight'}
             side={'right'}
             topology={store.topology}

@@ -13,6 +13,7 @@ export interface SlowTextFieldProp {
    onSubmit: (v: string) => void
    slowValue: string
    type?: string
+   variant?: string
 }
 
 export let SlowTextField = (prop: SlowTextFieldProp) => {
@@ -28,6 +29,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
       onSubmit,
       slowValue,
       type,
+      variant,
    } = prop
 
    let maybeDirty = slowValue !== fastValue ? 'dirty' : ''
@@ -53,6 +55,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
             disabled={disabled}
             helperText={helperText}
             type={type}
+            variant={variant as any}
             onChange={(ev) => onChange(ev.currentTarget.value)}
          />
       </form>

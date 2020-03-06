@@ -2,8 +2,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
-import { useStore, useDisplay } from '../../util/useContextHook'
-import { Xelement } from '../../util/Xelement'
+import { useDisplay } from '../../../util/useContextHook'
+import { Xelement } from '../../../util/Xelement'
 import { observer } from 'mobx-react-lite'
 
 let useStyle = makeStyles((theme: Theme) =>

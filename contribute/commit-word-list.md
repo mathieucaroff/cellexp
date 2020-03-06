@@ -22,11 +22,14 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 
 ### modules
 
+- scripts
 - src
 
+- data -- partially generated data, along with their generation script
 - simulator
   - compute
   - display
+- state
 - ui
   - editor -- rule editor
   - control -- simulation configurator

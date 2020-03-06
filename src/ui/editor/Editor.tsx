@@ -13,9 +13,10 @@ import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
 import { PropertyList } from './components/PropertyList'
-import { RuleLink } from './components/RuleLink'
 import { RuleEditor } from './components/RuleEditor'
-import { RuleSelector } from './components/RuleSelector'
+import { RuleLink } from './components/RuleLink'
+import { RuleSelection } from './components/RuleSelection'
+import { RuleSelectorTable } from './ruleSelectorTable/RuleSelectorTable'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -41,10 +42,18 @@ export let Editor = observer(() => {
          </h2>
          <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Rule Picker</h3>
+               <h3 className={shared.noVeritcalMargins}>Rule Table</h3>
             </EPSm>
             <EPDt className={clx(classes.displayBlock)}>
-               <RuleSelector />
+               <RuleSelectorTable />
+            </EPDt>
+         </EP>
+         <EP className={shared.panel} defaultExpanded>
+            <EPSm expandIcon={<ExpandMoreIcon />}>
+               <h3 className={shared.noVeritcalMargins}>Old Rule Selection</h3>
+            </EPSm>
+            <EPDt className={clx(classes.displayBlock)}>
+               <RuleSelection />
             </EPDt>
          </EP>
          <EP className={shared.panel}>

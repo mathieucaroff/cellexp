@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { Store } from '../../../state/store'
+import { State } from '../../../state/state'
 import { CellexpTheme, themeSet, ThemeString } from '../../../www/theme'
 
 export interface AppThemeSelectorProp {
@@ -13,7 +13,7 @@ export interface AppThemeSelectorProp {
    help: string
    allowUnset?: boolean
    themeProperty: 'theme' | 'displayTheme'
-   store: Store
+   store: State
    nameFunction: (theme: CellexpTheme) => string
 }
 

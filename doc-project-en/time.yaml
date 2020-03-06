@@ -1,0 +1,69 @@
+%YAML 1.1
+---
+title: "Time tracking"
+
+"Keyboard binding":
+  estimate: 4h
+  result:
+  - time: 2020-01-15T22:34+01 -> 2020-01-15T23:06+01
+    with: writing `display/keyboardManager.ts`
+
+  - time: 2020-01-15T23:06+01 -> 2020-01-16T00:09+01
+    with: moving arrows and centering them (2x the expected time)
+
+  - time: 2020-01-16T00:09+01 -> 2020-01-16T00:22+01
+    with: moving the display block to the top (.7x the expected time)
+
+  - time: 2020-01-16T00:23+01 -> 2020-01-16T00:30+01
+    with: changing the button symbols (.7x the expected time)
+
+  - time: 2020-01-16T07:13+01 -> 2020-01-16T07:45+01
+    with: disabling arrow that cannot be used (1.5x the expected time)
+
+  - time: 2020-01-16T18:35+01 -> 2020-01-16T18:51+01
+    with: add a context for accessing the display (1.1x)
+
+  - timeList:
+    - 2020-01-16T18:51+01 -> 2020-01-16T19:22+01
+    - 2020-01-16T19:53+01 -> 2020-01-16T21:18+01
+    with: Move key logic to display.tsx (3x -- 1h50 instead of 40min)
+
+  - start: 2020-01-16T21:55+01
+    end: "?"
+    with: Keyboard binding (~1x ?)
+
+  total: 5h10
+  comment: The estimate was rather decent!
+  group: 2
+
+"Border and State Design":
+  estimate: 2h
+  result: []
+
+"Autosizing":
+  estimate: 4h
+  result:
+  - with: add small buttons (1h)
+  - with: add big buttons (30m)
+  - with: make buttons work (wider, narrower / higher, smaller | autosize) (45m)
+  - with: deal with size limit (1h30)
+  - with: picking a default size (10m)
+
+"Topology Control":
+  estimate: 3h
+  result:
+  - with: add topology selection field (disabled) (15m)
+    note: it required a lot of wiring inside and repairing problems caused by changes to the store (15m+)
+    time: 2020-02-02T11:44+01 -> 2020-02-02T12:15+01
+  - with: parse control fields (1h)
+  - with: add border control fields (30m)
+  - with: add state control field (5m)
+  - with: ensure the state and border fields are respected (45m)
+
+"Pattern Detection":
+  estimate: 4h
+  result:
+  - with: specify the feature (45m)
+  - with: create pattern specifier type (15m)
+  - with: add pattern detection (with cache) (1h)
+  - with: more things to do (2h)

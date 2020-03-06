@@ -1,9 +1,9 @@
 import { createContext } from 'react'
 import { Hub } from '../state/hub'
-import { Store } from '../state/store'
+import { State } from '../state/state'
 import { Display } from '../display/display'
 
-export let storeContext = createContext<Store | null>(null)
+export let storeContext = createContext<State | null>(null)
 export let hubContext = createContext<Hub | null>(null)
 export let displayContext = createContext<Display | null>(null)
 

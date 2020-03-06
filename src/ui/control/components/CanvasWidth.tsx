@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { errorCheck } from '../../../util/errorCheck'
 import { useStore } from '../../util/useContextHook'
-import { SelectorInput } from './SelectorInput'
+import { SelectorInput } from '../../components/SelectorInput'
 
 let validation = (value: string) => {
    const fourKWidth = 3840

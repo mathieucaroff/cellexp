@@ -13,18 +13,19 @@ import { RuleLink } from '../editor/components/RuleLink'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
-import { AlignTime } from './components/AlignTime'
 import { CanvasHeight } from './components/CanvasHeight'
 import { CanvasWidth } from './components/CanvasWidth'
-import { WidthSelector } from './components/WidthSelector'
-import { FieldPosT } from './components/FieldPosT'
 import { FieldPosS } from './components/FieldPosS'
+import { FieldPosT } from './components/FieldPosT'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
+import { MorePanningControl } from './components/MorePanningControl'
 import { PlayPauseButton } from './components/PlayPauseButton'
 import { RerollButton } from './components/RerollButton'
 import { ResetTime } from './components/ResetTime'
+import { SeedSelector } from './components/SeedSelector'
 import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
+import { WidthSelector } from './components/WidthSelector'
 import { ZoomSelector } from './components/ZoomSelector'
 import { TopologyController } from './TopologyController'
 
@@ -60,10 +61,11 @@ export let Controller = observer(() => {
                Simulation Controller <RuleLink rule={store.rule} />
             </h3>
          </EPSm>
-         <EPDt className={clx(classes.inputSizing, shared.block)}>
+         <EPDt className={clx(shared.block)}>
             <div className={shared.inputList}>
                <TopologyController />
                <WidthSelector />
+               <SeedSelector />
                <RerollButton />
             </div>
          </EPDt>
@@ -78,7 +80,6 @@ export let Controller = observer(() => {
          <EPDt className={clx(classes.inputSizing, shared.block)}>
             <div className={classes.inputList}>
                <FieldPrecisePosT />
-               <AlignTime />
             </div>
          </EPDt>
       </EP>
@@ -92,12 +93,12 @@ export let Controller = observer(() => {
             </h3>
          </EPSm>
          <EPDt className={clx(classes.inputSizing, shared.block)}>
-            {displayExtraControls}
             <div className={classes.inputList}>
                <ZoomSelector />
                <CanvasHeight />
                <CanvasWidth />
                <SpeedSelector />
+               <MorePanningControl />
             </div>
             <div className={classes.inputList}>
                <FieldPosT />
@@ -106,6 +107,7 @@ export let Controller = observer(() => {
                <PlayPauseButton />
                <SingleStep />
             </div>
+            {displayExtraControls}
          </EPDt>
       </EP>
    )

@@ -3,7 +3,7 @@ import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
 import { Display } from '../display/display'
 import { Hub } from '../state/hub'
-import { Store } from '../state/store'
+import { State } from '../state/state'
 import { Configurator } from '../ui/control/Configurator'
 import { Controller } from '../ui/control/Controller'
 import { DisplayAdapter } from '../ui/DisplayAdapter'
@@ -17,7 +17,7 @@ import { InfoSection } from '../ui/info/InfoSection'
 export interface AppProp {
    display: Display
    hub: Hub
-   store: Store
+   store: State
 }
 
 let App = observer((prop: AppProp) => {

@@ -1,11 +1,11 @@
 import { Pair } from '../util/RectType'
-import { Topology } from './topology'
+import { TopologyFinite } from './topology'
 import { Rule } from './Rule'
 
 export interface ComputerOpenProp {
    rule: Rule
    seed: string
-   topology: Topology
+   topology: TopologyFinite
 }
 
 export interface OpenComputer {
