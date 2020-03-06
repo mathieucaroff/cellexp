@@ -35,11 +35,11 @@ export let RuleCell = (prop: RuleCellProp) => {
    let c = useStyle()
    let store = useStore()
 
-   let ccc: string[] = [c.cell]
+   let ccc: string[] = [c.cell, 'cell']
    if (prop.activated) {
       ccc.push(c.activated)
    }
-   ccc.push(...prop.info)
+   ccc.push(...prop.info.map((trait) => `tt-${trait}`))
 
    let handleClick = () => {
       store.rule.number = prop.number

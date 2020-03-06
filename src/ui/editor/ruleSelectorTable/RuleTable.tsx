@@ -19,7 +19,7 @@ let useStyle = makeStyles((theme: Theme) =>
 export let RuleTable = observer(() => {
    let c = useStyle()
    let store = useStore()
-   let ccc: string[] = [c.table, c.inlineblock, c[store.ruleTrait]]
+   let ccc: string[] = [c.table, c.inlineblock, `tt-${store.ruleTrait}`]
 
    let ruleList = Array.from({ length: 256 }, (_, k) => {
       return <RuleCell key={k} number={k} info={ruleData[k]} />
