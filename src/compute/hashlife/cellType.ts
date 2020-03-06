@@ -8,6 +8,7 @@ export interface AirCell extends BaseCell {
    left: Cell
    right: Cell
    result: () => Cell
+   level: number
 }
 
 export type Atom = number[]
@@ -21,7 +22,3 @@ export interface GroundCell extends BaseCell {
 }
 
 export type Cell = AirCell | GroundCell
-
-// hash:
-// - (Air) concatenation of children ids
-// - (Ground)

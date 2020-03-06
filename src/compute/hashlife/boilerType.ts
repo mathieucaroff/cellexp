@@ -1,6 +1,7 @@
 export interface Boiler {
    marginLeft: number
    marginRight: number
+   marginTop: number
    boil: BoilerFunction
 }
 

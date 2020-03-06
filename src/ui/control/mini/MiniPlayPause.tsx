@@ -12,9 +12,8 @@ let useStyle = makeStyles((theme: Theme) =>
             display: 'flex',
          },
          '& > *': {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
+            marginTop: 'auto',
+            marginBottom: 'auto',
          },
       },
    }),
@@ -32,9 +31,18 @@ export let MiniPlayPause = observer(() => {
 
    return (
       <div className={classes.buttonContainer}>
-         <ButtonGroup orientation="vertical" size="small">
-            <Button onClick={display.act.togglePlay}>
-               {store.play ? '⏸' : '▶'}
+         <ButtonGroup size="small">
+            <Button
+               onClick={display.act.setPause}
+               disabled={store.play === false}
+            >
+               ⏸
+            </Button>
+            <Button
+               onClick={display.act.setPlay}
+               disabled={store.play === true}
+            >
+               ▶
             </Button>
             <Button onClick={display.act.singleStep}>1</Button>
          </ButtonGroup>

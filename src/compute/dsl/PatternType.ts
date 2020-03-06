@@ -34,21 +34,28 @@ export type Pattern =
    | CyclicPattern
    | GridPattern
 
+export interface FlatPattern {
+   original: Pattern
+   width: number
+   flat: StateSet[]
+}
+
+export type StateSet = number[]
+
 // ## Internal
 
-export interface PatternQuantified {
+export type PatternVisibility = 'visible' | 'hidden'
+
+export interface PatternBase {
    quantity: number
    width: number
+   visibility: PatternVisibility
 }
-export interface PatternWithVisibility {
-   visibility: 'visible' | 'hidden'
-}
-
-export interface PatternBase extends PatternQuantified, PatternWithVisibility {}
 
 export interface PatternGroup extends PatternBase {
    type: 'group'
    content: PatternElement[]
+   capture: PatternVisibility
 }
 
 export interface PatternRootGroup extends PatternGroup {
@@ -57,8 +64,7 @@ export interface PatternRootGroup extends PatternGroup {
 
 export interface PatternSet extends PatternBase {
    type: 'set'
-   stateSet: number[]
-   visibility: 'visible' | 'hidden'
+   stateSet: StateSet
 }
 
 export type PatternElement = PatternGroup | PatternSet

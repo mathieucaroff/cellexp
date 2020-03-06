@@ -1,16 +1,16 @@
 import Button from '@material-ui/core/Button'
 import * as React from 'react'
 import { useStore } from '../../util/useContextHook'
+import { resetState } from '../../../state/state'
 
-export let RerollButton = () => {
+/**
+ * Reset simulation and display parameters
+ */
+export let ResetButton = () => {
    let store = useStore()
 
    let handleClick = () => {
-      store.posT.totalPos = 0
-      store.seed = Math.random()
-         .toString(36)
-         .slice(2)
-         .toUpperCase()
+      resetState(store)
    }
 
    return (
@@ -20,7 +20,7 @@ export let RerollButton = () => {
             variant="outlined"
             onClick={handleClick}
          >
-            🎲
+            ⟳
          </Button>
       </div>
    )

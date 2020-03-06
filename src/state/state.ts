@@ -1,18 +1,24 @@
+import { Rule } from '../compute/Rule'
+import { TopologyFinite } from '../compute/topology'
+import { canvasSizeAdvice } from '../display/canvasSizeAdvice'
 import { createPosition, OxPosition } from '../display/position'
+import { deepUpdate } from '../util/deepUpdate'
 import { Size } from '../util/RectType'
 import { ThemeString } from '../www/theme'
-import { Rule } from '../compute/Rule'
-import { Topology, TopologyFinite } from '../compute/topology'
+import { RuleTrait } from '../data/ruleTraitType'
 
 /**
  * @param postS Spatial position
  * @param postT Temporal position
  */
-export interface Store {
+export interface State {
    theme: ThemeString
    displayTheme: ThemeString | 'unset'
+   morePanningControl: boolean
 
    rule: Rule
+
+   ruleTrait: RuleTrait | 'all'
 
    speed: number
    posS: OxPosition
@@ -25,7 +31,7 @@ export interface Store {
    canvasSize: Size
 }
 
-export let createStore = (): Store => {
+export let defaultState = (): State => {
    let random7 = {
       cumulativeMap: [6, 7],
       total: 7,
@@ -40,19 +46,22 @@ export let createStore = (): Store => {
          number: 73,
       },
 
+      ruleTrait: 'all',
+
       // MDisplay + ui
       theme: 'darkCream',
       displayTheme: 'unset',
+      morePanningControl: false,
 
       speed: 4,
       posS: createPosition(30),
       posT: createPosition(30),
       play: false,
-      zoom: 30,
+      zoom: 24,
       topology: {
          finitness: 'finite',
          kind: 'loop',
-         width: 1320,
+         width: 600,
          genesis: {
             kind: 'top',
             center: [],
@@ -63,16 +72,10 @@ export let createStore = (): Store => {
       seed: '_',
 
       // MDisplay
-      canvasSize: defaultCanvasSize(), // x: 1320 - good for 1366-pixel-width displays
+      canvasSize: canvasSizeAdvice(window),
    }
 }
 
-let defaultCanvasSize = () => {
-   let x = 1320
-   let y = 440
-   let mx = window.innerWidth * 0.99 - 50
-   let my = window.innerHeight * 0.8
-   x = Math.ceil(Math.min(x, mx))
-   y = Math.ceil(Math.min(y, x, my))
-   return { x, y }
+export let resetState = (state: State) => {
+   deepUpdate(state, defaultState())
 }

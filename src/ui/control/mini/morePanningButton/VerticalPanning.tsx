@@ -1,10 +1,12 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
+import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import * as React from 'react'
+import { useDisplay } from '../../../util/useContextHook'
+import { Xelement } from '../../../util/Xelement'
 import { observer } from 'mobx-react-lite'
-import { Xelement } from '../../util/Xelement'
-import { useDisplay, useStore } from '../../util/useContextHook'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -26,10 +28,10 @@ let useStyle = makeStyles((theme: Theme) =>
  * (2) Big move
  * (3) Go to top
  */
-export let MiniZoom = observer(() => {
+export let VerticalPanning = observer(() => {
    let classes = useStyle()
    let display = useDisplay()
-   let store = useStore()
+   let { info, act } = display
 
    let toButton = (
       content: Xelement,
@@ -49,14 +51,27 @@ export let MiniZoom = observer(() => {
    }
 
    let relativeSmallMoveList = [
-      toButton('🔍+', store.zoom === 384, display.act.increaseZoom),
-      toButton('🔍-', store.zoom === 6, display.act.decreaseZoom),
+      toButton(<ExpandLessIcon />, info.passingTop, act.goUp, 'muiArrowUp'),
+      toButton(<ExpandMoreIcon />, false, act.goDown, 'muiArrowDown'),
    ]
+
+   let relativeBigMoveList = [
+      toButton('⇞', info.passingTop, act.pageUp),
+      toButton('⇟', false, act.pageDown),
+   ]
+
+   let absoluteMoveList = [toButton('⏏', info.atTop, act.gotoTop)]
 
    return (
       <div className={classes.buttonContainer}>
          <ButtonGroup orientation="vertical" size="small">
             {relativeSmallMoveList}
+         </ButtonGroup>
+         <ButtonGroup orientation="vertical" size="small">
+            {relativeBigMoveList}
+         </ButtonGroup>
+         <ButtonGroup orientation="vertical" size="small">
+            {absoluteMoveList}
          </ButtonGroup>
       </div>
    )

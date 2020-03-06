@@ -1,8 +1,8 @@
 import { action } from 'mobx'
-import { Store } from '../state/store'
+import { State } from '../state/state'
 import { Info } from './info'
 
-export let getAct = (store: Store, info: Info) => {
+export let getAct = (store: State, info: Info) => {
    let { posS, posT } = store
 
    let isBigEnough = () => info.maxLeft <= info.maxRight
@@ -31,8 +31,8 @@ export let getAct = (store: Store, info: Info) => {
    }
 
    let fixZoom = () => {
-      if (store.zoom > 300) {
-         store.zoom = 300
+      if (store.zoom > 384) {
+         store.zoom = 384
       } else if (store.zoom < 6) {
          store.zoom = 6
       } else if (store.zoom % 6 != 0) {
@@ -45,17 +45,23 @@ export let getAct = (store: Store, info: Info) => {
       /****************/
       /* Play / Pause */
       /****************/
+      setPlay: action(() => {
+         store.play = true
+      }),
+      setPause: action(() => {
+         store.play = false
+      }),
       togglePlay: action(() => {
          store.play = !store.play
       }),
       singleStep: action(() => {
-         if (store.play) {
-            store.play = false
-            let r = store.posT.microFactor
-            store.posT.microPos = r * Math.round(store.posT.microPos / r)
-         } else {
-            store.posT.wholePos += 1
+         store.play = false
+         let increment = 1
+         if (store.posT.microPos > (5 / 6) * store.posT.microFactor) {
+            increment = 2
          }
+         store.posT.microPos = 0
+         store.posT.wholePos += increment
       }),
 
       /********************/

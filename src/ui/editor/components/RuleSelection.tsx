@@ -19,7 +19,7 @@ let useStyle = makeStyles((theme: Theme) =>
 /**
  * RuleSelector / InterestingRuleList / Rule Picker
  */
-export let RuleSelector = () => {
+export let RuleSelection = () => {
    let classes = useStyle()
 
    let rr = (...ruleList) => {

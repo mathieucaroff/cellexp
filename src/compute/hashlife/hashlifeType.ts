@@ -51,12 +51,6 @@ export type NeighborhoodFunction = (relativePos: number) => number
 
 export type RuleFunction = (f: NeighborhoodFunction) => number
 
-export interface ArbitraryAutomaton {
-   stateCount: number
-   neigboorhoodSize: number
-   localRule: (arr: number[]) => number
-}
-
 // About changes
 //
 // rule() -> invalidate everything

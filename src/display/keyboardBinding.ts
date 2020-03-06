@@ -45,6 +45,8 @@ export let keyboardBinding = (prop: KeyboardBindingProp): Remover => {
    onKeydown('|', act.gotoCenter)
    onKeydown('}', act.gotoMaxRight)
 
+   codeOnKeydown('Digit0', act.gotoTop)
+
    codeOnKeydown('Minus', act.decreaseZoom)
    codeOnKeydown('Equal', act.increaseZoom)
 

@@ -55,7 +55,7 @@ export let SlowTextField = (prop: SlowTextFieldProp) => {
             disabled={disabled}
             helperText={helperText}
             type={type}
-            variant={variant}
+            variant={variant as any}
             onChange={(ev) => onChange(ev.currentTarget.value)}
          />
       </form>

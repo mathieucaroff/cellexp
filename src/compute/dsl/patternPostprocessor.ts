@@ -22,6 +22,8 @@ export let pattern = ([iFlag, iGroup]: [
 // ## Flag
 export let flag = ([input]): Pattern => {
    let pattern = {} as PatternRootGroup
+   // Note: `.pattern` is overwritten inside `pattern()`
+
    if (input === '!') {
       return {
          type: 'exact',
@@ -60,15 +62,19 @@ type Visi = PatternBase['visibility']
 type FGroup = (v: Visi) => (pe: [[], PatternElement[]]) => PatternGroup
 
 // ## Group
-export let group: FGroup = (visibility) => (arg) => {
+export let group: FGroup = (capture) => (arg) => {
    let [_, elementList] = arg
-   if (visibility !== 'visible') {
+   if (capture === 'hidden')
       elementList.forEach((elem) => {
          if (elem.type === 'set') {
-            elem.visibility = visibility
+            elem.visibility = capture
          }
       })
-   }
+
+   let isVisible =
+      capture === 'visible' ||
+      elementList.some((e) => e.type === 'group' && e.capture === 'visible')
+   let visibility: typeof capture = isVisible ? 'visible' : 'hidden'
 
    return {
       type: 'group',
@@ -76,6 +82,7 @@ export let group: FGroup = (visibility) => (arg) => {
       quantity: 1,
       width: sum(elementList),
       visibility,
+      capture,
    }
 }
 

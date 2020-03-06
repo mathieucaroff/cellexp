@@ -1,25 +1,45 @@
 import { createPatternParser } from '../src/compute/dsl/compileParser'
-console.log('compileParser DONE')
 import { testEngine, Case } from './lib/dslTestEngine'
-console.log('TestEngine DONE')
 import {
    Pattern,
    PatternSet,
    PatternRootGroup,
    PatternGroup,
 } from '../src/compute/dsl/PatternType'
-console.log('PatternType DONE')
 
-let qwv1: { quantity: 1; width: 1; visibility: 'visible' } = {
+type Qwvc1 = {
+   quantity: 1
+   width: 1
+   visibility: 'visible'
+   capture: 'visible'
+}
+
+let qwvc1: Qwvc1 = {
    quantity: 1,
    width: 1,
    visibility: 'visible',
+   capture: 'visible',
 }
-let zero: PatternSet = { type: 'set', stateSet: [0], ...qwv1 }
-let one: PatternSet = { type: 'set', stateSet: [1], ...qwv1 }
-let zo: PatternSet = { type: 'set', stateSet: [0, 1], ...qwv1 }
+let zero: PatternSet = { type: 'set', stateSet: [0], ...qwvc1 }
+let one: PatternSet = { type: 'set', stateSet: [1], ...qwvc1 }
+let zo: PatternSet = { type: 'set', stateSet: [0, 1], ...qwvc1 }
 
 let stateSetList = [[0], [1], [0, 1]]
+
+let visibilityList = [
+   {
+      capture: 'hidden' as 'hidden',
+      visibility: 'hidden' as 'hidden',
+   },
+   {
+      capture: 'hidden' as 'hidden',
+      visibility: 'visible' as 'visible',
+   },
+   {
+      capture: 'visible' as 'visible',
+      visibility: 'visible' as 'visible',
+   },
+]
 
 let set = (p: number, q = 1): PatternSet => {
    let quantity = q >= 0 ? q : -q
@@ -32,17 +52,15 @@ let set = (p: number, q = 1): PatternSet => {
    }
 }
 
-let pattern0: PatternRootGroup = { type: 'group', content: [zero], ...qwv1 }
+let pattern0: PatternRootGroup = { type: 'group', content: [zero], ...qwvc1 }
 
-let group = (q: number, ...content): PatternGroup => {
-   let quantity = q >= 0 ? q : -q
-
+let group = (visib: number, quantity: number, ...content): PatternGroup => {
    return {
       type: 'group',
       content,
       quantity,
       width: quantity * content.reduce((acc, val) => acc + val.width, 0),
-      visibility: q >= 0 ? 'visible' : 'hidden',
+      ...visibilityList[visib],
    }
 }
 
@@ -94,7 +112,7 @@ let patternList: Case<string, Pattern>[] = [
          type: 'grid',
          repetition: 'cycle',
          persistence: 'persistent',
-         pattern: { type: 'group', content: [one], ...qwv1 },
+         pattern: { type: 'group', content: [one], ...qwvc1 },
       },
    },
    {
@@ -109,21 +127,23 @@ let patternList: Case<string, Pattern>[] = [
             content: [
                zero,
                group(
+                  2,
                   7,
                   zero,
                   one,
                   zo,
-                  group(-1, set(0, -1)),
-                  group(-1, set(2, -1), set(1, -1), set(1, -2)),
+                  group(0, 1, set(0, -1)),
+                  group(0, 1, set(2, -1), set(1, -1), set(1, -2)),
                   set(0, 2),
                   set(2, 3),
-                  group(4, one, one),
-                  group(5, zo, zo),
+                  group(2, 4, one, one),
+                  group(2, 5, zo, zo),
                ),
             ],
             quantity: 1,
             width: 218, // unsure
             visibility: 'visible',
+            capture: 'visible',
          },
       },
    },

@@ -1,0 +1,17 @@
+export let ruleData: Record<number, string> = {
+   0: 'The constant-death rule',
+   15: 'The shift-right-and-negate rule',
+   30: "Rule 30 is popular to generate artistic patterns. It's also used by WolframAlpha to create random data.",
+   51: 'The negation rule',
+   54: "It's hard to see messages moving through rule 54, but you'll see them if you look into the details",
+   60: "Rule 60 is the XOR rule which igores the cell to it's right.",
+   73: 'Rule 73 has a tendency to create barriers, isolating different sections of the space into autonomous automata. Setting every other cell to 0 in the initial configuration ensures the absence of these barriers.',
+   85: 'The shift-left-and-negate rule',
+   90: 'Rule 90 ignores the cell above, and XOR the cell to the left and to the right. Because of this, rule 90 computes two separate automata: one for even (x+y) values, and one for odds.',
+   110: 'Rule 110 has been proven to be Turing Complete by Matthew Cook in 1984',
+   170: 'The shift-left rule',
+   184: 'Rule 184 does parenthese matching, or "summing". It also corresponds to a simple model for car movement.',
+   204: 'The identity rule',
+   240: 'The shift-right rule',
+   255: 'The constant-life rule',
+}

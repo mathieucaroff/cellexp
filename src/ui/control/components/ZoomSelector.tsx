@@ -6,7 +6,7 @@ import { useStore } from '../../util/useContextHook'
 import { SelectorInput } from '../../components/SelectorInput'
 
 let lowBound = 6
-let highBound = 300
+let highBound = 384
 let modulo = 6
 
 let validation = (value: string) => {

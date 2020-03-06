@@ -2,7 +2,7 @@ import { action, observable, observe, toJS } from 'mobx'
 import { Computer } from '../compute/ComputerType'
 import { TopologyFinite } from '../compute/topology'
 import { Hub } from '../state/hub'
-import { Store } from '../state/store'
+import { State } from '../state/state'
 import { autox } from '../util/autox'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
@@ -14,7 +14,7 @@ import { keyboardBinding } from './keyboardBinding'
 import { createKeyboardManager } from './keyboardManager'
 import { createImageData } from './util/createImageData'
 
-export let createDisplay = (store: Store, computer: Computer, hub: Hub) => {
+export let createDisplay = (store: State, computer: Computer, hub: Hub) => {
    let { posS, posT } = store
 
    let topology = store.topology as TopologyFinite

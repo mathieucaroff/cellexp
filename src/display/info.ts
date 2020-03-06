@@ -1,5 +1,5 @@
 import { observable } from 'mobx'
-import { Store } from '../state/store'
+import { State } from '../state/state'
 
 interface Info_ {
    minSpeed: number
@@ -31,7 +31,7 @@ interface Info_ {
 
 export type Info = Readonly<Info_>
 
-export let getInfo = (store: Store): Info => {
+export let getInfo = (store: State): Info => {
    let { posS, posT } = store
 
    let _info = {

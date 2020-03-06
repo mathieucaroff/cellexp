@@ -12,7 +12,7 @@ group -> none element:+ {% group('visible') %}
 hiddenGroup -> ":?" element:+ {% group('hidden') %}
 
 none -> null
-# `none` Will produce one empty array when used
+# `none` will produce one empty array when used
 # while `null` is purely omitted from the output
 
 element ->
