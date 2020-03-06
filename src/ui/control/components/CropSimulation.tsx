@@ -1,6 +1,7 @@
-import Button from '@material-ui/core/Button'
+import { Button } from '@material-ui/core'
+import CropIcon from '@material-ui/icons/Crop'
 import * as React from 'react'
-import { useStore } from '../../util/useContextHook'
+import { useStore, useDisplay } from '../../util/useContextHook'
 import { Theme, makeStyles, createStyles } from '@material-ui/core'
 
 let useStyle = makeStyles((theme: Theme) =>
@@ -11,22 +12,20 @@ let useStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-export let RerollButton = () => {
+export let CropSimulation = () => {
    let c = useStyle()
    let store = useStore()
+   let display = useDisplay()
 
    let handleClick = () => {
-      store.posT.totalPos = 0
-      store.seed = Math.random()
-         .toString(36)
-         .slice(2)
-         .toUpperCase()
+      store.topology.width = Math.ceil((store.canvasSize.x * 6) / store.zoom)
+      display.act.gotoCenter()
    }
 
    return (
       <div>
          <Button className={c.button} variant="outlined" onClick={handleClick}>
-            🎲
+            <CropIcon />
          </Button>
       </div>
    )

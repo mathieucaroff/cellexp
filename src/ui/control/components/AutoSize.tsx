@@ -1,5 +1,7 @@
-import Button from '@material-ui/core/Button'
+import { Button } from '@material-ui/core'
+import AspectRatioIcon from '@material-ui/icons/AspectRatio'
 import * as React from 'react'
+import { canvasSizeAdvice } from '../../../display/canvasSizeAdvice'
 import { useStore } from '../../util/useContextHook'
 import { Theme, makeStyles, createStyles } from '@material-ui/core'
 
@@ -11,22 +13,20 @@ let useStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-export let RerollButton = () => {
+export let AutoSize = () => {
    let c = useStyle()
    let store = useStore()
 
    let handleClick = () => {
-      store.posT.totalPos = 0
-      store.seed = Math.random()
-         .toString(36)
-         .slice(2)
-         .toUpperCase()
+      let advice = canvasSizeAdvice(window)
+      store.canvasSize.x = advice.x
+      store.canvasSize.y = advice.y
    }
 
    return (
       <div>
          <Button className={c.button} variant="outlined" onClick={handleClick}>
-            🎲
+            <AspectRatioIcon />
          </Button>
       </div>
    )

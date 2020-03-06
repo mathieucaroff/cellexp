@@ -1,10 +1,11 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { RuleBox } from '../editor/components/RuleBox'
 import { RerollButton } from './components/RerollButton'
-import { ResetButton } from './components/ResetButton'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { clx } from '../util/clx'
+import { ResetSimulationButton } from './components/ResetSimulationButton'
+import { CropSimulation } from './components/CropSimulation'
+import { AutoSize } from './components/AutoSize'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -18,21 +19,31 @@ let useStyle = makeStyles((theme: Theme) =>
             flexDirection: 'row',
          },
       },
+      withMargin: {
+         '& > *': {
+            marginRight: theme.spacing(1),
+         },
+      },
+      balancerDiv: {
+         width: '180px',
+      },
    }),
 )
 
 export let DisplayHeader = observer(() => {
-   let classes = useStyle()
+   let c = useStyle()
    return (
       <div>
-         <div className={classes.header}>
-            <div style={{ width: '180px' }}></div>
+         <div className={c.header}>
+            <div className={c.balancerDiv}></div>
             <div>
                <RuleBox />
             </div>
-            <div>
+            <div className={c.withMargin}>
                <RerollButton />
-               <ResetButton />
+               <ResetSimulationButton />
+               <AutoSize />
+               <CropSimulation />
             </div>
          </div>
       </div>
