@@ -77,5 +77,9 @@ export let defaultState = (): State => {
 }
 
 export let resetState = (state: State) => {
-   deepUpdate(state, defaultState())
+   let replacement = defaultState()
+   delete replacement.posS
+   delete replacement.posT
+   deepUpdate(state, replacement)
+   state.posT.wholePos = 0
 }
