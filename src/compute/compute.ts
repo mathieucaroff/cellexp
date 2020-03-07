@@ -9,7 +9,7 @@ import {
    SideBorderDescriptor,
    StochasticState,
    TopBorderDescriptor,
-} from './topology'
+} from './border'
 
 export let createComputer = (): Computer => {
    let ruleCache: Uint8Array[] = []

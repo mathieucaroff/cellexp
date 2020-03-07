@@ -8,7 +8,7 @@ import {
 import { set, action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { BorderDescriptor } from '../../compute/topology'
+import { BorderDescriptor } from '../../compute/border'
 import { useStore } from '../util/useContextHook'
 import { BorderField } from './components/BorderField'
 

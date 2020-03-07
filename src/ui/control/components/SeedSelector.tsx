@@ -26,7 +26,9 @@ export let SeedSelector = observer(() => {
       <SlowTextField
          error={false}
          fastValue={local.value}
-         helperText={'Simulation random seed'}
+         TextFieldProps={{
+            helperText: 'Simulation random seed',
+         }}
          label={'Seed'}
          onChange={(newV) => {
             local.value = newV

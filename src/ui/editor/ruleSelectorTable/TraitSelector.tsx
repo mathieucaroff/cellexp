@@ -15,7 +15,6 @@ let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       inlineblock: {
          display: 'inline-block',
-         width: '300px',
       },
    }),
 )

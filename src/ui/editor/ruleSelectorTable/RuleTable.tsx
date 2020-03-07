@@ -26,7 +26,7 @@ export let RuleTable = observer(() => {
    })
 
    let n = store.rule.number
-   ruleList[n] = <RuleCell activated key={n} number={n} info={ruleData[n]} />
+   ruleList[n] = <RuleCell active key={n} number={n} info={ruleData[n]} />
 
    let groupList: React.ReactElement[] = Array.from({ length: 16 }, (_, k) => {
       return (

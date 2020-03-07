@@ -27,7 +27,7 @@ export interface BorderFieldProp {
 export let BorderField = observer((prop: BorderFieldProp) => {
    let { property, side, topology } = prop
 
-   let classes = useStyle()
+   let c = useStyle()
 
    let local = useLocalStore(() => {
       let value = ''
@@ -61,28 +61,35 @@ export let BorderField = observer((prop: BorderFieldProp) => {
       bdslParse = bdslParseTopBorder
    }
 
-   let bdslResult = bdslParse(local.value)
+   let bdslResult = bdslParse(local.value.replace(/\s/g, ''))
    if (!bdslResult.success) {
       helperText = bdslResult.info
    }
 
+   let handleChange = (newV) => {
+      local.value = newV
+   }
+
+   let handleSubmit = (submittedV) => {
+      local.slowValue = submittedV
+      let { result } = bdslResult as BdslResultSuccess<any>
+      topology[property] = result
+   }
+
    return (
       <SlowTextField
-         className={classes.borderSelector}
-         disabled={side !== 'top' && topology.kind !== 'border'}
          error={!bdslResult.success}
          fastValue={local.value}
-         helperText={helperText}
          label={label}
-         onChange={(newV) => {
-            local.value = newV
-         }}
-         onSubmit={(submittedV) => {
-            local.slowValue = submittedV
-            let { result } = bdslResult as BdslResultSuccess<any>
-            topology[property] = result
-         }}
+         onChange={handleChange}
+         onSubmit={handleSubmit}
          slowValue={local.slowValue}
+         TextFieldProps={{
+            className: c.borderSelector,
+            disabled: side !== 'top' && topology.kind !== 'border',
+            helperText,
+            multiline: true,
+         }}
       />
    )
 })

@@ -56,13 +56,15 @@ export let SelectorInput = observer(<T extends RecAny>(prop: Prop<T>) => {
 
    return (
       <SlowTextField
+         TextFieldProps={{
+            disabled,
+            helperText: help,
+            type,
+         }}
          label={label}
          slowValue={'' + store[property]}
          fastValue={value}
          error={error}
-         disabled={disabled}
-         helperText={help}
-         type={type}
          onChange={onChange}
          onSubmit={action(() => {
             store[property] = +value as any
