@@ -7,7 +7,7 @@ import { autox } from '../util/autox'
 import { emitterLoop } from '../util/emitterLoop'
 import { createEventDispatcher } from '../util/eventDispatcher'
 import { displayThemeFromCellexp, themeSet } from '../www/theme'
-import { getAct } from './act'
+import { createAct } from './act'
 import { createDragManager } from './dragManager'
 import { getInfo } from './info'
 import { keyboardBinding } from './keyboardBinding'
@@ -42,7 +42,7 @@ export let createDisplay = (store: State, computer: Computer, hub: Hub) => {
 
    let info = getInfo(store)
 
-   let act = getAct(store, info)
+   let act = createAct(store, info)
 
    let discardLoop: (() => void) | undefined
    let clockTick = createEventDispatcher()
@@ -133,21 +133,7 @@ export let createDisplay = (store: State, computer: Computer, hub: Hub) => {
          },
       })
 
-      dragManager.onMove(({ x, y }) => {
-         if (x < 0 && isBigEnough()) {
-            x = 0
-         }
-         if (x > maxRight() && isBigEnough()) {
-            x = maxRight()
-         }
-         posS.fromPix(x, store.zoom)
-         if (!store.play) {
-            if (y < 0) {
-               y = 0
-            }
-            posT.fromPix(y, store.zoom)
-         }
-      })
+      dragManager.onMove(act.gotoLocation)
 
       autox.canvas_width_height(() => {
          canvas.width = store.canvasSize.x
