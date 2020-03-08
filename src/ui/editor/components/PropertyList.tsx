@@ -4,12 +4,10 @@ import * as React from 'react'
 import { useStore } from '../../util/useContextHook'
 import { SymmetricTable } from './SymmetricTable'
 import { clx } from '../../util/clx'
+import { useSharedStyle } from '../../style'
 
 let useStyle = makeStyles((theme: Theme) => {
    return createStyles({
-      displayBlock: {
-         display: 'inline-block',
-      },
       spacerRight: {
          marginRight: '2em',
       },
@@ -18,13 +16,14 @@ let useStyle = makeStyles((theme: Theme) => {
 
 export let PropertyList = observer(() => {
    let classes = useStyle()
+   let s = useSharedStyle()
    let store = useStore()
 
    let { rule } = store
 
    return (
       <div>
-         <div className={clx(classes.displayBlock, classes.spacerRight)}>
+         <div className={clx(s.inlineBlock, classes.spacerRight)}>
             <SymmetricTable
                label="Symmetrics of current rule"
                ruleNumber={rule.number}
@@ -32,7 +31,7 @@ export let PropertyList = observer(() => {
                symmetricMessage="self-symmetric"
             />
          </div>
-         <div className={clx(classes.displayBlock)}>
+         <div className={clx(s.inlineBlock)}>
             <SymmetricTable
                label="Symmetrics of color output complement rule"
                ruleNumber={255 - rule.number}

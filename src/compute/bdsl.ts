@@ -4,7 +4,7 @@ import {
    BasePattern,
    TopBorderDescriptor,
    SideBorderDescriptor,
-} from './topology'
+} from './border'
 
 /**
  * BDSL

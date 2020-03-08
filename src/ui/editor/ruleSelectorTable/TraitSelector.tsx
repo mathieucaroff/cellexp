@@ -10,17 +10,10 @@ import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { ruleTraitList } from '../../../data/ruleTraitType'
 import { useStore } from '../../util/useContextHook'
-
-let useStyle = makeStyles((theme: Theme) =>
-   createStyles({
-      inlineblock: {
-         display: 'inline-block',
-      },
-   }),
-)
+import { useSharedStyle } from '../../style'
 
 export let TraitSelector = observer(() => {
-   let c = useStyle()
+   let c = useSharedStyle()
    let store = useStore()
 
    let handleClick = (ev) => {
@@ -32,7 +25,7 @@ export let TraitSelector = observer(() => {
          <FormControlLabel
             key={traitName}
             value={traitName}
-            className={c.inlineblock}
+            className={c.inlineBlock}
             control={<Radio color="primary" />}
             label={traitName}
          />

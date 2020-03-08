@@ -17,16 +17,7 @@ export interface OxExpansionPanelProp {
    content: React.ReactElement | string
 }
 
-let useStyle = makeStyles((theme: Theme) =>
-   createStyles({
-      displayBlock: {
-         display: 'block',
-      },
-   }),
-)
-
 export let OxExpansionPanel = observer((prop: OxExpansionPanelProp) => {
-   let classes = useStyle()
    let shared = useSharedStyle()
 
    let { defaultExpanded, title, content } = prop
@@ -40,7 +31,7 @@ export let OxExpansionPanel = observer((prop: OxExpansionPanelProp) => {
          <EPSm expandIcon={<EMI />}>
             <h3 className={shared.noVeritcalMargins}>{title}</h3>
          </EPSm>
-         <EPDt className={classes.displayBlock}>{content}</EPDt>
+         <EPDt className={shared.block}>{content}</EPDt>
       </EP>
    )
 })

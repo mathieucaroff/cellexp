@@ -4,12 +4,10 @@ import { OxTable } from '../../components/OxTable'
 import { clx } from '../../util/clx'
 import { RuleLink } from './RuleLink'
 import { createElementaryRule } from '../../../compute/Rule'
+import { useSharedStyle } from '../../style'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      inlineBlock: {
-         display: 'inline-block',
-      },
       spacerRight: {
          marginRight: '2em',
       },
@@ -21,6 +19,7 @@ let useStyle = makeStyles((theme: Theme) =>
  */
 export let RuleSelection = () => {
    let classes = useStyle()
+   let s = useSharedStyle()
 
    let rr = (...ruleList) => {
       let r = createElementaryRule
@@ -34,7 +33,7 @@ export let RuleSelection = () => {
 
    return (
       <>
-         <div className={clx(classes.inlineBlock, classes.spacerRight)}>
+         <div className={clx(s.inlineBlock, classes.spacerRight)}>
             <OxTable
                tableHead={[['Description'], ['Rules']]}
                tableData={[
@@ -45,7 +44,7 @@ export let RuleSelection = () => {
                ]}
             />
          </div>
-         <div className={classes.inlineBlock}>
+         <div className={s.inlineBlock}>
             <OxTable
                tableHead={[['Description'], ['Rules']]}
                tableData={[

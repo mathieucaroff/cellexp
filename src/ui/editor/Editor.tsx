@@ -18,16 +18,7 @@ import { RuleLink } from './components/RuleLink'
 import { RuleSelection } from './components/RuleSelection'
 import { RuleSelectorTable } from './ruleSelectorTable/RuleSelectorTable'
 
-let useStyle = makeStyles((theme: Theme) =>
-   createStyles({
-      displayBlock: {
-         display: 'block',
-      },
-   }),
-)
-
 export let Editor = observer(() => {
-   let classes = useStyle()
    let shared = useSharedStyle()
    let store = useStore()
 
@@ -44,7 +35,7 @@ export let Editor = observer(() => {
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Rule Table</h3>
             </EPSm>
-            <EPDt className={clx(classes.displayBlock)}>
+            <EPDt className={clx(shared.block)}>
                <RuleSelectorTable />
             </EPDt>
          </EP>
@@ -52,7 +43,7 @@ export let Editor = observer(() => {
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Old Rule Selection</h3>
             </EPSm>
-            <EPDt className={clx(classes.displayBlock)}>
+            <EPDt className={clx(shared.block)}>
                <RuleSelection />
             </EPDt>
          </EP>
