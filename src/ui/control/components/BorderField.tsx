@@ -7,7 +7,7 @@ import {
    bdslParseTopBorder,
    BdslResultSuccess,
    borderToBdsl,
-} from '../../../compute/bdsl'
+} from '../../../compute/borderDsl'
 import { TopologyFinite } from '../../../compute/topology'
 import { capitalize } from '../../../util/capitalize'
 import { SlowTextField } from '../../components/SlowTextField'

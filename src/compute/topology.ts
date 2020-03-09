@@ -2,7 +2,7 @@ import {
    TopBorderDescriptor,
    SideBorderDescriptor,
    BorderDescriptor,
-} from './border'
+} from './borderType'
 
 export type Side = 'left' | 'right'
 
