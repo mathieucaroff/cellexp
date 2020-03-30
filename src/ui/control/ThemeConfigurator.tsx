@@ -6,7 +6,6 @@ import {
    makeStyles,
    Theme,
 } from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import {
@@ -14,9 +13,9 @@ import {
    themeNameFromCellexp,
 } from '../../www/theme'
 import { useSharedStyle } from '../style'
-import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
 import { ThemeSelector } from './components/AppThemeSelector'
+import { OxExpansionPanel } from '../components/OxExpansionPanel'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -34,7 +33,7 @@ let useStyle = makeStyles((theme: Theme) =>
    }),
 )
 
-export let Configurator = observer(() => {
+export let ThemeConfigurator = observer(() => {
    let classes = useStyle()
    let shared = useSharedStyle()
    let store = useStore()
@@ -45,11 +44,14 @@ export let Configurator = observer(() => {
 
    return (
       <div>
-         <EP className={shared.panel}>
-            <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Theme</h3>
-            </EPSm>
-            <EPDt className={clx(classes.inputSizing, shared.block)}>
+         <OxExpansionPanel
+            title="Theme"
+            defaultExpanded={false}
+            contentDisplayBlock={true}
+            ExpansionPanelDetailsProps={{
+               className: classes.inputSizing,
+            }}
+            content={
                <div className={classes.inputList}>
                   <ThemeSelector
                      label="App Theme"
@@ -67,8 +69,8 @@ export let Configurator = observer(() => {
                      allowUnset
                   />
                </div>
-            </EPDt>
-         </EP>
+            }
+         />
       </div>
    )
 })
