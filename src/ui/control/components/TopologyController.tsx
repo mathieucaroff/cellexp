@@ -8,9 +8,9 @@ import {
 import { set, action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { BorderDescriptor } from '../../compute/borderType'
-import { useStore } from '../util/useContextHook'
-import { BorderField } from './components/BorderField'
+import { BorderDescriptor } from '../../../compute/borderType'
+import { useStore } from '../../util/useContextHook'
+import { BorderField } from './BorderField'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({

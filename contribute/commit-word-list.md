@@ -63,6 +63,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 
 - clarify
 - clean
+- move
 - reclarify ("refactor")
 - reclean ("refactor")
 - rename

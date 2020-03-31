@@ -27,7 +27,7 @@ import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
 import { WidthSelector } from './components/WidthSelector'
 import { ZoomSelector } from './components/ZoomSelector'
-import { TopologyController } from './TopologyController'
+import { TopologyController } from './components/TopologyController'
 import { OxExpansionPanel } from '../components/OxExpansionPanel'
 
 let useStyle = makeStyles((theme: Theme) =>
