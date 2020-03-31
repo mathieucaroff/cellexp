@@ -2,6 +2,24 @@
 
 This README file presents the structure of the project, the responsibility of each module, the interfaces and the event model in the project.
 
+## Content
+
+- [Structure](#structure)
+  - [UI layer](#ui-layer)
+  - [Display layer](#display-layer)
+  - [Compute layer](#compute-layer)
+- [Modules](#modules)
+  - [Directory structure overview](#directory-structure-overview)
+  - [compute](#compute)
+  - [display](#display)
+  - [state](#state)
+  - [ui](#ui)
+    - [ui-control](#ui-control)
+    - [ui-editor](#ui-editor)
+  - [util](#util)
+  - [www](#www)
+- [Event model](#event-model)
+
 ## Structure
 
 The project is structured in layers. Each layer is aware of the layer directly below it, it. A layer is always a module, though a module is not always

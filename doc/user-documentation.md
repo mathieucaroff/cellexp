@@ -1,5 +1,32 @@
 # User documentation
 
+## Content
+
+- [Base interface](#base-interface)
+  - [View](#view)
+  - [View header](#view-header)
+    - [Rule Input](#rule-input)
+    - [Genesis](#genesis)
+    - [Autosizing](#autosizing)
+  - [View footer](#view-footer)
+  - [Rule Selection panes](#rule-selection-panes)
+    - [Rule Table](#rule-table)
+    - [Old Rule Selection](#old-rule-selection)
+    - [Note on the rule criteria](#note-on-the-rule-criteria)
+- [Advanced interface](#advanced-interface)
+  - [Rule Editor](#rule-editor)
+  - [Property List](#property-list)
+  - [Simulation Controller](#simulation-controller)
+    - [Simulation topology selector](#simulation-topology-selector)
+    - [Simulation border fields](#simulation-border-fields)
+  - [Display Controller](#display-controller)
+    - [Zoom](#zoom)
+    - [Width and Height](#width-and-height)
+    - [Generation and spatial position](#generation-and-spatial-position)
+    - [Speed](#speed)
+  - [Theme Selector](#theme-selector)
+  - [Info Section](#info-section)
+
 ## Base interface
 
 The application includes the following parts:
