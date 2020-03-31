@@ -21,7 +21,7 @@ import { FieldPrecisePosT } from './components/FieldPrecisePosT'
 import { MorePanningControl } from './components/MorePanningControl'
 import { PlayPauseButton } from './components/PlayPauseButton'
 import { RerollButton } from './components/RerollButton'
-import { ResetTime } from './components/ResetTime'
+import { GoToTop } from './components/GoToTop'
 import { SeedSelector } from './components/SeedSelector'
 import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
@@ -105,7 +105,7 @@ export let Controller = observer(() => {
             <div className={classes.inputList}>
                <FieldPosT />
                <FieldPosS />
-               <ResetTime />
+               <GoToTop />
                <PlayPauseButton />
                <SingleStep />
             </div>
@@ -132,7 +132,7 @@ export let Controller = observer(() => {
          <div className={classes.inputList}>
             <FieldPosT />
             <FieldPosS />
-            <ResetTime />
+            <GoToTop />
             <PlayPauseButton />
             <SingleStep />
          </div>
