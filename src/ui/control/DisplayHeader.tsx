@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { RuleBox } from '../editor/components/RuleBox'
 import { RerollButton } from './components/RerollButton'
-import { ResetSimulationButton } from './components/ResetSimulationButton'
 import { CropSimulation } from './components/CropSimulation'
 import { AutoSize } from './components/AutoSize'
 import { SimpleGenesisSelect } from './components/SimpleGenesisiSelect'
@@ -58,7 +57,6 @@ export let DisplayHeader = observer(() => {
                      </span>
                   </Outline>
                </div>
-               <ResetSimulationButton />
                <AutoSize />
                <CropSimulation />
             </div>
