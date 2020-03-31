@@ -10,7 +10,7 @@ const markdownContent = `
 - [ECAX](https://www.xanxys.net/ecax/)&nbsp;\t– Zoom, Navigation, Compute-on-demand
 - [ECA Canvas](http://www.cs.swan.ac.uk/~csandy/research/play/ca/)&nbsp;– Size, Border, Random
 - [ECA EmergentMind](http://www.emergentmind.com/elementary-cellular-automata)&nbsp;– Zoom, Board of 256 rules
-- [WolframAlpha](https://www.wolframalpha.com/input/?i=rule+110)&nbsp;– Description (symétries, propriétés, classe), Propagation differentielle
+- [WolframAlpha](https://www.wolframalpha.com/input/?i=rule+110)&nbsp;- Description (symetries, properties, classes), Differential propagation examples
 `
 
 let createElement = (component, ...args) => {
