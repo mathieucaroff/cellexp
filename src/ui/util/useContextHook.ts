@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { displayContext, storeContext, hubContext } from '../../www/global'
+import { displayContext, storeContext } from '../../www/global'
 
 export let useDisplay = () => {
    let display = useContext(displayContext)
@@ -7,14 +7,6 @@ export let useDisplay = () => {
       throw new Error('useDisplay must be used within a StoreProvider')
    }
    return display
-}
-
-export let useHub = () => {
-   let hub = useContext(hubContext)
-   if (!hub) {
-      throw new Error('useHub must be used within a StoreProvider')
-   }
-   return hub
 }
 
 export let useStore = () => {
