@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button, Tooltip } from '@material-ui/core'
 import AspectRatioIcon from '@material-ui/icons/AspectRatio'
 import * as React from 'react'
 import { canvasSizeAdvice } from '../../../display/canvasSizeAdvice'
@@ -25,9 +25,15 @@ export let AutoSize = () => {
 
    return (
       <div>
-         <Button className={c.button} variant="outlined" onClick={handleClick}>
-            <AspectRatioIcon />
-         </Button>
+         <Tooltip title="Fit view to window">
+            <Button
+               className={c.button}
+               variant="outlined"
+               onClick={handleClick}
+            >
+               <AspectRatioIcon />
+            </Button>
+         </Tooltip>
       </div>
    )
 }

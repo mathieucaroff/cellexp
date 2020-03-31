@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button, Tooltip } from '@material-ui/core'
 import CropIcon from '@material-ui/icons/Crop'
 import * as React from 'react'
 import { useStore, useDisplay } from '../../util/useContextHook'
@@ -24,9 +24,15 @@ export let CropSimulation = () => {
 
    return (
       <div>
-         <Button className={c.button} variant="outlined" onClick={handleClick}>
-            <CropIcon />
-         </Button>
+         <Tooltip title="Fit simulation to view">
+            <Button
+               className={c.button}
+               variant="outlined"
+               onClick={handleClick}
+            >
+               <CropIcon />
+            </Button>
+         </Tooltip>
       </div>
    )
 }

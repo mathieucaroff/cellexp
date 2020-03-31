@@ -11,6 +11,7 @@ import {
 import { TopologyFinite } from '../../../compute/topology'
 import { capitalize } from '../../../util/capitalize'
 import { SlowTextField } from '../../components/SlowTextField'
+import { BorderDescriptor } from '../../../compute/borderType'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -19,13 +20,14 @@ let useStyle = makeStyles((theme: Theme) =>
 )
 
 export interface BorderFieldProp {
-   property: 'borderLeft' | 'borderRight' | 'genesis'
+   getProperty: () => BorderDescriptor
+   setProperty: (val: BorderDescriptor) => void
    side: 'left' | 'right' | 'top'
-   topology: TopologyFinite
+   topologyKind: TopologyFinite['kind']
 }
 
 export let BorderField = observer((prop: BorderFieldProp) => {
-   let { property, side, topology } = prop
+   let { getProperty, setProperty, side, topologyKind } = prop
 
    let c = useStyle()
 
@@ -42,16 +44,13 @@ export let BorderField = observer((prop: BorderFieldProp) => {
       }
    })
 
-   reaction(
-      () => topology[property],
-      (border) => {
-         if (topology.kind === 'border') {
-            let bdsl = borderToBdsl(border)
-            local.slowValue = bdsl
-            local.value = bdsl
-         }
-      },
-   )
+   reaction(getProperty, (border) => {
+      if (topologyKind === 'border') {
+         let bdsl = borderToBdsl(border)
+         local.slowValue = bdsl
+         local.value = bdsl
+      }
+   })
 
    let label = `Border ${capitalize(side)}`
    let helperText = ''
@@ -73,7 +72,7 @@ export let BorderField = observer((prop: BorderFieldProp) => {
    let handleSubmit = (submittedV) => {
       local.slowValue = submittedV
       let { result } = bdslResult as BdslResultSuccess<any>
-      topology[property] = result
+      setProperty(result)
    }
 
    return (
@@ -86,7 +85,7 @@ export let BorderField = observer((prop: BorderFieldProp) => {
          slowValue={local.slowValue}
          TextFieldProps={{
             className: c.borderSelector,
-            disabled: side !== 'top' && topology.kind !== 'border',
+            disabled: side !== 'top' && topologyKind !== 'border',
             helperText,
             multiline: true,
          }}

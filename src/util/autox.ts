@@ -25,7 +25,7 @@ export let autox = new Proxy(autorun, {
          throw new Error("autox doesn't handle [Symbol]")
       }
 
-      return (func, param = {}) => {
+      return (func, param: any = {}) => {
          if (param.name) {
             throw new Error(
                `Autox got a debug name twice (${propName}) and (${param.name})`,
