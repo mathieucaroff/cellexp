@@ -4,33 +4,32 @@ import * as React from 'react'
 import { cellWidth, RuleCell } from './RuleCell'
 import { useStore } from '../../util/useContextHook'
 import { ruleData } from '../../../data/ruleData'
+import { useSharedStyle } from '../../style'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       table: {
          maxWidth: 32 * cellWidth,
       },
-      inlineblock: {
-         display: 'inline-block',
-      },
    }),
 )
 
 export let RuleTable = observer(() => {
    let c = useStyle()
+   let s = useSharedStyle()
    let store = useStore()
-   let ccc: string[] = [c.table, c.inlineblock, `tt-${store.ruleTrait}`]
+   let ccc: string[] = [c.table, s.inlineBlock, `tt-${store.ruleTrait}`]
 
    let ruleList = Array.from({ length: 256 }, (_, k) => {
       return <RuleCell key={k} number={k} info={ruleData[k]} />
    })
 
    let n = store.rule.number
-   ruleList[n] = <RuleCell activated key={n} number={n} info={ruleData[n]} />
+   ruleList[n] = <RuleCell active key={n} number={n} info={ruleData[n]} />
 
    let groupList: React.ReactElement[] = Array.from({ length: 16 }, (_, k) => {
       return (
-         <div className={c.inlineblock} key={k}>
+         <div className={s.inlineBlock} key={k}>
             {ruleList.slice(16 * k, 16 * (k + 1))}
          </div>
       )

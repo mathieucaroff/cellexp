@@ -2,7 +2,7 @@ import { action } from 'mobx'
 import { State } from '../state/state'
 import { Info } from './info'
 
-export let getAct = (store: State, info: Info) => {
+export let createAct = (store: State, info: Info) => {
    let { posS, posT } = store
 
    let isBigEnough = () => info.maxLeft <= info.maxRight
@@ -120,19 +120,19 @@ export let getAct = (store: State, info: Info) => {
       /** Relative move */
       pageLeft: action(() => {
          posS.totalPos -= info.horizontalPage
-         fixLeft()
+         fixPosition()
       }),
       goLeft: action(() => {
          posS.totalPos -= info.horizontalMove
-         fixLeft()
+         fixPosition()
       }),
       goRight: action(() => {
          posS.totalPos += info.horizontalMove
-         fixRight()
+         fixPosition()
       }),
       pageRight: action(() => {
          posS.totalPos += info.horizontalPage
-         fixRight()
+         fixPosition()
       }),
 
       /** Goto */
@@ -166,6 +166,17 @@ export let getAct = (store: State, info: Info) => {
       gotoTop: action(() => {
          store.play = false
          posT.totalPos = info.top
+      }),
+      gotoLocation: action(({ x, y }) => {
+         posS.fromPix(x, store.zoom)
+         fixPosition()
+
+         if (!store.play) {
+            if (y < 0) {
+               y = 0
+            }
+            posT.fromPix(y, store.zoom)
+         }
       }),
    }
    return act

@@ -1,28 +1,10 @@
-export type State = number
+import {
+   TopBorderDescriptor,
+   SideBorderDescriptor,
+   BorderDescriptor,
+} from './borderType'
 
 export type Side = 'left' | 'right'
-
-export interface StochasticState {
-   cumulativeMap: number[]
-   total: number
-}
-
-export type BasePattern = StochasticState[]
-
-export interface SideBorderDescriptor {
-   kind: 'side'
-   init: BasePattern
-   cycle: BasePattern
-}
-
-export interface TopBorderDescriptor {
-   kind: 'top'
-   center: BasePattern
-   cycleLeft: BasePattern
-   cycleRight: BasePattern
-}
-
-export type BorderDescriptor = SideBorderDescriptor | TopBorderDescriptor
 
 interface __TopologyBase {
    genesis: TopBorderDescriptor

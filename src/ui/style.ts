@@ -10,6 +10,9 @@ export let useSharedStyle = makeStyles((theme: Theme) =>
       block: {
          display: 'block',
       },
+      inlineBlock: {
+         display: 'inline-block',
+      },
       inputList: {
          '& > *': {
             margin: theme.spacing(1),

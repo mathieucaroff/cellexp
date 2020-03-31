@@ -28,6 +28,7 @@ import { SpeedSelector } from './components/SpeedSelector'
 import { WidthSelector } from './components/WidthSelector'
 import { ZoomSelector } from './components/ZoomSelector'
 import { TopologyController } from './TopologyController'
+import { OxExpansionPanel } from '../components/OxExpansionPanel'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -55,34 +56,35 @@ export let Controller = observer(() => {
    let EPDt = ExpansionPanelDetails
 
    let simulationController = (
-      <EP className={shared.panel} defaultExpanded>
-         <EPSm expandIcon={<ExpandMoreIcon />}>
-            <h3 className={shared.noVeritcalMargins}>
-               Simulation Controller <RuleLink rule={store.rule} />
-            </h3>
-         </EPSm>
-         <EPDt className={clx(shared.block)}>
+      <OxExpansionPanel
+         title={['Simulation Controller', <RuleLink rule={store.rule} />]}
+         defaultExpanded={true}
+         contentDisplayBlock={true}
+         content={
             <div className={shared.inputList}>
                <TopologyController />
                <WidthSelector />
                <SeedSelector />
                <RerollButton />
             </div>
-         </EPDt>
-      </EP>
+         }
+      />
    )
 
    let displayExtraControls = (
-      <EP className={shared.panel} TransitionProps={{ unmountOnExit: true }}>
-         <EPSm expandIcon={<ExpandMoreIcon />}>
-            <h4 className={shared.noVeritcalMargins}>Extra Controls</h4>
-         </EPSm>
-         <EPDt className={clx(classes.inputSizing, shared.block)}>
+      <OxExpansionPanel
+         title="Extra Controls"
+         titleTagName="h4"
+         defaultExpanded={false}
+         contentDisplayBlock={true}
+         ExpansionPanelProps={{ TransitionProps: { unmountOnExit: true } }}
+         ExpansionPanelDetailsProps={{ className: classes.inputSizing }}
+         content={
             <div className={classes.inputList}>
                <FieldPrecisePosT />
             </div>
-         </EPDt>
-      </EP>
+         }
+      />
    )
 
    let displayController = (
@@ -112,11 +114,37 @@ export let Controller = observer(() => {
       </EP>
    )
 
+   let displayControllers = (
+      <OxExpansionPanel
+         title={['Display Controller', <RuleLink rule={store.rule} />]}
+         defaultExpanded={false}
+         contentDisplayBlock={true}
+         ExpansionPanelDetailsProps={{ className: classes.inputSizing }}
+         content=""
+      >
+         <div className={classes.inputList}>
+            <ZoomSelector />
+            <CanvasHeight />
+            <CanvasWidth />
+            <SpeedSelector />
+            <MorePanningControl />
+         </div>
+         <div className={classes.inputList}>
+            <FieldPosT />
+            <FieldPosS />
+            <ResetTime />
+            <PlayPauseButton />
+            <SingleStep />
+         </div>
+         {displayExtraControls}
+      </OxExpansionPanel>
+   )
+
    return (
       <div>
          <h2>Controllers</h2>
          {simulationController}
-         {displayController}
+         {displayControllers}
       </div>
    )
 })

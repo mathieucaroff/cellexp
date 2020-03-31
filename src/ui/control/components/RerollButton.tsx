@@ -1,7 +1,7 @@
 import Button from '@material-ui/core/Button'
 import * as React from 'react'
 import { useStore } from '../../util/useContextHook'
-import { Theme, makeStyles, createStyles } from '@material-ui/core'
+import { Theme, makeStyles, createStyles, Tooltip } from '@material-ui/core'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -25,9 +25,15 @@ export let RerollButton = () => {
 
    return (
       <div>
-         <Button className={c.button} variant="outlined" onClick={handleClick}>
-            🎲
-         </Button>
+         <Tooltip title="Randomize seed">
+            <Button
+               className={c.button}
+               variant="outlined"
+               onClick={handleClick}
+            >
+               🎲
+            </Button>
+         </Tooltip>
       </div>
    )
 }

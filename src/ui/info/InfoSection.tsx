@@ -11,11 +11,13 @@ export let InfoSection = () => {
             defaultExpanded={false}
             title="Alternatives"
             content={<AlternativeSection />}
+            contentDisplayBlock
          ></OxExpansionPanel>
          <OxExpansionPanel
             defaultExpanded={false}
             title="CellExp changelog"
             content={<ChangelogSection />}
+            contentDisplayBlock
          ></OxExpansionPanel>
       </div>
    )

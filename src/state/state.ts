@@ -6,6 +6,7 @@ import { deepUpdate } from '../util/deepUpdate'
 import { Size } from '../util/RectType'
 import { ThemeString } from '../www/theme'
 import { RuleTrait } from '../data/ruleTraitType'
+import { SimpleGenesis } from '../ui/control/components/SimpleGenesisiSelect'
 
 /**
  * @param postS Spatial position
@@ -25,6 +26,7 @@ export interface State {
    posT: OxPosition
    play: boolean
    zoom: number
+   selectedSimpleGenesis: SimpleGenesis
    topology: TopologyFinite
    seed: string
 
@@ -32,9 +34,9 @@ export interface State {
 }
 
 export let defaultState = (): State => {
-   let random7 = {
-      cumulativeMap: [6, 7],
-      total: 7,
+   let random10 = {
+      cumulativeMap: [9, 10],
+      total: 10,
    }
 
    return {
@@ -58,6 +60,7 @@ export let defaultState = (): State => {
       posT: createPosition(30),
       play: false,
       zoom: 24,
+      selectedSimpleGenesis: 'Random 10%',
       topology: {
          finitness: 'finite',
          kind: 'loop',
@@ -65,8 +68,8 @@ export let defaultState = (): State => {
          genesis: {
             kind: 'top',
             center: [],
-            cycleLeft: [random7],
-            cycleRight: [random7],
+            cycleLeft: [random10],
+            cycleRight: [random10],
          },
       },
       seed: '_',

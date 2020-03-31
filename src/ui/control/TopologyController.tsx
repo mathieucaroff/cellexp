@@ -8,7 +8,7 @@ import {
 import { set, action } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { BorderDescriptor } from '../../compute/topology'
+import { BorderDescriptor } from '../../compute/borderType'
 import { useStore } from '../util/useContextHook'
 import { BorderField } from './components/BorderField'
 
@@ -60,6 +60,8 @@ export let TopologyController = observer(() => {
       }
    })
 
+   let { kind } = store.topology
+
    return (
       <div className={classes.topology}>
          <Select value={store.topology.kind} onChange={handleChange}>
@@ -67,19 +69,29 @@ export let TopologyController = observer(() => {
             <MenuItem value="border">Border</MenuItem>
          </Select>
          <BorderField
-            property={'genesis'}
+            getProperty={() => store.topology.genesis}
+            setProperty={(val: any) => {
+               store.topology.genesis = val
+               store.selectedSimpleGenesis = 'Other'
+            }}
             side={'top'}
-            topology={store.topology}
+            topologyKind={kind}
          />
          <BorderField
-            property={'borderLeft'}
+            getProperty={() => (store.topology as any).borderLeft}
+            setProperty={(val: any) => {
+               ;(store.topology as any).borderLeft = val
+            }}
             side={'left'}
-            topology={store.topology}
+            topologyKind={kind}
          />
          <BorderField
-            property={'borderRight'}
+            getProperty={() => (store.topology as any).borderRight}
+            setProperty={(val: any) => {
+               ;(store.topology as any).borderRight = val
+            }}
             side={'right'}
-            topology={store.topology}
+            topologyKind={kind}
          />
       </div>
    )

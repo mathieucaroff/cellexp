@@ -3,7 +3,7 @@ import * as React from 'react'
 
 export interface OutlineProp {
    label: string
-   children: React.ReactElement[]
+   children: React.ReactElement[] | React.ReactElement
 }
 
 let useStyle = makeStyles((theme: Theme) =>

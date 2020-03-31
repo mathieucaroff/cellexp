@@ -63,7 +63,9 @@ export let BasenumRuleField = observer((prop: BasenumRuleFieldProp) => {
          slowValue={local.slowValue}
          fastValue={value}
          error={error}
-         helperText={help}
+         TextFieldProps={{
+            helperText: help,
+         }}
          onChange={(v) => setValue(v.trim())}
          onSubmit={action(() => {
             store.rule.number = convertedValue

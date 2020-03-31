@@ -17,17 +17,9 @@ import { RuleEditor } from './components/RuleEditor'
 import { RuleLink } from './components/RuleLink'
 import { RuleSelection } from './components/RuleSelection'
 import { RuleSelectorTable } from './ruleSelectorTable/RuleSelectorTable'
-
-let useStyle = makeStyles((theme: Theme) =>
-   createStyles({
-      displayBlock: {
-         display: 'block',
-      },
-   }),
-)
+import { OxExpansionPanel } from '../components/OxExpansionPanel'
 
 export let Editor = observer(() => {
-   let classes = useStyle()
    let shared = useSharedStyle()
    let store = useStore()
 
@@ -40,19 +32,25 @@ export let Editor = observer(() => {
          <h2>
             Rule Picker <RuleLink rule={store.rule} />
          </h2>
-         <EP className={shared.panel} defaultExpanded>
+         {/* <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Rule Table</h3>
             </EPSm>
-            <EPDt className={clx(classes.displayBlock)}>
+            <EPDt className={clx(shared.block)}>
                <RuleSelectorTable />
             </EPDt>
-         </EP>
+         </EP> */}
+         <OxExpansionPanel
+            title="Rule Table"
+            content={<RuleSelectorTable />}
+            defaultExpanded={true}
+            ExpansionPanelDetailsProps={{ className: shared.block }}
+         />
          <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
                <h3 className={shared.noVeritcalMargins}>Old Rule Selection</h3>
             </EPSm>
-            <EPDt className={clx(classes.displayBlock)}>
+            <EPDt className={clx(shared.block)}>
                <RuleSelection />
             </EPDt>
          </EP>

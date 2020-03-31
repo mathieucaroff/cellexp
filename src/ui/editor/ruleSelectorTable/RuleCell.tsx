@@ -2,6 +2,36 @@ import { ButtonBase, createStyles, makeStyles, Theme } from '@material-ui/core'
 import * as React from 'react'
 import { useStore } from '../../util/useContextHook'
 import { RuleTrait } from '../../../data/ruleTraitType'
+import { ruleTraitList } from '../../../data/ruleTraitType'
+import { createStyleSheet } from '../../util/createStyleSheet'
+
+let sheet = createStyleSheet(document)
+ruleTraitList.forEach((trait) => {
+   sheet.insertRule(`
+      #appRoot .tt-${trait} .tt-${trait} {
+         color: white;
+         border-color: white;
+      }
+   `)
+})
+sheet.insertRule(`
+   #appRoot .tt-all .cell {
+      color: white;
+      border-color: white;
+   }
+`)
+sheet.insertRule(`
+   #appRoot .active {
+      color: white;
+      border-color: white;
+   }
+`)
+sheet.insertRule(`
+   #appRoot .brotherhood {
+      color: white;
+      border-color: white;
+   }
+`)
 
 export let cellWidth = 35
 export let cellBorder = 1
@@ -18,7 +48,7 @@ let useStyle = makeStyles((theme: Theme) =>
          color: theme.palette.text.disabled,
          width: innerCellWidth,
       },
-      activated: {
+      active: {
          borderColor: theme.palette.primary.main,
          color: theme.palette.primary.main,
       },
@@ -28,7 +58,7 @@ let useStyle = makeStyles((theme: Theme) =>
 export interface RuleCellProp {
    number: number
    info: RuleTrait[]
-   activated?: true
+   active?: true
 }
 
 export let RuleCell = (prop: RuleCellProp) => {
@@ -36,8 +66,8 @@ export let RuleCell = (prop: RuleCellProp) => {
    let store = useStore()
 
    let ccc: string[] = [c.cell, 'cell']
-   if (prop.activated) {
-      ccc.push(c.activated)
+   if (prop.active) {
+      ccc.push(c.active)
    }
    ccc.push(...prop.info.map((trait) => `tt-${trait}`))
 

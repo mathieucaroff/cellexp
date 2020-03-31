@@ -10,7 +10,7 @@ import {
  */
 
 let repeat = <T>(arr: T[], count): T[] => {
-   return ([] as T[]).concat(...Array.from({ length: count }, () => arr))
+   return ([] as T[]).concat(...Array(count).fill(arr))
 }
 
 export let flattenPattern = (original: Pattern): FlatPattern => {

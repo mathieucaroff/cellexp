@@ -6,6 +6,9 @@ import { RerollButton } from './components/RerollButton'
 import { ResetSimulationButton } from './components/ResetSimulationButton'
 import { CropSimulation } from './components/CropSimulation'
 import { AutoSize } from './components/AutoSize'
+import { SimpleGenesisSelect } from './components/SimpleGenesisiSelect'
+import { Outline } from '../components/Outline'
+import { clx } from '../util/clx'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -17,6 +20,7 @@ let useStyle = makeStyles((theme: Theme) =>
             flexGrow: 1,
             display: 'flex',
             flexDirection: 'row',
+            justifyContent: 'center',
          },
       },
       withMargin: {
@@ -25,7 +29,13 @@ let useStyle = makeStyles((theme: Theme) =>
          },
       },
       balancerDiv: {
-         width: '180px',
+         width: '480px',
+      },
+      inlineFlex: {
+         display: 'inline-flex',
+      },
+      moveUp: {
+         marginTop: '-20px',
       },
    }),
 )
@@ -36,11 +46,18 @@ export let DisplayHeader = observer(() => {
       <div>
          <div className={c.header}>
             <div className={c.balancerDiv}></div>
-            <div>
+            <div className={c.withMargin}>
                <RuleBox />
             </div>
             <div className={c.withMargin}>
-               <RerollButton />
+               <div className={c.moveUp}>
+                  <Outline label="Genesis">
+                     <span className={clx(c.withMargin, c.inlineFlex)}>
+                        <SimpleGenesisSelect />
+                        <RerollButton />
+                     </span>
+                  </Outline>
+               </div>
                <ResetSimulationButton />
                <AutoSize />
                <CropSimulation />

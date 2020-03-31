@@ -55,14 +55,16 @@ export let RuleBox = observer(() => {
 
    return (
       <SlowTextField
-         className={classes.textField}
+         TextFieldProps={{
+            className: classes.textField,
+            helperText: help,
+            variant: 'outlined',
+         }}
          error={error}
          fastValue={local.value}
-         helperText={help}
          inline={true}
          label="Rule"
          slowValue={local.slowValue}
-         variant="outlined"
          onChange={(v) => {
             local.value = v.trim()
          }}
