@@ -11,9 +11,19 @@ import * as React from 'react'
 import { ruleTraitList } from '../../../data/ruleTraitType'
 import { useStore } from '../../util/useContextHook'
 import { useSharedStyle } from '../../style'
+import { clx } from '../../util/clx'
+
+let useStyle = makeStyles((theme: Theme) =>
+   createStyles({
+      selector: {
+         width: '250px',
+      },
+   }),
+)
 
 export let TraitSelector = observer(() => {
-   let c = useSharedStyle()
+   let c = useStyle()
+   let s = useSharedStyle()
    let store = useStore()
 
    let handleClick = (ev) => {
@@ -25,7 +35,7 @@ export let TraitSelector = observer(() => {
          <FormControlLabel
             key={traitName}
             value={traitName}
-            className={c.inlineBlock}
+            className={clx(c.selector, s.inlineBlock)}
             control={<Radio color="primary" />}
             label={traitName}
          />

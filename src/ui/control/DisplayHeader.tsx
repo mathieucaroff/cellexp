@@ -28,7 +28,7 @@ let useStyle = makeStyles((theme: Theme) =>
          },
       },
       balancerDiv: {
-         width: '480px',
+         width: '340px',
       },
       inlineFlex: {
          display: 'inline-flex',
