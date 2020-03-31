@@ -45,7 +45,7 @@ export let MiniPlayPause = observer(() => {
                ▶
             </Button>
             <Tooltip title="Single step">
-               <Button onClick={display.act.singleStep}>1</Button>
+               <Button onClick={display.act.singleStep}>❘⯈</Button>
             </Tooltip>
          </ButtonGroup>
       </div>
