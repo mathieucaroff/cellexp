@@ -19,11 +19,9 @@ import { FieldPosS } from './components/FieldPosS'
 import { FieldPosT } from './components/FieldPosT'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
 import { MorePanningControl } from './components/MorePanningControl'
-import { PlayPauseButton } from './components/PlayPauseButton'
 import { RerollButton } from './components/RerollButton'
 import { GoToTop } from './components/GoToTop'
 import { SeedSelector } from './components/SeedSelector'
-import { SingleStep } from './components/SingleStep'
 import { SpeedSelector } from './components/SpeedSelector'
 import { WidthSelector } from './components/WidthSelector'
 import { ZoomSelector } from './components/ZoomSelector'
@@ -88,33 +86,6 @@ export let Controller = observer(() => {
    )
 
    let displayController = (
-      <EP className={shared.panel}>
-         <EPSm expandIcon={<ExpandMoreIcon />}>
-            <h3 className={shared.noVeritcalMargins}>
-               Display Controller <RuleLink rule={store.rule} />
-            </h3>
-         </EPSm>
-         <EPDt className={clx(classes.inputSizing, shared.block)}>
-            <div className={classes.inputList}>
-               <ZoomSelector />
-               <CanvasHeight />
-               <CanvasWidth />
-               <SpeedSelector />
-               <MorePanningControl />
-            </div>
-            <div className={classes.inputList}>
-               <FieldPosT />
-               <FieldPosS />
-               <GoToTop />
-               <PlayPauseButton />
-               <SingleStep />
-            </div>
-            {displayExtraControls}
-         </EPDt>
-      </EP>
-   )
-
-   let displayControllers = (
       <OxExpansionPanel
          title={['Display Controller', <RuleLink rule={store.rule} />]}
          defaultExpanded={false}
@@ -133,8 +104,6 @@ export let Controller = observer(() => {
             <FieldPosT />
             <FieldPosS />
             <GoToTop />
-            <PlayPauseButton />
-            <SingleStep />
          </div>
          {displayExtraControls}
       </OxExpansionPanel>
@@ -144,7 +113,7 @@ export let Controller = observer(() => {
       <div>
          <h2>Controllers</h2>
          {simulationController}
-         {displayControllers}
+         {displayController}
       </div>
    )
 })
