@@ -1,9 +1,8 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core'
+import { createStyles, makeStyles, Theme, Tooltip } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
 import { observer } from 'mobx-react-lite'
-import { Xelement } from '../../util/Xelement'
 import { useDisplay, useStore } from '../../util/useContextHook'
 
 let useStyle = makeStyles((theme: Theme) =>
@@ -34,18 +33,22 @@ export let MiniSpeedChange = observer(() => {
    return (
       <div className={classes.buttonContainer}>
          <ButtonGroup orientation="vertical" size="small">
-            <Button
-               disabled={display.info.passingMinSpeed}
-               onClick={display.act.halfSpeed}
-            >
-               -
-            </Button>
-            <Button
-               disabled={display.info.passingMaxSpeed}
-               onClick={display.act.doubleSpeed}
-            >
-               +
-            </Button>
+            <Tooltip title="Decrease speed" placement="top">
+               <Button
+                  disabled={display.info.passingMinSpeed}
+                  onClick={display.act.halfSpeed}
+               >
+                  -
+               </Button>
+            </Tooltip>
+            <Tooltip title="Increase speed">
+               <Button
+                  disabled={display.info.passingMaxSpeed}
+                  onClick={display.act.doubleSpeed}
+               >
+                  +
+               </Button>
+            </Tooltip>
          </ButtonGroup>
       </div>
    )
