@@ -68,6 +68,9 @@ export let BorderTextarea = observer((prop: BorderFieldProp) => {
    }
 
    let bdslResult = bdslParse(local.value.replace(/\s/g, ''))
+   if (local.slowValue !== local.value) {
+      helperText = 'Note: Press Shift+Enter or Ctrl+Enter to validate'
+   }
    if (!bdslResult.success) {
       helperText = bdslResult.info
    }
