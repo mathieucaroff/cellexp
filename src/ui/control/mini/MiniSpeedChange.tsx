@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
 import { observer } from 'mobx-react-lite'
-import { useDisplay, useStore } from '../../util/useContextHook'
+import { useDisplay } from '../../util/useContextHook'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({

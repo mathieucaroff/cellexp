@@ -115,13 +115,6 @@ export let createDisplay = (store: State, computer: Computer) => {
          codeKb: codeKeyboardManager,
       })
 
-      let isBigEnough = () => info.maxLeft <= info.maxRight
-      let maxRight = () => {
-         return Math.ceil(
-            (store.zoom * topology.width) / 6 - store.canvasSize.x,
-         )
-      }
-
       let dragManager = createDragManager({
          element: canvas,
          getDisplayInit: () => {

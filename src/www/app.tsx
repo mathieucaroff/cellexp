@@ -3,7 +3,6 @@ import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
 import { Display } from '../display/display'
 import { State } from '../state/state'
-import { ThemeConfigurator } from '../ui/control/ThemeConfigurator'
 import { Controller } from '../ui/control/Controller'
 import { DisplayAdapter } from '../ui/DisplayAdapter'
 import { Editor } from '../ui/editor/Editor'
@@ -38,7 +37,6 @@ let App = observer((prop: AppProp) => {
                />
                <Editor />
                <Controller />
-               <ThemeConfigurator />
                <InfoSection />
                <CssBaseline />
             </ThemeProvider>

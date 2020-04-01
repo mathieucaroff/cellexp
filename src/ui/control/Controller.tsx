@@ -19,6 +19,7 @@ import { BorderFieldList } from './components/BorderFieldList'
 import { TopologySelect } from './components/TopologySelect'
 import { WidthSelector } from './components/WidthSelector'
 import { ZoomSelector } from './components/ZoomSelector'
+import { ThemeConfigurator } from './ThemeConfigurator'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -79,7 +80,7 @@ export let Controller = observer(() => {
 
    let displayController = (
       <OxExpansionPanel
-         title={['Display Controller', <RuleLink rule={store.rule} />]}
+         title={'Display Controller'}
          defaultExpanded={false}
          contentDisplayBlock={true}
          ExpansionPanelDetailsProps={{ className: classes.inputSizing }}
@@ -102,10 +103,11 @@ export let Controller = observer(() => {
    )
 
    return (
-      <div>
+      <>
          <h2>Controllers</h2>
          {simulationController}
          {displayController}
-      </div>
+         <ThemeConfigurator />
+      </>
    )
 })

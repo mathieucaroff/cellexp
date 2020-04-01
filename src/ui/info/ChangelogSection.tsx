@@ -10,15 +10,9 @@ const markdownContent = readFileSync(
    'utf-8',
 )
 
-let createElement = (component, ...args) => {
-   if (component === 'a') {
-      return <Link {...(args[0] || {})}>{args.slice(1)}</Link>
-   } else {
-      return React.createElement(component, ...args)
-   }
-}
-
-let promise = md2react(markdownContent, createElement)
+let promise = md2react(markdownContent, {
+   a: Link,
+})
 
 export let ChangelogSection = observer(() => {
    let tree = usePromise(() => '', promise)
