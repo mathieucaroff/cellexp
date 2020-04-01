@@ -17,7 +17,7 @@ let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       borderField: {
          '&': {
-            width: '400px',
+            width: '340px',
          },
          '& .MuiInput-input': {
             minHeight: '3.5em',
