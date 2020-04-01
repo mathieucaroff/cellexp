@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core'
+import { createStyles, makeStyles, Theme, Link } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { useStore } from '../../util/useContextHook'
@@ -23,6 +23,12 @@ export let PropertyList = observer(() => {
 
    return (
       <div>
+         <Link
+            className={s.block}
+            href={`https://www.wolframalpha.com/input/?i=rule+${rule.number}`}
+         >
+            Look up rule {rule.number} on Wolfram Alpha 🡕
+         </Link>
          <div className={clx(s.inlineBlock, classes.spacerRight)}>
             <SymmetricTable
                label="Symmetrics of current rule"

@@ -10,7 +10,7 @@ import { displayContext, storeContext } from './global'
 import { muiThemeFromCellexp, themeSet } from './theme'
 import { DisplayHeader } from '../ui/control/DisplayHeader'
 import { DisplayFooter } from '../ui/control/DisplayFooter'
-import { InfoSection } from '../ui/info/InfoSection'
+import { InfoPart } from '../ui/info/InfoPart'
 
 export interface AppProp {
    display: Display
@@ -37,7 +37,7 @@ let App = observer((prop: AppProp) => {
                />
                <Editor />
                <Controller />
-               <InfoSection />
+               <InfoPart />
                <CssBaseline />
             </ThemeProvider>
          </displayContext.Provider>
