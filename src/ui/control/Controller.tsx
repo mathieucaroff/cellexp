@@ -1,32 +1,24 @@
-import {
-   createStyles,
-   ExpansionPanel,
-   ExpansionPanelDetails,
-   ExpansionPanelSummary,
-   makeStyles,
-   Theme,
-} from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
+import { OxExpansionPanel } from '../components/OxExpansionPanel'
 import { RuleLink } from '../editor/components/RuleLink'
 import { useSharedStyle } from '../style'
-import { clx } from '../util/clx'
 import { useStore } from '../util/useContextHook'
 import { CanvasHeight } from './components/CanvasHeight'
 import { CanvasWidth } from './components/CanvasWidth'
 import { FieldPosS } from './components/FieldPosS'
 import { FieldPosT } from './components/FieldPosT'
 import { FieldPrecisePosT } from './components/FieldPrecisePosT'
+import { GoToTop } from './components/GoToTop'
 import { MorePanningControl } from './components/MorePanningControl'
 import { RerollButton } from './components/RerollButton'
-import { GoToTop } from './components/GoToTop'
 import { SeedSelector } from './components/SeedSelector'
 import { SpeedSelector } from './components/SpeedSelector'
+import { BorderFieldList } from './components/BorderFieldList'
+import { TopologySelect } from './components/TopologySelect'
 import { WidthSelector } from './components/WidthSelector'
 import { ZoomSelector } from './components/ZoomSelector'
-import { TopologyController } from './components/TopologyController'
-import { OxExpansionPanel } from '../components/OxExpansionPanel'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -36,6 +28,9 @@ let useStyle = makeStyles((theme: Theme) =>
          },
       },
       inputList: {
+         '&': {
+            display: 'inline',
+         },
          '& > *': {
             margin: theme.spacing(1),
             display: 'inline-block',
@@ -49,10 +44,6 @@ export let Controller = observer(() => {
    let shared = useSharedStyle()
    let store = useStore()
 
-   let EP = ExpansionPanel
-   let EPSm = ExpansionPanelSummary
-   let EPDt = ExpansionPanelDetails
-
    let simulationController = (
       <OxExpansionPanel
          title={['Simulation Controller', <RuleLink rule={store.rule} />]}
@@ -60,8 +51,9 @@ export let Controller = observer(() => {
          contentDisplayBlock={true}
          content={
             <div className={shared.inputList}>
-               <TopologyController />
+               <TopologySelect />
                <WidthSelector />
+               <BorderFieldList />
                <SeedSelector />
                <RerollButton />
             </div>

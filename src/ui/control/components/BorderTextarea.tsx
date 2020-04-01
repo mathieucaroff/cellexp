@@ -15,7 +15,14 @@ import { BorderDescriptor } from '../../../compute/borderType'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
-      borderSelector: {},
+      borderField: {
+         '&': {
+            width: '400px',
+         },
+         '& .MuiInput-input': {
+            minHeight: '3.5em',
+         },
+      },
    }),
 )
 
@@ -26,7 +33,7 @@ export interface BorderFieldProp {
    topologyKind: TopologyFinite['kind']
 }
 
-export let BorderField = observer((prop: BorderFieldProp) => {
+export let BorderTextarea = observer((prop: BorderFieldProp) => {
    let { getProperty, setProperty, side, topologyKind } = prop
 
    let c = useStyle()
@@ -84,7 +91,7 @@ export let BorderField = observer((prop: BorderFieldProp) => {
          onSubmit={handleSubmit}
          slowValue={local.slowValue}
          TextFieldProps={{
-            className: c.borderSelector,
+            className: c.borderField,
             disabled: side !== 'top' && topologyKind !== 'border',
             helperText,
             multiline: true,
