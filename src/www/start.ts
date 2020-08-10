@@ -6,6 +6,7 @@ import { createDisplay } from '../display/display'
 import { defaultState } from '../state/state'
 import '../ui/style.css'
 import { appElement } from './app'
+import { githubCornerHTML } from './lib/githubCorner'
 
 function main() {
    let cellexp_version = document.getElementById('cellexp_version')
@@ -17,6 +18,9 @@ function main() {
 
    let computer = createComputer()
    let display = createDisplay(store, computer)
+
+   let div = document.createElement('div')
+   div.innerHTML = githubCornerHTML(packageInfo.repository)
 
    render(
       appElement({
