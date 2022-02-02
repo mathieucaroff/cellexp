@@ -29,23 +29,9 @@ export let Editor = observer(() => {
          <h2>
             Rule Picker <RuleLink rule={store.rule} />
          </h2>
-         {/* <EP className={shared.panel} defaultExpanded>
-            <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Rule Table</h3>
-            </EPSm>
-            <EPDt className={clx(shared.block)}>
-               <RuleSelectorTable />
-            </EPDt>
-         </EP> */}
-         <OxExpansionPanel
-            title="Rule Table"
-            content={<RuleSelectorTable />}
-            defaultExpanded={true}
-            ExpansionPanelDetailsProps={{ className: shared.block }}
-         />
          <EP className={shared.panel} defaultExpanded>
             <EPSm expandIcon={<ExpandMoreIcon />}>
-               <h3 className={shared.noVeritcalMargins}>Old Rule Selection</h3>
+               <h3 className={shared.noVeritcalMargins}>Rule Selection</h3>
             </EPSm>
             <EPDt className={clx(shared.block)}>
                <RuleSelection />
@@ -69,6 +55,12 @@ export let Editor = observer(() => {
                <PropertyList />
             </EPDt>
          </EP>
+         <OxExpansionPanel
+            title="Rule Table"
+            content={<RuleSelectorTable />}
+            defaultExpanded={false}
+            ExpansionPanelDetailsProps={{ className: shared.block }}
+         />
       </div>
    )
 })
