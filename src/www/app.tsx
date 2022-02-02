@@ -2,26 +2,23 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core'
 import { observer, useLocalStore } from 'mobx-react-lite'
 import * as React from 'react'
 import { Display } from '../display/display'
-import { Hub } from '../state/hub'
 import { State } from '../state/state'
-import { ThemeConfigurator } from '../ui/control/ThemeConfigurator'
 import { Controller } from '../ui/control/Controller'
 import { DisplayAdapter } from '../ui/DisplayAdapter'
 import { Editor } from '../ui/editor/Editor'
-import { displayContext, hubContext, storeContext } from './global'
+import { displayContext, storeContext } from './global'
 import { muiThemeFromCellexp, themeSet } from './theme'
 import { DisplayHeader } from '../ui/control/DisplayHeader'
 import { DisplayFooter } from '../ui/control/DisplayFooter'
-import { InfoSection } from '../ui/info/InfoSection'
+import { InfoPart } from '../ui/info/InfoPart'
 
 export interface AppProp {
    display: Display
-   hub: Hub
    store: State
 }
 
 let App = observer((prop: AppProp) => {
-   let { display, hub, store } = prop
+   let { display, store } = prop
 
    let local = useLocalStore(() => ({
       get muiTheme() {
@@ -30,24 +27,21 @@ let App = observer((prop: AppProp) => {
    }))
 
    return (
-      <hubContext.Provider value={hub}>
-         <storeContext.Provider value={store}>
-            <displayContext.Provider value={display}>
-               <ThemeProvider theme={local.muiTheme}>
-                  <DisplayAdapter
-                     display={display}
-                     header={<DisplayHeader />}
-                     footer={<DisplayFooter />}
-                  />
-                  <Editor />
-                  <Controller />
-                  <ThemeConfigurator />
-                  <InfoSection />
-                  <CssBaseline />
-               </ThemeProvider>
-            </displayContext.Provider>
-         </storeContext.Provider>
-      </hubContext.Provider>
+      <storeContext.Provider value={store}>
+         <displayContext.Provider value={display}>
+            <ThemeProvider theme={local.muiTheme}>
+               <DisplayAdapter
+                  display={display}
+                  header={<DisplayHeader />}
+                  footer={<DisplayFooter />}
+               />
+               <Editor />
+               <Controller />
+               <InfoPart />
+               <CssBaseline />
+            </ThemeProvider>
+         </displayContext.Provider>
+      </storeContext.Provider>
    )
 })
 

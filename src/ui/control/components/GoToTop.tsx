@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useDisplay } from '../../util/useContextHook'
 import { Tooltip } from '@material-ui/core'
 
-export let ResetTime = observer(() => {
+export let GoToTop = observer(() => {
    let display = useDisplay()
 
    return (
@@ -16,7 +16,7 @@ export let ResetTime = observer(() => {
                   disabled={display.info.atTop}
                   onClick={display.act.gotoTop}
                >
-                  Reset
+                  Go to top
                </Button>
             </span>
          </Tooltip>

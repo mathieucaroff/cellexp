@@ -53,6 +53,10 @@ export let RuleBox = observer(() => {
       [outOfBoundary, `The rule number must be between 0 and 255`],
    )
 
+   if (!error && local.value !== local.slowValue) {
+      help = 'Press enter to validate'
+   }
+
    return (
       <SlowTextField
          TextFieldProps={{

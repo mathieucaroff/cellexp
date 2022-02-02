@@ -14,6 +14,13 @@ input {
    width: 135px;
 }
 
+code {
+   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+   background-color: rgba(160, 160, 160, 0.6);
+   padding: 1px 4px;
+   border-radius: 4px;
+}
+
 .bodyDiv {
    margin-left: 16px;
    margin-right: 16px;

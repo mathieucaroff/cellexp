@@ -35,6 +35,7 @@ This files lists domain and verbs to use in commits. See the [commit format desc
   - control -- simulation configurator
 - util
 - www
+- info
 
 ## verbe
 
@@ -63,8 +64,10 @@ This files lists domain and verbs to use in commits. See the [commit format desc
 
 - clarify
 - clean
+- move
 - reclarify ("refactor")
 - reclean ("refactor")
+- remove (factor out)
 - rename
 - reordre
 - restructure

@@ -6,6 +6,9 @@ import { Display } from '../display/display'
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
       display: {
+         '&': {
+            cursor: 'grab',
+         },
          '& > *': {
             display: 'block',
             margin: 'auto',
