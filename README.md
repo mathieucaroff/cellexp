@@ -4,9 +4,7 @@ A cellular automaton (CA) explorer to understand and unveil properties of CAs in
 
 [![Cellexp preview](doc/img/cellexp-screencap.png)](https://cellexp.now.sh)
 
-## Try it out
-
-The first version of Cellexp has been [deployed to Now.sh](https://cellexp.now.sh) (aka Zeit.co).
+## [Try it out](https://cellexp.now.sh)
 
 ## Alternatives
 
@@ -14,7 +12,14 @@ The first version of Cellexp has been [deployed to Now.sh](https://cellexp.now.s
 - [ECA Canvas](http://www.cs.swan.ac.uk/~csandy/research/play/ca/) - Size, Border, Random
 - [ECA EmergentMind](http://www.emergentmind.com/elementary-cellular-automata) - Zoom, Board of 256 rules
 - [Celldemo](http://devinacker.github.io/celldemo/) - Autoscrolling, Impuse, Random proportion,
-- [WolframAlpha](https://www.wolframalpha.com/input/?i=rule+110) - Description (symétries, propriétés, classe), Propagation differentielle
+- [WolframAlpha](https://www.wolframalpha.com/input/?i=rule+110) - Description (symetries, properties, classes), Differential propagation examples
+
+## Documentation
+
+The following ressources are available to learn about Cellexp:
+
+- [Cellexp's user documentation](doc/user-documentation.md) presents in details all features, simple and complexe
+- [Cellexp's internal documentation](src/README.md) presents the structure of the project, the responsibility of each module, the interfaces and the event model.
 
 ## Study and roadmap
 

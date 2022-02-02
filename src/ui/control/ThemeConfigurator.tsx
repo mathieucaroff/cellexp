@@ -1,18 +1,10 @@
-import {
-   createStyles,
-   ExpansionPanel,
-   ExpansionPanelDetails,
-   ExpansionPanelSummary,
-   makeStyles,
-   Theme,
-} from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import {
    displayThemeNameFromCellexp,
    themeNameFromCellexp,
 } from '../../www/theme'
-import { useSharedStyle } from '../style'
 import { useStore } from '../util/useContextHook'
 import { ThemeSelector } from './components/AppThemeSelector'
 import { OxExpansionPanel } from '../components/OxExpansionPanel'
@@ -35,12 +27,7 @@ let useStyle = makeStyles((theme: Theme) =>
 
 export let ThemeConfigurator = observer(() => {
    let classes = useStyle()
-   let shared = useSharedStyle()
    let store = useStore()
-
-   let EP = ExpansionPanel
-   let EPSm = ExpansionPanelSummary
-   let EPDt = ExpansionPanelDetails
 
    return (
       <div>

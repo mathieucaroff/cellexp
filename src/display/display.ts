@@ -1,7 +1,6 @@
 import { action, observable, observe, toJS } from 'mobx'
 import { Computer } from '../compute/ComputerType'
 import { TopologyFinite } from '../compute/topology'
-import { Hub } from '../state/hub'
 import { State } from '../state/state'
 import { autox } from '../util/autox'
 import { emitterLoop } from '../util/emitterLoop'
@@ -14,7 +13,7 @@ import { keyboardBinding } from './keyboardBinding'
 import { createKeyboardManager } from './keyboardManager'
 import { createImageData } from './util/createImageData'
 
-export let createDisplay = (store: State, computer: Computer, hub: Hub) => {
+export let createDisplay = (store: State, computer: Computer) => {
    let { posS, posT } = store
 
    let topology = store.topology as TopologyFinite
@@ -115,13 +114,6 @@ export let createDisplay = (store: State, computer: Computer, hub: Hub) => {
          keyKb: keyKeyboardManager,
          codeKb: codeKeyboardManager,
       })
-
-      let isBigEnough = () => info.maxLeft <= info.maxRight
-      let maxRight = () => {
-         return Math.ceil(
-            (store.zoom * topology.width) / 6 - store.canvasSize.x,
-         )
-      }
 
       let dragManager = createDragManager({
          element: canvas,

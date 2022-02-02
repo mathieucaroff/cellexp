@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core'
+import { createStyles, makeStyles, Theme, Tooltip } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import * as React from 'react'
@@ -44,7 +44,9 @@ export let MiniPlayPause = observer(() => {
             >
                ▶
             </Button>
-            <Button onClick={display.act.singleStep}>1</Button>
+            <Tooltip title="Single step">
+               <Button onClick={display.act.singleStep}>❘⯈</Button>
+            </Tooltip>
          </ButtonGroup>
       </div>
    )

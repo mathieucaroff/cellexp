@@ -64,7 +64,7 @@ export let defaultState = (): State => {
       topology: {
          finitness: 'finite',
          kind: 'loop',
-         width: 600,
+         width: 260,
          genesis: {
             kind: 'top',
             center: [],
