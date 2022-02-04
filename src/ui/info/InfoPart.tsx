@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { OxExpansionPanel } from '../components/OxExpansionPanel'
+import { OxAccordion } from '../components/OxAccordion'
 import { AlternativeSection } from './AlternativeSection'
 import { ChangelogSection } from './ChangelogSection'
 import { UserDocumentationSection } from './UserDocumentationSection'
@@ -8,19 +8,19 @@ export let InfoPart = () => {
    return (
       <div>
          <h2>Info</h2>
-         <OxExpansionPanel
+         <OxAccordion
             defaultExpanded={false}
             title="Automaton explorer alternatives"
             content={<AlternativeSection />}
             contentDisplayBlock
          />
-         <OxExpansionPanel
+         <OxAccordion
             defaultExpanded={false}
             title="Cellexp User Documentation"
             content={<UserDocumentationSection />}
             contentDisplayBlock
          />
-         <OxExpansionPanel
+         <OxAccordion
             defaultExpanded={false}
             title="CellExp Changelog"
             content={<ChangelogSection />}

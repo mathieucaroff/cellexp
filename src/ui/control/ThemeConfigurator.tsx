@@ -7,7 +7,7 @@ import {
 } from '../../www/theme'
 import { useStore } from '../util/useContextHook'
 import { ThemeSelector } from './components/AppThemeSelector'
-import { OxExpansionPanel } from '../components/OxExpansionPanel'
+import { OxAccordion } from '../components/OxAccordion'
 
 let useStyle = makeStyles((theme: Theme) =>
    createStyles({
@@ -31,11 +31,11 @@ export let ThemeConfigurator = observer(() => {
 
    return (
       <div>
-         <OxExpansionPanel
+         <OxAccordion
             title="Theme"
             defaultExpanded={false}
             contentDisplayBlock={true}
-            ExpansionPanelDetailsProps={{
+            AccordionDetailsProps={{
                className: classes.inputSizing,
             }}
             content={

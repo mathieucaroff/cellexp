@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { OxExpansionPanel } from '../components/OxExpansionPanel'
+import { OxAccordion } from '../components/OxAccordion'
 import { RuleLink } from '../editor/components/RuleLink'
 import { useSharedStyle } from '../style'
 import { useStore } from '../util/useContextHook'
@@ -46,7 +46,7 @@ export let Controller = observer(() => {
    let store = useStore()
 
    let simulationController = (
-      <OxExpansionPanel
+      <OxAccordion
          title={['Simulation Controller', <RuleLink rule={store.rule} />]}
          defaultExpanded={true}
          contentDisplayBlock={true}
@@ -63,13 +63,13 @@ export let Controller = observer(() => {
    )
 
    let displayExtraControls = (
-      <OxExpansionPanel
+      <OxAccordion
          title="Extra Controls"
          titleTagName="h4"
          defaultExpanded={false}
          contentDisplayBlock={true}
-         ExpansionPanelProps={{ TransitionProps: { unmountOnExit: true } }}
-         ExpansionPanelDetailsProps={{ className: classes.inputSizing }}
+         AccordionProps={{ TransitionProps: { unmountOnExit: true } }}
+         AccordionDetailsProps={{ className: classes.inputSizing }}
          content={
             <div className={classes.inputList}>
                <FieldPrecisePosT />
@@ -79,11 +79,11 @@ export let Controller = observer(() => {
    )
 
    let displayController = (
-      <OxExpansionPanel
+      <OxAccordion
          title={'Display Controller'}
          defaultExpanded={false}
          contentDisplayBlock={true}
-         ExpansionPanelDetailsProps={{ className: classes.inputSizing }}
+         AccordionDetailsProps={{ className: classes.inputSizing }}
          content=""
       >
          <div className={classes.inputList}>
@@ -99,7 +99,7 @@ export let Controller = observer(() => {
             <GoToTop />
          </div>
          {displayExtraControls}
-      </OxExpansionPanel>
+      </OxAccordion>
    )
 
    return (

@@ -1,7 +1,7 @@
 import {
-   ExpansionPanel,
-   ExpansionPanelDetails,
-   ExpansionPanelSummary,
+   Accordion,
+   AccordionDetails,
+   AccordionSummary,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { observer } from 'mobx-react-lite'
@@ -14,15 +14,15 @@ import { RuleEditor } from './components/RuleEditor'
 import { RuleLink } from './components/RuleLink'
 import { RuleSelection } from './components/RuleSelection'
 import { RuleSelectorTable } from './ruleSelectorTable/RuleSelectorTable'
-import { OxExpansionPanel } from '../components/OxExpansionPanel'
+import { OxAccordion } from '../components/OxAccordion'
 
 export let Editor = observer(() => {
    let shared = useSharedStyle()
    let store = useStore()
 
-   let EP = ExpansionPanel
-   let EPSm = ExpansionPanelSummary
-   let EPDt = ExpansionPanelDetails
+   let EP = Accordion
+   let EPSm = AccordionSummary
+   let EPDt = AccordionDetails
 
    return (
       <div>
@@ -55,11 +55,11 @@ export let Editor = observer(() => {
                <PropertyList />
             </EPDt>
          </EP>
-         <OxExpansionPanel
+         <OxAccordion
             title="Rule Table"
             content={<RuleSelectorTable />}
             defaultExpanded={false}
-            ExpansionPanelDetailsProps={{ className: shared.block }}
+            AccordionDetailsProps={{ className: shared.block }}
          />
       </div>
    )

@@ -1,9 +1,9 @@
 import {
-   ExpansionPanel,
-   ExpansionPanelDetails,
-   ExpansionPanelSummary,
-   ExpansionPanelProps,
-   ExpansionPanelDetailsProps,
+   Accordion,
+   AccordionDetails,
+   AccordionSummary,
+   AccordionProps,
+   AccordionDetailsProps,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { observer } from 'mobx-react-lite'
@@ -11,7 +11,7 @@ import * as React from 'react'
 import { useSharedStyle } from '../style'
 import { clx } from '../util/clx'
 
-export interface OxExpansionPanelProp {
+export interface OxAccordionProp {
    content: React.ReactElement | string
    defaultExpanded: boolean
    title: string | (React.ReactElement | string)[]
@@ -19,11 +19,11 @@ export interface OxExpansionPanelProp {
    className?: string
    contentDisplayBlock?: boolean
    titleTagName?: string
-   ExpansionPanelProps?: ExpansionPanelProps
-   ExpansionPanelDetailsProps?: ExpansionPanelDetailsProps
+   AccordionProps?: AccordionProps
+   AccordionDetailsProps?: AccordionDetailsProps
 }
 
-export let OxExpansionPanel = observer((prop: OxExpansionPanelProp) => {
+export let OxAccordion = observer((prop: OxAccordionProp) => {
    let shared = useSharedStyle()
 
    let { defaultExpanded, title, content } = prop
@@ -36,8 +36,8 @@ export let OxExpansionPanel = observer((prop: OxExpansionPanelProp) => {
    let {
       className = '',
       titleTagName = 'h3',
-      ExpansionPanelProps: EPProp = {},
-      ExpansionPanelDetailsProps: EPDProp = {},
+      AccordionProps: EPProp = {},
+      AccordionDetailsProps: EPDProp = {},
       children = '',
    } = prop
 
@@ -54,9 +54,9 @@ export let OxExpansionPanel = observer((prop: OxExpansionPanelProp) => {
       }
    }
 
-   let EP = ExpansionPanel
-   let EPSm = ExpansionPanelSummary
-   let EPDt = ExpansionPanelDetails
+   let EP = Accordion
+   let EPSm = AccordionSummary
+   let EPDt = AccordionDetails
    let EMI = ExpandMoreIcon
    let HX: any = titleTagName
    return (
