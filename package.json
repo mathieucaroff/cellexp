@@ -18,8 +18,9 @@
       "typescript": "4.5.5"
    },
    "dependencies": {
-      "@material-ui/core": "^4.8.2",
-      "@material-ui/icons": "^4.5.1",
+      "@material-ui/core": "^4.11.0",
+      "@material-ui/icons": "^4.9.1",
+      "@parcel/transformer-inline-string": "^2.2.1",
       "js-xxhash": "^1.0.4",
       "mobx": "^5.15.1",
       "mobx-react-lite": "^1.5.2",
