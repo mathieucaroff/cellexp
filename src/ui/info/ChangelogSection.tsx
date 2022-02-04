@@ -1,11 +1,11 @@
 import Link from '@material-ui/core/Link'
-import { readFileSync } from 'fs'
+import fs from 'fs'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { md2react } from './md2react'
 import { usePromise } from './usePromise'
 
-const markdownContent = readFileSync(
+const markdownContent = fs.readFileSync(
    __dirname + '../../../../CHANGELOG.md',
    'utf-8',
 )

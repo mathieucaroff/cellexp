@@ -1,4 +1,4 @@
-import { readFileSync as read } from 'fs'
+import fs from 'fs'
 
 import { default as nearley } from 'nearley'
 import { default as neCompile } from 'nearley/lib/compile'
@@ -37,9 +37,9 @@ let compile = (source: string) => {
    return compileGrammar(source, __dirname)
 }
 
-let sideBorderSource = read(__dirname + '/sideBorderDsl.ne', 'utf-8')
-let topBorderSource = read(__dirname + '/topBorderDsl.ne', 'utf-8')
-let patternSource = read(__dirname + '/patternDsl.ne', 'utf-8')
+let sideBorderSource = fs.readFileSync(__dirname + '/sideBorderDsl.ne', 'utf-8')
+let topBorderSource = fs.readFileSync(__dirname + '/topBorderDsl.ne', 'utf-8')
+let patternSource = fs.readFileSync(__dirname + '/patternDsl.ne', 'utf-8')
 
 let sideBorderGrammar, topBorderGrammar, patternGrammar
 
