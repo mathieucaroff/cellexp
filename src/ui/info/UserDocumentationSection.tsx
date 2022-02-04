@@ -6,8 +6,10 @@ import { md2react } from './md2react'
 import { usePromise } from './usePromise'
 import { SelfLinkingTitleList } from './SelfLinkingTitleList'
 
-// @ts-ignore
-import markdownContent from 'bundle-text:../../../doc/user-documentation.md'
+const markdownContent = fs.readFileSync(
+   __dirname + '/../../../doc/user-documentation.md',
+   'utf-8',
+)
 
 let promise = md2react(markdownContent, {
    a: Link,

@@ -1,11 +1,14 @@
+import fs, { readFileSync } from 'fs'
 import Link from '@material-ui/core/Link'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import { md2react } from './md2react'
 import { usePromise } from './usePromise'
 
-// @ts-ignore
-import markdownContent from "bundle-text:../../../CHANGELOG.md";
+const markdownContent = readFileSync(
+   __dirname + '/../../../CHANGELOG.md',
+   'utf-8',
+)
 
 let promise = md2react(markdownContent, {
    a: Link,

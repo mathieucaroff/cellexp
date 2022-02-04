@@ -2,9 +2,9 @@
 
 A cellular automaton (CA) explorer to understand and unveil properties of CAs in 1D.
 
-[![Cellexp preview](doc/img/cellexp-screencap.png)](https://cellexp.now.sh)
+[![Cellexp preview](doc/img/cellexp-screencap.png)](https://mathieucaroff.com/cellexp)
 
-## [Try it out](https://cellexp.now.sh)
+## [Try it out](https://mathieucaroff.com/cellexp)
 
 ## Alternatives
 
