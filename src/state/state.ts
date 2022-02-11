@@ -53,7 +53,7 @@ export let defaultState = (): State => {
       // MDisplay + ui
       theme: 'darkCream',
       displayTheme: 'unset',
-      morePanningControl: false,
+      morePanningControl: true,
 
       speed: 4,
       posS: createPosition(30),

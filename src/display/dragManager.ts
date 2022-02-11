@@ -7,7 +7,7 @@ export interface DragManagerProp {
    element: HTMLElement
    /**
     * the function to run at the beginning of the drag
-    * to know the position of the thing being dragged at that
+    * to know the initial position of the dragged thing
     */
    getDisplayInit: () => Pair
 }

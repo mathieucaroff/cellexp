@@ -36,7 +36,7 @@ export let emitterLoop = (schedulingFunction: (f: () => any) => any) => {
             discard,
          }
       } else if (status === 'inUse') {
-         throw new Error('This emitter loop has already been subsribed to')
+         throw new Error('This emitter loop has already been subscribed to')
       } else {
          throw new Error('This emitter loop has already been used and unlinked')
       }
@@ -49,7 +49,6 @@ export let emitterLoop = (schedulingFunction: (f: () => any) => any) => {
    }
 
    return {
-      discard,
       link,
    }
 }
