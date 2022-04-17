@@ -6,8 +6,9 @@
    "author": "Mathieu CAROFF <mathieu.caroff@free.fr>",
    "license": "ISC",
    "scripts": {
-      "build": "parcel build src/www/cellexp.html --public-url cellexp.d",
-      "start": "parcel src/www/cellexp.html"
+      "build": "parcel build src/www/index.html --dist-dir public",
+      "mcabuild": "parcel build src/www/index.html --public-url cellexp.d",
+      "serve": "parcel src/www/index.html"
    },
    "devDependencies": {
       "@types/nearley": "^2.11.1",
